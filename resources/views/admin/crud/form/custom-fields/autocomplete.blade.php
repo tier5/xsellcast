@@ -1,0 +1,1 @@
+{!! Form::admin_text($crud_field->getOption('name'), $crud_field->getOption('label'), $crud_field->getOption('value'), ['class' => 'field-autocomplete', 'data-url' => $crud_field->getOption('data-url')]); !!}

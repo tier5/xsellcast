@@ -1,0 +1,36 @@
+<?php
+
+namespace App\Http\Requests\Api;
+
+use App\Http\Requests\Request;
+
+class RequestTypeContactStoreRequest extends Request
+{
+    protected $redirectRoute = 'api.errors';
+    
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            'access_token' => 'required',
+            'customer_id'  => 'required',
+            'phone_number' => 'required',
+            'offer_id'     => 'required',
+            'body'         => 'required'
+        ];
+    }
+}

@@ -1,0 +1,1073 @@
+---
+title: API Reference
+
+language_tabs:
+- bash
+- javascript
+- php
+
+includes:
+
+search: true
+
+toc_footers:
+- Documentation Powered by <a href='https://github.com/mpociot/laravel-apidoc-generator'>mpociot<a/> & <br/><a href='http://caffeineinteractive.com'>Caffeine Interactive</a>
+---
+<!-- START_INFO -->
+# Introduction
+
+Welcome to the XSellCast API reference.
+
+For updating/generating content on this document please go <a target="_blank" href="https://github.com/mpociot/laravel-apidoc-generator">here</a>.
+<!-- END_INFO -->
+
+#Brands
+
+Brands resource.
+<!-- START_ac4403f8bf71ab01d05f2eca4cba5f68 -->
+## List All
+
+This will a list of existing brands.
+
+> Example request:
+
+```bash
+curl "http://localhost.dev.xsellcast/api/v1/brands" \
+-H "Accept: application/json" \
+    -d "access_token"="aut" \
+    -d "page"="99751627" \
+
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost.dev.xsellcast/api/v1/brands",
+    "method": "GET",
+    "data": {
+        "access_token": "aut",
+        "page": 99751627
+},
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+```
+
+> Example response:
+
+```json
+{
+    "error": "invalid_request",
+    "error_description": "The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+}
+```
+
+### HTTP Request
+`GET api/v1/brands`
+
+`HEAD api/v1/brands`
+
+#### Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    access_token | string |  required  | 
+    page | integer |  optional  | 
+
+<!-- END_ac4403f8bf71ab01d05f2eca4cba5f68 -->
+<!-- START_0669638b3a92accc17ca0ea8f473a929 -->
+## Get Brand
+
+Get existing brand by ID.
+Return page 404 when ever dealer don't exists.
+
+> Example request:
+
+```bash
+curl "http://localhost.dev.xsellcast/api/v1/brand/{id}" \
+-H "Accept: application/json" \
+    -d "access_token"="error" \
+
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost.dev.xsellcast/api/v1/brand/{id}",
+    "method": "GET",
+    "data": {
+        "access_token": "error"
+},
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+```
+
+> Example response:
+
+```json
+{
+    "error": "invalid_request",
+    "error_description": "The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+}
+```
+
+### HTTP Request
+`GET api/v1/brand/{id}`
+
+`HEAD api/v1/brand/{id}`
+
+#### Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    access_token | string |  required  | 
+
+<!-- END_0669638b3a92accc17ca0ea8f473a929 -->
+#Customer
+
+Customer resource.
+<!-- START_7dcb2e835d08b8605b7005d3fa447cf1 -->
+## Get Customers
+
+This will a list of existing customers.
+
+> Example request:
+
+```bash
+curl "http://localhost.dev.xsellcast/api/v1/customers" \
+-H "Accept: application/json" \
+    -d "access_token"="deserunt" \
+    -d "page"="64069" \
+
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost.dev.xsellcast/api/v1/customers",
+    "method": "GET",
+    "data": {
+        "access_token": "deserunt",
+        "page": 64069
+},
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+```
+
+> Example response:
+
+```json
+{
+    "error": "invalid_request",
+    "error_description": "The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+}
+```
+
+### HTTP Request
+`GET api/v1/customers`
+
+`HEAD api/v1/customers`
+
+#### Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    access_token | string |  required  | 
+    page | integer |  optional  | 
+
+<!-- END_7dcb2e835d08b8605b7005d3fa447cf1 -->
+<!-- START_d8b0340ccfd3fcdc50af88b980e8d1d7 -->
+## Get Customer
+
+Get existing customer by ID.
+Return page 404 when ever offer don't exists.
+
+> Example request:
+
+```bash
+curl "http://localhost.dev.xsellcast/api/v1/customer/{customer_d}" \
+-H "Accept: application/json" \
+    -d "access_token"="enim" \
+
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost.dev.xsellcast/api/v1/customer/{customer_d}",
+    "method": "GET",
+    "data": {
+        "access_token": "enim"
+},
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+```
+
+> Example response:
+
+```json
+{
+    "error": "invalid_request",
+    "error_description": "The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+}
+```
+
+### HTTP Request
+`GET api/v1/customer/{customer_d}`
+
+`HEAD api/v1/customer/{customer_d}`
+
+#### Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    access_token | string |  required  | 
+
+<!-- END_d8b0340ccfd3fcdc50af88b980e8d1d7 -->
+<!-- START_0d7c805066af8bae50cc9e0aa152029a -->
+## Brand Associate
+
+Get list of brand associate related to a customer.
+
+> Example request:
+
+```bash
+curl "http://localhost.dev.xsellcast/api/v1/customer/{customer_d}/brands-associates" \
+-H "Accept: application/json" \
+    -d "access_token"="quia" \
+
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost.dev.xsellcast/api/v1/customer/{customer_d}/brands-associates",
+    "method": "GET",
+    "data": {
+        "access_token": "quia"
+},
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+```
+
+> Example response:
+
+```json
+{
+    "error": "invalid_request",
+    "error_description": "The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+}
+```
+
+### HTTP Request
+`GET api/v1/customer/{customer_d}/brands-associates`
+
+`HEAD api/v1/customer/{customer_d}/brands-associates`
+
+#### Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    access_token | string |  required  | 
+
+<!-- END_0d7c805066af8bae50cc9e0aa152029a -->
+<!-- START_84230bb56080c6f8d3cbbe9ff385ee59 -->
+## Offers
+
+Get list of offers related to a customer
+
+> Example request:
+
+```bash
+curl "http://localhost.dev.xsellcast/api/v1/customer/{customer_id}/offers" \
+-H "Accept: application/json" \
+    -d "access_token"="quae" \
+
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost.dev.xsellcast/api/v1/customer/{customer_id}/offers",
+    "method": "GET",
+    "data": {
+        "access_token": "quae"
+},
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+```
+
+> Example response:
+
+```json
+{
+    "error": "invalid_request",
+    "error_description": "The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+}
+```
+
+### HTTP Request
+`GET api/v1/customer/{customer_id}/offers`
+
+`HEAD api/v1/customer/{customer_id}/offers`
+
+#### Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    access_token | string |  required  | 
+
+<!-- END_84230bb56080c6f8d3cbbe9ff385ee59 -->
+<!-- START_5c99dc8d1bba95d3ccddc791908c01ce -->
+## Add Offer
+
+Add an offer to a customer.
+
+> Example request:
+
+```bash
+curl "http://localhost.dev.xsellcast/api/v1/customer/offer" \
+-H "Accept: application/json" \
+    -d "access_token"="dolores" \
+    -d "customer_id"="dolores" \
+    -d "offer_id"="dolores" \
+
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost.dev.xsellcast/api/v1/customer/offer",
+    "method": "POST",
+    "data": {
+        "access_token": "dolores",
+        "customer_id": "dolores",
+        "offer_id": "dolores"
+},
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+```
+
+
+### HTTP Request
+`POST api/v1/customer/offer`
+
+#### Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    access_token | string |  required  | 
+    customer_id | string |  required  | 
+    offer_id | string |  required  | 
+
+<!-- END_5c99dc8d1bba95d3ccddc791908c01ce -->
+<!-- START_d353f0c9b2a499f8dda5d44a23ce6adb -->
+## Delete offer
+
+Delete and offer related to customer.
+
+> Example request:
+
+```bash
+curl "http://xsellcast.caffeineinteractive.net/api/v1/customer/offer" \
+-H "Accept: application/json" \
+    -d "access_token"="neque" \
+    -d "customer_id"="1" \
+    -d "offer_id"="1" \
+    -d "_method"="DELETE" \
+
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/customer/offer",
+    "method": "DELETE",
+    "data": {
+        "access_token": "neque",
+        "customer_id": "1",
+        "offer_id": "1",
+        "_method": "DELETE"
+},
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+```
+
+
+### HTTP Request
+`DELETE api/v1/customer/offer`
+
+#### Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    access_token | string |  required  | 
+    customer_id | string |  required  | 
+    offer_id | string |  required  | 
+    _method | string |  required  | Value required is "DELETE".
+
+<!-- END_d353f0c9b2a499f8dda5d44a23ce6adb -->
+#Dealers
+
+Dealers resource.
+<!-- START_543a559c79b5e89127ea48a14d17ccbc -->
+## Get Dealers
+
+This will a list of existing dealers.
+
+> Example request:
+
+```bash
+curl "http://xsellcast.caffeineinteractive.net/api/v1/dealers" \
+-H "Accept: application/json" \
+    -d "access_token"="dolor" \
+    -d "page"="60" \
+    -d "zip"="dolor" \
+
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/dealers",
+    "method": "GET",
+    "data": {
+        "access_token": "dolor",
+        "page": 60,
+        "zip": "dolor"
+},
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+```
+
+> Example response:
+
+```json
+{
+    "error": "invalid_request",
+    "error_description": "The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+}
+```
+
+### HTTP Request
+`GET api/v1/dealers`
+
+`HEAD api/v1/dealers`
+
+#### Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    access_token | string |  required  | 
+    page | integer |  optional  | 
+    zip | string |  optional  | 
+
+<!-- END_543a559c79b5e89127ea48a14d17ccbc -->
+<!-- START_8c793e4127650186f15d88232265a0f9 -->
+## Get Dealer
+
+Get existing dealer by ID.
+Return page 404 when ever dealer don't exists.
+
+> Example request:
+
+```bash
+curl "http://xsellcast.caffeineinteractive.net/api/v1/dealer/{id}" \
+-H "Accept: application/json" \
+    -d "access_token"="optio" \
+
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/dealer/{id}",
+    "method": "GET",
+    "data": {
+        "access_token": "optio"
+},
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+```
+
+> Example response:
+
+```json
+{
+    "error": "invalid_request",
+    "error_description": "The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+}
+```
+
+### HTTP Request
+`GET api/v1/dealer/{id}`
+
+`HEAD api/v1/dealer/{id}`
+
+#### Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    access_token | string |  required  | 
+
+<!-- END_8c793e4127650186f15d88232265a0f9 -->
+<!-- START_c0ee645f33bf5bb6cafa4b1e8ee7427b -->
+## Get Brands
+
+Pull related brands to a dealer.
+
+> Example request:
+
+```bash
+curl "http://xsellcast.caffeineinteractive.net/api/v1/dealer/{id}/brands" \
+-H "Accept: application/json" \
+    -d "access_token"="asperiores" \
+
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/dealer/{id}/brands",
+    "method": "GET",
+    "data": {
+        "access_token": "asperiores"
+},
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+```
+
+> Example response:
+
+```json
+{
+    "error": "invalid_request",
+    "error_description": "The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+}
+```
+
+### HTTP Request
+`GET api/v1/dealer/{id}/brands`
+
+`HEAD api/v1/dealer/{id}/brands`
+
+#### Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    access_token | string |  required  | 
+
+<!-- END_c0ee645f33bf5bb6cafa4b1e8ee7427b -->
+<!-- START_df30a75fba7920a9a5396bdf7c51416b -->
+## Get Brand Associates
+
+Pull all existing brand associate to dealer.
+
+> Example request:
+
+```bash
+curl "http://xsellcast.caffeineinteractive.net/api/v1/dealer/{id}/brands-associates" \
+-H "Accept: application/json" \
+    -d "access_token"="velit" \
+
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/dealer/{id}/brands-associates",
+    "method": "GET",
+    "data": {
+        "access_token": "velit"
+},
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+```
+
+> Example response:
+
+```json
+{
+    "error": "invalid_request",
+    "error_description": "The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+}
+```
+
+### HTTP Request
+`GET api/v1/dealer/{id}/brands-associates`
+
+`HEAD api/v1/dealer/{id}/brands-associates`
+
+#### Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    access_token | string |  required  | 
+
+<!-- END_df30a75fba7920a9a5396bdf7c51416b -->
+#OAuth
+
+Request and refresh app access token.
+Token is require for accessing xsellcast api. Ask caffeine developer for your site client_id and secret_id.
+<!-- START_d0b9b9c0bbb9da16ce2962f493350b97 -->
+## Request Token
+
+Send request for acquiring client credential token.
+
+> Example request:
+
+```bash
+curl "http://xsellcast.caffeineinteractive.net/api/oauth/request-token" \
+-H "Accept: application/json" \
+    -d "client_id"="provident" \
+    -d "client_secret"="provident" \
+
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://xsellcast.caffeineinteractive.net/api/oauth/request-token",
+    "method": "POST",
+    "data": {
+        "client_id": "provident",
+        "client_secret": "provident"
+},
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+```
+
+
+### HTTP Request
+`POST api/oauth/request-token`
+
+#### Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    client_id | string |  required  | Maximum: `255`
+    client_secret | string |  required  | Maximum: `255`
+
+<!-- END_d0b9b9c0bbb9da16ce2962f493350b97 -->
+#Offers
+
+Offers resource.
+<!-- START_c233fc34839427dff7ef9ad7c3821ae3 -->
+## Get Offers
+
+This will a list of existing offers.
+
+> Example request:
+
+```bash
+curl "http://xsellcast.caffeineinteractive.net/api/v1/offers" \
+-H "Accept: application/json" \
+    -d "access_token"="rerum" \
+    -d "page"="796437556" \
+
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/offers",
+    "method": "GET",
+    "data": {
+        "access_token": "rerum",
+        "page": 796437556
+},
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+```
+
+> Example response:
+
+```json
+{
+    "error": "invalid_request",
+    "error_description": "The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+}
+```
+
+### HTTP Request
+`GET api/v1/offers`
+
+`HEAD api/v1/offers`
+
+#### Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    access_token | string |  required  | 
+    page | integer |  optional  | 
+
+<!-- END_c233fc34839427dff7ef9ad7c3821ae3 -->
+<!-- START_20f7dcc2be313226fef14601da7c335a -->
+## Get Offer
+
+Get existing offer by ID.
+Return page 404 when ever offer don't exists.
+
+> Example request:
+
+```bash
+curl "http://xsellcast.caffeineinteractive.net/api/v1/offer/{id}" \
+-H "Accept: application/json" \
+    -d "access_token"="voluptas" \
+
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost.dev.xsellcast/api/v1/offer/{id}",
+    "method": "GET",
+    "data": {
+        "access_token": "voluptas"
+},
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+```
+
+> Example response:
+
+```json
+{
+    "error": "invalid_request",
+    "error_description": "The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+}
+```
+
+### HTTP Request
+`GET api/v1/offer/{id}`
+
+`HEAD api/v1/offer/{id}`
+
+#### Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    access_token | string |  required  | 
+
+<!-- END_20f7dcc2be313226fef14601da7c335a -->
+#Users
+
+Users resource.
+<!-- START_080f3ecebb7bcc2f93284b8f5ae1ac3b -->
+## Get All
+
+This will pull all availables users.
+
+> Example request:
+
+```bash
+curl "http://localhost.dev.xsellcast/api/v1/users" \
+-H "Accept: application/json" \
+    -d "access_token"="est" \
+
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost.dev.xsellcast/api/v1/users",
+    "method": "GET",
+    "data": {
+        "access_token": "est"
+},
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+```
+
+> Example response:
+
+```json
+{
+    "access_token": [
+        "The access token field is required."
+    ]
+}
+```
+
+### HTTP Request
+`GET api/v1/users`
+
+`HEAD api/v1/users`
+
+#### Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    access_token | string |  required  | 
+
+<!-- END_080f3ecebb7bcc2f93284b8f5ae1ac3b -->
+<!-- START_eacf91ed954a61c54ef195ee35b6e4e1 -->
+## Create New
+
+This will create new user.
+
+> Example request:
+
+```bash
+curl "http://localhost.dev.xsellcast/api/v1/users/store" \
+-H "Accept: application/json" \
+    -d "firstname"="nam" \
+    -d "lastname"="nam" \
+    -d "access_token"="nam" \
+
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost.dev.xsellcast/api/v1/users/store",
+    "method": "POST",
+    "data": {
+        "firstname": "nam",
+        "lastname": "nam",
+        "access_token": "nam"
+},
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+```
+
+
+### HTTP Request
+`POST api/v1/users/store`
+
+#### Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    firstname | string |  required  | Maximum: `255`
+    lastname | string |  required  | Maximum: `255`
+    access_token | string |  required  | 
+
+<!-- END_eacf91ed954a61c54ef195ee35b6e4e1 -->
+#general
+<!-- START_f3a716d7d25be66c005b1879a16d4148 -->
+## Get All
+
+This will a list of existing brand associate.
+
+> Example request:
+
+```bash
+curl "http://localhost.dev.xsellcast/api/v1/brands-associates" \
+-H "Accept: application/json" \
+    -d "access_token"="quasi" \
+
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost.dev.xsellcast/api/v1/brands-associates",
+    "method": "GET",
+    "data": {
+        "access_token": "quasi"
+},
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+```
+
+> Example response:
+
+```json
+{
+    "error": "invalid_request",
+    "error_description": "The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+}
+```
+
+### HTTP Request
+`GET api/v1/brands-associates`
+
+`HEAD api/v1/brands-associates`
+
+#### Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    access_token | string |  required  | 
+
+<!-- END_f3a716d7d25be66c005b1879a16d4148 -->
+<!-- START_157728b7d0e777171c01715902ba9650 -->
+## Get Info
+
+Get brand representative basic informations.
+
+> Example request:
+
+```bash
+curl "http://localhost.dev.xsellcast/api/v1/brands-associates/{id}" \
+-H "Accept: application/json" \
+    -d "access_token"="occaecati" \
+
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost.dev.xsellcast/api/v1/brands-associates/{id}",
+    "method": "GET",
+    "data": {
+        "access_token": "occaecati"
+},
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+```
+
+> Example response:
+
+```json
+{
+    "error": "invalid_request",
+    "error_description": "The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+}
+```
+
+### HTTP Request
+`GET api/v1/brands-associates/{id}`
+
+`HEAD api/v1/brands-associates/{id}`
+
+#### Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    access_token | string |  required  | 
+
+<!-- END_157728b7d0e777171c01715902ba9650 -->

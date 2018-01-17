@@ -1,0 +1,2 @@
+[24-Aug-2017 20:40:12 UTC] PHP Fatal error:  Class 'Illuminate\Foundation\Application' not found in /home/i97394k9jhnqsn0x/public_html/application/xsellcast/web/bootstrap/app.php on line 14
+[24-Aug-2017 20:40:15 UTC] PHP Fatal error:  Class 'Illuminate\Foundation\Application' not found in /home/i97394k9jhnqsn0x/public_html/application/xsellcast/web/bootstrap/app.php on line 14

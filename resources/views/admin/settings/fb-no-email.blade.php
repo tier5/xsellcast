@@ -1,0 +1,1 @@
+Set personal email before setting password. Go to <a href="{!! route('admin.settings.profile') !!}" class="btn btn-white btn-small">My Profile</a>
