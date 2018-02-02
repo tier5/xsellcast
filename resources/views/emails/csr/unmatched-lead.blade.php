@@ -1,0 +1,1 @@
+A new lead has expressed interest in an offer, but no nearby BA has joined Xsellcast yet. Please onboard a BA to help this new lead. Details are here: <a href="{!! route('admin.prospects.unmatched.lead') !!}">{!! route('admin.prospects.unmatched.lead') !!}</a>

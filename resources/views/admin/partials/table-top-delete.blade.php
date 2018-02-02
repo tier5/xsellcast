@@ -1,0 +1,2 @@
+<a class="btn btn-danger" data-toggle="modal" data-target="#delete_prospect_confirm">Delete</a>
+{!! Html::modalYesNo($modalMsg, 'delete_prospect_confirm', ['no_label' => 'Cancel', 'yes_url' =>  $deleteUrl]) !!}

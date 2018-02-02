@@ -1,0 +1,28 @@
+{
+    "name": "stevebauman/eloquenttable",
+    "description": "An HTML table generator for laravel collections",
+    "license" : "MIT",
+    "keywords" : [
+            "laravel",
+            "php",
+            "table",
+            "html",
+            "eloquent"
+    ],
+    "authors": [
+        {
+            "name": "Steve Bauman",
+            "email": "steven_bauman_7@hotmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "4.* | 5.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Stevebauman\\EloquentTable\\": "src/Stevebauman/EloquentTable/"
+        }
+    },
+    "minimum-stability": "stable"
+}
