@@ -164,4 +164,6 @@ class User extends Authenticatable implements Transformable
 
         return ($fbRegistered && ($this->email == '' || !$this->email));
     }
+
+
 }

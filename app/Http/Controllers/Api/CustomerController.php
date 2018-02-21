@@ -7,19 +7,25 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Storage\Customer\CustomerRepository;
+use App\Storage\SalesRep\SalesRepRepository;
+use App\Storage\Offer\OfferRepository;
+use App\Storage\Customer\Customer;
+use App\Storage\User\User;
 use App\Http\Requests\Api\CustomersRequest;
 use App\Http\Requests\Api\CustomersShowRequest;
 use App\Http\Requests\Api\SimpleGetRequest;
 use App\Http\Requests\Api\CustomerSalesRepGetRequest;
 use App\Http\Requests\Api\CustomerOfferPostRequest;
 use App\Http\Requests\Api\CustomerOfferDeleteRequest;
-use App\Storage\SalesRep\SalesRepRepository;
-use App\Storage\Offer\OfferRepository;
 use App\Http\Requests\Api\CustomerPostRequest;
+use App\Http\Requests\Api\CustomerPostSocialRequest;
+use App\Http\Requests\Api\CustomerPostLoginRequest;
+use App\Http\Requests\Api\CustomerPostSocialLoginRequest;
 use App\Http\Requests\Api\CustomerPutRequest;
 use App\Http\Requests\Api\CustomerDeleteRequest;
-use App\Storage\Customer\Customer;
-use App\Storage\User\User;
+use App\Http\Requests\Api\CustomerForgotPasswordRequest;
+use Snowfire\Beautymail\Beautymail;
+use Hash;
 
 /**
  * @resource Customer
@@ -202,7 +208,7 @@ class CustomerController extends Controller
     {
         try {
             $data             = $request->all();
-            $data['password'] = uniqid();
+            // $data['password'] = (isset($data['password']) ? $data['password'] : uniqid();
             $data['geo_long'] = (isset($data['geo_long']) ? $data['geo_long'] : '');
             $data['geo_lat']  = (isset($data['geo_lat']) ? $data['geo_lat'] : '');
             $data['country']  = 'US';
@@ -210,6 +216,48 @@ class CustomerController extends Controller
             $data['provider_token']  = (isset($data['provider_token']) ? $data['provider_token'] : '');
 
             $customer         = $this->customer->createOne($data);
+
+            // return response() ->json($this->customer->find($customer->id));
+            return response()->json([
+                    'status'=>true,
+                    'code'=>config('responses.success.status_code'),
+                    'data'=>$this->customer->find($customer->id),
+                    'message'=>config('responses.success.status_message'),
+                ], config('responses.success.status_code'));
+            }
+        catch (\Exception $e) {
+            // dd($e->getMessage());
+            return response()->json([
+                'status'=>false,
+                'code'=>config('responses.bad_request.status_code'),
+                'data'=>null,
+                'message'=>$e->getMessage()
+            ],
+                config('responses.bad_request.status_code')
+            );
+        }
+    }
+    /**
+     * Create
+     *
+     * Create a new customer using Social Registration.
+     *
+     * @param      \App\Http\Requests\Api\CustomerPostSocialRequest  $request  The request
+     *
+     * @return     <type>                                      ( description_of_the_return_value )
+     */
+    public function storeSocialRegistration(CustomerPostSocialRequest $request)
+    {
+        try {
+            $data                   = $request->all();
+            $data['password']       = uniqid();
+            $data['geo_long']       = (isset($data['geo_long']) ? $data['geo_long'] : '');
+            $data['geo_lat']        = (isset($data['geo_lat']) ? $data['geo_lat'] : '');
+            $data['country']        = 'US';
+            $data['provider']       = (isset($data['provider']) ? $data['provider'] : '');
+            $data['provider_token'] = (isset($data['provider_token']) ? $data['provider_token'] : '');
+
+            $customer               = $this->customer->createOne($data);
 
             // return response() ->json($this->customer->find($customer->id));
             return response()->json([
@@ -294,5 +342,166 @@ class CustomerController extends Controller
         User::find($userId)->delete();
 
         return response()->json(['data' => 1]);
+    }
+
+    /**
+     *
+     * Customer login.
+     *
+     * @param      \App\Http\Requests\Api\CustomerPostLoginRequest  $request  The request
+     *
+     * @return     <type>                                      ( description_of_the_return_value )
+     */
+    public function doCustomerLogin(CustomerPostLoginRequest $request)
+    {
+        try {
+            $email             = $request->email;
+            $password          = $request->password;
+            $user= User::where('email','=',$email)->first();
+            if(!empty($user)){
+
+                if(Hash::check($password,$user->password))
+                    {
+            // dd($user);
+                        return response()->json([
+                        'status'=>true,
+                        'code'=>config('responses.success.status_code'),
+                        'data'=>$user->customer,
+                        'message'=>config('responses.success.status_message'),
+                        ], config('responses.success.status_code'));
+                    }
+
+            }
+                return response()->json([
+                    'status'=>true,
+                    'code'=>config('responses.success.status_code'),
+                    'data'=>[],
+                    'message'=>'Invalid email or password',
+                ], config('responses.bad_request.status_code'));
+
+            // $customer
+
+            // return response() ->json($this->customer->find($customer->id));
+
+            }
+        catch (\Exception $e) {
+            // dd($e->getMessage());
+            return response()->json([
+                'status'=>false,
+                'code'=>config('responses.bad_request.status_code'),
+                'data'=>null,
+                'message'=>$e->getMessage()
+            ],
+                config('responses.bad_request.status_code')
+            );
+        }
+    }
+
+     /**
+     *
+     * Customer Social login.
+     *
+     * @param      \App\Http\Requests\Api\CustomerPostSocialLoginRequest  $request  The request
+     *
+     * @return     <type>                                      ( description_of_the_return_value )
+     */
+    public function doCustomerSocialLogin(CustomerPostSocialLoginRequest $request)
+    {
+        try {
+            $provider             = $request->provider;
+            $provider_token       = $request->provider_token;
+            $user= User::where('provider','=',$provider)->where('provider_token','=',$provider_token)->first();
+            if(!empty($user)){
+
+                return response()->json([
+                'status'=>true,
+                'code'=>config('responses.success.status_code'),
+                'data'=>$user->customer,
+                'message'=>config('responses.success.status_message'),
+                ], config('responses.success.status_code'));
+            }
+
+            return response()->json([
+               'status'=>false,
+                'code'=>config('responses.bad_request.status_code'),
+                'data'=>[],
+                'message'=>'Invalid '.$provider .' Token' ,
+            ], config('responses.bad_request.status_code'));
+
+            // $customer
+
+            // return response() ->json($this->customer->find($customer->id));
+
+            }
+        catch (\Exception $e) {
+            // dd($e->getMessage());
+            return response()->json([
+                'status'=>false,
+                'code'=>config('responses.bad_request.status_code'),
+                'data'=>null,
+                'message'=>$e->getMessage()
+            ],
+                config('responses.bad_request.status_code')
+            );
+        }
+    }
+
+    /**
+     *
+     * Forgot Password.
+     *
+     * @param      \App\Http\Requests\Api\CustomerPostSocialLoginRequest  $request  The request
+     *
+     * @return     <type>                                      ( description_of_the_return_value )
+     */
+    public function forgotPassword(CustomerForgotPasswordRequest $request)
+    {
+        try {
+            $email             = $request->email;
+            $user= User::where('email','=',$email)->first();
+
+            if(!empty($user)){
+            $token=   app('auth.password.broker')->createToken($user);
+            $user->token=$token;
+
+
+                $beautymail = app()->make(Beautymail::class);
+                $beautymail->send('emails.auth.api.password-reset', compact('user'), function($message) use($user)
+                {
+                     // $token = str_random(64);
+
+                    $message
+                        ->from(env('MAIL_USERNAME'))
+                        ->to($user->email, $user->firstname . ' ' . $user->lastname)
+                        ->subject('Password Reset Link');
+                });
+
+                return response()->json([
+                'status'=>true,
+                'code'=>config('responses.success.status_code'),
+                'data'=>$user->customer,
+                'message'=>config('responses.success.status_message'),
+                ], config('responses.success.status_code'));
+            }
+
+            return response()->json([
+               'status'=>false,
+                'code'=>config('responses.bad_request.status_code'),
+                'data'=>[],
+                'message'=>'Invalid Email Token' ,
+            ], config('responses.bad_request.status_code'));
+
+            }
+        catch (\Exception $e) {
+            // dd($e->getMessage());
+            return response()->json([
+                'status'=>false,
+                'code'=>config('responses.bad_request.status_code'),
+                'data'=>null,
+                'message'=>$e->getMessage()
+            ],
+                config('responses.bad_request.status_code')
+            );
+        }
     }
 }

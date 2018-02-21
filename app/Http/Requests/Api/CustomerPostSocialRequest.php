@@ -4,7 +4,7 @@ namespace App\Http\Requests\Api;
 
 use App\Http\Requests\Request;
 use Response;
-class CustomerPostRequest extends Request
+class CustomerPostSocialRequest extends Request
 {
     protected $redirectRoute = 'api.errors';
 
@@ -41,7 +41,9 @@ class CustomerPostRequest extends Request
             'homephone'    => '',
             'cellphone'    => '',
             'officephone'  => '',
-            'password'        => 'required|min:6'
+            'provider'     =>'required',
+            'provider_token'        => 'required|unique:users,provider_token',
+
 
         ];
     }

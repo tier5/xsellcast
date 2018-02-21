@@ -4,7 +4,7 @@ namespace App\Http\Requests\Api;
 
 use App\Http\Requests\Request;
 use Response;
-class CustomerPostRequest extends Request
+class CustomerPostSocialLoginRequest extends Request
 {
     protected $redirectRoute = 'api.errors';
 
@@ -26,22 +26,9 @@ class CustomerPostRequest extends Request
     public function rules()
     {
         return [
-            'access_token' => 'required',
-            'wp_userid'    => 'required|unique:user_customer,wp_userid',
-            'address1'     => 'required',
-            'address2'     => '',
-            'zip'          => 'required',
-            'city'         => 'required',
-            'state'        => 'required',
-            'geo_long'     => '',
-            'geo_lat'      => '',
-            'email'        => 'required|unique:users,email',
-            'firstname'    => 'required',
-            'lastname'     => 'required',
-            'homephone'    => '',
-            'cellphone'    => '',
-            'officephone'  => '',
-            'password'        => 'required|min:6'
+            'access_token'      => 'required',
+            'provider'          => 'required',
+            'provider_token'    => 'required',
 
         ];
     }

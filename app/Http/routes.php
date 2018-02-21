@@ -163,11 +163,11 @@ Route::group(array('namespace' => 'Debug'), function(){
 
         Route::post('users/store/csr', array(
             'as' => 'debug.admin.users.csr.store',
-            'uses' => 'UsersController@csrStore'));      
+            'uses' => 'UsersController@csrStore'));
 
         Route::get('api-tool', array(
             'as' => 'debug.admin.api.tool',
-            'uses' => 'ApiTestToolController@index'));    
+            'uses' => 'ApiTestToolController@index'));
 
         Route::get('ontraport', array(
             'as' => 'debug.admin.ontraport',
@@ -617,8 +617,8 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Api'), function()
     Route::any('error', array(
         'as' => 'api.errors',
         'uses' => 'ErrorsController@index'
-    ));  
-  
+    ));
+
     /**
      * Secure API V1
      */
@@ -675,17 +675,17 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Api'), function()
 
         Route::post('offer', array(
             'as'           => 'api.v1.offers.store',
-            'uses'         => 'OffersController@store'));   
+            'uses'         => 'OffersController@store'));
 
         Route::delete('offer', array(
             'as'           => 'api.v1.offers.delete',
-            'uses'         => 'OffersController@destroy'));     
+            'uses'         => 'OffersController@destroy'));
 
         Route::put('offer', array(
             'as'           => 'api.v1.offers.update',
-            'uses'         => 'OffersController@update'));                       
+            'uses'         => 'OffersController@update'));
         //End Offer
-        
+
         /**
          * Customer routes
          */
@@ -716,14 +716,28 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Api'), function()
         Route::post('customer', array(
             'as'           => 'api.v1.customers.store',
             'uses'         => 'CustomerController@store'));
+        Route::post('customer/social-registration', array(
+            'as'           => 'api.v1.customers.social-registration',
+            'uses'         => 'CustomerController@storeSocialRegistration'));
 
         Route::put('customer', array(
             'as'           => 'api.v1.customers.update',
-            'uses'         => 'CustomerController@update'));   
+            'uses'         => 'CustomerController@update'));
 
         Route::delete('customer', array(
             'as'           => 'api.v1.customers.destroy',
-            'uses'         => 'CustomerController@destroy'));                    
+            'uses'         => 'CustomerController@destroy'));
+
+        Route::post('customer/login', array(
+            'as'           => 'api.v1.customers.login',
+            'uses'         => 'CustomerController@doCustomerLogin'));
+        Route::post('customer/social-login', array(
+            'as'           => 'api.v1.customers.social-login',
+            'uses'         => 'CustomerController@doCustomerSocialLogin'));
+
+         Route::post('customer/forgot-password', array(
+            'as'           => 'api.v1.customers.forgot-password',
+            'uses'         => 'CustomerController@forgotPassword'));
 
         /**
          * Brand associates (Sales Rep)
@@ -762,7 +776,7 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Api'), function()
 
                 Route::post('mark-as-read', array(
                     'uses'  => 'DirectMessageController@markAsRead',
-                    'as'    => 'admin.api.messages.direct.mark.read' ));                
+                    'as'    => 'admin.api.messages.direct.mark.read' ));
 
                 Route::post('store', array(
                     'uses'  => 'DirectMessageController@store',
@@ -827,7 +841,7 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Api'), function()
                 Route::post('store', array(
                     'uses'  => 'RequestContactController@store',
                     'as'    => 'admin.api.messages.request.contact_me.store' ));
-            });            
+            });
         });
     });
 });
