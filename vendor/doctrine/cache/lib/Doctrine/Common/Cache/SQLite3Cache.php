@@ -1,4 +1,21 @@
 <?php
+/*
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * This software consists of voluntary contributions made by many individuals
+ * and is licensed under the MIT license. For more information, see
+ * <http://www.doctrine-project.org>.
+ */
 
 namespace Doctrine\Common\Cache;
 
@@ -42,7 +59,7 @@ class SQLite3Cache extends CacheProvider
     /**
      * Constructor.
      *
-     * Calling the constructor will ensure that the database file and table
+     * Calling the constructor will ensure that the database file and table 
      * exist and will create both if they don't.
      *
      * @param SQLite3 $sqlite
@@ -53,20 +70,15 @@ class SQLite3Cache extends CacheProvider
         $this->sqlite = $sqlite;
         $this->table  = (string) $table;
 
-        $this->ensureTableExists();
-    }
+        list($id, $data, $exp) = $this->getFields();
 
-    private function ensureTableExists() : void
-    {
-        $this->sqlite->exec(
-            sprintf(
-                'CREATE TABLE IF NOT EXISTS %s(%s TEXT PRIMARY KEY NOT NULL, %s BLOB, %s INTEGER)',
-                $this->table,
-                static::ID_FIELD,
-                static::DATA_FIELD,
-                static::EXPIRATION_FIELD
-            )
-        );
+        return $this->sqlite->exec(sprintf(
+            'CREATE TABLE IF NOT EXISTS %s(%s TEXT PRIMARY KEY NOT NULL, %s BLOB, %s INTEGER)',
+            $table,
+            $id,
+            $data,
+            $exp
+        ));
     }
 
     /**
@@ -74,13 +86,11 @@ class SQLite3Cache extends CacheProvider
      */
     protected function doFetch($id)
     {
-        $item = $this->findById($id);
-
-        if ( ! $item) {
-            return false;
+        if ($item = $this->findById($id)) {
+            return unserialize($item[self::DATA_FIELD]);
         }
 
-        return unserialize($item[self::DATA_FIELD]);
+        return false;
     }
 
     /**
@@ -151,11 +161,11 @@ class SQLite3Cache extends CacheProvider
      *
      * @return array|null
      */
-    private function findById($id, bool $includeData = true) : ?array
+    private function findById($id, $includeData = true)
     {
         list($idField) = $fields = $this->getFields();
 
-        if ( ! $includeData) {
+        if (!$includeData) {
             $key = array_search(static::DATA_FIELD, $fields);
             unset($fields[$key]);
         }
@@ -189,9 +199,9 @@ class SQLite3Cache extends CacheProvider
      *
      * @return array
      */
-    private function getFields() : array
+    private function getFields()
     {
-        return [static::ID_FIELD, static::DATA_FIELD, static::EXPIRATION_FIELD];
+        return array(static::ID_FIELD, static::DATA_FIELD, static::EXPIRATION_FIELD);
     }
 
     /**
@@ -201,7 +211,7 @@ class SQLite3Cache extends CacheProvider
      *
      * @return bool
      */
-    private function isExpired(array $item) : bool
+    private function isExpired(array $item)
     {
         return isset($item[static::EXPIRATION_FIELD]) &&
             $item[self::EXPIRATION_FIELD] !== null &&

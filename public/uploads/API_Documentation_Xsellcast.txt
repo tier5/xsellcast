@@ -1,0 +1,93 @@
+API Documentation on Xsellcast:
+
+Note : {{HOST}} = xsellcast.com/
+		{{access_token}} = "uLdIeLJl37kso8invA6pIFaHsHeraQzJ5dHfK4yj"
+
+1. To work on all API's, you need to first logged as authentication user to get to generate access_token. They have use laravel oAuth for Auth module. So we need to follow below steps.
+
+	Step 1.
+		We need to find oAuth "client id" and "client_secret". Those data are in database xSellCast -> oauth_clients(table)-> we need to use id field as client_id and secret as client_sceret on Main site.
+	Step 2.
+		To generate access_token
+		API : http://{{HOST}}/api/oauth/request-token
+		Method : POST
+		BODY:
+			grant_type:password
+			client_id:f3d259ddd3ed8ff3843839b
+			client_secret:4c7f6f8fa93d59c45502c0ae8c4a95b
+			email:csr-001@caffeineinteractive.com
+			password:lbt01LBT
+		OUTPUT:
+			{
+		    "access_token": "uLdIeLJl37kso8invA6pIFaHsHeraQzJ5dHfK4yj",
+		    "token_type": "Bearer",
+		    "expires_in": 8640
+			}
+
+
+Note: we have use this access token to get or post data.
+
+2. BRANDS:
+
+	1. Get a list of brands:
+		http://{{HOST}}api/v1/brands?access_token={{access_token}}
+		Method : GET
+
+	2. Get a brand by ID. Return 404 if dealer doesn't exist.
+		http://{{HOST}}api/v1/brands/{brand_id}?access_token={{access_token}}
+		Method : GET
+
+3. CUSTOMERS:
+
+	3.1. Get a list of customers:
+		http://{{HOST}}api/v1/customers?access_token={{access_token}}
+		Method : GET
+
+	3.2. Get a brand by ID. Return 404 if offer doesn't exist.
+		http://{{HOST}}api/v1/brands/{customer_id}?access_token={{access_token}}
+		Method : GET
+
+	3.3 ADD CUSTOMER
+
+		http://{{HOST}}api/v1/brands/{customer_id}?access_token={{access_token}}
+
+
+4. BRAND ASSOCIATES:
+
+	1. Get a list of brand associates related to a customer.
+		http://{{HOST}}api/v1/customer/{id}/brand-associates?access_token={{access_token}}&filter_by=accepted
+		Method : GET
+
+5. OFFERS
+
+	5.1. ADD OFFER
+
+		Add an offer related to a customer.
+		http://{{HOST}}api/v1/customer/offers
+		Method : POST
+		BODY: {
+			customer_id:5
+			offer_id:123
+			access_token={{access_token}}
+			}
+
+		RESPONSE: []
+
+	5.2. DELETE OFFER
+
+		Add an offer related to a customer.
+		http://{{HOST}}api/v1/customer/offers
+		Method : DELETE
+		BODY: {
+			customer_id:5
+			offer_id:123
+			access_token={{access_token}}
+			}
+
+		RESPONSE: []
+
+	5.3 CustomerOffers (lookbook)
+
+		Get a list of brand associates related to a customer.
+		http://{{HOST}}api/v1/customer/{customer_id}/offers?access_token={{access_token}}
+		Method : GET

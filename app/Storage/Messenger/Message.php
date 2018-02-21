@@ -34,7 +34,7 @@ class Message extends Model implements Transformable
     {
 		return $query->whereHas('thread', function($q){
             $q->draftOnly();
-        });  	
+        });
     }
 
     public function scopeInThread($query, $thread_id)
@@ -49,11 +49,11 @@ class Message extends Model implements Transformable
         return $query->whereHas('thread', function($q) use($thread_id){
             $q->where('id', $thread_id);
             $q->draftOnly();
-        });        
+        });
     }
 
     public function scopeForSearch($query, $key)
-    {   
+    {
         $key =  '%' . urldecode($key) . '%';
         return $query->where('body', 'like', $key)
             ->orWhereHas('thread', function($query) use($key){
@@ -62,11 +62,11 @@ class Message extends Model implements Transformable
                     $query->WhereHas('user', function($query) use($key){
                         $query->where('firstname', 'like', $key);
                         $query->orWhere('lastname', 'like', $key);
-                    });                    
+                    });
                 });
         });
-    }  
-    
+    }
+
     public function reads()
     {
         return $this->hasMany('App\Storage\Messenger\Read', 'message_id', 'id');
@@ -110,7 +110,7 @@ class Message extends Model implements Transformable
         $updatedAt = new \Carbon\Carbon($this->updated_at);
 
         return carbonToLocal($updatedAt);
-    }    
+    }
 
     /**
      * Mark a thread as read for a user.
@@ -125,13 +125,13 @@ class Message extends Model implements Transformable
             if(!$read->first()){
                 $read->create([
                     'message_id' => $this->id,
-                    'user_id' => $user_id]);                
+                    'user_id' => $user_id]);
             }
 
         } catch (ModelNotFoundException $e) { // @codeCoverageIgnore
             // do nothing
         }
-    }    
+    }
 
     /*
      *
@@ -161,14 +161,14 @@ class Message extends Model implements Transformable
         return $this->hasMany('App\Storage\Messenger\Read', 'message_id', 'id');
     }
 
-    public function scopeUnReadForUser($query, $user_id)
-    {
+    // public function scopeUnReadForUser($query, $user_id)
+    // {
 
-        return $query->whereHas('messageRead', function($query) use($user_id){
-            
-            $query->where('user_id', $user_id); 
-        }, '<', 1);
-    }
+    //     return $query->whereHas('messageRead', function($query) use($user_id){
+
+    //         $query->where('user_id', $user_id);
+    //     }, '<', 1);
+    // }
 
     public function scopeForType($query, $type, $closure = null)
     {
@@ -177,8 +177,8 @@ class Message extends Model implements Transformable
 
             if ($closure instanceof Closure) {
                 call_user_func($closure, $query);
-            }            
-        });        
+            }
+        });
     }
 
     /**
@@ -205,7 +205,7 @@ class Message extends Model implements Transformable
 
             if ($closure instanceof Closure) {
                 call_user_func($closure, $query);
-            }            
+            }
         });
     }
 
@@ -216,7 +216,7 @@ class Message extends Model implements Transformable
         }
 
         return $query->where('user_id', $user_id);
-    }    
+    }
     /**
      * End of class Message
      */

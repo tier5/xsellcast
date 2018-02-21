@@ -3,11 +3,11 @@
 namespace App\Http\Requests\Api;
 
 use App\Http\Requests\Request;
-
+use Response;
 class CustomerPostRequest extends Request
 {
     protected $redirectRoute = 'api.errors';
-    
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -40,7 +40,29 @@ class CustomerPostRequest extends Request
             'lastname'     => 'required',
             'homephone'    => '',
             'cellphone'    => '',
-            'officephone'  => ''
+            'officephone'  => '',
+            'provider_token'        => 'unique:users,provider_token'
+
         ];
+    }
+
+    /**
+     * Response error message as json
+     *
+     * @param array $errors
+     * @return mixed
+     */
+    public function response(array $errors){
+
+        return response()->json([
+                    'status'=>false,
+                    'code'=>config('responses.bad_request.status_code'),
+                    'data'=>null,
+                    'errors'=>$errors,
+                    'message'=>config('responses.bad_request.status_message'),
+                ],
+                config('responses.bad_request.status_code')
+            );
+        // return Response::json($errors, config('responses.bad_request.status_code'));
     }
 }

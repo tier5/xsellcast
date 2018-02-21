@@ -1,0 +1,7 @@
+/public/uploads
+/storage/*.key
+/vendor
+/.idea
+/.vagrant
+.env
+composer.lock

@@ -150,7 +150,6 @@ class ComposerStaticInitc03b58e48261f5740cbbb1a72d6bb2a4
             'Doctrine\\Instantiator\\' => 22,
             'Doctrine\\Common\\Lexer\\' => 22,
             'Doctrine\\Common\\Inflector\\' => 26,
-            'Doctrine\\Common\\Collections\\' => 28,
             'Doctrine\\Common\\Cache\\' => 22,
             'Doctrine\\Common\\Annotations\\' => 28,
             'Doctrine\\Common\\' => 16,
@@ -471,10 +470,6 @@ class ComposerStaticInitc03b58e48261f5740cbbb1a72d6bb2a4
         array (
             0 => __DIR__ . '/..' . '/doctrine/inflector/lib/Doctrine/Common/Inflector',
         ),
-        'Doctrine\\Common\\Collections\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/doctrine/collections/lib/Doctrine/Common/Collections',
-        ),
         'Doctrine\\Common\\Cache\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/cache/lib/Doctrine/Common/Cache',
@@ -617,6 +612,10 @@ class ComposerStaticInitc03b58e48261f5740cbbb1a72d6bb2a4
             array (
                 0 => __DIR__ . '/..' . '/doctrine/dbal/lib',
             ),
+            'Doctrine\\Common\\Collections\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/doctrine/collections/lib',
+            ),
         ),
         'B' => 
         array (
@@ -655,6 +654,7 @@ class ComposerStaticInitc03b58e48261f5740cbbb1a72d6bb2a4
         'AddRejectedDateField' => __DIR__ . '/../..' . '/database/migrations/2017_06_15_170441_add_rejected_date_field.php',
         'AddSalesrepPasswordChaged' => __DIR__ . '/../..' . '/database/migrations/2017_06_05_133615_add_salesrep_password_chaged.php',
         'AddSoftDeleteToMessageTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_10_163807_add_soft_delete_to_message_table.php',
+        'AddSoftDeletesToMessagesTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_30_152742_add_soft_deletes_to_messages_table.php',
         'AddSoftDeletesToParticipantsTable' => __DIR__ . '/../..' . '/database/migrations/2014_11_03_154831_add_soft_deletes_to_participants_table.php',
         'AddSoftdeletesToThreadsTable' => __DIR__ . '/../..' . '/database/migrations/2014_12_04_124531_add_softdeletes_to_threads_table.php',
         'AddTitleColumnToOfferTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_19_171348_add_title_column_to_offer_table.php',
@@ -680,6 +680,7 @@ class ComposerStaticInitc03b58e48261f5740cbbb1a72d6bb2a4
         'AlterThreandTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_23_024710_alter_threand_table.php',
         'AlterUserActivationAddIdFieldTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_02_192933_alter_user_activation_add_id_field_table.php',
         'AlterUserActivationAddSoftdeleteTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_02_192137_alter_user_activation_add_softdelete_table.php',
+        'AlterUserAddSocialLogin' => __DIR__ . '/../..' . '/database/migrations/2018_02_20_133553_alter_user_add_social_login.php',
         'AlterUserCustomerOntraIdTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_06_030638_alter_user_customer_ontra_id_table.php',
         'AlterUserFieldNameColumn' => __DIR__ . '/../..' . '/database/migrations/2017_02_17_155217_alter_user_field_name_column.php',
         'BrandSeeder' => __DIR__ . '/../..' . '/database/seeds/BrandSeeder.php',

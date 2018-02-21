@@ -84,7 +84,7 @@ class CustomerRepositoryEloquent extends BaseRepository implements CustomerRepos
      *
      * @param      integer  $offer_id     The offer identifier
      * @param      App\Storage\Customer\Customer  $customer  The customer identifier
-     * @param      string  $action        The action 
+     * @param      string  $action        The action
      *
      * @return     App\Storage\Customer\Customer
      */
@@ -107,8 +107,8 @@ class CustomerRepositoryEloquent extends BaseRepository implements CustomerRepos
 
           $customerOffer = $customer->setOffer($offer_id);
         }
-        
-        
+
+
       //  $co                       = $customerOffer->first();
         $customerOffer->added     = $is_added;
 
@@ -130,7 +130,7 @@ class CustomerRepositoryEloquent extends BaseRepository implements CustomerRepos
         /**
          * Set action
          */
-        $action = new \App\Storage\UserAction\UserAction();   
+        $action = new \App\Storage\UserAction\UserAction();
 
         if($is_added){
           $action->addCustomerOffer($customer->user->id, $offer_id);
@@ -162,34 +162,34 @@ class CustomerRepositoryEloquent extends BaseRepository implements CustomerRepos
 
         $this->model = $model;
 
-        return $this;                     
-    }    
+        return $this;
+    }
 
     public function noAssignedSalesrep()
     {
         $this->model = $this->model->whereHas('salesRepsPivot', function($query){
             $query->withApproved();
-        }, '<=', 0); 
+        }, '<=', 0);
 
         return $this;
     }
 
     public function orderBySalesRepsPivot($order)
     {
-      $this->model = $this->model->leftJoin('customer_salesreps', 'user_customer.id', '=', 'customer_salesreps.customer_id')->orderBy('customer_salesreps.updated_at', $order)->select('user_customer.*');  
+      $this->model = $this->model->leftJoin('customer_salesreps', 'user_customer.id', '=', 'customer_salesreps.customer_id')->orderBy('customer_salesreps.updated_at', $order)->select('user_customer.*');
 
-      return $this;       
+      return $this;
     }
 
     public function orderByRejected($order = 'desc')
     {
-        $this->model = $this->model->leftJoin('customer_salesreps', 'user_customer.id', '=', 'customer_salesreps.customer_id')->orderBy('customer_salesreps.rejected_at', $order)->select('user_customer.*'); 
+        $this->model = $this->model->leftJoin('customer_salesreps', 'user_customer.id', '=', 'customer_salesreps.customer_id')->orderBy('customer_salesreps.rejected_at', $order)->select('user_customer.*');
 
-        return $this;      
+        return $this;
     }
 
     /**
-     * 
+     *
      * @param      Offer  $offer     The offer
      * @param      Customer  $customer  The customer
      *
@@ -211,7 +211,7 @@ class CustomerRepositoryEloquent extends BaseRepository implements CustomerRepos
 
         foreach($dealers as $dealer)
         {
-            $distance = $this->distance($customer->geo_lat, $customer->geo_long, $dealer->geo_lat, $dealer->geo_long);    
+            $distance = $this->distance($customer->geo_lat, $customer->geo_long, $dealer->geo_lat, $dealer->geo_long);
 
             if($nearestDis > $distance)
             {
@@ -219,19 +219,19 @@ class CustomerRepositoryEloquent extends BaseRepository implements CustomerRepos
                 $nearestDealer = $dealer;
             }
         }
-        
+
         $salesrep = $nearestDealer->salesReps->shuffle()->first();
 
         return $salesrep;
     }
 
-    public function distance($lat1, $lon1, $lat2, $lon2, $unit = 'K') 
+    public function distance($lat1, $lon1, $lat2, $lon2, $unit = 'K')
     {
       $lat1 = (float)$lat1;
       $lon1 = (float)$lon1;
       $lat2 = (float)$lat2;
       $lon2 = (float)$lon2;
-      
+
       $theta = $lon1 - $lon2;
       $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
       $dist = acos($dist);
@@ -246,30 +246,34 @@ class CustomerRepositoryEloquent extends BaseRepository implements CustomerRepos
         } else {
             return $miles;
           }
-    }    
+    }
 
     public function createOne($data, $ontraport = true)
     {
       $roleObj      = new Role();
       $customerRole = $roleObj->where('name', 'customer')->first();
 
-      $user         = User::create([
-        'firstname' => $data['firstname'],
-        'lastname'  => $data['lastname'],
-        'password'  => bcrypt($data['password']),
-        'email'     => $data['email'] ]);
+      $user               = User::create([
+        'firstname'       => $data['firstname'],
+        'lastname'        => $data['lastname'],
+        'password'        => bcrypt($data['password']),
+        'email'           => $data['email'],
+        'provider'        => $data['provider'],
+        'provider_token'  => $data['provider_token'],
+
+      ]);
 
       $user->roles()->save($customerRole);
 
       $customer = $this->model->create([
-        'zip'       => $data['zip'],
-        'city'      => $data['city'],
-        'state'     => $data['state'],
-        'country'   => $data['country'], 
-        'geo_long'  => $data['geo_long'],
-        'geo_lat'   => $data['geo_lat'],
-        'user_id'   => $user->id,
-        'wp_userid' => (isset($data['wp_userid']) ? $data['wp_userid'] : null)
+        'zip'             => $data['zip'],
+        'city'            => $data['city'],
+        'state'           => $data['state'],
+        'country'         => $data['country'],
+        'geo_long'        => $data['geo_long'],
+        'geo_lat'         => $data['geo_lat'],
+        'user_id'         => $user->id,
+        'wp_userid'       => (isset($data['wp_userid']) ? $data['wp_userid'] : null)
       ]);
 
       $user->customer()->save($customer);
@@ -317,11 +321,11 @@ class CustomerRepositoryEloquent extends BaseRepository implements CustomerRepos
             {
                 continue;
             }
-            
+
             if(isset($data[$field]))
             {
                 $cust->{$field} = $data[$field];
-            }            
+            }
         }
 
         $cust->save();
@@ -330,7 +334,7 @@ class CustomerRepositoryEloquent extends BaseRepository implements CustomerRepos
         $custop->upsert($cust);
 
         return $cust;
-    }    
+    }
 
     public function countResult()
     {

@@ -1,4 +1,21 @@
 <?php
+/*
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * This software consists of voluntary contributions made by many individuals
+ * and is licensed under the MIT license. For more information, see
+ * <http://www.doctrine-project.org>.
+ */
 
 namespace Doctrine\Common\Cache;
 
@@ -11,9 +28,8 @@ namespace Doctrine\Common\Cache;
  * @author Jonathan Wage <jonwage@gmail.com>
  * @author Roman Borschel <roman@code-factory.org>
  * @author Fabio B. Silva <fabio.bat.silva@gmail.com>
- * @author Benoit Burnichon <bburnichon@gmail.com>
  */
-abstract class CacheProvider implements Cache, FlushableCache, ClearableCache, MultiOperationCache
+abstract class CacheProvider implements Cache, FlushableCache, ClearableCache, MultiGetCache, MultiPutCache
 {
     const DOCTRINE_NAMESPACE_CACHEKEY = 'DoctrineNamespaceCacheKey[%s]';
 
@@ -68,13 +84,13 @@ abstract class CacheProvider implements Cache, FlushableCache, ClearableCache, M
     public function fetchMultiple(array $keys)
     {
         if (empty($keys)) {
-            return [];
+            return array();
         }
-
+        
         // note: the array_combine() is in place to keep an association between our $keys and the $namespacedKeys
-        $namespacedKeys = array_combine($keys, array_map([$this, 'getNamespacedId'], $keys));
+        $namespacedKeys = array_combine($keys, array_map(array($this, 'getNamespacedId'), $keys));
         $items          = $this->doFetchMultiple($namespacedKeys);
-        $foundItems     = [];
+        $foundItems     = array();
 
         // no internal array function supports this sort of mapping: needs to be iterative
         // this filters and combines keys in one pass
@@ -92,7 +108,7 @@ abstract class CacheProvider implements Cache, FlushableCache, ClearableCache, M
      */
     public function saveMultiple(array $keysAndValues, $lifetime = 0)
     {
-        $namespacedKeysAndValues = [];
+        $namespacedKeysAndValues = array();
         foreach ($keysAndValues as $key => $value) {
             $namespacedKeysAndValues[$this->getNamespacedId($key)] = $value;
         }
@@ -114,14 +130,6 @@ abstract class CacheProvider implements Cache, FlushableCache, ClearableCache, M
     public function save($id, $data, $lifeTime = 0)
     {
         return $this->doSave($this->getNamespacedId($id), $data, $lifeTime);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function deleteMultiple(array $keys)
-    {
-        return $this->doDeleteMultiple(array_map(array($this, 'getNamespacedId'), $keys));
     }
 
     /**
@@ -172,9 +180,9 @@ abstract class CacheProvider implements Cache, FlushableCache, ClearableCache, M
      *
      * @return string The namespaced id.
      */
-    private function getNamespacedId(string $id) : string
+    private function getNamespacedId($id)
     {
-        $namespaceVersion = $this->getNamespaceVersion();
+        $namespaceVersion  = $this->getNamespaceVersion();
 
         return sprintf('%s[%s][%s]', $this->namespace, $id, $namespaceVersion);
     }
@@ -184,7 +192,7 @@ abstract class CacheProvider implements Cache, FlushableCache, ClearableCache, M
      *
      * @return string
      */
-    private function getNamespaceCacheKey() : string
+    private function getNamespaceCacheKey()
     {
         return sprintf(self::DOCTRINE_NAMESPACE_CACHEKEY, $this->namespace);
     }
@@ -194,14 +202,14 @@ abstract class CacheProvider implements Cache, FlushableCache, ClearableCache, M
      *
      * @return integer
      */
-    private function getNamespaceVersion() : int
+    private function getNamespaceVersion()
     {
         if (null !== $this->namespaceVersion) {
             return $this->namespaceVersion;
         }
 
-        $namespaceCacheKey      = $this->getNamespaceCacheKey();
-        $this->namespaceVersion = (int) $this->doFetch($namespaceCacheKey) ?: 1;
+        $namespaceCacheKey = $this->getNamespaceCacheKey();
+        $this->namespaceVersion = $this->doFetch($namespaceCacheKey) ?: 1;
 
         return $this->namespaceVersion;
     }
@@ -214,7 +222,7 @@ abstract class CacheProvider implements Cache, FlushableCache, ClearableCache, M
      */
     protected function doFetchMultiple(array $keys)
     {
-        $returnValues = [];
+        $returnValues = array();
 
         foreach ($keys as $key) {
             if (false !== ($item = $this->doFetch($key)) || $this->doContains($key)) {
@@ -257,7 +265,7 @@ abstract class CacheProvider implements Cache, FlushableCache, ClearableCache, M
         $success = true;
 
         foreach ($keysAndValues as $key => $value) {
-            if ( ! $this->doSave($key, $value, $lifetime)) {
+            if (!$this->doSave($key, $value, $lifetime)) {
                 $success = false;
             }
         }
@@ -276,26 +284,6 @@ abstract class CacheProvider implements Cache, FlushableCache, ClearableCache, M
      * @return bool TRUE if the entry was successfully stored in the cache, FALSE otherwise.
      */
     abstract protected function doSave($id, $data, $lifeTime = 0);
-
-    /**
-     * Default implementation of doDeleteMultiple. Each driver that supports multi-delete should override it.
-     *
-     * @param array $keys Array of keys to delete from cache
-     *
-     * @return bool TRUE if the operation was successful, FALSE if it wasn't
-     */
-    protected function doDeleteMultiple(array $keys)
-    {
-        $success = true;
-
-        foreach ($keys as $key) {
-            if ( ! $this->doDelete($key)) {
-                $success = false;
-            }
-        }
-
-        return $success;
-    }
 
     /**
      * Deletes a cache entry.

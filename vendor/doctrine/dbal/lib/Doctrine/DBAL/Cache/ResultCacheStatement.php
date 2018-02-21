@@ -107,7 +107,7 @@ class ResultCacheStatement implements \IteratorAggregate, ResultStatement
         if ($this->emptied && $this->data !== null) {
             $data = $this->resultCache->fetch($this->cacheKey);
             if ( ! $data) {
-                $data = [];
+                $data = array();
             }
             $data[$this->realKey] = $this->data;
 
@@ -147,10 +147,10 @@ class ResultCacheStatement implements \IteratorAggregate, ResultStatement
     /**
      * {@inheritdoc}
      */
-    public function fetch($fetchMode = null, $cursorOrientation = \PDO::FETCH_ORI_NEXT, $cursorOffset = 0)
+    public function fetch($fetchMode = null)
     {
         if ($this->data === null) {
-            $this->data = [];
+            $this->data = array();
         }
 
         $row = $this->statement->fetch(PDO::FETCH_ASSOC);
@@ -179,9 +179,9 @@ class ResultCacheStatement implements \IteratorAggregate, ResultStatement
     /**
      * {@inheritdoc}
      */
-    public function fetchAll($fetchMode = null, $fetchArgument = null, $ctorArgs = null)
+    public function fetchAll($fetchMode = null)
     {
-        $rows = [];
+        $rows = array();
         while ($row = $this->fetch($fetchMode)) {
             $rows[] = $row;
         }
@@ -195,9 +195,12 @@ class ResultCacheStatement implements \IteratorAggregate, ResultStatement
     public function fetchColumn($columnIndex = 0)
     {
         $row = $this->fetch(PDO::FETCH_NUM);
+        if (!isset($row[$columnIndex])) {
+            // TODO: verify this is correct behavior
+            return false;
+        }
 
-        // TODO: verify that return false is the correct behavior
-        return $row[$columnIndex] ?? false;
+        return $row[$columnIndex];
     }
 
     /**

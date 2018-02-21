@@ -107,7 +107,7 @@ class CustomerController extends Controller
         $filter       = $request->get('filter_by');
         $showApproved = true;
         $showRejected = true;
-        
+
         if($filter == 'approved')
         {
             $showApproved = true;
@@ -191,7 +191,7 @@ class CustomerController extends Controller
 
     /**
      * Create
-     * 
+     *
      * Create a new customer.
      *
      * @param      \App\Http\Requests\Api\CustomerPostRequest  $request  The request
@@ -200,20 +200,41 @@ class CustomerController extends Controller
      */
     public function store(CustomerPostRequest $request)
     {
-        $data             = $request->all();
-        $data['password'] = uniqid();
-        $data['geo_long'] = (isset($data['geo_long']) ? $data['geo_long'] : '');
-        $data['geo_lat']  = (isset($data['geo_lat']) ? $data['geo_lat'] : '');
-        $data['country']  = 'US';
-        $customer         = $this->customer->createOne($data);
+        try {
+            $data             = $request->all();
+            $data['password'] = uniqid();
+            $data['geo_long'] = (isset($data['geo_long']) ? $data['geo_long'] : '');
+            $data['geo_lat']  = (isset($data['geo_lat']) ? $data['geo_lat'] : '');
+            $data['country']  = 'US';
+            $data['provider']  = (isset($data['provider']) ? $data['provider'] : '');
+            $data['provider_token']  = (isset($data['provider_token']) ? $data['provider_token'] : '');
 
-        return response()
-            ->json($this->customer->find($customer->id));
+            $customer         = $this->customer->createOne($data);
+
+            // return response() ->json($this->customer->find($customer->id));
+            return response()->json([
+                    'status'=>true,
+                    'code'=>config('responses.success.status_code'),
+                    'data'=>$this->customer->find($customer->id),
+                    'message'=>config('responses.success.status_message'),
+                ], config('responses.success.status_code'));
+            }
+        catch (\Exception $e) {
+            // dd($e->getMessage());
+            return response()->json([
+                'status'=>false,
+                'code'=>config('responses.bad_request.status_code'),
+                'data'=>null,
+                'message'=>$e->getMessage()
+            ],
+                config('responses.bad_request.status_code')
+            );
+        }
     }
 
     /**
      * Update
-     * 
+     *
      * Update an existing customer.
      *
      * @param      \App\Http\Requests\Api\CustomerPutRequest  $request  The request
@@ -229,7 +250,7 @@ class CustomerController extends Controller
         $this->customer->updateOne($customer, $data);
 
         return response()
-            ->json($this->customer->skipPresenter(false)->find($customer->id));        
+            ->json($this->customer->skipPresenter(false)->find($customer->id));
     }
 
     /**

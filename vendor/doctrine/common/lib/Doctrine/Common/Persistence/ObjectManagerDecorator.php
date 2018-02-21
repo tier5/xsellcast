@@ -1,4 +1,22 @@
 <?php
+/*
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * This software consists of voluntary contributions made by many individuals
+ * and is licensed under the MIT license. For more information, see
+ * <http://www.doctrine-project.org>.
+ */
+
 namespace Doctrine\Common\Persistence;
 
 /**
@@ -29,7 +47,7 @@ abstract class ObjectManagerDecorator implements ObjectManager
      */
     public function persist($object)
     {
-        $this->wrapped->persist($object);
+        return $this->wrapped->persist($object);
     }
 
     /**
@@ -37,7 +55,7 @@ abstract class ObjectManagerDecorator implements ObjectManager
      */
     public function remove($object)
     {
-        $this->wrapped->remove($object);
+        return $this->wrapped->remove($object);
     }
 
     /**
@@ -53,7 +71,7 @@ abstract class ObjectManagerDecorator implements ObjectManager
      */
     public function clear($objectName = null)
     {
-        $this->wrapped->clear($objectName);
+        return $this->wrapped->clear($objectName);
     }
 
     /**
@@ -61,7 +79,7 @@ abstract class ObjectManagerDecorator implements ObjectManager
      */
     public function detach($object)
     {
-        $this->wrapped->detach($object);
+        return $this->wrapped->detach($object);
     }
 
     /**
@@ -69,7 +87,7 @@ abstract class ObjectManagerDecorator implements ObjectManager
      */
     public function refresh($object)
     {
-        $this->wrapped->refresh($object);
+        return $this->wrapped->refresh($object);
     }
 
     /**
@@ -77,7 +95,7 @@ abstract class ObjectManagerDecorator implements ObjectManager
      */
     public function flush()
     {
-        $this->wrapped->flush();
+        return $this->wrapped->flush();
     }
 
     /**
@@ -109,7 +127,7 @@ abstract class ObjectManagerDecorator implements ObjectManager
      */
     public function initializeObject($obj)
     {
-        $this->wrapped->initializeObject($obj);
+        return $this->wrapped->initializeObject($obj);
     }
 
     /**

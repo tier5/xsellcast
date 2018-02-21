@@ -1,4 +1,22 @@
 <?php
+/*
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * This software consists of voluntary contributions made by many individuals
+ * and is licensed under the MIT license. For more information, see
+ * <http://www.doctrine-project.org>.
+ */
+
 namespace Doctrine\Common\Persistence\Mapping;
 
 use Doctrine\Common\Cache\Cache;
@@ -91,7 +109,7 @@ abstract class AbstractClassMetadataFactory implements ClassMetadataFactory
             $this->initialize();
         }
 
-        $driver   = $this->getDriver();
+        $driver = $this->getDriver();
         $metadata = [];
         foreach ($driver->getAllClassNames() as $className) {
             $metadata[] = $this->getMetadataFor($className);
@@ -190,8 +208,7 @@ abstract class AbstractClassMetadataFactory implements ClassMetadataFactory
 
         try {
             if ($this->cacheDriver) {
-                $cached = $this->cacheDriver->fetch($realClassName . $this->cacheSalt);
-                if ($cached instanceof ClassMetadata) {
+                if (($cached = $this->cacheDriver->fetch($realClassName . $this->cacheSalt)) instanceof ClassMetadata) {
                     $this->loadedMetadata[$realClassName] = $cached;
 
                     $this->wakeupReflection($cached, $this->getReflectionService());
@@ -208,7 +225,7 @@ abstract class AbstractClassMetadataFactory implements ClassMetadataFactory
                 $this->loadMetadata($realClassName);
             }
         } catch (MappingException $loadingException) {
-            if ( ! $fallbackMetadataResponse = $this->onNotFoundMetadata($realClassName)) {
+            if (! $fallbackMetadataResponse = $this->onNotFoundMetadata($realClassName)) {
                 throw $loadingException;
             }
 
@@ -273,7 +290,7 @@ abstract class AbstractClassMetadataFactory implements ClassMetadataFactory
      * Loads the metadata of the class in question and all it's ancestors whose metadata
      * is still not loaded.
      *
-     * Important: The class $name does not necessarily exist at this point here.
+     * Important: The class $name does not necesarily exist at this point here.
      * Scenarios in a code-generation setup might have access to XML/YAML
      * Mapping files without the actual PHP code existing here. That is why the
      * {@see Doctrine\Common\Persistence\Mapping\ReflectionService} interface
@@ -291,14 +308,14 @@ abstract class AbstractClassMetadataFactory implements ClassMetadataFactory
 
         $loaded = [];
 
-        $parentClasses   = $this->getParentClasses($name);
+        $parentClasses = $this->getParentClasses($name);
         $parentClasses[] = $name;
 
         // Move down the hierarchy of parent classes, starting from the topmost class
-        $parent          = null;
+        $parent = null;
         $rootEntityFound = false;
-        $visited         = [];
-        $reflService     = $this->getReflectionService();
+        $visited = [];
+        $reflService = $this->getReflectionService();
         foreach ($parentClasses as $className) {
             if (isset($this->loadedMetadata[$className])) {
                 $parent = $this->loadedMetadata[$className];
@@ -379,7 +396,7 @@ abstract class AbstractClassMetadataFactory implements ClassMetadataFactory
         // Check for namespace alias
         if (strpos($class, ':') !== false) {
             list($namespaceAlias, $simpleClassName) = explode(':', $class, 2);
-            $class                                  = $this->getFqcnFromAlias($namespaceAlias, $simpleClassName);
+            $class = $this->getFqcnFromAlias($namespaceAlias, $simpleClassName);
         }
 
         return $this->getDriver()->isTransient($class);

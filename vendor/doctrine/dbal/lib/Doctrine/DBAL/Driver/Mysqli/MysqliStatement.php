@@ -20,7 +20,6 @@
 namespace Doctrine\DBAL\Driver\Mysqli;
 
 use Doctrine\DBAL\Driver\Statement;
-use Doctrine\DBAL\Driver\StatementIterator;
 use PDO;
 
 /**
@@ -31,13 +30,13 @@ class MysqliStatement implements \IteratorAggregate, Statement
     /**
      * @var array
      */
-    protected static $_paramTypeMap = [
+    protected static $_paramTypeMap = array(
         PDO::PARAM_STR => 's',
         PDO::PARAM_BOOL => 'i',
         PDO::PARAM_NULL => 's',
         PDO::PARAM_INT => 'i',
         PDO::PARAM_LOB => 's' // TODO Support LOB bigger then max package size.
-    ];
+    );
 
     /**
      * @var \mysqli
@@ -74,7 +73,7 @@ class MysqliStatement implements \IteratorAggregate, Statement
      *
      * @var array
      */
-    protected $_values = [];
+    protected $_values = array();
 
     /**
      * @var integer
@@ -163,7 +162,7 @@ class MysqliStatement implements \IteratorAggregate, Statement
                     throw new MysqliException($this->_stmt->error, $this->_stmt->errno);
                 }
             } else {
-                if (!call_user_func_array([$this->_stmt, 'bind_param'], [$this->types] + $this->_bindedValues)) {
+                if (!call_user_func_array(array($this->_stmt, 'bind_param'), array($this->types) + $this->_bindedValues)) {
                     throw new MysqliException($this->_stmt->error, $this->_stmt->sqlstate, $this->_stmt->errno);
                 }
             }
@@ -176,7 +175,7 @@ class MysqliStatement implements \IteratorAggregate, Statement
         if (null === $this->_columnNames) {
             $meta = $this->_stmt->result_metadata();
             if (false !== $meta) {
-                $columnNames = [];
+                $columnNames = array();
                 foreach ($meta->fetch_fields() as $col) {
                     $columnNames[] = $col->name;
                 }
@@ -207,12 +206,12 @@ class MysqliStatement implements \IteratorAggregate, Statement
             // to the length of the ones fetched during the previous execution.
             $this->_rowBindedValues = array_fill(0, count($this->_columnNames), null);
 
-            $refs = [];
+            $refs = array();
             foreach ($this->_rowBindedValues as $key => &$value) {
                 $refs[$key] =& $value;
             }
 
-            if (!call_user_func_array([$this->_stmt, 'bind_result'], $refs)) {
+            if (!call_user_func_array(array($this->_stmt, 'bind_result'), $refs)) {
                 throw new MysqliException($this->_stmt->error, $this->_stmt->sqlstate, $this->_stmt->errno);
             }
         }
@@ -231,7 +230,7 @@ class MysqliStatement implements \IteratorAggregate, Statement
      */
     private function _bindValues($values)
     {
-        $params = [];
+        $params = array();
         $types = str_repeat('s', count($values));
         $params[0] = $types;
 
@@ -239,7 +238,7 @@ class MysqliStatement implements \IteratorAggregate, Statement
             $params[] =& $v;
         }
 
-        return call_user_func_array([$this->_stmt, 'bind_param'], $params);
+        return call_user_func_array(array($this->_stmt, 'bind_param'), $params);
     }
 
     /**
@@ -250,7 +249,7 @@ class MysqliStatement implements \IteratorAggregate, Statement
         $ret = $this->_stmt->fetch();
 
         if (true === $ret) {
-            $values = [];
+            $values = array();
             foreach ($this->_rowBindedValues as $v) {
                 $values[] = $v;
             }
@@ -264,18 +263,12 @@ class MysqliStatement implements \IteratorAggregate, Statement
     /**
      * {@inheritdoc}
      */
-    public function fetch($fetchMode = null, $cursorOrientation = \PDO::FETCH_ORI_NEXT, $cursorOffset = 0)
+    public function fetch($fetchMode = null)
     {
         // do not try fetching from the statement if it's not expected to contain result
         // in order to prevent exceptional situation
         if (!$this->result) {
             return false;
-        }
-
-        $fetchMode = $fetchMode ?: $this->_defaultFetchMode;
-
-        if ($fetchMode === PDO::FETCH_COLUMN) {
-            return $this->fetchColumn();
         }
 
         $values = $this->_fetch();
@@ -286,6 +279,8 @@ class MysqliStatement implements \IteratorAggregate, Statement
         if (false === $values) {
             throw new MysqliException($this->_stmt->error, $this->_stmt->sqlstate, $this->_stmt->errno);
         }
+
+        $fetchMode = $fetchMode ?: $this->_defaultFetchMode;
 
         switch ($fetchMode) {
             case PDO::FETCH_NUM:
@@ -300,16 +295,6 @@ class MysqliStatement implements \IteratorAggregate, Statement
 
                 return $ret;
 
-            case PDO::FETCH_OBJ:
-                $assoc = array_combine($this->_columnNames, $values);
-                $ret = new \stdClass();
-
-                foreach ($assoc as $column => $value) {
-                    $ret->$column = $value;
-                }
-
-                return $ret;
-
             default:
                 throw new MysqliException("Unknown fetch type '{$fetchMode}'");
         }
@@ -318,11 +303,11 @@ class MysqliStatement implements \IteratorAggregate, Statement
     /**
      * {@inheritdoc}
      */
-    public function fetchAll($fetchMode = null, $fetchArgument = null, $ctorArgs = null)
+    public function fetchAll($fetchMode = null)
     {
         $fetchMode = $fetchMode ?: $this->_defaultFetchMode;
 
-        $rows = [];
+        $rows = array();
         if (PDO::FETCH_COLUMN == $fetchMode) {
             while (($row = $this->fetchColumn()) !== false) {
                 $rows[] = $row;
@@ -346,7 +331,7 @@ class MysqliStatement implements \IteratorAggregate, Statement
             return false;
         }
 
-        return $row[$columnIndex] ?? null;
+        return isset($row[$columnIndex]) ? $row[$columnIndex] : null;
     }
 
     /**
@@ -411,6 +396,8 @@ class MysqliStatement implements \IteratorAggregate, Statement
      */
     public function getIterator()
     {
-        return new StatementIterator($this);
+        $data = $this->fetchAll();
+
+        return new \ArrayIterator($data);
     }
 }

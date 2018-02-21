@@ -128,7 +128,7 @@ class PoolingShardConnection extends Connection
 
     /**
      * Get active shard id.
-     *
+     * 
      * @return integer
      */
     public function getActiveShardId()
@@ -151,7 +151,7 @@ class PoolingShardConnection extends Connection
     {
         $params = $this->getParams();
 
-        return $params['host'] ?? parent::getHost();
+        return isset($params['host']) ? $params['host'] : parent::getHost();
     }
 
     /**
@@ -161,7 +161,7 @@ class PoolingShardConnection extends Connection
     {
         $params = $this->getParams();
 
-        return $params['port'] ?? parent::getPort();
+        return isset($params['port']) ? $params['port'] : parent::getPort();
     }
 
     /**
@@ -171,7 +171,7 @@ class PoolingShardConnection extends Connection
     {
         $params = $this->getParams();
 
-        return $params['user'] ?? parent::getUsername();
+        return isset($params['user']) ? $params['user'] : parent::getUsername();
     }
 
     /**
@@ -181,7 +181,7 @@ class PoolingShardConnection extends Connection
     {
         $params = $this->getParams();
 
-        return $params['password'] ?? parent::getPassword();
+        return isset($params['password']) ? $params['password'] : parent::getPassword();
     }
 
     /**
@@ -236,12 +236,12 @@ class PoolingShardConnection extends Connection
     {
         $params = $this->getParams();
 
-        $driverOptions = $params['driverOptions'] ?? [];
+        $driverOptions = isset($params['driverOptions']) ? $params['driverOptions'] : array();
 
         $connectionParams = $this->connections[$shardId];
 
-        $user = $connectionParams['user'] ?? null;
-        $password = $connectionParams['password'] ?? null;
+        $user = isset($connectionParams['user']) ? $connectionParams['user'] : null;
+        $password = isset($connectionParams['password']) ? $connectionParams['password'] : null;
 
         return $this->_driver->connect($connectionParams, $user, $password, $driverOptions);
     }

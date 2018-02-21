@@ -36,20 +36,20 @@ class Driver extends AbstractSQLAnywhereDriver
      *
      * @throws \Doctrine\DBAL\DBALException if there was a problem establishing the connection.
      */
-    public function connect(array $params, $username = null, $password = null, array $driverOptions = [])
+    public function connect(array $params, $username = null, $password = null, array $driverOptions = array())
     {
         try {
             return new SQLAnywhereConnection(
                 $this->buildDsn(
-                    $params['host'] ?? null,
-                    $params['port'] ?? null,
-                    $params['server'] ?? null,
-                    $params['dbname'] ?? null,
+                    isset($params['host']) ? $params['host'] : null,
+                    isset($params['port']) ? $params['port'] : null,
+                    isset($params['server']) ? $params['server'] : null,
+                    isset($params['dbname']) ? $params['dbname'] : null,
                     $username,
                     $password,
                     $driverOptions
                 ),
-                $params['persistent'] ?? false
+                isset($params['persistent']) ? $params['persistent'] : false
             );
         } catch (SQLAnywhereException $e) {
             throw DBALException::driverException($this, $e);
@@ -79,7 +79,7 @@ class Driver extends AbstractSQLAnywhereDriver
      *
      * @return string
      */
-    private function buildDsn($host, $port, $server, $dbname, $username = null, $password = null, array $driverOptions = [])
+    private function buildDsn($host, $port, $server, $dbname, $username = null, $password = null, array $driverOptions = array())
     {
         $host = $host ?: 'localhost';
         $port = $port ?: 2638;

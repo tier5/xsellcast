@@ -36,7 +36,7 @@ class Comparator
      *
      * @return \Doctrine\DBAL\Schema\SchemaDiff
      */
-    public static function compareSchemas(Schema $fromSchema, Schema $toSchema)
+    static public function compareSchemas(Schema $fromSchema, Schema $toSchema)
     {
         $c = new self();
 
@@ -60,7 +60,7 @@ class Comparator
         $diff = new SchemaDiff();
         $diff->fromSchema = $fromSchema;
 
-        $foreignKeysToTable = [];
+        $foreignKeysToTable = array();
 
         foreach ($toSchema->getNamespaces() as $namespace) {
             if ( ! $fromSchema->hasNamespace($namespace)) {
@@ -99,7 +99,7 @@ class Comparator
             foreach ($table->getForeignKeys() as $foreignKey) {
                 $foreignTable = strtolower($foreignKey->getForeignTableName());
                 if (!isset($foreignKeysToTable[$foreignTable])) {
-                    $foreignKeysToTable[$foreignTable] = [];
+                    $foreignKeysToTable[$foreignTable] = array();
                 }
                 $foreignKeysToTable[$foreignTable][] = $foreignKey;
             }
@@ -279,12 +279,14 @@ class Comparator
         foreach ($fromFkeys as $key1 => $constraint1) {
             foreach ($toFkeys as $key2 => $constraint2) {
                 if ($this->diffForeignKey($constraint1, $constraint2) === false) {
-                    unset($fromFkeys[$key1], $toFkeys[$key2]);
+                    unset($fromFkeys[$key1]);
+                    unset($toFkeys[$key2]);
                 } else {
                     if (strtolower($constraint1->getName()) == strtolower($constraint2->getName())) {
                         $tableDifferences->changedForeignKeys[] = $constraint2;
                         $changes++;
-                        unset($fromFkeys[$key1], $toFkeys[$key2]);
+                        unset($fromFkeys[$key1]);
+                        unset($toFkeys[$key2]);
                     }
                 }
             }
@@ -313,11 +315,11 @@ class Comparator
      */
     private function detectColumnRenamings(TableDiff $tableDifferences)
     {
-        $renameCandidates = [];
+        $renameCandidates = array();
         foreach ($tableDifferences->addedColumns as $addedColumnName => $addedColumn) {
             foreach ($tableDifferences->removedColumns as $removedColumn) {
                 if (count($this->diffColumn($addedColumn, $removedColumn)) == 0) {
-                    $renameCandidates[$addedColumn->getName()][] = [$removedColumn, $addedColumn, $addedColumnName];
+                    $renameCandidates[$addedColumn->getName()][] = array($removedColumn, $addedColumn, $addedColumnName);
                 }
             }
         }
@@ -330,10 +332,8 @@ class Comparator
 
                 if ( ! isset($tableDifferences->renamedColumns[$removedColumnName])) {
                     $tableDifferences->renamedColumns[$removedColumnName] = $addedColumn;
-                    unset(
-                        $tableDifferences->addedColumns[$addedColumnName],
-                        $tableDifferences->removedColumns[$removedColumnName]
-                    );
+                    unset($tableDifferences->addedColumns[$addedColumnName]);
+                    unset($tableDifferences->removedColumns[$removedColumnName]);
                 }
             }
         }
@@ -349,13 +349,13 @@ class Comparator
      */
     private function detectIndexRenamings(TableDiff $tableDifferences)
     {
-        $renameCandidates = [];
+        $renameCandidates = array();
 
         // Gather possible rename candidates by comparing each added and removed index based on semantics.
         foreach ($tableDifferences->addedIndexes as $addedIndexName => $addedIndex) {
             foreach ($tableDifferences->removedIndexes as $removedIndex) {
                 if (! $this->diffIndex($addedIndex, $removedIndex)) {
-                    $renameCandidates[$addedIndex->getName()][] = [$removedIndex, $addedIndex, $addedIndexName];
+                    $renameCandidates[$addedIndex->getName()][] = array($removedIndex, $addedIndex, $addedIndexName);
                 }
             }
         }
@@ -373,10 +373,8 @@ class Comparator
 
                 if (! isset($tableDifferences->renamedIndexes[$removedIndexName])) {
                     $tableDifferences->renamedIndexes[$removedIndexName] = $addedIndex;
-                    unset(
-                        $tableDifferences->addedIndexes[$addedIndexName],
-                        $tableDifferences->removedIndexes[$removedIndexName]
-                    );
+                    unset($tableDifferences->addedIndexes[$addedIndexName]);
+                    unset($tableDifferences->removedIndexes[$removedIndexName]);
                 }
             }
         }
@@ -429,19 +427,12 @@ class Comparator
         $properties1 = $column1->toArray();
         $properties2 = $column2->toArray();
 
-        $changedProperties = [];
+        $changedProperties = array();
 
-        foreach (['type', 'notnull', 'unsigned', 'autoincrement'] as $property) {
+        foreach (array('type', 'notnull', 'unsigned', 'autoincrement') as $property) {
             if ($properties1[$property] != $properties2[$property]) {
                 $changedProperties[] = $property;
             }
-        }
-
-        // This is a very nasty hack to make comparator work with the legacy json_array type, which should be killed in v3
-        if ($this->isALegacyJsonComparison($properties1['type'], $properties2['type'])) {
-            array_shift($changedProperties);
-
-            $changedProperties[] = 'comment';
         }
 
         if ($properties1['default'] != $properties2['default'] ||
@@ -504,21 +495,6 @@ class Comparator
         }
 
         return array_unique($changedProperties);
-    }
-
-    /**
-     * TODO: kill with fire on v3.0
-     *
-     * @deprecated
-     */
-    private function isALegacyJsonComparison(Types\Type $one, Types\Type $other) : bool
-    {
-        if ( ! $one instanceof Types\JsonType || ! $other instanceof Types\JsonType) {
-            return false;
-        }
-
-        return ( ! $one instanceof Types\JsonArrayType && $other instanceof Types\JsonArrayType)
-            || ( ! $other instanceof Types\JsonArrayType && $one instanceof Types\JsonArrayType);
     }
 
     /**

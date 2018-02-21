@@ -30,7 +30,7 @@ Get a list of brands.
 > Example request:
 
 ```bash
-curl "http://xsellcast.local/api/v1/brands" \
+curl "http://xsellcast.caffeineinteractive.net/api/v1/brands" \
 -H "Accept: application/json" \
     -d "access_token"="aut" \
     -d "page"="99751627" \
@@ -41,7 +41,7 @@ curl "http://xsellcast.local/api/v1/brands" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/brands",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/brands",
     "method": "GET",
     "data": {
         "access_token": "aut",
@@ -88,7 +88,7 @@ Return 404 if dealer doesn't exist.
 > Example request:
 
 ```bash
-curl "http://xsellcast.local/api/v1/brand/{id}" \
+curl "http://xsellcast.caffeineinteractive.net/api/v1/brand/{id}" \
 -H "Accept: application/json" \
     -d "access_token"="error" \
 
@@ -98,7 +98,7 @@ curl "http://xsellcast.local/api/v1/brand/{id}" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/brand/{id}",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/brand/{id}",
     "method": "GET",
     "data": {
         "access_token": "error"
@@ -145,7 +145,7 @@ Get a list of customers.
 > Example request:
 
 ```bash
-curl "http://xsellcast.local/api/v1/customers" \
+curl "http://xsellcast.caffeineinteractive.net/api/v1/customers" \
 -H "Accept: application/json" \
     -d "access_token"="deserunt" \
     -d "page"="64069" \
@@ -158,7 +158,7 @@ curl "http://xsellcast.local/api/v1/customers" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/customers",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/customers",
     "method": "GET",
     "data": {
         "access_token": "deserunt",
@@ -210,7 +210,7 @@ Return 404 if offer doesn't exist.
 > Example request:
 
 ```bash
-curl "http://xsellcast.local/api/v1/customer/{id}" \
+curl "http://xsellcast.caffeineinteractive.net/api/v1/customer/{id}" \
 -H "Accept: application/json" \
     -d "access_token"="dolorem" \
 
@@ -220,7 +220,7 @@ curl "http://xsellcast.local/api/v1/customer/{id}" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/customer/{id}",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/customer/{id}",
     "method": "GET",
     "data": {
         "access_token": "dolorem"
@@ -264,7 +264,7 @@ Get a list of brand associates related to a customer.
 > Example request:
 
 ```bash
-curl "http://xsellcast.local/api/v1/customer/{id}/brand-associates" \
+curl "http://xsellcast.caffeineinteractive.net/api/v1/customer/{id}/brand-associates" \
 -H "Accept: application/json" \
     -d "access_token"="eligendi" \
     -d "page"="3269477" \
@@ -277,7 +277,7 @@ curl "http://xsellcast.local/api/v1/customer/{id}/brand-associates" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/customer/{id}/brand-associates",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/customer/{id}/brand-associates",
     "method": "GET",
     "data": {
         "access_token": "eligendi",
@@ -327,7 +327,7 @@ Get a list of offers related to a customer.
 > Example request:
 
 ```bash
-curl "http://xsellcast.local/api/v1/customer/{id}/offers" \
+curl "http://xsellcast.caffeineinteractive.net/api/v1/customer/{id}/offers" \
 -H "Accept: application/json" \
     -d "access_token"="quae" \
 
@@ -337,7 +337,7 @@ curl "http://xsellcast.local/api/v1/customer/{id}/offers" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/customer/{id}/offers",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/customer/{id}/offers",
     "method": "GET",
     "data": {
         "access_token": "quae"
@@ -381,7 +381,7 @@ Add an offer related to a customer.
 > Example request:
 
 ```bash
-curl "http://xsellcast.local/api/v1/customer/offer" \
+curl "http://xsellcast.caffeineinteractive.net/api/v1/customer/offer" \
 -H "Accept: application/json" \
     -d "access_token"="dolores" \
     -d "customer_id"="dolores" \
@@ -393,7 +393,7 @@ curl "http://xsellcast.local/api/v1/customer/offer" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/customer/offer",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/customer/offer",
     "method": "POST",
     "data": {
         "access_token": "dolores",
@@ -432,7 +432,7 @@ The @parameter $_method is required and value must set to <strong>DELETE</strong
 > Example request:
 
 ```bash
-curl "http://xsellcast.local/api/v1/customer/offer" \
+curl "http://xsellcast.caffeineinteractive.net/api/v1/customer/offer" \
 -H "Accept: application/json" \
     -d "access_token"="neque" \
     -d "customer_id"="13" \
@@ -445,7 +445,7 @@ curl "http://xsellcast.local/api/v1/customer/offer" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/customer/offer",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/customer/offer",
     "method": "DELETE",
     "data": {
         "access_token": "neque",
@@ -485,7 +485,7 @@ Create a new customer.
 > Example request:
 
 ```bash
-curl "http://xsellcast.local/api/v1/customer" \
+curl "http://xsellcast.caffeineinteractive.net/api/v1/customer" \
 -H "Accept: application/json" \
     -d "access_token"="sit" \
     -d "wp_userid"="sit" \
@@ -509,7 +509,7 @@ curl "http://xsellcast.local/api/v1/customer" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/customer",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/customer",
     "method": "POST",
     "data": {
         "access_token": "sit",
@@ -571,7 +571,7 @@ Update an existing customer.
 > Example request:
 
 ```bash
-curl "http://xsellcast.local/api/v1/customer" \
+curl "http://xsellcast.caffeineinteractive.net/api/v1/customer" \
 -H "Accept: application/json" \
     -d "access_token"="nemo" \
     -d "customer_id"="nemo" \
@@ -596,7 +596,7 @@ curl "http://xsellcast.local/api/v1/customer" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/customer",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/customer",
     "method": "PUT",
     "data": {
         "access_token": "nemo",
@@ -660,7 +660,7 @@ Delete an existing customer.
 > Example request:
 
 ```bash
-curl "http://xsellcast.local/api/v1/customer" \
+curl "http://xsellcast.caffeineinteractive.net/api/v1/customer" \
 -H "Accept: application/json" \
     -d "access_token"="a" \
     -d "customer_id"="194585763" \
@@ -671,7 +671,7 @@ curl "http://xsellcast.local/api/v1/customer" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/customer",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/customer",
     "method": "DELETE",
     "data": {
         "access_token": "a",
@@ -710,7 +710,7 @@ Get a list of dealers.
 > Example request:
 
 ```bash
-curl "http://xsellcast.local/api/v1/dealers" \
+curl "http://xsellcast.caffeineinteractive.net/api/v1/dealers" \
 -H "Accept: application/json" \
     -d "access_token"="dolor" \
     -d "page"="60" \
@@ -725,7 +725,7 @@ curl "http://xsellcast.local/api/v1/dealers" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/dealers",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/dealers",
     "method": "GET",
     "data": {
         "access_token": "dolor",
@@ -780,7 +780,7 @@ Return 404 if dealer doesn't exist.
 > Example request:
 
 ```bash
-curl "http://xsellcast.local/api/v1/dealer/{id}" \
+curl "http://xsellcast.caffeineinteractive.net/api/v1/dealer/{id}" \
 -H "Accept: application/json" \
     -d "access_token"="optio" \
 
@@ -790,7 +790,7 @@ curl "http://xsellcast.local/api/v1/dealer/{id}" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/dealer/{id}",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/dealer/{id}",
     "method": "GET",
     "data": {
         "access_token": "optio"
@@ -834,7 +834,7 @@ Get brands related to a dealer.
 > Example request:
 
 ```bash
-curl "http://xsellcast.local/api/v1/dealer/{id}/brands" \
+curl "http://xsellcast.caffeineinteractive.net/api/v1/dealer/{id}/brands" \
 -H "Accept: application/json" \
     -d "access_token"="asperiores" \
 
@@ -844,7 +844,7 @@ curl "http://xsellcast.local/api/v1/dealer/{id}/brands" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/dealer/{id}/brands",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/dealer/{id}/brands",
     "method": "GET",
     "data": {
         "access_token": "asperiores"
@@ -888,7 +888,7 @@ Get brand associates related to a dealer.
 > Example request:
 
 ```bash
-curl "http://xsellcast.local/api/v1/dealer/{id}/brand-associates" \
+curl "http://xsellcast.caffeineinteractive.net/api/v1/dealer/{id}/brand-associates" \
 -H "Accept: application/json" \
     -d "access_token"="reprehenderit" \
 
@@ -898,7 +898,7 @@ curl "http://xsellcast.local/api/v1/dealer/{id}/brand-associates" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/dealer/{id}/brand-associates",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/dealer/{id}/brand-associates",
     "method": "GET",
     "data": {
         "access_token": "reprehenderit"
@@ -945,7 +945,7 @@ Get list of direct messages sent by a customer.
 > Example request:
 
 ```bash
-curl "http://xsellcast.local/api/v1/messages/direct-message" \
+curl "http://xsellcast.caffeineinteractive.net/api/v1/messages/direct-message" \
 -H "Accept: application/json" \
     -d "access_token"="facilis" \
     -d "customer_id"="facilis" \
@@ -956,7 +956,7 @@ curl "http://xsellcast.local/api/v1/messages/direct-message" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/messages/direct-message",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/messages/direct-message",
     "method": "GET",
     "data": {
         "access_token": "facilis",
@@ -1002,7 +1002,7 @@ Get a message of a specific customer.
 > Example request:
 
 ```bash
-curl "http://xsellcast.local/api/v1/messages/direct-message/show" \
+curl "http://xsellcast.caffeineinteractive.net/api/v1/messages/direct-message/show" \
 -H "Accept: application/json" \
     -d "access_token"="illo" \
     -d "customer_id"="illo" \
@@ -1014,7 +1014,7 @@ curl "http://xsellcast.local/api/v1/messages/direct-message/show" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/messages/direct-message/show",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/messages/direct-message/show",
     "method": "GET",
     "data": {
         "access_token": "illo",
@@ -1062,7 +1062,7 @@ Mark a message as read.
 > Example request:
 
 ```bash
-curl "http://xsellcast.local/api/v1/messages/direct-message/mark-as-read" \
+curl "http://xsellcast.caffeineinteractive.net/api/v1/messages/direct-message/mark-as-read" \
 -H "Accept: application/json" \
     -d "access_token"="id" \
     -d "customer_id"="id" \
@@ -1074,7 +1074,7 @@ curl "http://xsellcast.local/api/v1/messages/direct-message/mark-as-read" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/messages/direct-message/mark-as-read",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/messages/direct-message/mark-as-read",
     "method": "POST",
     "data": {
         "access_token": "id",
@@ -1112,7 +1112,7 @@ Create (send) a message to Sales Rep from a specific customer.
 > Example request:
 
 ```bash
-curl "http://xsellcast.local/api/v1/messages/direct-message/store" \
+curl "http://xsellcast.caffeineinteractive.net/api/v1/messages/direct-message/store" \
 -H "Accept: application/json" \
     -d "access_token"="voluptatum" \
     -d "customer_id"="voluptatum" \
@@ -1126,7 +1126,7 @@ curl "http://xsellcast.local/api/v1/messages/direct-message/store" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/messages/direct-message/store",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/messages/direct-message/store",
     "method": "POST",
     "data": {
         "access_token": "voluptatum",
@@ -1171,7 +1171,7 @@ Get a list of offers.
 > Example request:
 
 ```bash
-curl "http://xsellcast.local/api/v1/offers" \
+curl "http://xsellcast.caffeineinteractive.net/api/v1/offers" \
 -H "Accept: application/json" \
     -d "access_token"="rerum" \
     -d "limit"="796437556" \
@@ -1184,7 +1184,7 @@ curl "http://xsellcast.local/api/v1/offers" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/offers",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/offers",
     "method": "GET",
     "data": {
         "access_token": "rerum",
@@ -1235,7 +1235,7 @@ Return 404 if offer doesn't exist.
 > Example request:
 
 ```bash
-curl "http://xsellcast.local/api/v1/offer/{id}" \
+curl "http://xsellcast.caffeineinteractive.net/api/v1/offer/{id}" \
 -H "Accept: application/json" \
     -d "access_token"="voluptas" \
 
@@ -1245,7 +1245,7 @@ curl "http://xsellcast.local/api/v1/offer/{id}" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/offer/{id}",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/offer/{id}",
     "method": "GET",
     "data": {
         "access_token": "voluptas"
@@ -1289,7 +1289,7 @@ Create an offer.
 > Example request:
 
 ```bash
-curl "http://xsellcast.local/api/v1/offer" \
+curl "http://xsellcast.caffeineinteractive.net/api/v1/offer" \
 -H "Accept: application/json" \
     -d "access_token"="dolore" \
     -d "contents"="dolore" \
@@ -1306,7 +1306,7 @@ curl "http://xsellcast.local/api/v1/offer" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/offer",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/offer",
     "method": "POST",
     "data": {
         "access_token": "dolore",
@@ -1354,7 +1354,7 @@ Delete an existing offer.
 > Example request:
 
 ```bash
-curl "http://xsellcast.local/api/v1/offer" \
+curl "http://xsellcast.caffeineinteractive.net/api/v1/offer" \
 -H "Accept: application/json" \
     -d "access_token"="inventore" \
     -d "offer_id"="inventore" \
@@ -1365,7 +1365,7 @@ curl "http://xsellcast.local/api/v1/offer" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/offer",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/offer",
     "method": "DELETE",
     "data": {
         "access_token": "inventore",
@@ -1401,7 +1401,7 @@ Update an existing offer.
 > Example request:
 
 ```bash
-curl "http://xsellcast.local/api/v1/offer" \
+curl "http://xsellcast.caffeineinteractive.net/api/v1/offer" \
 -H "Accept: application/json" \
     -d "access_token"="consectetur" \
     -d "contents"="consectetur" \
@@ -1419,7 +1419,7 @@ curl "http://xsellcast.local/api/v1/offer" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/offer",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/offer",
     "method": "PUT",
     "data": {
         "access_token": "consectetur",
@@ -1472,7 +1472,7 @@ Get a list of all appointment requests by a specific customer.
 > Example request:
 
 ```bash
-curl "http://xsellcast.local/api/v1/messages/request/appt" \
+curl "http://xsellcast.caffeineinteractive.net/api/v1/messages/request/appt" \
 -H "Accept: application/json" \
     -d "access_token"="officia" \
     -d "customer_id"="officia" \
@@ -1483,7 +1483,7 @@ curl "http://xsellcast.local/api/v1/messages/request/appt" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/messages/request/appt",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/messages/request/appt",
     "method": "GET",
     "data": {
         "access_token": "officia",
@@ -1529,7 +1529,7 @@ Get an appointment request of a specific customer.
 > Example request:
 
 ```bash
-curl "http://xsellcast.local/api/v1/messages/request/appt/{id}" \
+curl "http://xsellcast.caffeineinteractive.net/api/v1/messages/request/appt/{id}" \
 -H "Accept: application/json" \
     -d "access_token"="quo" \
     -d "customer_id"="quo" \
@@ -1541,7 +1541,7 @@ curl "http://xsellcast.local/api/v1/messages/request/appt/{id}" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/messages/request/appt/{id}",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/messages/request/appt/{id}",
     "method": "GET",
     "data": {
         "access_token": "quo",
@@ -1589,7 +1589,7 @@ Create (send) an appointment request to Sales Rep from a specific customer.
 > Example request:
 
 ```bash
-curl "http://xsellcast.local/api/v1/messages/request/appt/store" \
+curl "http://xsellcast.caffeineinteractive.net/api/v1/messages/request/appt/store" \
 -H "Accept: application/json" \
     -d "access_token"="ut" \
     -d "customer_id"="ut" \
@@ -1602,7 +1602,7 @@ curl "http://xsellcast.local/api/v1/messages/request/appt/store" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/messages/request/appt/store",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/messages/request/appt/store",
     "method": "POST",
     "data": {
         "access_token": "ut",
@@ -1645,7 +1645,7 @@ Get a list of all contact requests by a specific customer.
 > Example request:
 
 ```bash
-curl "http://xsellcast.local/api/v1/messages/request/contact_me" \
+curl "http://xsellcast.caffeineinteractive.net/api/v1/messages/request/contact_me" \
 -H "Accept: application/json" \
     -d "access_token"="tempora" \
     -d "customer_id"="tempora" \
@@ -1656,7 +1656,7 @@ curl "http://xsellcast.local/api/v1/messages/request/contact_me" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/messages/request/contact_me",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/messages/request/contact_me",
     "method": "GET",
     "data": {
         "access_token": "tempora",
@@ -1702,7 +1702,7 @@ Get an contact request of a specific customer.
 > Example request:
 
 ```bash
-curl "http://xsellcast.local/api/v1/messages/request/contact_me/{id}" \
+curl "http://xsellcast.caffeineinteractive.net/api/v1/messages/request/contact_me/{id}" \
 -H "Accept: application/json" \
     -d "access_token"="eum" \
     -d "customer_id"="eum" \
@@ -1714,7 +1714,7 @@ curl "http://xsellcast.local/api/v1/messages/request/contact_me/{id}" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/messages/request/contact_me/{id}",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/messages/request/contact_me/{id}",
     "method": "GET",
     "data": {
         "access_token": "eum",
@@ -1762,7 +1762,7 @@ Create (send) an contact request to Sales Rep from a specific customer.
 > Example request:
 
 ```bash
-curl "http://xsellcast.local/api/v1/messages/request/contact_me/store" \
+curl "http://xsellcast.caffeineinteractive.net/api/v1/messages/request/contact_me/store" \
 -H "Accept: application/json" \
     -d "access_token"="vel" \
     -d "customer_id"="vel" \
@@ -1776,7 +1776,7 @@ curl "http://xsellcast.local/api/v1/messages/request/contact_me/store" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/messages/request/contact_me/store",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/messages/request/contact_me/store",
     "method": "POST",
     "data": {
         "access_token": "vel",
@@ -1821,7 +1821,7 @@ Get a list of all info requests by a specific customer.
 > Example request:
 
 ```bash
-curl "http://xsellcast.local/api/v1/messages/request/info" \
+curl "http://xsellcast.caffeineinteractive.net/api/v1/messages/request/info" \
 -H "Accept: application/json" \
     -d "access_token"="aut" \
     -d "customer_id"="aut" \
@@ -1832,7 +1832,7 @@ curl "http://xsellcast.local/api/v1/messages/request/info" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/messages/request/info",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/messages/request/info",
     "method": "GET",
     "data": {
         "access_token": "aut",
@@ -1878,7 +1878,7 @@ Get an info request of a specific customer.
 > Example request:
 
 ```bash
-curl "http://xsellcast.local/api/v1/messages/request/info/{id}" \
+curl "http://xsellcast.caffeineinteractive.net/api/v1/messages/request/info/{id}" \
 -H "Accept: application/json" \
     -d "access_token"="quidem" \
     -d "customer_id"="quidem" \
@@ -1890,7 +1890,7 @@ curl "http://xsellcast.local/api/v1/messages/request/info/{id}" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/messages/request/info/{id}",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/messages/request/info/{id}",
     "method": "GET",
     "data": {
         "access_token": "quidem",
@@ -1938,7 +1938,7 @@ Create (send) an info request to Sales Rep from a specific customer.
 > Example request:
 
 ```bash
-curl "http://xsellcast.local/api/v1/messages/request/info/store" \
+curl "http://xsellcast.caffeineinteractive.net/api/v1/messages/request/info/store" \
 -H "Accept: application/json" \
     -d "access_token"="autem" \
     -d "customer_id"="autem" \
@@ -1951,7 +1951,7 @@ curl "http://xsellcast.local/api/v1/messages/request/info/store" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/messages/request/info/store",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/messages/request/info/store",
     "method": "POST",
     "data": {
         "access_token": "autem",
@@ -1994,7 +1994,7 @@ Get a list of all price requests by a specific customer.
 > Example request:
 
 ```bash
-curl "http://xsellcast.local/api/v1/messages/request/price" \
+curl "http://xsellcast.caffeineinteractive.net/api/v1/messages/request/price" \
 -H "Accept: application/json" \
     -d "access_token"="tempora" \
     -d "customer_id"="tempora" \
@@ -2005,7 +2005,7 @@ curl "http://xsellcast.local/api/v1/messages/request/price" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/messages/request/price",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/messages/request/price",
     "method": "GET",
     "data": {
         "access_token": "tempora",
@@ -2051,7 +2051,7 @@ Get a price request of a specific customer.
 > Example request:
 
 ```bash
-curl "http://xsellcast.local/api/v1/messages/request/price/{id}" \
+curl "http://xsellcast.caffeineinteractive.net/api/v1/messages/request/price/{id}" \
 -H "Accept: application/json" \
     -d "access_token"="vero" \
     -d "customer_id"="vero" \
@@ -2063,7 +2063,7 @@ curl "http://xsellcast.local/api/v1/messages/request/price/{id}" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/messages/request/price/{id}",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/messages/request/price/{id}",
     "method": "GET",
     "data": {
         "access_token": "vero",
@@ -2111,7 +2111,7 @@ Create (send) a price request to Sales Rep from a specific customer.
 > Example request:
 
 ```bash
-curl "http://xsellcast.local/api/v1/messages/request/price/store" \
+curl "http://xsellcast.caffeineinteractive.net/api/v1/messages/request/price/store" \
 -H "Accept: application/json" \
     -d "access_token"="omnis" \
     -d "customer_id"="omnis" \
@@ -2124,7 +2124,7 @@ curl "http://xsellcast.local/api/v1/messages/request/price/store" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/messages/request/price/store",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/messages/request/price/store",
     "method": "POST",
     "data": {
         "access_token": "omnis",
@@ -2167,7 +2167,7 @@ Get a list of sales reps.
 > Example request:
 
 ```bash
-curl "http://xsellcast.local/api/v1/brand-associates" \
+curl "http://xsellcast.caffeineinteractive.net/api/v1/brand-associates" \
 -H "Accept: application/json" \
     -d "access_token"="et" \
     -d "limit"="537109550" \
@@ -2180,7 +2180,7 @@ curl "http://xsellcast.local/api/v1/brand-associates" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/brand-associates",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/brand-associates",
     "method": "GET",
     "data": {
         "access_token": "et",
@@ -2230,7 +2230,7 @@ Get sales rep basic information.
 > Example request:
 
 ```bash
-curl "http://xsellcast.local/api/v1/brand-associate/{id}" \
+curl "http://xsellcast.caffeineinteractive.net/api/v1/brand-associate/{id}" \
 -H "Accept: application/json" \
     -d "access_token"="autem" \
 
@@ -2240,7 +2240,7 @@ curl "http://xsellcast.local/api/v1/brand-associate/{id}" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/brand-associate/{id}",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/brand-associate/{id}",
     "method": "GET",
     "data": {
         "access_token": "autem"
@@ -2284,7 +2284,7 @@ Get a list of customers related to BA.
 > Example request:
 
 ```bash
-curl "http://xsellcast.local/api/v1/brand-associate/{id}/customers" \
+curl "http://xsellcast.caffeineinteractive.net/api/v1/brand-associate/{id}/customers" \
 -H "Accept: application/json" \
     -d "access_token"="non" \
     -d "limit"="603181798" \
@@ -2297,7 +2297,7 @@ curl "http://xsellcast.local/api/v1/brand-associate/{id}/customers" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/brand-associate/{id}/customers",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/brand-associate/{id}/customers",
     "method": "GET",
     "data": {
         "access_token": "non",
@@ -2350,7 +2350,7 @@ Get a list of users.
 > Example request:
 
 ```bash
-curl "http://xsellcast.local/api/v1/users" \
+curl "http://xsellcast.caffeineinteractive.net/api/v1/users" \
 -H "Accept: application/json" \
     -d "access_token"="est" \
 
@@ -2360,7 +2360,7 @@ curl "http://xsellcast.local/api/v1/users" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/users",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/users",
     "method": "GET",
     "data": {
         "access_token": "est"
@@ -2405,7 +2405,7 @@ Create a new user.
 > Example request:
 
 ```bash
-curl "http://xsellcast.local/api/v1/users/store" \
+curl "http://xsellcast.caffeineinteractive.net/api/v1/users/store" \
 -H "Accept: application/json" \
     -d "firstname"="nam" \
     -d "lastname"="nam" \
@@ -2417,7 +2417,7 @@ curl "http://xsellcast.local/api/v1/users/store" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/users/store",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/users/store",
     "method": "POST",
     "data": {
         "firstname": "nam",

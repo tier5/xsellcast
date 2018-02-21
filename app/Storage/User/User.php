@@ -17,7 +17,7 @@ class User extends Authenticatable implements Transformable
      * @var array
      */
     protected $fillable = [
-        'firstname', 'lastname', 'email', 'password', 'is_email_notify'
+        'firstname', 'lastname', 'email', 'password', 'is_email_notify','provider','provider_token'
     ];
 
     protected $metaTable = 'users_meta';
@@ -44,7 +44,7 @@ class User extends Authenticatable implements Transformable
     public function salesRep()
     {
     	return $this->hasOne('App\Storage\SalesRep\SalesRep', 'user_id', 'id');
-    }     
+    }
 
     public function customer()
     {
@@ -59,7 +59,7 @@ class User extends Authenticatable implements Transformable
     public function accountActivation()
     {
         return $this->hasOne('App\Storage\UserActivations\UserActivations', 'user_id', 'id');
-    }   
+    }
 
     public function scopeGetByActivation($query, $token)
     {
@@ -76,7 +76,7 @@ class User extends Authenticatable implements Transformable
     public function avatar()
     {
         return \App\Storage\Media\Media::where('id', $this->avatarId())->first();
-    }    
+    }
 
     public function getIsCsrAttribute()
     {
@@ -86,12 +86,12 @@ class User extends Authenticatable implements Transformable
     public function getIsSalesrepAttribute()
     {
         return $this->hasRole('sales-rep');
-    }  
+    }
 
     public function getIsCustomerAttribute()
     {
         return $this->hasRole('customer');
-    }        
+    }
 
     public function getAvatarUrlAttribute()
     {
@@ -119,7 +119,7 @@ class User extends Authenticatable implements Transformable
         $this->save();
 
         return $this;
-    }    
+    }
 
     public function isUnConfirmedInvited()
     {
@@ -155,7 +155,7 @@ class User extends Authenticatable implements Transformable
         $isSalesrep    = $this->hasRole('sales-rep');
         $isFbSetPass   = $this->getMeta('fb_set_password');
 
-        return ($isSalesrep && $fbRegistered && !$isFbSetPass);    
+        return ($isSalesrep && $fbRegistered && !$isFbSetPass);
     }
 
     public function isFbUserNoEmail()

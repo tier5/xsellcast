@@ -44,14 +44,14 @@ class Statement implements \IteratorAggregate, DriverStatement
      *
      * @var array
      */
-    protected $params = [];
+    protected $params = array();
 
     /**
      * The parameter types.
      *
      * @var array
      */
-    protected $types = [];
+    protected $types = array();
 
     /**
      * The underlying driver statement.
@@ -118,9 +118,9 @@ class Statement implements \IteratorAggregate, DriverStatement
             }
 
             return $this->stmt->bindValue($name, $value, $bindingType);
+        } else {
+            return $this->stmt->bindValue($name, $value);
         }
-
-        return $this->stmt->bindValue($name, $value);
     }
 
     /**
@@ -181,8 +181,8 @@ class Statement implements \IteratorAggregate, DriverStatement
         if ($logger) {
             $logger->stopQuery();
         }
-        $this->params = [];
-        $this->types = [];
+        $this->params = array();
+        $this->types = array();
 
         return $stmt;
     }
@@ -252,19 +252,29 @@ class Statement implements \IteratorAggregate, DriverStatement
     }
 
     /**
-     * {@inheritdoc}
+     * Fetches the next row from a result set.
+     *
+     * @param integer|null $fetchMode
+     *
+     * @return mixed The return value of this function on success depends on the fetch type.
+     *               In all cases, FALSE is returned on failure.
      */
-    public function fetch($fetchMode = null, $cursorOrientation = \PDO::FETCH_ORI_NEXT, $cursorOffset = 0)
+    public function fetch($fetchMode = null)
     {
         return $this->stmt->fetch($fetchMode);
     }
 
     /**
-     * {@inheritdoc}
+     * Returns an array containing all of the result set rows.
+     *
+     * @param integer|null $fetchMode
+     * @param mixed        $fetchArgument
+     *
+     * @return array An array containing all of the remaining rows in the result set.
      */
-    public function fetchAll($fetchMode = null, $fetchArgument = null, $ctorArgs = null)
+    public function fetchAll($fetchMode = null, $fetchArgument = 0)
     {
-        if ($fetchArgument) {
+        if ($fetchArgument !== 0) {
             return $this->stmt->fetchAll($fetchMode, $fetchArgument);
         }
 

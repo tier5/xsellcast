@@ -46,14 +46,6 @@ abstract class AbstractSQLAnywhereDriver implements Driver, ExceptionConverterDr
     public function convertException($message, DriverException $exception)
     {
         switch ($exception->getErrorCode()) {
-            case '-306':
-            case '-307':
-            case '-684':
-                return new Exception\DeadlockException($message, $exception);
-            case '-210':
-            case '-1175':
-            case '-1281':
-                return new Exception\LockWaitTimeoutException($message, $exception);
             case '-100':
             case '-103':
             case '-832':
@@ -100,9 +92,9 @@ abstract class AbstractSQLAnywhereDriver implements Driver, ExceptionConverterDr
         }
 
         $majorVersion = $versionParts['major'];
-        $minorVersion = $versionParts['minor'] ?? 0;
-        $patchVersion = $versionParts['patch'] ?? 0;
-        $buildVersion = $versionParts['build'] ?? 0;
+        $minorVersion = isset($versionParts['minor']) ? $versionParts['minor'] : 0;
+        $patchVersion = isset($versionParts['patch']) ? $versionParts['patch'] : 0;
+        $buildVersion = isset($versionParts['build']) ? $versionParts['build'] : 0;
         $version      = $majorVersion . '.' . $minorVersion . '.' . $patchVersion . '.' . $buildVersion;
 
         switch(true) {
@@ -124,7 +116,11 @@ abstract class AbstractSQLAnywhereDriver implements Driver, ExceptionConverterDr
     {
         $params = $conn->getParams();
 
-        return $params['dbname'] ?? $conn->query('SELECT DB_NAME()')->fetchColumn();
+        if (isset($params['dbname'])) {
+            return $params['dbname'];
+        }
+
+        return $conn->query('SELECT DB_NAME()')->fetchColumn();
     }
 
     /**

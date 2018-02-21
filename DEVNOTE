@@ -1,0 +1,10 @@
+oAuth v1.0 #stable
+	a) Implement validation and exception handling in oAuth
+
+Prospect registration v1.0 #stable
+	a) Implement exception handling in LBT Prospect registration .
+	b) Implement validation in LBT Prospect registration .
+	c) Implement validation and exception handling in prospect registration via Facebook .
+	d) Crated  migration for Facebook registration .
+	e) Modified prospect registration API  for  Facebook login.
+

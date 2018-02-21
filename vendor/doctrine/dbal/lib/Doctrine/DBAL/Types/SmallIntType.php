@@ -26,7 +26,7 @@ use Doctrine\DBAL\Platforms\AbstractPlatform;
  *
  * @author robo
  */
-class SmallIntType extends Type implements PhpIntegerMappingType
+class SmallIntType extends Type
 {
     /**
      * {@inheritdoc}

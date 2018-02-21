@@ -39,6 +39,8 @@ class Sdk
 
         $this->api_id = $appId;
         $this->api_key = $apiKey;
+        // $this->api_id = '2_137325_WSrzvR2KM';
+        // $this->api_key = '8qCBDoPuo2RGqst';
 
         // define constant and get config
         $this->client = new \GuzzleHttp\Client([
@@ -96,19 +98,19 @@ class Sdk
                 $body[$fieldName] = $fieldValue;
             }
         }
-        
+
         $header = array(
             'Api-Appid' => $this->api_id,
-            'Api-Key'   => $this->api_key);    
+            'Api-Key'   => $this->api_key);
 
         $args = array(
-            'headers' => $header, 
+            'headers' => $header,
    //         'body' => $body,
             'form_params' => $body,
             'verify' => false);
 
         try {
-             //$response = $client->request('GET', 'https://api.ontraport.com/1/objects'); 
+             //$response = $client->request('GET', 'https://api.ontraport.com/1/objects');
             $response = $this->client->post('https://api.ontraport.com/1/objects', $args);
         } catch (RequestException $e) {
             //echo $e->getRequest() . "\n";
@@ -117,7 +119,7 @@ class Sdk
             }
         }
 
-        return json_decode($response->getBody());    
+        return json_decode($response->getBody());
     }
 
     /**
@@ -152,14 +154,14 @@ class Sdk
             'Accept'    => 'application/json',
             'Api-Appid' => $this->api_id,
             'Api-Key'   => $this->api_key,
-            'Host'      => 'api.ontraport.com');        
+            'Host'      => 'api.ontraport.com');
         $client = new Client(array(
-            'headers' => $header, 
+            'headers' => $header,
             'query' => ['objectID' => (int) $objectTypeId, 'id' => (int) $id],
             'verify' => false));
 
         try {
-             $response = $client->request('GET', 'https://api.ontraport.com/1/object'); 
+             $response = $client->request('GET', 'https://api.ontraport.com/1/object');
         } catch (RequestException $e) {
             //echo $e->getRequest() . "\n";
             if ($e->hasResponse()) {
@@ -228,15 +230,15 @@ class Sdk
 
         $header = array(
             'Api-Appid' => $this->api_id,
-            'Api-Key'   => $this->api_key);    
+            'Api-Key'   => $this->api_key);
 
         $args = array(
-            'headers' => $header, 
+            'headers' => $header,
             'query' => $paramQuery,
             'verify' => false);
 
         try {
-             //$response = $client->request('GET', 'https://api.ontraport.com/1/objects'); 
+             //$response = $client->request('GET', 'https://api.ontraport.com/1/objects');
             $response = $this->client->get('https://api.ontraport.com/1/objects', $args);
         } catch (RequestException $e) {
             //echo $e->getRequest() . "\n";
@@ -289,19 +291,19 @@ class Sdk
                 $body[$fieldName] = $fieldValue;
             }
         }
-        
+
         $header = array(
             'Api-Appid' => $this->api_id,
-            'Api-Key'   => $this->api_key);    
+            'Api-Key'   => $this->api_key);
 
         $args = array(
-            'headers' => $header, 
+            'headers' => $header,
             //'body' => $body,
             'form_params' => $body,
             'verify' => false);
 
         try {
-             //$response = $client->request('GET', 'https://api.ontraport.com/1/objects'); 
+             //$response = $client->request('GET', 'https://api.ontraport.com/1/objects');
             $response = $this->client->put('https://api.ontraport.com/1/objects', $args);
         } catch (RequestException $e) {
             //echo $e->getRequest() . "\n";
@@ -358,15 +360,15 @@ class Sdk
 
         $header = array(
             'Api-Appid' => $this->api_id,
-            'Api-Key'   => $this->api_key);    
+            'Api-Key'   => $this->api_key);
 
         $args = array(
-            'headers' => $header, 
+            'headers' => $header,
             'form_params' => $form_params,
             'verify' => false);
 
         try {
-             //$response = $client->request('GET', 'https://api.ontraport.com/1/objects'); 
+             //$response = $client->request('GET', 'https://api.ontraport.com/1/objects');
             $response = $this->client->post('https://api.ontraport.com/1/objects/saveorupdate', $args);
         } catch (RequestException $e) {
             //echo $e->getRequest() . "\n";
@@ -375,7 +377,7 @@ class Sdk
             }
         }
 
-        return json_decode($response->getBody()); 
+        return json_decode($response->getBody());
     }
 
     /**
@@ -401,21 +403,21 @@ class Sdk
         if (isset($params['objectID'])) {
             $objectTypeId = $params['objectID'];
         }
-        
+
        // $request = $this->client->createRequest('GET', 'objects/meta');
        // $query = $request->getQuery();
 
         //////////
         $header = array(
             'Api-Appid' => $this->api_id,
-            'Api-Key'   => $this->api_key);        
+            'Api-Key'   => $this->api_key);
         $client = new Client(array(
-            'headers' => $header, 
+            'headers' => $header,
             'query' => ['objectID' => (int) $objectTypeId],
             'verify' => false));
 
         try {
-             $response = $client->request('GET', 'https://api.ontraport.com/1/objects/meta'); 
+             $response = $client->request('GET', 'https://api.ontraport.com/1/objects/meta');
         } catch (RequestException $e) {
             //echo $e->getRequest() . "\n";
             if ($e->hasResponse()) {
@@ -635,7 +637,7 @@ class Sdk
             }
         }
         $request = $this->client->createRequest('POST', 'task/cancel', ['body' => $body]);
-        
+
         try {
             $response = $this->client->send($request);
         } catch (RequestException $e) {
@@ -680,7 +682,7 @@ class Sdk
             }
         }
         $request = $this->client->createRequest('POST', 'task/complete', ['body' => $body]);
-        
+
         try {
             $response = $this->client->send($request);
         } catch (RequestException $e) {
@@ -786,7 +788,7 @@ class Sdk
         $body = array();
         $body['id'] = (int) $params['id'];
         $request = $this->client->createRequest('PUT', 'transaction/convertToDecline', ['body' => $body]);
-        
+
         try {
             $response = $this->client->send($request);
         } catch (RequestException $e) {
@@ -881,7 +883,7 @@ class Sdk
         $body = array();
         $body['id'] = (int) $params['id'];
         $request = $this->client->createRequest('PUT', 'transaction/voidPurchase', ['body' => $body]);
-        
+
         try {
             $response = $this->client->send($request);
         } catch (RequestException $e) {
@@ -926,7 +928,7 @@ class Sdk
             }
         }
         $request = $this->client->createRequest('PUT', 'transaction/rerunCommission', ['body' => $body]);
-        
+
         try {
             $response = $this->client->send($request);
         } catch (RequestException $e) {
@@ -951,7 +953,7 @@ class Sdk
         $body = array();
         $body['id'] = (int) $params['id'];
         $request = $this->client->createRequest('PUT', 'transaction/markPaid', ['body' => $body]);
-        
+
         try {
             $response = $this->client->send($request);
         } catch (RequestException $e) {
@@ -1082,7 +1084,7 @@ class Sdk
             }
         }
         $request = $this->client->createRequest('PUT', 'transaction/order', ['body' => $body]);
-        
+
         try {
             $response = $this->client->send($request);
         } catch (RequestException $e) {

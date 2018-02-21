@@ -174,7 +174,7 @@ return [
          * OAuth 2
          */
         LucaDegasperi\OAuth2Server\Storage\FluentStorageServiceProvider::class,
-        LucaDegasperi\OAuth2Server\OAuth2ServerServiceProvider::class,        
+        LucaDegasperi\OAuth2Server\OAuth2ServerServiceProvider::class,
 
         /**
          * Prettus repository pattern
@@ -288,7 +288,7 @@ return [
         'Menu'       => Lavary\Menu\Facade::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
-        
+
         /**
          * OAuth
          */

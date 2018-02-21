@@ -29,7 +29,7 @@ class Index extends AbstractAsset implements Constraint
      *
      * @var Identifier[]
      */
-    protected $_columns = [];
+    protected $_columns = array();
 
     /**
      * @var boolean
@@ -47,7 +47,7 @@ class Index extends AbstractAsset implements Constraint
      *
      * @var array
      */
-    protected $_flags = [];
+    protected $_flags = array();
 
     /**
      * Platform specific options
@@ -56,7 +56,7 @@ class Index extends AbstractAsset implements Constraint
      *
      * @var array
      */
-    private $options = [];
+    private $options = array();
 
     /**
      * @param string   $indexName
@@ -66,7 +66,7 @@ class Index extends AbstractAsset implements Constraint
      * @param string[] $flags
      * @param array    $options
      */
-    public function __construct($indexName, array $columns, $isUnique = false, $isPrimary = false, array $flags = [], array $options = [])
+    public function __construct($indexName, array $columns, $isUnique = false, $isPrimary = false, array $flags = array(), array $options = array())
     {
         $isUnique = $isUnique || $isPrimary;
 
@@ -112,7 +112,7 @@ class Index extends AbstractAsset implements Constraint
      */
     public function getQuotedColumns(AbstractPlatform $platform)
     {
-        $columns = [];
+        $columns = array();
 
         foreach ($this->_columns as $column) {
             $columns[] = $column->getQuotedName($platform);
@@ -126,7 +126,7 @@ class Index extends AbstractAsset implements Constraint
      */
     public function getUnquotedColumns()
     {
-        return array_map([$this, 'trimQuotes'], $this->getColumns());
+        return array_map(array($this, 'trimQuotes'), $this->getColumns());
     }
 
     /**
@@ -215,7 +215,7 @@ class Index extends AbstractAsset implements Constraint
             }
 
             if ( ! $this->isUnique() && ! $this->isPrimary()) {
-                // this is a special case: If the current key is neither primary or unique, any unique or
+                // this is a special case: If the current key is neither primary or unique, any uniqe or
                 // primary key will always have the same effect for the index and there cannot be any constraint
                 // overlaps. This means a primary or unique index can always fulfill the requirements of just an
                 // index that has no constraints.

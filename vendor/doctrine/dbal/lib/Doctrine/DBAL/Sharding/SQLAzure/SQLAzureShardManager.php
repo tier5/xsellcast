@@ -19,9 +19,9 @@
 
 namespace Doctrine\DBAL\Sharding\SQLAzure;
 
-use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Sharding\ShardingException;
 use Doctrine\DBAL\Sharding\ShardManager;
+use Doctrine\DBAL\Sharding\ShardingException;
+use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Types\Type;
 
 /**
@@ -57,7 +57,7 @@ class SQLAzureShardManager implements ShardManager
     private $conn;
 
     /**
-     * @var string|null
+     * @var string
      */
     private $currentDistributionValue;
 
@@ -86,7 +86,7 @@ class SQLAzureShardManager implements ShardManager
         $this->federationName = $params['sharding']['federationName'];
         $this->distributionKey = $params['sharding']['distributionKey'];
         $this->distributionType = $params['sharding']['distributionType'];
-        $this->filteringEnabled = (bool) ($params['sharding']['filteringEnabled'] ?? false);
+        $this->filteringEnabled = (isset($params['sharding']['filteringEnabled'])) ? (bool) $params['sharding']['filteringEnabled'] : false;
     }
 
     /**
@@ -198,14 +198,14 @@ class SQLAzureShardManager implements ShardManager
      /**
       * {@inheritDoc}
       */
-    public function queryAll($sql, array $params = [], array $types = [])
+    public function queryAll($sql, array $params = array(), array $types = array())
     {
         $shards = $this->getShards();
         if (!$shards) {
             throw new \RuntimeException("No shards found for " . $this->federationName);
         }
 
-        $result = [];
+        $result = array();
         $oldDistribution = $this->getCurrentDistributionValue();
 
         foreach ($shards as $shard) {

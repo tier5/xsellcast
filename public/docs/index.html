@@ -56,7 +56,7 @@
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl "http://xsellcast.local/api/v1/brands" \
+<pre><code class="language-bash">curl "http://xsellcast.caffeineinteractive.net/api/v1/brands" \
 -H "Accept: application/json" \
     -d "access_token"="aut" \
     -d "page"="99751627" \
@@ -64,7 +64,7 @@
 <pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/brands",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/brands",
     "method": "GET",
     "data": {
         "access_token": "aut",
@@ -119,14 +119,14 @@ Return 404 if dealer doesn't exist.</p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl "http://xsellcast.local/api/v1/brand/{id}" \
+<pre><code class="language-bash">curl "http://xsellcast.caffeineinteractive.net/api/v1/brand/{id}" \
 -H "Accept: application/json" \
     -d "access_token"="error" \
 </code></pre>
 <pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/brand/{id}",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/brand/{id}",
     "method": "GET",
     "data": {
         "access_token": "error"
@@ -176,7 +176,7 @@ $.ajax(settings).done(function (response) {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl "http://xsellcast.local/api/v1/customers" \
+<pre><code class="language-bash">curl "http://xsellcast.caffeineinteractive.net/api/v1/customers" \
 -H "Accept: application/json" \
     -d "access_token"="deserunt" \
     -d "page"="64069" \
@@ -186,7 +186,7 @@ $.ajax(settings).done(function (response) {
 <pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/customers",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/customers",
     "method": "GET",
     "data": {
         "access_token": "deserunt",
@@ -253,14 +253,14 @@ $.ajax(settings).done(function (response) {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl "http://xsellcast.local/api/v1/customer/{id}" \
+<pre><code class="language-bash">curl "http://xsellcast.caffeineinteractive.net/api/v1/customer/{id}" \
 -H "Accept: application/json" \
     -d "access_token"="dolorem" \
 </code></pre>
 <pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/customer/{id}",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/customer/{id}",
     "method": "GET",
     "data": {
         "access_token": "dolorem"
@@ -308,7 +308,7 @@ $.ajax(settings).done(function (response) {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl "http://xsellcast.local/api/v1/customer/{id}/brand-associates" \
+<pre><code class="language-bash">curl "http://xsellcast.caffeineinteractive.net/api/v1/customer/{id}/brand-associates" \
 -H "Accept: application/json" \
     -d "access_token"="eligendi" \
     -d "page"="3269477" \
@@ -318,7 +318,7 @@ $.ajax(settings).done(function (response) {
 <pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/customer/{id}/brand-associates",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/customer/{id}/brand-associates",
     "method": "GET",
     "data": {
         "access_token": "eligendi",
@@ -385,14 +385,14 @@ $.ajax(settings).done(function (response) {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl "http://xsellcast.local/api/v1/customer/{id}/offers" \
+<pre><code class="language-bash">curl "http://xsellcast.caffeineinteractive.net/api/v1/customer/{id}/offers" \
 -H "Accept: application/json" \
     -d "access_token"="quae" \
 </code></pre>
 <pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/customer/{id}/offers",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/customer/{id}/offers",
     "method": "GET",
     "data": {
         "access_token": "quae"
@@ -440,7 +440,7 @@ $.ajax(settings).done(function (response) {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl "http://xsellcast.local/api/v1/customer/offer" \
+<pre><code class="language-bash">curl "http://xsellcast.caffeineinteractive.net/api/v1/customer/offer" \
 -H "Accept: application/json" \
     -d "access_token"="dolores" \
     -d "customer_id"="dolores" \
@@ -449,7 +449,7 @@ $.ajax(settings).done(function (response) {
 <pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/customer/offer",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/customer/offer",
     "method": "POST",
     "data": {
         "access_token": "dolores",
@@ -502,7 +502,7 @@ The @parameter $_method is required and value must set to <strong>DELETE</strong
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl "http://xsellcast.local/api/v1/customer/offer" \
+<pre><code class="language-bash">curl "http://xsellcast.caffeineinteractive.net/api/v1/customer/offer" \
 -H "Accept: application/json" \
     -d "access_token"="neque" \
     -d "customer_id"="13" \
@@ -512,7 +512,7 @@ The @parameter $_method is required and value must set to <strong>DELETE</strong
 <pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/customer/offer",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/customer/offer",
     "method": "DELETE",
     "data": {
         "access_token": "neque",
@@ -571,7 +571,7 @@ $.ajax(settings).done(function (response) {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl "http://xsellcast.local/api/v1/customer" \
+<pre><code class="language-bash">curl "http://xsellcast.caffeineinteractive.net/api/v1/customer" \
 -H "Accept: application/json" \
     -d "access_token"="sit" \
     -d "wp_userid"="sit" \
@@ -592,7 +592,7 @@ $.ajax(settings).done(function (response) {
 <pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/customer",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/customer",
     "method": "POST",
     "data": {
         "access_token": "sit",
@@ -716,7 +716,7 @@ $.ajax(settings).done(function (response) {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl "http://xsellcast.local/api/v1/customer" \
+<pre><code class="language-bash">curl "http://xsellcast.caffeineinteractive.net/api/v1/customer" \
 -H "Accept: application/json" \
     -d "access_token"="nemo" \
     -d "customer_id"="nemo" \
@@ -738,7 +738,7 @@ $.ajax(settings).done(function (response) {
 <pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/customer",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/customer",
     "method": "PUT",
     "data": {
         "access_token": "nemo",
@@ -869,7 +869,7 @@ $.ajax(settings).done(function (response) {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl "http://xsellcast.local/api/v1/customer" \
+<pre><code class="language-bash">curl "http://xsellcast.caffeineinteractive.net/api/v1/customer" \
 -H "Accept: application/json" \
     -d "access_token"="a" \
     -d "customer_id"="194585763" \
@@ -877,7 +877,7 @@ $.ajax(settings).done(function (response) {
 <pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/customer",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/customer",
     "method": "DELETE",
     "data": {
         "access_token": "a",
@@ -925,7 +925,7 @@ $.ajax(settings).done(function (response) {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl "http://xsellcast.local/api/v1/dealers" \
+<pre><code class="language-bash">curl "http://xsellcast.caffeineinteractive.net/api/v1/dealers" \
 -H "Accept: application/json" \
     -d "access_token"="dolor" \
     -d "page"="60" \
@@ -937,7 +937,7 @@ $.ajax(settings).done(function (response) {
 <pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/dealers",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/dealers",
     "method": "GET",
     "data": {
         "access_token": "dolor",
@@ -1017,14 +1017,14 @@ Return 404 if dealer doesn't exist.</p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl "http://xsellcast.local/api/v1/dealer/{id}" \
+<pre><code class="language-bash">curl "http://xsellcast.caffeineinteractive.net/api/v1/dealer/{id}" \
 -H "Accept: application/json" \
     -d "access_token"="optio" \
 </code></pre>
 <pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/dealer/{id}",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/dealer/{id}",
     "method": "GET",
     "data": {
         "access_token": "optio"
@@ -1072,14 +1072,14 @@ $.ajax(settings).done(function (response) {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl "http://xsellcast.local/api/v1/dealer/{id}/brands" \
+<pre><code class="language-bash">curl "http://xsellcast.caffeineinteractive.net/api/v1/dealer/{id}/brands" \
 -H "Accept: application/json" \
     -d "access_token"="asperiores" \
 </code></pre>
 <pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/dealer/{id}/brands",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/dealer/{id}/brands",
     "method": "GET",
     "data": {
         "access_token": "asperiores"
@@ -1127,14 +1127,14 @@ $.ajax(settings).done(function (response) {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl "http://xsellcast.local/api/v1/dealer/{id}/brand-associates" \
+<pre><code class="language-bash">curl "http://xsellcast.caffeineinteractive.net/api/v1/dealer/{id}/brand-associates" \
 -H "Accept: application/json" \
     -d "access_token"="reprehenderit" \
 </code></pre>
 <pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/dealer/{id}/brand-associates",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/dealer/{id}/brand-associates",
     "method": "GET",
     "data": {
         "access_token": "reprehenderit"
@@ -1184,7 +1184,7 @@ $.ajax(settings).done(function (response) {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl "http://xsellcast.local/api/v1/messages/direct-message" \
+<pre><code class="language-bash">curl "http://xsellcast.caffeineinteractive.net/api/v1/messages/direct-message" \
 -H "Accept: application/json" \
     -d "access_token"="facilis" \
     -d "customer_id"="facilis" \
@@ -1192,7 +1192,7 @@ $.ajax(settings).done(function (response) {
 <pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/messages/direct-message",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/messages/direct-message",
     "method": "GET",
     "data": {
         "access_token": "facilis",
@@ -1246,7 +1246,7 @@ $.ajax(settings).done(function (response) {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl "http://xsellcast.local/api/v1/messages/direct-message/show" \
+<pre><code class="language-bash">curl "http://xsellcast.caffeineinteractive.net/api/v1/messages/direct-message/show" \
 -H "Accept: application/json" \
     -d "access_token"="illo" \
     -d "customer_id"="illo" \
@@ -1255,7 +1255,7 @@ $.ajax(settings).done(function (response) {
 <pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/messages/direct-message/show",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/messages/direct-message/show",
     "method": "GET",
     "data": {
         "access_token": "illo",
@@ -1315,7 +1315,7 @@ $.ajax(settings).done(function (response) {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl "http://xsellcast.local/api/v1/messages/direct-message/mark-as-read" \
+<pre><code class="language-bash">curl "http://xsellcast.caffeineinteractive.net/api/v1/messages/direct-message/mark-as-read" \
 -H "Accept: application/json" \
     -d "access_token"="id" \
     -d "customer_id"="id" \
@@ -1324,7 +1324,7 @@ $.ajax(settings).done(function (response) {
 <pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/messages/direct-message/mark-as-read",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/messages/direct-message/mark-as-read",
     "method": "POST",
     "data": {
         "access_token": "id",
@@ -1376,7 +1376,7 @@ $.ajax(settings).done(function (response) {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl "http://xsellcast.local/api/v1/messages/direct-message/store" \
+<pre><code class="language-bash">curl "http://xsellcast.caffeineinteractive.net/api/v1/messages/direct-message/store" \
 -H "Accept: application/json" \
     -d "access_token"="voluptatum" \
     -d "customer_id"="voluptatum" \
@@ -1387,7 +1387,7 @@ $.ajax(settings).done(function (response) {
 <pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/messages/direct-message/store",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/messages/direct-message/store",
     "method": "POST",
     "data": {
         "access_token": "voluptatum",
@@ -1456,7 +1456,7 @@ $.ajax(settings).done(function (response) {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl "http://xsellcast.local/api/v1/offers" \
+<pre><code class="language-bash">curl "http://xsellcast.caffeineinteractive.net/api/v1/offers" \
 -H "Accept: application/json" \
     -d "access_token"="rerum" \
     -d "limit"="796437556" \
@@ -1466,7 +1466,7 @@ $.ajax(settings).done(function (response) {
 <pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/offers",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/offers",
     "method": "GET",
     "data": {
         "access_token": "rerum",
@@ -1534,14 +1534,14 @@ Return 404 if offer doesn't exist.</p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl "http://xsellcast.local/api/v1/offer/{id}" \
+<pre><code class="language-bash">curl "http://xsellcast.caffeineinteractive.net/api/v1/offer/{id}" \
 -H "Accept: application/json" \
     -d "access_token"="voluptas" \
 </code></pre>
 <pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/offer/{id}",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/offer/{id}",
     "method": "GET",
     "data": {
         "access_token": "voluptas"
@@ -1589,7 +1589,7 @@ $.ajax(settings).done(function (response) {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl "http://xsellcast.local/api/v1/offer" \
+<pre><code class="language-bash">curl "http://xsellcast.caffeineinteractive.net/api/v1/offer" \
 -H "Accept: application/json" \
     -d "access_token"="dolore" \
     -d "contents"="dolore" \
@@ -1603,7 +1603,7 @@ $.ajax(settings).done(function (response) {
 <pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/offer",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/offer",
     "method": "POST",
     "data": {
         "access_token": "dolore",
@@ -1687,7 +1687,7 @@ $.ajax(settings).done(function (response) {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl "http://xsellcast.local/api/v1/offer" \
+<pre><code class="language-bash">curl "http://xsellcast.caffeineinteractive.net/api/v1/offer" \
 -H "Accept: application/json" \
     -d "access_token"="inventore" \
     -d "offer_id"="inventore" \
@@ -1695,7 +1695,7 @@ $.ajax(settings).done(function (response) {
 <pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/offer",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/offer",
     "method": "DELETE",
     "data": {
         "access_token": "inventore",
@@ -1742,7 +1742,7 @@ $.ajax(settings).done(function (response) {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl "http://xsellcast.local/api/v1/offer" \
+<pre><code class="language-bash">curl "http://xsellcast.caffeineinteractive.net/api/v1/offer" \
 -H "Accept: application/json" \
     -d "access_token"="consectetur" \
     -d "contents"="consectetur" \
@@ -1757,7 +1757,7 @@ $.ajax(settings).done(function (response) {
 <pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/offer",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/offer",
     "method": "PUT",
     "data": {
         "access_token": "consectetur",
@@ -1851,7 +1851,7 @@ $.ajax(settings).done(function (response) {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl "http://xsellcast.local/api/v1/messages/request/appt" \
+<pre><code class="language-bash">curl "http://xsellcast.caffeineinteractive.net/api/v1/messages/request/appt" \
 -H "Accept: application/json" \
     -d "access_token"="officia" \
     -d "customer_id"="officia" \
@@ -1859,7 +1859,7 @@ $.ajax(settings).done(function (response) {
 <pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/messages/request/appt",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/messages/request/appt",
     "method": "GET",
     "data": {
         "access_token": "officia",
@@ -1913,7 +1913,7 @@ $.ajax(settings).done(function (response) {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl "http://xsellcast.local/api/v1/messages/request/appt/{id}" \
+<pre><code class="language-bash">curl "http://xsellcast.caffeineinteractive.net/api/v1/messages/request/appt/{id}" \
 -H "Accept: application/json" \
     -d "access_token"="quo" \
     -d "customer_id"="quo" \
@@ -1922,7 +1922,7 @@ $.ajax(settings).done(function (response) {
 <pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/messages/request/appt/{id}",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/messages/request/appt/{id}",
     "method": "GET",
     "data": {
         "access_token": "quo",
@@ -1982,7 +1982,7 @@ $.ajax(settings).done(function (response) {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl "http://xsellcast.local/api/v1/messages/request/appt/store" \
+<pre><code class="language-bash">curl "http://xsellcast.caffeineinteractive.net/api/v1/messages/request/appt/store" \
 -H "Accept: application/json" \
     -d "access_token"="ut" \
     -d "customer_id"="ut" \
@@ -1992,7 +1992,7 @@ $.ajax(settings).done(function (response) {
 <pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/messages/request/appt/store",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/messages/request/appt/store",
     "method": "POST",
     "data": {
         "access_token": "ut",
@@ -2052,7 +2052,7 @@ $.ajax(settings).done(function (response) {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl "http://xsellcast.local/api/v1/messages/request/contact_me" \
+<pre><code class="language-bash">curl "http://xsellcast.caffeineinteractive.net/api/v1/messages/request/contact_me" \
 -H "Accept: application/json" \
     -d "access_token"="tempora" \
     -d "customer_id"="tempora" \
@@ -2060,7 +2060,7 @@ $.ajax(settings).done(function (response) {
 <pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/messages/request/contact_me",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/messages/request/contact_me",
     "method": "GET",
     "data": {
         "access_token": "tempora",
@@ -2114,7 +2114,7 @@ $.ajax(settings).done(function (response) {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl "http://xsellcast.local/api/v1/messages/request/contact_me/{id}" \
+<pre><code class="language-bash">curl "http://xsellcast.caffeineinteractive.net/api/v1/messages/request/contact_me/{id}" \
 -H "Accept: application/json" \
     -d "access_token"="eum" \
     -d "customer_id"="eum" \
@@ -2123,7 +2123,7 @@ $.ajax(settings).done(function (response) {
 <pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/messages/request/contact_me/{id}",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/messages/request/contact_me/{id}",
     "method": "GET",
     "data": {
         "access_token": "eum",
@@ -2183,7 +2183,7 @@ $.ajax(settings).done(function (response) {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl "http://xsellcast.local/api/v1/messages/request/contact_me/store" \
+<pre><code class="language-bash">curl "http://xsellcast.caffeineinteractive.net/api/v1/messages/request/contact_me/store" \
 -H "Accept: application/json" \
     -d "access_token"="vel" \
     -d "customer_id"="vel" \
@@ -2194,7 +2194,7 @@ $.ajax(settings).done(function (response) {
 <pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/messages/request/contact_me/store",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/messages/request/contact_me/store",
     "method": "POST",
     "data": {
         "access_token": "vel",
@@ -2260,7 +2260,7 @@ $.ajax(settings).done(function (response) {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl "http://xsellcast.local/api/v1/messages/request/info" \
+<pre><code class="language-bash">curl "http://xsellcast.caffeineinteractive.net/api/v1/messages/request/info" \
 -H "Accept: application/json" \
     -d "access_token"="aut" \
     -d "customer_id"="aut" \
@@ -2268,7 +2268,7 @@ $.ajax(settings).done(function (response) {
 <pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/messages/request/info",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/messages/request/info",
     "method": "GET",
     "data": {
         "access_token": "aut",
@@ -2322,7 +2322,7 @@ $.ajax(settings).done(function (response) {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl "http://xsellcast.local/api/v1/messages/request/info/{id}" \
+<pre><code class="language-bash">curl "http://xsellcast.caffeineinteractive.net/api/v1/messages/request/info/{id}" \
 -H "Accept: application/json" \
     -d "access_token"="quidem" \
     -d "customer_id"="quidem" \
@@ -2331,7 +2331,7 @@ $.ajax(settings).done(function (response) {
 <pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/messages/request/info/{id}",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/messages/request/info/{id}",
     "method": "GET",
     "data": {
         "access_token": "quidem",
@@ -2391,7 +2391,7 @@ $.ajax(settings).done(function (response) {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl "http://xsellcast.local/api/v1/messages/request/info/store" \
+<pre><code class="language-bash">curl "http://xsellcast.caffeineinteractive.net/api/v1/messages/request/info/store" \
 -H "Accept: application/json" \
     -d "access_token"="autem" \
     -d "customer_id"="autem" \
@@ -2401,7 +2401,7 @@ $.ajax(settings).done(function (response) {
 <pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/messages/request/info/store",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/messages/request/info/store",
     "method": "POST",
     "data": {
         "access_token": "autem",
@@ -2461,7 +2461,7 @@ $.ajax(settings).done(function (response) {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl "http://xsellcast.local/api/v1/messages/request/price" \
+<pre><code class="language-bash">curl "http://xsellcast.caffeineinteractive.net/api/v1/messages/request/price" \
 -H "Accept: application/json" \
     -d "access_token"="tempora" \
     -d "customer_id"="tempora" \
@@ -2469,7 +2469,7 @@ $.ajax(settings).done(function (response) {
 <pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/messages/request/price",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/messages/request/price",
     "method": "GET",
     "data": {
         "access_token": "tempora",
@@ -2523,7 +2523,7 @@ $.ajax(settings).done(function (response) {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl "http://xsellcast.local/api/v1/messages/request/price/{id}" \
+<pre><code class="language-bash">curl "http://xsellcast.caffeineinteractive.net/api/v1/messages/request/price/{id}" \
 -H "Accept: application/json" \
     -d "access_token"="vero" \
     -d "customer_id"="vero" \
@@ -2532,7 +2532,7 @@ $.ajax(settings).done(function (response) {
 <pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/messages/request/price/{id}",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/messages/request/price/{id}",
     "method": "GET",
     "data": {
         "access_token": "vero",
@@ -2592,7 +2592,7 @@ $.ajax(settings).done(function (response) {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl "http://xsellcast.local/api/v1/messages/request/price/store" \
+<pre><code class="language-bash">curl "http://xsellcast.caffeineinteractive.net/api/v1/messages/request/price/store" \
 -H "Accept: application/json" \
     -d "access_token"="omnis" \
     -d "customer_id"="omnis" \
@@ -2602,7 +2602,7 @@ $.ajax(settings).done(function (response) {
 <pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/messages/request/price/store",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/messages/request/price/store",
     "method": "POST",
     "data": {
         "access_token": "omnis",
@@ -2662,7 +2662,7 @@ $.ajax(settings).done(function (response) {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl "http://xsellcast.local/api/v1/brand-associates" \
+<pre><code class="language-bash">curl "http://xsellcast.caffeineinteractive.net/api/v1/brand-associates" \
 -H "Accept: application/json" \
     -d "access_token"="et" \
     -d "limit"="537109550" \
@@ -2672,7 +2672,7 @@ $.ajax(settings).done(function (response) {
 <pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/brand-associates",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/brand-associates",
     "method": "GET",
     "data": {
         "access_token": "et",
@@ -2739,14 +2739,14 @@ $.ajax(settings).done(function (response) {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl "http://xsellcast.local/api/v1/brand-associate/{id}" \
+<pre><code class="language-bash">curl "http://xsellcast.caffeineinteractive.net/api/v1/brand-associate/{id}" \
 -H "Accept: application/json" \
     -d "access_token"="autem" \
 </code></pre>
 <pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/brand-associate/{id}",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/brand-associate/{id}",
     "method": "GET",
     "data": {
         "access_token": "autem"
@@ -2794,7 +2794,7 @@ $.ajax(settings).done(function (response) {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl "http://xsellcast.local/api/v1/brand-associate/{id}/customers" \
+<pre><code class="language-bash">curl "http://xsellcast.caffeineinteractive.net/api/v1/brand-associate/{id}/customers" \
 -H "Accept: application/json" \
     -d "access_token"="non" \
     -d "limit"="603181798" \
@@ -2804,7 +2804,7 @@ $.ajax(settings).done(function (response) {
 <pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/brand-associate/{id}/customers",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/brand-associate/{id}/customers",
     "method": "GET",
     "data": {
         "access_token": "non",
@@ -2873,14 +2873,14 @@ $.ajax(settings).done(function (response) {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl "http://xsellcast.local/api/v1/users" \
+<pre><code class="language-bash">curl "http://xsellcast.caffeineinteractive.net/api/v1/users" \
 -H "Accept: application/json" \
     -d "access_token"="est" \
 </code></pre>
 <pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/users",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/users",
     "method": "GET",
     "data": {
         "access_token": "est"
@@ -2929,7 +2929,7 @@ $.ajax(settings).done(function (response) {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl "http://xsellcast.local/api/v1/users/store" \
+<pre><code class="language-bash">curl "http://xsellcast.caffeineinteractive.net/api/v1/users/store" \
 -H "Accept: application/json" \
     -d "firstname"="nam" \
     -d "lastname"="nam" \
@@ -2938,7 +2938,7 @@ $.ajax(settings).done(function (response) {
 <pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://xsellcast.local/api/v1/users/store",
+    "url": "http://xsellcast.caffeineinteractive.net/api/v1/users/store",
     "method": "POST",
     "data": {
         "firstname": "nam",

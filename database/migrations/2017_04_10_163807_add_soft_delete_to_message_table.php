@@ -12,9 +12,9 @@ class AddSoftDeleteToMessageTable extends Migration
      */
     public function up()
     {
-        Schema::table('messenger_messages', function ($t) {
-            $t->softDeletes();
-        });
+        // Schema::table('messenger_messages', function ($t) {
+        //     $t->softDeletes();
+        // });
     }
 
     /**

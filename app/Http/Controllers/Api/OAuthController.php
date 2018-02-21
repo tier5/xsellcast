@@ -22,16 +22,35 @@ class OAuthController extends Controller
      * Request Token
      *
      * Send request for acquiring client credential token.
-     * 
+     *
      * @param  OAuthRequestTokenPostRequest $request
      * @return Response
      */
     public function getClientCredentialsToken(OAuthRequestTokenPostRequest $request)
-    { 
-        $request->request->add(['grant_type' => 'client_credentials']);
+    {
+        try {
 
-        $authIssuer = Authorizer::getIssuer();
-        $authIssuer->setRequest($request);
-        return Response::json($authIssuer->issueAccessToken());
+            $request->request->add(['grant_type' => 'client_credentials']);
+            $authIssuer = Authorizer::getIssuer();
+            $authIssuer->setRequest($request);
+//            return Response::json($authIssuer->issueAccessToken());
+            return response()->json([
+                'status'=>true,
+                'code'=>config('responses.success.status_code'),
+                'data'=>$authIssuer->issueAccessToken(),
+                'message'=>config('responses.success.status_message'),
+            ], config('responses.success.status_code'));
+        }
+        catch (\Exception $e) {
+            // dd($e->getMessage());
+            return response()->json([
+                'status'=>false,
+                'code'=>config('responses.bad_request.status_code'),
+                'data'=>null,
+                'message'=>$e->getMessage()
+            ],
+                config('responses.bad_request.status_code')
+            );
+        }
     }
 }
