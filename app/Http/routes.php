@@ -735,9 +735,15 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Api'), function()
             'as'           => 'api.v1.customers.social-login',
             'uses'         => 'CustomerController@doCustomerSocialLogin'));
 
-         Route::post('customer/forgot-password', array(
+        Route::post('customer/forgot-password', array(
             'as'           => 'api.v1.customers.forgot-password',
             'uses'         => 'CustomerController@forgotPassword'));
+        Route::post('customer/new-password', array(
+            'as'           => 'api.v1.customers.new-password',
+            'uses'         => 'CustomerController@newPassword'));
+        Route::post('customer/change-password', array(
+            'as'           => 'api.v1.customers.change-password',
+            'uses'         => 'CustomerController@changePassword'));
 
         /**
          * Brand associates (Sales Rep)

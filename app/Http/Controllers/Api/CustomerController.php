@@ -24,9 +24,11 @@ use App\Http\Requests\Api\CustomerPostSocialLoginRequest;
 use App\Http\Requests\Api\CustomerPutRequest;
 use App\Http\Requests\Api\CustomerDeleteRequest;
 use App\Http\Requests\Api\CustomerForgotPasswordRequest;
+use App\Http\Requests\Api\CustomerNewPasswordRequest;
+use App\Http\Requests\Api\CustomerChangePasswordRequest;
 use Snowfire\Beautymail\Beautymail;
 use Hash;
-
+use Mail;
 /**
  * @resource Customer
  *
@@ -459,27 +461,35 @@ class CustomerController extends Controller
         try {
             $email             = $request->email;
             $user= User::where('email','=',$email)->first();
-
+            // $customer=$user->customer;
             if(!empty($user)){
             $token=   app('auth.password.broker')->createToken($user);
-            $user->token=$token;
-
+              $user->token=$token;
 
                 $beautymail = app()->make(Beautymail::class);
                 $beautymail->send('emails.auth.api.password-reset', compact('user'), function($message) use($user)
                 {
                      // $token = str_random(64);
-
                     $message
-                        ->from(env('MAIL_USERNAME'))
+                        ->from(env('NO_REPLY'))
+                        // ->from(env('MAIL_USERNAME'))
                         ->to($user->email, $user->firstname . ' ' . $user->lastname)
                         ->subject('Password Reset Link');
                 });
+                // \Mail::send('emails.auth.api.password-reset', compact('user'), function($message) use($user)
+                // {
+                //      // $token = str_random(64);
+
+                //     $message
+                //         ->from(env('NO_REPLY'))
+                //         ->to($user->email, $user->firstname . ' ' . $user->lastname)
+                //         ->subject('Password Reset Link');
+                // });
 
                 return response()->json([
                 'status'=>true,
                 'code'=>config('responses.success.status_code'),
-                'data'=>$user->customer,
+                'data'=>['We have e-mailed your password reset link!'],
                 'message'=>config('responses.success.status_message'),
                 ], config('responses.success.status_code'));
             }
@@ -488,7 +498,129 @@ class CustomerController extends Controller
                'status'=>false,
                 'code'=>config('responses.bad_request.status_code'),
                 'data'=>[],
-                'message'=>'Invalid Email Token' ,
+                'message'=>'Invalid Email ' ,
+            ], config('responses.bad_request.status_code'));
+
+            }
+        catch (\Exception $e) {
+            // dd($e->getMessage());
+            return response()->json([
+                'status'=>false,
+                'code'=>config('responses.bad_request.status_code'),
+                'data'=>null,
+                'message'=>$e->getMessage()
+            ],
+                config('responses.bad_request.status_code')
+            );
+        }
+    }
+
+
+
+     /**
+     *
+     * New Password.
+     *
+     * @param      \App\Http\Requests\Api\CustomerNewPasswordRequest  $request  The request
+     *
+     * @return     <type>                                      ( description_of_the_return_value )
+     */
+    public function newPassword(CustomerNewPasswordRequest $request)
+    {
+        try {
+            $email             = $request->email;
+            $token             = $request->token;
+            $password             = $request->password;
+            $user= User::where('email','=',$email)->first();
+            // $customer=$user->customer;
+            if(!empty($user)){
+            // $token=   app('auth.password.broker')->reset();
+            // $credentials = $request->only(
+               // 'email', 'password', 'token','password_confirmation'
+            // );
+            //
+            $credentials=['email'=>$email, 'password' =>$password , 'token' => $token ,'password_confirmation'=> $password];
+
+               $response =app('auth.password.broker')->reset($credentials, function ($user, $password) {
+                   $this->resetPassword($user, $password);
+                   return response()->json([
+                    'status'=>true,
+                    'code'=>config('responses.success.status_code'),
+                    'data'=>['Your password was succesfully changed'],
+                    'message'=>config('responses.success.status_message'),
+                    ], config('responses.success.status_code'));
+
+                   });
+            }
+
+            return response()->json([
+               'status'=>false,
+                'code'=>config('responses.bad_request.status_code'),
+                'data'=>[],
+                'message'=>'Invalid Email or Token' ,
+            ], config('responses.bad_request.status_code'));
+
+            }
+        catch (\Exception $e) {
+            // dd($e->getMessage());
+            return response()->json([
+                'status'=>false,
+                'code'=>config('responses.bad_request.status_code'),
+                'data'=>null,
+                'message'=>$e->getMessage()
+            ],
+                config('responses.bad_request.status_code')
+            );
+        }
+    }
+
+    /**
+    * Reset the given user's password.
+    *
+    * @param  \Illuminate\Contracts\Auth\CanResetPassword  $user
+    * @param  string  $password
+    * @return void
+    */
+   protected function resetPassword($user, $password)
+   {
+       $user->password = bcrypt($password);
+
+       $user->save();
+        return true;
+       // Auth::login($user);
+   }
+
+
+   /**
+     *
+     * Change Password.
+     *
+     * @param      \App\Http\Requests\Api\CustomerNewPasswordRequest  $request  The request
+     *
+     * @return     <type>                                      ( description_of_the_return_value )
+     */
+    public function changePassword(CustomerChangePasswordRequest $request)
+    {
+        try {
+            $email          = $request->email;
+            $password       = $request->password;
+            // $newHashPass    = Hash::make($request->password);
+            $user= User::where('email','=',$email)->first();
+            // $customer=$user->customer;
+            if(!empty($user)){
+                $this->resetPassword($user, $password);
+                return response()->json([
+                    'status'=>true,
+                    'code'=>config('responses.success.status_code'),
+                    'data'=>['Your password was succesfully changed'],
+                    'message'=>config('responses.success.status_message'),
+                    ], config('responses.success.status_code'));
+            }
+            return response()->json([
+               'status'=>false,
+                'code'=>config('responses.bad_request.status_code'),
+                'data'=>[],
+                'message'=>'Invalid Email' ,
             ], config('responses.bad_request.status_code'));
 
             }
