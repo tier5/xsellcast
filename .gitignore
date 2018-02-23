@@ -3,5 +3,7 @@
 /vendor
 /.idea
 /.vagrant
+
 .env
 composer.lock
+

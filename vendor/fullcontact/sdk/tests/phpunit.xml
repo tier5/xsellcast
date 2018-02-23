@@ -1,7 +1,0 @@
-<phpunit bootstrap="./Bootstrap.php">
-  <testsuites>
-    <testsuite name="Full Contact Test Suite">
-      <directory>./</directory>
-    </testsuite>
-  </testsuites>
-</phpunit>
