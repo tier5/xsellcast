@@ -29,6 +29,7 @@ use App\Http\Requests\Api\CustomerChangePasswordRequest;
 use Snowfire\Beautymail\Beautymail;
 use Hash;
 use Mail;
+use DB;
 /**
  * @resource Customer
  *
@@ -216,6 +217,11 @@ class CustomerController extends Controller
             $data['country']  = 'US';
             $data['provider']  = (isset($data['provider']) ? $data['provider'] : '');
             $data['provider_token']  = (isset($data['provider_token']) ? $data['provider_token'] : '');
+            $data['address1']= (isset($data['address1']) ? $data['address1'] : '');
+            $data['address2']= (isset($data['address2']) ? $data['address2'] : '');
+            $data['homephone']= (isset($data['homephone']) ? $data['homephone'] : '');
+            $data['cellphone']= (isset($data['cellphone']) ? $data['cellphone'] : '');
+            $data['officephone']= (isset($data['officephone']) ? $data['officephone'] : '');
 
             $customer         = $this->customer->createOne($data);
 
@@ -258,6 +264,12 @@ class CustomerController extends Controller
             $data['country']        = 'US';
             $data['provider']       = (isset($data['provider']) ? $data['provider'] : '');
             $data['provider_token'] = (isset($data['provider_token']) ? $data['provider_token'] : '');
+
+            $data['address1']= (isset($data['address1']) ? $data['address1'] : '');
+            $data['address2']= (isset($data['address2']) ? $data['address2'] : '');
+            $data['homephone']= (isset($data['homephone']) ? $data['homephone'] : '');
+            $data['cellphone']= (isset($data['cellphone']) ? $data['cellphone'] : '');
+            $data['officephone']= (isset($data['officephone']) ? $data['officephone'] : '');
 
             $customer               = $this->customer->createOne($data);
 
@@ -360,15 +372,21 @@ class CustomerController extends Controller
             $email             = $request->email;
             $password          = $request->password;
             $user= User::where('email','=',$email)->first();
+            // dd($user->customer);
             if(!empty($user)){
 
                 if(Hash::check($password,$user->password))
                     {
-            // dd($user);
+
+            $data=[
+                'customer_id'=>$user->customer->id,
+                'user_id'=>$user->customer->user_id,
+                // 'wp_userid'=>$user->customer->wp_userid
+                ];
                         return response()->json([
                         'status'=>true,
                         'code'=>config('responses.success.status_code'),
-                        'data'=>$user->customer,
+                        'data'=>$data,
                         'message'=>config('responses.success.status_message'),
                         ], config('responses.success.status_code'));
                     }
@@ -414,11 +432,15 @@ class CustomerController extends Controller
             $provider_token       = $request->provider_token;
             $user= User::where('provider','=',$provider)->where('provider_token','=',$provider_token)->first();
             if(!empty($user)){
-
+            $data=[
+               'customer_id'=>$user->customer->id,
+                'user_id'=>$user->customer->user_id,
+                // 'wp_userid'=>$user->customer->wp_userid
+                ];
                 return response()->json([
                 'status'=>true,
                 'code'=>config('responses.success.status_code'),
-                'data'=>$user->customer,
+                'data'=>$data,
                 'message'=>config('responses.success.status_message'),
                 ], config('responses.success.status_code'));
             }
@@ -464,7 +486,13 @@ class CustomerController extends Controller
             // $customer=$user->customer;
             if(!empty($user)){
             $token=   app('auth.password.broker')->createToken($user);
-              $user->token=$token;
+            $user->token=$token;
+           // echo $token = str_random(64);
+
+           //  DB::table('password_resets')->insert([
+           //      'email' => $user->email,
+           //      'token' => $token
+           //  ]);
 
                 $beautymail = app()->make(Beautymail::class);
                 $beautymail->send('emails.auth.api.password-reset', compact('user'), function($message) use($user)
@@ -489,8 +517,8 @@ class CustomerController extends Controller
                 return response()->json([
                 'status'=>true,
                 'code'=>config('responses.success.status_code'),
-                'data'=>['We have e-mailed your password reset link!'],
-                'message'=>config('responses.success.status_message'),
+                'data'=>['token'=>$token],
+                'message'=>'We have e-mailed your password reset link!',
                 ], config('responses.success.status_code'));
             }
 
@@ -530,27 +558,34 @@ class CustomerController extends Controller
         try {
             $email             = $request->email;
             $token             = $request->token;
-            $password             = $request->password;
+            $password          = $request->password;
             $user= User::where('email','=',$email)->first();
+
             // $customer=$user->customer;
             if(!empty($user)){
-            // $token=   app('auth.password.broker')->reset();
-            // $credentials = $request->only(
-               // 'email', 'password', 'token','password_confirmation'
-            // );
-            //
+
+
             $credentials=['email'=>$email, 'password' =>$password , 'token' => $token ,'password_confirmation'=> $password];
 
                $response =app('auth.password.broker')->reset($credentials, function ($user, $password) {
-                   $this->resetPassword($user, $password);
-                   return response()->json([
-                    'status'=>true,
-                    'code'=>config('responses.success.status_code'),
-                    'data'=>['Your password was succesfully changed'],
-                    'message'=>config('responses.success.status_message'),
-                    ], config('responses.success.status_code'));
+                 // dd($user);
+                    // if(!empty($issettoken)){
+                        $this->resetPassword($user, $password);
 
+
+                    // }
                    });
+
+                if($response=='passwords.reset'){
+                    return response()->json([
+                        'status'=>true,
+                        'code'=>config('responses.success.status_code'),
+                        'data'=>['Your password was succesfully changed'],
+                        'message'=>config('responses.success.status_message'),
+                        ], config('responses.success.status_code'));
+                   }
+
+
             }
 
             return response()->json([
@@ -586,7 +621,8 @@ class CustomerController extends Controller
        $user->password = bcrypt($password);
 
        $user->save();
-        return true;
+
+        // return true;
        // Auth::login($user);
    }
 
