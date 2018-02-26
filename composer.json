@@ -51,7 +51,7 @@
             "type": "vcs",
             "url": "http://github.com/WP-API/WP-API"
         }
-    ],    
+    ],
     "autoload": {
         "classmap": [
             "database"
@@ -61,7 +61,7 @@
         },
         "files": [
             "app/helpers.php"
-        ]        
+        ]
     },
     "autoload-dev": {
         "classmap": [

@@ -301,7 +301,7 @@ class CustomerRepositoryEloquent extends BaseRepository implements CustomerRepos
         $user       = $cust->user;
         $userFields = \Schema::getColumnListing($cust->user->getTable());
         $srFields   = \Schema::getColumnListing($cust->getTable());
-
+      // dd( $srFields);
         foreach($userFields as $field)
         {
             if($field == 'id' || $field == 'password')
@@ -336,9 +336,11 @@ class CustomerRepositoryEloquent extends BaseRepository implements CustomerRepos
         }
 
         $cust->save();
-
+        if($cust->opid){
         $custop = new CustomerObj();
         $custop->upsert($cust);
+        }
+
 
         return $cust;
     }
@@ -353,5 +355,10 @@ class CustomerRepositoryEloquent extends BaseRepository implements CustomerRepos
       $this->model = $this->model->joinUser()->orderBy('users.firstname', $order);
 
       return $this;
+    }
+
+    public function media(){
+    exit;
+    return $this->model->media;
     }
 }

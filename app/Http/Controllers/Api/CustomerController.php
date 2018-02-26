@@ -11,6 +11,8 @@ use App\Storage\SalesRep\SalesRepRepository;
 use App\Storage\Offer\OfferRepository;
 use App\Storage\Customer\Customer;
 use App\Storage\User\User;
+use App\Storage\Media\MediaRepository;
+
 use App\Http\Requests\Api\CustomersRequest;
 use App\Http\Requests\Api\CustomersShowRequest;
 use App\Http\Requests\Api\SimpleGetRequest;
@@ -26,6 +28,8 @@ use App\Http\Requests\Api\CustomerDeleteRequest;
 use App\Http\Requests\Api\CustomerForgotPasswordRequest;
 use App\Http\Requests\Api\CustomerNewPasswordRequest;
 use App\Http\Requests\Api\CustomerChangePasswordRequest;
+use App\Http\Requests\Api\CustomerUploadAvatarRequest;
+use App\Http\Requests\Api\CustomerAvatarsRequest;
 use Snowfire\Beautymail\Beautymail;
 use Hash;
 use Mail;
@@ -40,12 +44,14 @@ class CustomerController extends Controller
 	protected $customer;
 
     protected $salesrep;
+    protected $media;
 
-	public function __construct(CustomerRepository $customer, SalesRepRepository $salesrep, OfferRepository $offer)
+	public function __construct(CustomerRepository $customer, SalesRepRepository $salesrep, OfferRepository $offer, MediaRepository $media)
 	{
         $this->customer = $customer;
         $this->salesrep = $salesrep;
         $this->offer    = $offer;
+        $this->media    = $media;
 	}
 
 	/**
@@ -305,14 +311,34 @@ class CustomerController extends Controller
      */
     public function update(CustomerPutRequest $request)
     {
-        $custData = $request->except(['id', 'email', 'lastname', 'firstname']);
-        $data     = $request->all();
-        $customer = $this->customer->skipPresenter()->find($request->get('customer_id'));
+        try
+        {
+            // $custData = $request->except(['id', 'email', 'lastname', 'firstname']);
+            $data     = $request->all();
+            $customer = $this->customer->skipPresenter()->find($request->get('customer_id'));
+            $this->customer->updateOne($customer, $data);
 
-        $this->customer->updateOne($customer, $data);
-
-        return response()
-            ->json($this->customer->skipPresenter(false)->find($customer->id));
+            // $$this->customer->skipPresenter(false)->find($customer->id)
+            // return response()
+            //     ->json();
+                 return response()->json([
+                    'status'=>true,
+                    'code'=>config('responses.success.status_code'),
+                    'data'=>$customer,
+                    'message'=>config('responses.success.status_message'),
+                ], config('responses.success.status_code'));
+        }
+        catch (\Exception $e) {
+            // dd($e->getMessage());
+            return response()->json([
+                'status'=>false,
+                'code'=>config('responses.bad_request.status_code'),
+                'data'=>null,
+                'message'=>$e->getMessage()
+            ],
+                config('responses.bad_request.status_code')
+            );
+        }
     }
 
     /**
@@ -631,7 +657,7 @@ class CustomerController extends Controller
      *
      * Change Password.
      *
-     * @param      \App\Http\Requests\Api\CustomerNewPasswordRequest  $request  The request
+     * @param      \App\Http\Requests\Api\CustomerChangePasswordRequest  $request  The request
      *
      * @return     <type>                                      ( description_of_the_return_value )
      */
@@ -660,6 +686,136 @@ class CustomerController extends Controller
             ], config('responses.bad_request.status_code'));
 
             }
+        catch (\Exception $e) {
+            // dd($e->getMessage());
+            return response()->json([
+                'status'=>false,
+                'code'=>config('responses.bad_request.status_code'),
+                'data'=>null,
+                'message'=>$e->getMessage()
+            ],
+                config('responses.bad_request.status_code')
+            );
+        }
+    }
+   /**
+     *
+     * Upload Avatar
+     *
+     * @param      \App\Http\Requests\Api\CustomerUploadAvatarRequest  $request  The request
+     *
+     * @return     <type>                                      ( description_of_the_return_value )
+     */
+    public function uploadAvatar(CustomerUploadAvatarRequest $request)
+    {
+        try {
+            $data     = $request->all();
+            $customer = $this->customer->skipPresenter()->find($request->get('customer_id'));
+            $user= $customer->user;
+
+            if(!empty($user)){
+
+            $file=$data['avatar'];
+
+            $type = explode('/', $file->getClientMimeType());
+            $ext = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
+            $baseName = basename($file->getClientOriginalName(), '.' . $ext);
+            $fileName = $this->media->setUploadPath()->generateFilename($baseName, $ext);
+
+            try {
+                $targetFile = $file->move($this->media->getUploadPath(), $fileName);
+            }
+            catch (\Exception $e) {
+
+                $erroMsg = $this->media->errorMessage($file->getClientOriginalName());
+                $error = [
+                    'title' => $erroMsg[0],
+                    'body'  => $erroMsg[1]
+                ];
+                return response()->json([
+                    'status'=>false,
+                    'code'=>config('responses.bad_request.status_code'),
+                    'data'=>$error,
+                    'message'=> $erroMsg ,
+                    ], config('responses.bad_request.status_code'));
+
+
+            }
+
+            if($type[0]== 'image')
+            {
+             $media = $this->media->skipPresenter()->uploadImg($targetFile->getPathname(),[[150, 100]], false);
+             //set image as Avatar
+             $user->setMeta('avatar_media_id', $media->id);
+
+             $customer->setMedia($media->id);
+
+            }
+
+                return response()->json([
+                    'status'=>true,
+                    'code'=>config('responses.success.status_code'),
+                    'data'=>['Your Avatar was succesfully upload'],
+                    'message'=>config('responses.success.status_message'),
+                    ], config('responses.success.status_code'));
+            }
+            return response()->json([
+               'status'=>false,
+                'code'=>config('responses.bad_request.status_code'),
+                'data'=>[],
+                'message'=>'Invalid Customer' ,
+            ], config('responses.bad_request.status_code'));
+
+        }
+        catch (\Exception $e) {
+            // dd($e->getMessage());
+            return response()->json([
+                'status'=>false,
+                'code'=>config('responses.bad_request.status_code'),
+                'data'=>null,
+                'message'=>$e->getMessage()
+            ],
+                config('responses.bad_request.status_code')
+            );
+        }
+    }
+
+    /**
+     *
+     * Avatar list of customer
+     *
+     * @param      \App\Http\Requests\Api\CustomerAvatarsRequest  $request  The request
+     *
+     * @return     <type>                                      ( description_of_the_return_value )
+     */
+    public function avatars(CustomerAvatarsRequest $request)
+    {
+        try {
+            $data     = $request->all();
+            $customer = $this->customer->skipPresenter()->find($request->get('customer_id'));
+            $user= $customer->user;
+
+            if(!empty($user)){
+                $data=[];
+                $medias=$customer->medias;
+                dd($medias);
+
+
+                return response()->json([
+                    'status'=>true,
+                    'code'=>config('responses.success.status_code'),
+                    'data'=>$data,
+                    'message'=>config('responses.success.status_message'),
+                    ], config('responses.success.status_code'));
+            }
+            return response()->json([
+               'status'=>false,
+                'code'=>config('responses.bad_request.status_code'),
+                'data'=>[],
+                'message'=>'Invalid Customer' ,
+            ], config('responses.bad_request.status_code'));
+
+        }
         catch (\Exception $e) {
             // dd($e->getMessage());
             return response()->json([

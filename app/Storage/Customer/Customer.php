@@ -28,6 +28,11 @@ class Customer extends Model implements Transformable
     	return $this->belongsToMany('App\Storage\Offer\Offer', 'customer_offers', 'customer_id', 'offer_id');
     }
 
+    public function medias()
+    {
+      return $this->belongsToMany('App\Storage\Media\Media', 'customer_medias', 'customer_id', 'media_id');
+    }
+
     /**
      * This will select record from relationship table('customer_offers')
      */
@@ -45,7 +50,12 @@ class Customer extends Model implements Transformable
     {
         return $this->hasMany('App\Storage\Customer\CustomerSalesRep', 'customer_id', 'id');
     }
-    
+
+    public function pivotMedias()
+    {
+        return $this->hasMany('App\Storage\CustomerMedia\CustomerMedia', 'customer_id', 'id');
+    }
+
     /**
      * Sets the offer.
      *
@@ -57,7 +67,12 @@ class Customer extends Model implements Transformable
     {
         return $this->pivotOffers()
             ->updateOrCreate(['customer_id' => $this->id, 'offer_id' => $offer_id]);
-    }    
+    }
+    public function setMedia($media_id)
+    {
+        return $this->pivotMedias()
+            ->updateOrCreate(['customer_id' => $this->id, 'media_id' => $media_id]);
+    }
 
     public function scopeForUserEmail($query, $email)
     {
@@ -70,7 +85,7 @@ class Customer extends Model implements Transformable
     {
         return $query->whereHas('user', function($q) use($user_id){
             $q->where('id', $user_id);
-        });        
+        });
     }
 
     public function scopeJoinUser($query)
@@ -81,7 +96,7 @@ class Customer extends Model implements Transformable
     /**
      * Get user activies
      *
-     * @return 
+     * @return
      */
     public function activities()
     {
