@@ -31,9 +31,8 @@ class CustomerChangeAvatarRequest extends Request
         return [
             'access_token' => 'required',
             'customer_id'  => 'required|exists:user_customer,id',
-            'avatar_id'  => 'required|exists:media,id',
+            'avatar_id'  => 'required|exists:customer_medias,media_id,customer_id,'.$this->customer_id,
         ];
-        // 'state' => 'exists:states,abbreviation'
 
     }
      /**
@@ -53,6 +52,5 @@ class CustomerChangeAvatarRequest extends Request
                 ],
                 config('responses.bad_request.status_code')
             );
-        // return Response::json($errors, config('responses.bad_request.status_code'));
     }
 }

@@ -712,6 +712,7 @@ class CustomerController extends Controller
         try {
             $data     = $request->all();
             $customer = $this->customer->skipPresenter()->find($request->get('customer_id'));
+
             $user= $customer->user;
 
             if(!empty($user)){
@@ -745,11 +746,13 @@ class CustomerController extends Controller
 
             if($type[0]== 'image')
             {
-             $media = $this->media->skipPresenter()->uploadImg($targetFile->getPathname(),[[150, 100]], false);
-             //set image as Avatar
-             $user->setMeta('avatar_media_id', $media->id);
+                $media = $this->media->skipPresenter()->uploadImg($targetFile->getPathname(),[[150, 100]], false);
 
-             $customer->setMedia($media->id);
+                $media_id=$media->id;
+                //set image as Avatar
+                $user->setMeta('avatar_media_id', $media_id);
+                $user->save();
+                $customer->setMedia($media->id);
 
             }
 
@@ -792,24 +795,28 @@ class CustomerController extends Controller
     public function avatars(CustomerAvatarsRequest $request)
     {
         try {
-            $data     = $request->all();
+
             $customer = $this->customer->skipPresenter()->find($request->get('customer_id'));
             $user= $customer->user;
 
             if(!empty($user)){
-                $data=[];
+
                 $medias=$customer->medias;
                 $mediaIds=[];
                 foreach ($medias as $key => $media) {
                 $mediaIds[]=$media->id;
                 }
 
-                $avatars=$this->media->skipPresenter(false)->findWhereIn('id', $mediaIds);
-
+                $avatars=$this->media->skipPresenter()->findWhereIn('id', $mediaIds);
+                $current=$user->avatar();
+                $data=[
+                    'profile_avatar'=>$current,
+                    'avatars'=>$avatars,
+                ];
                 return response()->json([
                     'status'=>true,
                     'code'=>config('responses.success.status_code'),
-                    'data'=>$avatars,
+                    'data'=>$data,
                     'message'=>config('responses.success.status_message'),
                     ], config('responses.success.status_code'));
             }
@@ -852,11 +859,12 @@ class CustomerController extends Controller
             if(!empty($user)){
 
                $user->setMeta('avatar_media_id', $request->get('avatar_id'));
+               $user->save();
                return response()->json([
                     'status'=>true,
                     'code'=>config('responses.success.status_code'),
-                    'data'=>['Your Avatar was succesfully updated'],
-                    'message'=>config('responses.success.status_message'),
+                    'data'=>$user->avatar(),
+                    'message'=>'Your Avatar was succesfully updated',
                     ], config('responses.success.status_code'));
             }
             return response()->json([
