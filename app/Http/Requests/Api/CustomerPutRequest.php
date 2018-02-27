@@ -43,22 +43,22 @@ class CustomerPutRequest extends Request
             'access_token' => 'required',
             'customer_id'  => 'required|exists:user_customer,id',
             'wp_userid'    => $wpIdRules,
-            'address1'     => '',
+            'address1'     => isset($this->address1)?'required':'',
             'address2'     => '',
-            'zip'          => '',
-            'city'         => '',
-            'state'        => '',
+            'zip'          => isset($this->zip)?'required':'',
+            'city'         => isset($this->city)?'required':'',
+            'state'        => isset($this->state)?'required':'',
             'geo_long'     => '',
             'geo_lat'      => '',
-            'email'        => $emailRules,
-            'firstname'    => '',
-            'lastname'     => '',
+            'email'        => isset($this->email)?'required|'.$emailRules:'',
+            'firstname'    => isset($this->firstname)?'required':'',
+            'lastname'     => isset($this->lastname)?'required':'',
             'cellphone'    => '',
             'officephone'  => '',
             'homephone'    => ''
+
         ];
     }
-
 
     /**
      * Response error message as json

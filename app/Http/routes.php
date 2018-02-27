@@ -749,8 +749,11 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Api'), function()
             'as'           => 'api.v1.customers.upload-avatar',
             'uses'         => 'CustomerController@uploadAvatar'));
         Route::post('customer/avatars', array(
-            'as'           => 'api.v1.customers.upload-avatar',
+            'as'           => 'api.v1.customers.avatars',
             'uses'         => 'CustomerController@avatars'));
+        Route::post('customer/change-avatar', array(
+            'as'           => 'api.v1.customers.change-avatar',
+            'uses'         => 'CustomerController@changeAvatar'));
 
         /**
          * Brand associates (Sales Rep)

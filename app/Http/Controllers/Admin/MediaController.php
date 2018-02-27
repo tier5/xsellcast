@@ -39,7 +39,7 @@ class MediaController extends Controller
 
             $type = explode('/', $file->getClientMimeType());
             $ext = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
-            $baseName = basename($file->getClientOriginalName(), '.' . $ext);            
+            $baseName = basename($file->getClientOriginalName(), '.' . $ext);
             $fileName = $this->media->setUploadPath()->generateFilename($baseName, $ext);
 
             try {
@@ -62,15 +62,15 @@ class MediaController extends Controller
 
             switch($type[0]){
                 case 'image':
-                    
+
                     try {
-                        $media = $this->media->skipPresenter()->uploadImg($targetFile->getPathname(), 
+                        $media = $this->media->skipPresenter()->uploadImg($targetFile->getPathname(),
                             [[150, 100]], false);
                     }
                     catch (\Exception $e) {
                         return Response::json([$e->getMessage() . ' ' . $e->getCode()], 422);
                     }
-                    
+
                     break;
                 case 'video':
                     $media = $this->media->skipPresenter()->saveVideo($targetFile, $fileName);
@@ -81,15 +81,16 @@ class MediaController extends Controller
                      * TODO: Return error
                      */
                     exit();
-                    break;  
+                    break;
             }
-            
+
             $mediaIds[] = $media->id;
-        }        
+        }
+
 
         $all = $this->media->skipPresenter(false)->findWhereIn('id', $mediaIds);
 
-        return response()->json($all);        
+        return response()->json($all);
     }
 
     public function show(Request $request, $media_id)

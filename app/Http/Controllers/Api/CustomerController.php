@@ -30,6 +30,7 @@ use App\Http\Requests\Api\CustomerNewPasswordRequest;
 use App\Http\Requests\Api\CustomerChangePasswordRequest;
 use App\Http\Requests\Api\CustomerUploadAvatarRequest;
 use App\Http\Requests\Api\CustomerAvatarsRequest;
+use App\Http\Requests\Api\CustomerChangeAvatarRequest;
 use Snowfire\Beautymail\Beautymail;
 use Hash;
 use Mail;
@@ -798,13 +799,63 @@ class CustomerController extends Controller
             if(!empty($user)){
                 $data=[];
                 $medias=$customer->medias;
-                dd($medias);
+                $mediaIds=[];
+                foreach ($medias as $key => $media) {
+                $mediaIds[]=$media->id;
+                }
 
+                $avatars=$this->media->skipPresenter(false)->findWhereIn('id', $mediaIds);
 
                 return response()->json([
                     'status'=>true,
                     'code'=>config('responses.success.status_code'),
-                    'data'=>$data,
+                    'data'=>$avatars,
+                    'message'=>config('responses.success.status_message'),
+                    ], config('responses.success.status_code'));
+            }
+            return response()->json([
+               'status'=>false,
+                'code'=>config('responses.bad_request.status_code'),
+                'data'=>[],
+                'message'=>'Invalid Customer' ,
+            ], config('responses.bad_request.status_code'));
+
+        }
+        catch (\Exception $e) {
+            // dd($e->getMessage());
+            return response()->json([
+                'status'=>false,
+                'code'=>config('responses.bad_request.status_code'),
+                'data'=>null,
+                'message'=>$e->getMessage()
+            ],
+                config('responses.bad_request.status_code')
+            );
+        }
+    }
+
+    /**
+     *
+     * change avatar of customer
+     *
+     * @param      \App\Http\Requests\Api\CustomerChangeAvatarRequest  $request  The request
+     *
+     * @return     <type>                                      ( description_of_the_return_value )
+     */
+    public function changeAvatar(CustomerChangeAvatarRequest $request)
+    {
+        try {
+            $data     = $request->all();
+            $customer = $this->customer->skipPresenter()->find($request->get('customer_id'));
+            $user= $customer->user;
+
+            if(!empty($user)){
+
+               $user->setMeta('avatar_media_id', $request->get('avatar_id'));
+               return response()->json([
+                    'status'=>true,
+                    'code'=>config('responses.success.status_code'),
+                    'data'=>['Your Avatar was succesfully updated'],
                     'message'=>config('responses.success.status_message'),
                     ], config('responses.success.status_code'));
             }

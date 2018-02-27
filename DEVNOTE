@@ -20,6 +20,12 @@ Prospect Login v1.2 #stable
 a) Fixed forget password issue
 b) Modified prospect registration
 
-Prospect Edit v1.0#stable
+Prospect Edit v1.0 #stable
 a) Edit Prospect
 b) Upload Avatar
+
+Prospect Edit v1.1 #stable
+a) Created API to view list of Avatar for  prospect
+b) Change avatar API
+c) Fixed validation issue in prospect edit api
+d) created migration for notification
