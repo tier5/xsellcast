@@ -24,9 +24,8 @@ class NotificationSettingTransformer extends TransformerAbstract
             'id'         => (int) $model->id,
 
             /* place your other model properties here */
-            'name'       => $model->name,
-            'wpid'       => $model->wpid,
-            'parent_id'  => $model->parent_id,
+            'notification_type'       => $model->notification_type,
+            'customer_id'  => $model->customer_id,
             'created_at' => $model->created_at,
             'updated_at' => $model->updated_at,
             'category'  => $model->category

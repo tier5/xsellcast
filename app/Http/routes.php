@@ -755,6 +755,14 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Api'), function()
             'as'           => 'api.v1.customers.change-avatar',
             'uses'         => 'CustomerController@changeAvatar'));
 
+        Route::group(array('prefix' => 'customer/notification'), function(){
+
+            Route::post('news', array(
+            'as'           => 'api.v1.customers.notification.news',
+            'uses'         => 'CustomerNotificationSettingController@createNews'));
+
+            });
+
         /**
          * Brand associates (Sales Rep)
          */

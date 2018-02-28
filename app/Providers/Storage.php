@@ -33,7 +33,7 @@ class Storage extends ServiceProvider
         $this->app->bind(\App\Storage\Customer\CustomerRepository::class, \App\Storage\Customer\CustomerRepositoryEloquent::class);
         $this->app->bind(\App\Storage\UserActivations\UserActivationsRepository::class, \App\Storage\UserActivations\UserActivationsRepositoryEloquent::class);
         $this->app->bind(\App\Storage\Media\MediaRepository::class, \App\Storage\Media\MediaRepositoryEloquent::class);
-        $this->app->bind(\App\Storage\OfferTag\OfferTagRepository::class, \App\Storage\OfferTag\OfferTagRepositoryEloquent::class);        
+        $this->app->bind(\App\Storage\OfferTag\OfferTagRepository::class, \App\Storage\OfferTag\OfferTagRepositoryEloquent::class);
         $this->app->bind(\App\Storage\Messenger\MessageRepository::class, \App\Storage\Messenger\MessageRepositoryEloquent::class);
         $this->app->bind(\App\Storage\Messenger\ThreadRepository::class, \App\Storage\Messenger\ThreadRepositoryEloquent::class);
         //$this->app->bind(\App\Storage\UserActionUserActionRepository::class, \App\Storage\UserActionUserActionRepositoryEloquent::class);
@@ -42,6 +42,7 @@ class Storage extends ServiceProvider
         $this->app->bind(\App\Storage\Category\CategoryRepository::class, \App\Storage\Category\CategoryRepositoryEloquent::class);
     //    $this->app->bind(\App\Storage\CsrCsrRepository::class, \App\Storage\CsrCsrRepositoryEloquent::class);
         $this->app->bind(\App\Storage\Csr\CsrRepository::class, \App\Storage\Csr\CsrRepositoryEloquent::class);
+        $this->app->bind(\App\Storage\NotificationSetting\NotificationSettingRepository::class, \App\Storage\NotificationSetting\NotificationSettingRepositoryEloquent::class);
         //:end-bindings:
     }
 }

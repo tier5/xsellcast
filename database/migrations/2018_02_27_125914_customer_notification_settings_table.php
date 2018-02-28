@@ -19,7 +19,7 @@ class CustomerNotificationSettingsTable extends Migration
             $table->integer('customer_id')->length(11)->unsigned()->nullable();
             $table->foreign('customer_id')
                 ->references('id')->on('user_customer');
-
+            $table->boolean('status')->deafult('1');
             $table->timestamps();
             $table->softDeletes();
         });

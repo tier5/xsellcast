@@ -10,58 +10,12 @@ class NotificationSetting extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $fillable = ['name', 'parent_id', 'media_logo_id', 'description', 'catalog_url', 'media_ids', 'opid'];
+    protected $fillable = ['notification_type', 'customer_id'];//1 = new features and news, 2= National Offers , 3 = Brand Associates Offer
 
-    protected $table = 'brands';
+    protected $table = 'customer_notification_settings';
 
-    protected $category;
-
-    protected $logo;
-
-    public function dealers()
+   public function customer()
     {
-    	return $this->belongsToMany('App\Storage\Dealer\Dealer', 'dealer_brands', 'brand_id', 'dealer_id');
-    }
-
-    public function offers()
-    {
-    	return $this->belongsToMany('App\Storage\Offer\Offer', 'brand_offers', 'brand_id', 'offer_id');
-    }
-
-    public function categories()
-    {
-        return $this->belongsToMany('App\Storage\Category\Category', 'brand_categories', 'brand_id', 'category_id');
-    }
-
-    public function getCategoryAttribute()
-    {
-        return $this->categories->first();
-    }
-
-    public function getLogoAttribute()
-    {
-        if(!$this->media_logo_id)
-        {
-            return false;
-        }
-
-        $media = \App\Storage\Media\Media::find($this->media_logo_id);
-
-        return $media->getOrigUrl();
-    }
-
-    public function salesReps()
-    {
-        $collect = collect([]);
-
-        foreach($this->dealers()->get() as $dealer)
-        {
-            foreach($dealer->salesReps()->get() as $salesrep)
-            {
-                $collect->push($salesrep);
-            }
-        }
-
-        return $collect;
+        return $this->hasOne('App\Storage\Customer\Customer', 'id', 'customer_id');
     }
 }

@@ -29,5 +29,9 @@ a) Created API to view list of Avatar for  prospect
 b) Change avatar API
 c) Fixed validation issue in prospect edit api
 d) created migration for notification
+
 Prospect Edit v1.2 #stable
 a) Fixed validation issue in prospect change avatar api
+
+Prospect Edit v1.3 #stable
+a) Created API to add notification setting for  News and Offers Notification

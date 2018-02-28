@@ -52,75 +52,48 @@ class NotificationSettingRepositoryEloquent extends BaseRepository implements No
     }
 
     /**
-     * Gets the by dealer.
+     * Gets the by customer_id.
      *
-     * @param      integer  $dealer_id  The dealer identifier
+     * @param      integer  $customer_id  The customer identifier
      *
-     * @return     $this  The by dealer.
+     * @return     $this  The by customer.
      */
-    public function getByDealer($dealer_id)
+    public function getByCustomer($customer_id)
     {
 
         $model = $this->model
-            ->whereHas('dealers', function($query) use($dealer_id){
-                $query->where('dealer_id', $dealer_id);
+            ->whereHas('customer', function($query) use($customer_id){
+                $query->where('customer_id', $customer_id);
             });
 
         $this->model = $model;
 
         return $this;
     }
+    public function createNews($data){
+        $notification_type   = (isset($data['notification_type']) ? $data['notification_type'] : '1' );
+        $customer_id   = (isset($data['customer_id']) ? $data['customer_id'] : 0);
+        $status   = (isset($data['status']) ? $data['status'] : 1);
+        $insert=['notification_type'=>$notification_type,'customer_id'=>$customer_id,'status'=> $status];
 
-    public function createOne($data)
-    {
-        $name       = (isset($data['name']) ? $data['name'] : '' );
-        $parentId   = (isset($data['parent_id']) ? $data['parent_id'] : 0);
-        $logoId     = (isset($data['media_logo_id']) ? $data['media_logo_id'] : null);
-        $desc       = (isset($data['description']) ? $data['description'] : '');
-        $catalogUrl = (isset($data['catalog_url']) ? $data['catalog_url'] : '');
-        $mediaIds   = (isset($data['media_ids']) ? $data['media_ids'] : '');
-        $categoryId   = (isset($data['category']) ? $data['category'] : null);
-        $opId = (isset($data['opid']) ? $data['opid'] : null);
-
-        if(is_array($mediaIds))
-        {
-            $mediaIds = implode(',', $mediaIds);
-        }elseif(!$mediaIds)
-        {
-            $mediaIds = '';
-        }
-
-        $insert = ['name' => $name, 'parent_id' => $parentId, 'media_logo_id' => $logoId, 'description' => $desc, 'catalog_url' => $catalogUrl, 'media_ids' => $mediaIds, 'opid' => $opId];
-
-        $brand = $this->skipPresenter()->create($insert);
-        $category = Category::find($categoryId);
-
-        $brand->categories()->save($category);
-
-        return $brand;
+        $this->skipPresenter()->create($insert);
+        return $this;
     }
+
+
 
     public function customerBrands($customer_id)
     {
-        $this->model = $this->model->whereHas('dealers', function($query) use($customer_id){
-            $query->whereHas('salesReps', function($query) use($customer_id){
-                $query->whereHas('customersPivot', function($query) use($customer_id){
-                    $query->where('customer_id', $customer_id);
-                });
-            });
-        });
+        // $this->model = $this->model->whereHas('dealers', function($query) use($customer_id){
+        //     $query->whereHas('salesReps', function($query) use($customer_id){
+        //         $query->whereHas('customersPivot', function($query) use($customer_id){
+        //             $query->where('customer_id', $customer_id);
+        //         });
+        //     });
+        // });
 
-        return $this;
+        // return $this;
     }
 
-    public function orderByCategoryName($order = 'desc')
-    {
 
-        $this->model = $this->model
-            ->join('brand_categories', 'brand_categories.brand_id', '=', 'brands.id')
-            ->join('categories', 'categories.id', '=', 'brand_categories.category_id')
-            ->orderBy('categories.name', $order)->select('brands.*');
-
-        return $this;
-    }
 }
