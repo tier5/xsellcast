@@ -139,4 +139,21 @@ class Customer extends Model implements Transformable
       $this->updated_at = \Carbon\Carbon::now();
       $this->save();
     }
+
+    // Notification
+    public function notificationBrand()
+    {
+      return $this->belongsToMany('App\Storage\Brand\Brand', 'customer_notification_brand', 'customer_id', 'brand_id');
+    }
+
+     public function pivotNotificationBrand()
+    {
+        return $this->hasMany('App\Storage\NotificationSetting\NotificationBrand\NotificationBrand', 'customer_id', 'id');
+    }
+
+    public function setNotificationBrand($brand_id,$status)
+    {
+        return $this->pivotNotificationBrand()
+            ->updateOrCreate(['customer_id' => $this->id, 'brand_id' => $brand_id]);
+    }
 }

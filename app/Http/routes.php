@@ -757,9 +757,19 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Api'), function()
 
         Route::group(array('prefix' => 'customer/notification'), function(){
 
-            Route::post('news', array(
+        Route::post('news', array(
             'as'           => 'api.v1.customers.notification.news',
             'uses'         => 'CustomerNotificationSettingController@createNews'));
+
+
+        Route::post('brand', array(
+            'as'           => 'api.v1.customers.notification.brand',
+            'uses'         => 'CustomerNotificationSettingController@createBrand'));
+
+
+        Route::get('brands', array(
+            'as'           => 'api.v1.customers.notification.brands',
+            'uses'         => 'CustomerNotificationSettingController@indexBrand'));
 
             });
 

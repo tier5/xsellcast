@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Storage\NotificationSetting;
+namespace App\Storage\NotificationSetting\NotificationNews;
 
-use App\Storage\NotificationSetting\NotificationSettingTransformer;
+use App\Storage\NotificationSetting\NotificationNews\NotificationNewsTransformer;
 use Prettus\Repository\Presenter\FractalPresenter;
 
 /**
@@ -10,7 +10,7 @@ use Prettus\Repository\Presenter\FractalPresenter;
  *
  * @package namespace App\Storage\NotificationSetting;
  */
-class NotificationSettingPresenter extends FractalPresenter
+class NotificationNewsPresenter extends FractalPresenter
 {
     /**
      * Transformer
@@ -19,6 +19,6 @@ class NotificationSettingPresenter extends FractalPresenter
      */
     public function getTransformer()
     {
-        return new NotificationSettingTransformer();
+        return new NotificationNewsTransformer();
     }
 }

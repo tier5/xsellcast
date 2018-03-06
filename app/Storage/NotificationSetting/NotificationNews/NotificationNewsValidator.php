@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Storage\NotificationSetting;
+namespace App\Storage\NotificationSetting\NotificationNews;
 
 use \Prettus\Validator\Contracts\ValidatorInterface;
 use \Prettus\Validator\LaravelValidator;
 
-class NotificationSettingValidator extends LaravelValidator
+class NotificationNewsValidator extends LaravelValidator
 {
 
     protected $rules = [

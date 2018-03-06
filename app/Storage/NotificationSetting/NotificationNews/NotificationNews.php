@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Storage\NotificationSetting;
+namespace App\Storage\NotificationSetting\NotificationNews;
 
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
-class NotificationSetting extends Model implements Transformable
+class NotificationNews extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $fillable = ['notification_type', 'customer_id'];//1 = new features and news, 2= National Offers , 3 = Brand Associates Offer
+    protected $fillable = ['customer_id','status'];//1 = new features and news, 2= National Offers , 3 = Brand Associates Offer
 
-    protected $table = 'customer_notification_settings';
+    protected $table = 'customer_notification_news';
 
    public function customer()
     {

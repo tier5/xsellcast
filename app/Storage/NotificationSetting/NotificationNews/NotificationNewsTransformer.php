@@ -3,13 +3,13 @@
 namespace App\Storage\NotificationSetting;
 
 use League\Fractal\TransformerAbstract;
-use App\Storage\NotificationSetting\NotificationSetting;
+use App\Storage\NotificationSetting\NotificationNews\NotificationNews;
 
 /**
  * Class BrandTransformer
- * @package namespace App\Storage\NotificationSetting;
+ * @package namespace App\Storage\NotificationSetting\NotificationNews;
  */
-class NotificationSettingTransformer extends TransformerAbstract
+class NotificationNewsTransformer extends TransformerAbstract
 {
 
     /**
@@ -24,7 +24,7 @@ class NotificationSettingTransformer extends TransformerAbstract
             'id'         => (int) $model->id,
 
             /* place your other model properties here */
-            'notification_type'       => $model->notification_type,
+            // 'notification_type'       => $model->notification_type,
             'customer_id'  => $model->customer_id,
             'created_at' => $model->created_at,
             'updated_at' => $model->updated_at,
