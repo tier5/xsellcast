@@ -7,7 +7,7 @@ use App\Http\Requests\Request;
 /**
  * Use for simple API request with access token for a post.
  */
-class CustomerNotificationNewsRequest extends Request
+class CustomerPostLogoutRequest extends Request
 {
     protected $redirectRoute = 'api.errors';
 
@@ -30,8 +30,7 @@ class CustomerNotificationNewsRequest extends Request
     {
         return [
             'access_token' => 'required',
-            'customer_id'  => 'required|exists:user_customer,id',
-            // 'status'  => 'required',
+            'customer_id'  => 'required|exists:user_customer,id'
         ];
 
     }

@@ -35,7 +35,16 @@ a) Fixed validation issue in prospect change avatar api
 
 Prospect Edit v1.3 #stable
 a) Created API to add notification setting for  News and Offers Notification
+
 Prospect Edit v1.4 #stable
 a) Created API to add & update  notification setting for Brand Notification
 b) Crated API to list all selected brand
 c) Modified News and Offers Notification API
+
+Prospect Edit v1.5 #stable
+a) Modified News and Offers to Global Notification API
+b) Modified Brand Notification to  National Notification API
+c) Created Brand Associates Notification settings
+d) Created customer logout API
+e) Modified get offer API implemented exception handling and validation.
+

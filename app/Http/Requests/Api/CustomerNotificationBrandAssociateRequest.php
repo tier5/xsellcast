@@ -7,7 +7,7 @@ use App\Http\Requests\Request;
 /**
  * Use for simple API request with access token for a post.
  */
-class CustomerNotificationNewsRequest extends Request
+class CustomerNotificationBrandAssociateRequest extends Request
 {
     protected $redirectRoute = 'api.errors';
 
@@ -28,13 +28,19 @@ class CustomerNotificationNewsRequest extends Request
      */
     public function rules()
     {
-        return [
+
+        $input = $this->all();
+
+        $rules= [
             'access_token' => 'required',
             'customer_id'  => 'required|exists:user_customer,id',
-            // 'status'  => 'required',
+            'salesreps' => 'required|exists:user_salesreps,id',
+
         ];
 
+        return $rules;
     }
+
      /**
      * Response error message as json
      *

@@ -70,19 +70,20 @@ class NotificationBrandAssociatesRepositoryEloquent extends BaseRepository imple
 
         return $this;
     }
-    public function createBrand($data){
+    public function createSalesrep($data){
 
 
         $customer_id            = (isset($data['customer_id']) ? $data['customer_id'] : 0);
-        $brand_ids              = (isset($data['brand_ids']) ? $data['brand_ids'] : []);
-        $status                 = (isset($data['status']) ? $data['status'] : 1);
+        $salesrep_ids           = (isset($data['salesrep_ids']) ? $data['brand_ids'] : []);
+        // $status                 = (isset($data['status']) ? $data['status'] : 1);
         $notification=[];
         foreach ($brand_ids as $brand_id) {
             // $model=$this->model->where('customer_id','=',$customer_id)->where('brand_id','=',$brand_id)->updateOrCreate();
             $formdata                 =[
                     'customer_id'=>$customer_id,
-                    'brand_id'=>$brand_id,
-                    'status'=> $status];
+                    'salesrep_id'=>$brand_id,
+                    // 'status'=> $status
+                ];
              $brandobj= $this->isBrand($formdata);
             if(empty($brandobj)){
             $notification[]=$this->skipPresenter()->create($formdata);
@@ -108,24 +109,24 @@ class NotificationBrandAssociatesRepositoryEloquent extends BaseRepository imple
     //     return $notification;
     // }
 
-    public function isBrand($data){
+    public function isSalesrep($data){
         $customer_id            = (isset($data['customer_id']) ? $data['customer_id'] : 0);
-        $brand_id            = (isset($data['brand_id']) ? $data['brand_id'] : 0);
-        $notification           = $this->model->where('customer_id','=',$customer_id)->where('brand_id','=',$brand_id)->first();
+        $salesrep_id            = (isset($data['salesrep_id']) ? $data['salesrep_id'] : 0);
+        $notification           = $this->model->where('customer_id','=',$customer_id)->where('salesrep_id','=',$brand_id)->first();
        return $notification;
     }
-    public function customerBrands($customer_id)
-    {
-        $this->model = $this->model->whereHas('dealers', function($query) use($customer_id){
-            $query->whereHas('salesReps', function($query) use($customer_id){
-                $query->whereHas('customersPivot', function($query) use($customer_id){
-                    $query->where('customer_id', $customer_id);
-                });
-            });
-        });
+    // public function customerBrands($customer_id)
+    // {
+    //     $this->model = $this->model->whereHas('dealers', function($query) use($customer_id){
+    //         $query->whereHas('salesReps', function($query) use($customer_id){
+    //             $query->whereHas('customersPivot', function($query) use($customer_id){
+    //                 $query->where('customer_id', $customer_id);
+    //             });
+    //         });
+    //     });
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
 
 }

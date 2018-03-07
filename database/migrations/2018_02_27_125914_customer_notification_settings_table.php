@@ -12,14 +12,14 @@ class CustomerNotificationSettingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('customer_notification_news', function (Blueprint $table) {
+        Schema::create('customer_notification_global', function (Blueprint $table) {
             $table->increments('id');
 
             // $table->enum('notification_type',['1','2','3'])->comment('1 = new features and news, 2= National Offers , 3 = Brand Associates Offer');
             $table->integer('customer_id')->length(11)->unsigned()->nullable();
             $table->foreign('customer_id')
                 ->references('id')->on('user_customer');
-            $table->boolean('status')->deafult('1');
+            // $table->boolean('status')->deafult('1');
             $table->timestamps();
             $table->softDeletes();
         });

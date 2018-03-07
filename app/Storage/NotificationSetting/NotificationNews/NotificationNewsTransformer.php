@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Storage\NotificationSetting;
+namespace App\Storage\NotificationSetting\NotificationNews;
 
 use League\Fractal\TransformerAbstract;
 use App\Storage\NotificationSetting\NotificationNews\NotificationNews;

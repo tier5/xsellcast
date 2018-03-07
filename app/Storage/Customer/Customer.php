@@ -151,9 +151,24 @@ class Customer extends Model implements Transformable
         return $this->hasMany('App\Storage\NotificationSetting\NotificationBrand\NotificationBrand', 'customer_id', 'id');
     }
 
-    public function setNotificationBrand($brand_id,$status)
+    public function setNotificationBrand($brand_id)
     {
         return $this->pivotNotificationBrand()
             ->updateOrCreate(['customer_id' => $this->id, 'brand_id' => $brand_id]);
+    }
+    public function notificationBrandAssociates()
+    {
+      return $this->belongsToMany('App\Storage\SalesRep\SalesRep', 'customer_notification_salesrep', 'customer_id', 'salesrep_id');
+    }
+
+     public function pivotNotificationBrandAssociates()
+    {
+        return $this->hasMany('App\Storage\NotificationSetting\NotificationBrandAssociates\NotificationBrandAssociates', 'customer_id', 'id');
+    }
+
+    public function setNotificationBrandAssociates($salesrep_id)
+    {
+        return $this->pivotNotificationBrandAssociates()
+            ->updateOrCreate(['customer_id' => $this->id, 'salesrep_id' => $salesrep_id]);
     }
 }

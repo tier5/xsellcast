@@ -39,10 +39,26 @@ class OffersController extends Controller
 	 */
     public function index(SimpleListGetRequest $request)
     {
-    	$offers = $this->offer->paginate(20);
+    	try{
 
-		return response()
-			->json($offers);
+            $offers = $this->offer->skipPresenter()->paginate(20);
+            return response()->json([
+                    'status'=>true,
+                    'code'=>config('responses.success.status_code'),
+                    'offers'=>$offers,
+                    'message'=>config('responses.success.status_message'),
+                ], config('responses.success.status_code'));
+        }
+        catch (\Exception $e) {
+            return response()->json([
+                'status'=>false,
+                'code'=>config('responses.bad_request.status_code'),
+                'data'=>null,
+                'message'=>$e->getMessage()
+            ],
+                config('responses.bad_request.status_code')
+            );
+        }
     }
 
     /**
@@ -66,7 +82,7 @@ class OffersController extends Controller
 
     /**
      * Create
-     * 
+     *
      * Create an offer.
      *
      * @param      \App\Http\Requests\Api\OffersStorePostRequest  $request  The request
@@ -90,7 +106,7 @@ class OffersController extends Controller
 
     /**
      * Delete
-     * 
+     *
      * Delete an existing offer.
      *
      * @param      \App\Http\Requests\Api\OffersDeleteRequest  $request  The request
@@ -112,7 +128,7 @@ class OffersController extends Controller
 
     /**
      * Update
-     * 
+     *
      * Update an existing offer.
      *
      * @param      \App\Http\Requests\Api\OffersPutRequest  $request  The request

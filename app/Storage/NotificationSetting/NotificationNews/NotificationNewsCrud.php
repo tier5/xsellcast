@@ -1,11 +1,13 @@
-<?php namespace App\Storage\NotificationSetting\NotificationNews;
+<?php
+
+namespace App\Storage\NotificationSetting\NotificationNews;
 
 use App\Storage\Crud\Box;
 use HTML;
 use App\Storage\Crud\CrudForm;
 use App\Storage\Crud\TableCollection;
 
-class NotificationNewsSettingCrud
+class NotificationNewsCrud
 {
 
     public static function table($model, $opt)

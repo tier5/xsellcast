@@ -13,11 +13,13 @@ use App\Storage\SalesRep\SalesRepRepository;
 use App\Storage\Brand\BrandRepository;
 // use App\Storage\Customer\Customer;
 use App\Storage\Brand\Brand;
+use App\Storage\SalesRep\SalesRep;
 
 
 use App\Http\Requests\Api\CustomerNotificationNewsRequest;
 use App\Http\Requests\Api\CustomerNotificationBrandRequest;
 use App\Http\Requests\Api\CustomerNotificationBrandsRequest;
+use App\Http\Requests\Api\CustomerNotificationBrandAssociateRequest;
 
 /**
  * @resource Customer Notification Setting
@@ -45,7 +47,7 @@ class CustomerNotificationSettingController extends Controller
         $this->notificationBrand = $notificationBrand;
 
 	}
-    public function createNews(CustomerNotificationNewsRequest $request){
+    public function createGlobal(CustomerNotificationNewsRequest $request){
 
       try
         {
@@ -82,23 +84,10 @@ class CustomerNotificationSettingController extends Controller
         {
            $data=$request->all();
            $customer = $this->customer->skipPresenter()->find($request->get('customer_id'));
-           $brand_ids              = (isset($data['brand_ids']) ? $data['brand_ids'] : []);
+           $brands       = (isset($data['brands']) ? $data['brands'] : []);
 
-            foreach ($brand_ids as $brand_id) {
-                $brand=Brand::find($brand_id);
-                // print_r($brand);
-                if(!empty($brand)){
-                    $customer->setNotificationBrand($brand_id,$status);
-                }
-                else{
-                     return response()->json([
-                       'status'=>false,
-                        'code'=>config('responses.bad_request.status_code'),
-                        'data'=>[],
-                        'message'=>'Invalid Brand' ,
-                    ], config('responses.bad_request.status_code'));
-                 }
-
+            foreach ($brands as $brand_id) {
+                    $customer->setNotificationBrand($brand_id);
             }
 
             $brands=$customer->notificationBrand;
@@ -151,4 +140,106 @@ class CustomerNotificationSettingController extends Controller
         }
     }
 
+
+    public function createBrandAssociate(CustomerNotificationBrandAssociateRequest $request){
+
+      try
+        {
+           $data=$request->all();
+           $customer = $this->customer->skipPresenter()->find($request->get('customer_id'));
+           $salesreps              = (isset($data['salesreps']) ? $data['salesreps'] : []);
+
+            foreach ($salesreps as $salesrep_id) {
+
+                $customer->setNotificationBrandAssociates($salesrep_id);
+            }
+
+            $salesreps=$customer->notificationBrandAssociates;
+
+            return response()->json([
+                    'status'=>true,
+                    'code'=>config('responses.success.status_code'),
+                    'data'=> $salesreps,
+                    'message'=>config('responses.success.status_message'),
+             ], config('responses.success.status_code'));
+        }
+        catch (\Exception $e) {
+            // dd($e->getMessage());
+            return response()->json([
+                'status'=>false,
+                'code'=>config('responses.bad_request.status_code'),
+                'data'=>null,
+                'message'=>$e->getMessage()
+            ],
+                config('responses.bad_request.status_code')
+            );
+        }
+    }
+
+
+      public function indexBrandAssociate(CustomerNotificationBrandsRequest $request){
+
+      try
+        {
+
+           $data=$request->all();
+
+           $customer = $this->customer->skipPresenter()->find($request->get('customer_id'));
+            $salesreps=$customer->notificationBrandAssociates;
+            return response()->json([
+                    'status'=>true,
+                    'code'=>config('responses.success.status_code'),
+                    'data'=> $salesreps,
+                    'message'=>config('responses.success.status_message'),
+             ], config('responses.success.status_code'));
+        }
+        catch (\Exception $e) {
+            // dd($e->getMessage());
+            return response()->json([
+                'status'=>false,
+                'code'=>config('responses.bad_request.status_code'),
+                'data'=>null,
+                'message'=>$e->getMessage()
+            ],
+                config('responses.bad_request.status_code')
+            );
+        }
+    }
+
+
+    /**
+     * Delete
+     *
+     *  Delete an existing Brand Associate.
+     *
+     * @param      \App\Http\Requests\Api\CustomerDeleteRequest  $request  The request
+     *
+     * @return     Response
+     */
+    public function destroyBrandAssociate(CustomerNotificationBrandAssociateRequest $request)
+    {
+        try{
+               $customer                  = $this->customer->skipPresenter()->find($request->get('customer_id'));
+               $salesrep_ids              = (isset($data['salesrep_ids']) ? $data['salesrep_ids'] : []);
+               $customer->pivotNotificationBrandAssociates()->whereIn('salesrep_id', $salesrep_ids)->delete();
+
+           return response()->json([
+                    'status'=>true,
+                    'code'=>config('responses.success.status_code'),
+                    'data'=> 'Deleted succesfully',
+                    'message'=>config('responses.success.status_message'),
+             ], config('responses.success.status_code'));
+        }
+        catch (\Exception $e) {
+            // dd($e->getMessage());
+            return response()->json([
+                'status'=>false,
+                'code'=>config('responses.bad_request.status_code'),
+                'data'=>null,
+                'message'=>$e->getMessage()
+            ],
+                config('responses.bad_request.status_code')
+            );
+        }
+    }
 }

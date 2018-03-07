@@ -731,9 +731,14 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Api'), function()
         Route::post('customer/login', array(
             'as'           => 'api.v1.customers.login',
             'uses'         => 'CustomerController@doCustomerLogin'));
+
         Route::post('customer/social-login', array(
             'as'           => 'api.v1.customers.social-login',
             'uses'         => 'CustomerController@doCustomerSocialLogin'));
+
+        Route::post('customer/logout', array(
+            'as'           => 'api.v1.customers.logout',
+            'uses'         => 'CustomerController@doCustomerLogout'));
 
         Route::post('customer/forgot-password', array(
             'as'           => 'api.v1.customers.forgot-password',
@@ -757,19 +762,36 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Api'), function()
 
         Route::group(array('prefix' => 'customer/notification'), function(){
 
-        Route::post('news', array(
-            'as'           => 'api.v1.customers.notification.news',
-            'uses'         => 'CustomerNotificationSettingController@createNews'));
+            Route::post('global', array(
+                'as'           => 'api.v1.customers.notification.global',
+                'uses'         => 'CustomerNotificationSettingController@createGlobal'));
 
 
-        Route::post('brand', array(
-            'as'           => 'api.v1.customers.notification.brand',
-            'uses'         => 'CustomerNotificationSettingController@createBrand'));
+            Route::post('national', array(
+                'as'           => 'api.v1.customers.notification.brand',
+                'uses'         => 'CustomerNotificationSettingController@createBrand'));
 
 
-        Route::get('brands', array(
-            'as'           => 'api.v1.customers.notification.brands',
-            'uses'         => 'CustomerNotificationSettingController@indexBrand'));
+            // Route::get('brands', array(
+            //     'as'           => 'api.v1.customers.notification.brands',
+            //     'uses'         => 'CustomerNotificationSettingController@indexBrand'));
+
+
+
+
+            Route::post('ba', array(
+                'as'           => 'api.v1.customers.notification.brand-associate',
+                'uses'         => 'CustomerNotificationSettingController@createBrandAssociate'));
+
+
+            // Route::post('brand-associates', array(
+            //     'as'           => 'api.v1.customers.notification.brand-associates',
+            //     'uses'         => 'CustomerNotificationSettingController@indexBrandAssociate'));
+
+
+            // Route::post('brand-associates/delete', array(
+            //     'as'           => 'api.v1.customers.notification.brand-associates.delete',
+            //     'uses'         => 'CustomerNotificationSettingController@destroyBrandAssociate'));
 
             });
 

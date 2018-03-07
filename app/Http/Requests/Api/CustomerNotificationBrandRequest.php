@@ -32,13 +32,15 @@ class CustomerNotificationBrandRequest extends Request
     {
 
         $input = $this->all();
-        $brands=explode(',', $this->get('brand_ids'));
-        $input['brand_ids']=$brands;
+        // $brands=explode(',', $this->get('brand_ids'));
+        // $input['brand_ids']=$brands;
         $this->replace($input);
            $rules= [
             'access_token' => 'required',
             'customer_id'  => 'required|exists:user_customer,id',
-            // 'brand_ids.*.brand' => 'required|exists:brands,id',
+            // 'brand_ids' => 'required',
+
+            'brands.*' => 'required|exists:brands,id',
             // 'status'  => 'required',
         ];
 

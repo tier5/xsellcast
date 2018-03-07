@@ -42,9 +42,10 @@ class Storage extends ServiceProvider
         $this->app->bind(\App\Storage\Category\CategoryRepository::class, \App\Storage\Category\CategoryRepositoryEloquent::class);
     //    $this->app->bind(\App\Storage\CsrCsrRepository::class, \App\Storage\CsrCsrRepositoryEloquent::class);
         $this->app->bind(\App\Storage\Csr\CsrRepository::class, \App\Storage\Csr\CsrRepositoryEloquent::class);
+        //NotificationSetting
         $this->app->bind(\App\Storage\NotificationSetting\NotificationNews\NotificationNewsRepository::class, \App\Storage\NotificationSetting\NotificationNews\NotificationNewsRepositoryEloquent::class);
         $this->app->bind(\App\Storage\NotificationSetting\NotificationBrand\NotificationBrandRepository::class, \App\Storage\NotificationSetting\NotificationBrand\NotificationBrandRepositoryEloquent::class);
         $this->app->bind(\App\Storage\NotificationSetting\NotificationBrandAssociates\NotificationBrandAssociatesRepository::class, \App\Storage\NotificationSetting\NotificationBrandAssociates\NotificationBrandAssociatesRepositoryEloquent::class);
-        //:end-bindings:
+        // :end-bindings:
     }
 }
