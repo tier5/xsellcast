@@ -10,7 +10,7 @@ use App\Http\Requests\Request;
 class SimpleListGetRequest extends Request
 {
     protected $redirectRoute = 'api.errors';
-    
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -32,7 +32,28 @@ class SimpleListGetRequest extends Request
             'access_token' => 'required',
             'limit'        => 'integer',
             'sort'         => 'in:desc,asc',
-            'page'         => 'integer'
+            'page'         => 'integer',
+            'brand_id'     => 'exists:brands,id',
+            'category_id'  => 'exists:categories,id'
         ];
+    }
+
+      /**
+     * Response error message as json
+     *
+     * @param array $errors
+     * @return mixed
+     */
+    public function response(array $errors){
+
+        return response()->json([
+                    'status'=>false,
+                    'code'=>config('responses.bad_request.status_code'),
+                    'data'=>null,
+                    'errors'=>$errors,
+                    'message'=>config('responses.bad_request.status_message'),
+                ],
+                config('responses.bad_request.status_code')
+            );
     }
 }

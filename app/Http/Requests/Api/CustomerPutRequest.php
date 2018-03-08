@@ -77,6 +77,5 @@ class CustomerPutRequest extends Request
                 ],
                 config('responses.bad_request.status_code')
             );
-        // return Response::json($errors, config('responses.bad_request.status_code'));
     }
 }

@@ -40,8 +40,20 @@ class OffersController extends Controller
     public function index(SimpleListGetRequest $request)
     {
     	try{
+            $brand_id=$request->brand_id;
+            $category_id=$request->category_id;
+            $offer = $this->offer->skipPresenter();
 
-            $offers = $this->offer->skipPresenter()->paginate(20);
+            if($brand_id!=''){
+            $offer=$this->offer->offerByBrand($brand_id);
+            }
+
+            if($category_id!=''){
+            $offer=$this->offer->offerByCaregory($category_id);
+            }
+            $offers=$offer->paginate(20);
+
+
             return response()->json([
                     'status'=>true,
                     'code'=>config('responses.success.status_code'),

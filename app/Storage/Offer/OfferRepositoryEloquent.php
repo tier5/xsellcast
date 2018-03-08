@@ -41,7 +41,7 @@ class OfferRepositoryEloquent extends BaseRepository implements OfferRepository
 
     public function presenter()
     {
-        
+
         return OfferPresenter::class;
     }
 
@@ -72,7 +72,7 @@ class OfferRepositoryEloquent extends BaseRepository implements OfferRepository
         $this->model = $model;
 
         return $this;
-    }        
+    }
 
     public function setOfferToCustomer_deprecated($offer_id, $customer_id)
     {
@@ -82,7 +82,7 @@ class OfferRepositoryEloquent extends BaseRepository implements OfferRepository
     public function createForCsr($param)
     {
         $offer = $this->skipPresenter()->create($param);
-        
+
         if(!is_array($param['media'])){
             $param['media'] = array(0);
         }
@@ -94,13 +94,13 @@ class OfferRepositoryEloquent extends BaseRepository implements OfferRepository
 
         $this->createOfferMedia($offer, $param['media'], $param['thumbnail_id']);
 
-        return $offer;        
+        return $offer;
     }
 
     public function createForSalesRep($param, $salesrep_id)
     {
         $offer = $this->skipPresenter()->create($param);
-        
+
         if(!is_array($param['media'])){
             $param['media'] = array(0);
         }
@@ -118,7 +118,7 @@ class OfferRepositoryEloquent extends BaseRepository implements OfferRepository
             $pivot = new SalesrepOffer();
             $pivot->offer_id = $offer->id;
             $pivot->salesrep_id = $salesrep_id;
-            $pivot->save();            
+            $pivot->save();
         }
 
         return $offer;
@@ -126,8 +126,8 @@ class OfferRepositoryEloquent extends BaseRepository implements OfferRepository
 
     public function createOfferMedia($offer, $media_ids, $thumb_id)
     {
-        $offer->setMeta('media', $media_ids); 
-        $offer->setMeta('thumbnail_id', $thumb_id);     
+        $offer->setMeta('media', $media_ids);
+        $offer->setMeta('thumbnail_id', $thumb_id);
         $offer->save();
 
         return $this;
@@ -200,5 +200,29 @@ class OfferRepositoryEloquent extends BaseRepository implements OfferRepository
         $offer->brands()->save($brand);
 
         return $this->skipPresenter(false)->find($offer->id);
+    }
+
+    public function offerByBrand($brand_id){
+        $this->model = $this->model
+            // ->join('brand_categories', 'brand_categories.brand_id', '=', 'brands.id')
+            ->join('brand_offers', 'brand_offers.offer_id', '=', 'offers.id')
+            // ->join('categories', 'categories.id', '=', 'brand_categories.category_id')
+            // ->orderBy('categories.name', $order)
+            ->where('brand_offers.brand_id',$brand_id)
+            ->select('offers.*');
+            return $this->model;
+
+    }
+    public function offerByCaregory($category_id){
+        $this->model = $this->model
+            //
+            ->join('brand_offers', 'brand_offers.offer_id', '=', 'offers.id')
+            ->join('brand_categories', 'brand_categories.brand_id', '=', 'brand_offers.brand_id')
+            // ->join('categories', 'categories.id', '=', 'brand_categories.category_id')
+            // ->orderBy('categories.name', $order)
+            ->where('brand_categories.category_id',$category_id)
+            ->select('offers.*');
+            return $this->model;
+
     }
 }

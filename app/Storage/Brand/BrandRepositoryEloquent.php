@@ -39,7 +39,7 @@ class BrandRepositoryEloquent extends BaseRepository implements BrandRepository
 
     public function presenter()
     {
-        
+
         return BrandPresenter::class;
     }
 
@@ -98,7 +98,7 @@ class BrandRepositoryEloquent extends BaseRepository implements BrandRepository
         $brand->categories()->save($category);
 
         return $brand;
-    }  
+    }
 
     public function customerBrands($customer_id)
     {
@@ -111,7 +111,7 @@ class BrandRepositoryEloquent extends BaseRepository implements BrandRepository
         });
 
         return $this;
-    }   
+    }
 
     public function orderByCategoryName($order = 'desc')
     {
@@ -122,5 +122,5 @@ class BrandRepositoryEloquent extends BaseRepository implements BrandRepository
             ->orderBy('categories.name', $order)->select('brands.*');
 
         return $this;
-    } 
+    }
 }

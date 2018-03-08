@@ -51,3 +51,7 @@ e) Modified get offer API implemented exception handling and validation.
 Prospect Edit v1.5.1 #stable
 Fixed prospect display issue
 
+Prospect offers v1.0 #stable
+a) Created offer filter by category
+b) Created offer filter by brand
+
