@@ -2,7 +2,7 @@
 
 use GuzzleHttp\Client;
 
-class LocalApiRequest 
+class LocalApiRequest
 {
 
     protected $token;
@@ -25,17 +25,17 @@ class LocalApiRequest
             ]);
 
             $json = json_decode($response->getBody());
-        } 
+        }
         catch(\Exception $e){
-          
-        }        
 
-        if(!isset($json->access_token)){
+        }
+
+        if(!isset($json->data->access_token)){
 
             return null;
         }
 
-        return $json->access_token;
+        return $json->data->access_token;
     }
 
     public function getToken()
@@ -52,19 +52,19 @@ class LocalApiRequest
             ]
         ]);
 
-        return $response->getBody();    
+        return $response->getBody();
     }
 
     public function url($route, $params = [])
     {
         $params['access_token'] = $this->getToken();
-        return route($route, $params);      
+        return route($route, $params);
     }
 
     public static function requestUrl($route, $params = [])
     {
         $local = new LocalApiRequest();
-        
+
         return $local->url($route, $params);
     }
 }
