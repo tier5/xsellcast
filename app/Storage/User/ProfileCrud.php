@@ -21,7 +21,7 @@ class ProfileCrud
 		$fields->addField(array(
 			'name' 			=> 'avatar',
 			'label' 		=> 'Change Photo',
-			'accepts'		=> 'image/*|video/*',
+			'accepts'		=> 'image/*',
 			'is_single'		=> true,
 			'type' 			=> 'App\Storage\Media\MediaFieldCustomFields@mediaUpload',
 			'col-class' 	=> 'col-lg-8 col-md-12 col-sm-12 col-xs-12',
