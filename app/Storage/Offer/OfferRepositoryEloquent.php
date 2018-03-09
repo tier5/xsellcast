@@ -204,10 +204,7 @@ class OfferRepositoryEloquent extends BaseRepository implements OfferRepository
 
     public function offerByBrand($brand_id){
         $this->model = $this->model
-            // ->join('brand_categories', 'brand_categories.brand_id', '=', 'brands.id')
             ->join('brand_offers', 'brand_offers.offer_id', '=', 'offers.id')
-            // ->join('categories', 'categories.id', '=', 'brand_categories.category_id')
-            // ->orderBy('categories.name', $order)
             ->where('brand_offers.brand_id',$brand_id)
             ->select('offers.*');
             return $this->model;
@@ -215,11 +212,8 @@ class OfferRepositoryEloquent extends BaseRepository implements OfferRepository
     }
     public function offerByCaregory($category_id){
         $this->model = $this->model
-            //
             ->join('brand_offers', 'brand_offers.offer_id', '=', 'offers.id')
             ->join('brand_categories', 'brand_categories.brand_id', '=', 'brand_offers.brand_id')
-            // ->join('categories', 'categories.id', '=', 'brand_categories.category_id')
-            // ->orderBy('categories.name', $order)
             ->where('brand_categories.category_id',$category_id)
             ->select('offers.*');
             return $this->model;

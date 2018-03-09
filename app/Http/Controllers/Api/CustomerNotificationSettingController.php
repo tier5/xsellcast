@@ -86,11 +86,17 @@ class CustomerNotificationSettingController extends Controller
            $customer = $this->customer->skipPresenter()->find($request->get('customer_id'));
            $brands       = (isset($data['brands']) ? $data['brands'] : []);
 
+
+              foreach($customer->pivotNotificationBrand()->get() as $pivot)
+              {
+                  $pivot->delete();
+              }
+
             foreach ($brands as $brand_id) {
                     $customer->setNotificationBrand($brand_id);
             }
-
             $brands=$customer->notificationBrand;
+
 
             return response()->json([
                     'status'=>true,
@@ -148,6 +154,11 @@ class CustomerNotificationSettingController extends Controller
            $data=$request->all();
            $customer = $this->customer->skipPresenter()->find($request->get('customer_id'));
            $salesreps              = (isset($data['salesreps']) ? $data['salesreps'] : []);
+
+           foreach($customer->pivotNotificationBrandAssociates()->get() as $pivot)
+              {
+                  $pivot->delete();
+              }
 
             foreach ($salesreps as $salesrep_id) {
 

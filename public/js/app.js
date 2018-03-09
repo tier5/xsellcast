@@ -167,9 +167,9 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
 // for convenience
 
 /* Plugin for jQuery for working with colors.
- * 
+ *
  * Version 1.1.
- * 
+ *
  * Inspiration from jQuery color animation plugin by John Resig.
  *
  * Released under the MIT license by Ole Laursen, October 2009.
@@ -186,7 +186,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
  *
  * V. 1.1: Fix error handling so e.g. parsing an empty string does
  * produce a color rather than just crashing.
- */ 
+ */
 (function(B){B.color={};B.color.make=function(F,E,C,D){var G={};G.r=F||0;G.g=E||0;G.b=C||0;G.a=D!=null?D:1;G.add=function(J,I){for(var H=0;H<J.length;++H){G[J.charAt(H)]+=I}return G.normalize()};G.scale=function(J,I){for(var H=0;H<J.length;++H){G[J.charAt(H)]*=I}return G.normalize()};G.toString=function(){if(G.a>=1){return"rgb("+[G.r,G.g,G.b].join(",")+")"}else{return"rgba("+[G.r,G.g,G.b,G.a].join(",")+")"}};G.normalize=function(){function H(J,K,I){return K<J?J:(K>I?I:K)}G.r=H(0,parseInt(G.r),255);G.g=H(0,parseInt(G.g),255);G.b=H(0,parseInt(G.b),255);G.a=H(0,G.a,1);return G};G.clone=function(){return B.color.make(G.r,G.b,G.g,G.a)};return G.normalize()};B.color.extract=function(D,C){var E;do{E=D.css(C).toLowerCase();if(E!=""&&E!="transparent"){break}D=D.parent()}while(!B.nodeName(D.get(0),"body"));if(E=="rgba(0, 0, 0, 0)"){E="transparent"}return B.color.parse(E)};B.color.parse=function(F){var E,C=B.color.make;if(E=/rgb\(\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*\)/.exec(F)){return C(parseInt(E[1],10),parseInt(E[2],10),parseInt(E[3],10))}if(E=/rgba\(\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*,\s*([0-9]+(?:\.[0-9]+)?)\s*\)/.exec(F)){return C(parseInt(E[1],10),parseInt(E[2],10),parseInt(E[3],10),parseFloat(E[4]))}if(E=/rgb\(\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\%\s*\)/.exec(F)){return C(parseFloat(E[1])*2.55,parseFloat(E[2])*2.55,parseFloat(E[3])*2.55)}if(E=/rgba\(\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\s*\)/.exec(F)){return C(parseFloat(E[1])*2.55,parseFloat(E[2])*2.55,parseFloat(E[3])*2.55,parseFloat(E[4]))}if(E=/#([a-fA-F0-9]{2})([a-fA-F0-9]{2})([a-fA-F0-9]{2})/.exec(F)){return C(parseInt(E[1],16),parseInt(E[2],16),parseInt(E[3],16))}if(E=/#([a-fA-F0-9])([a-fA-F0-9])([a-fA-F0-9])/.exec(F)){return C(parseInt(E[1]+E[1],16),parseInt(E[2]+E[2],16),parseInt(E[3]+E[3],16))}var D=B.trim(F).toLowerCase();if(D=="transparent"){return C(255,255,255,0)}else{E=A[D]||[0,0,0];return C(E[0],E[1],E[2])}};var A={aqua:[0,255,255],azure:[240,255,255],beige:[245,245,220],black:[0,0,0],blue:[0,0,255],brown:[165,42,42],cyan:[0,255,255],darkblue:[0,0,139],darkcyan:[0,139,139],darkgrey:[169,169,169],darkgreen:[0,100,0],darkkhaki:[189,183,107],darkmagenta:[139,0,139],darkolivegreen:[85,107,47],darkorange:[255,140,0],darkorchid:[153,50,204],darkred:[139,0,0],darksalmon:[233,150,122],darkviolet:[148,0,211],fuchsia:[255,0,255],gold:[255,215,0],green:[0,128,0],indigo:[75,0,130],khaki:[240,230,140],lightblue:[173,216,230],lightcyan:[224,255,255],lightgreen:[144,238,144],lightgrey:[211,211,211],lightpink:[255,182,193],lightyellow:[255,255,224],lime:[0,255,0],magenta:[255,0,255],maroon:[128,0,0],navy:[0,0,128],olive:[128,128,0],orange:[255,165,0],pink:[255,192,203],purple:[128,0,128],violet:[128,0,128],red:[255,0,0],silver:[192,192,192],white:[255,255,255],yellow:[255,255,0]}})(jQuery);
 
 // the actual Flot code
@@ -196,7 +196,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
         //   [ series1, series2 ... ]
         // where series is either just the data as [ [x1, y1], [x2, y2], ... ]
         // or { data: [ [x1, y1], [x2, y2], ... ], label: "some label", ... }
-        
+
         var series = [],
             options = {
                 // the color theme used for graphs
@@ -230,7 +230,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     reserveSpace: null, // whether to reserve space even if axis isn't shown
                     tickLength: null, // size in pixels of ticks, or "full" for whole line
                     alignTicksWithAxis: null, // axis number or null for no sync
-                    
+
                     // mode specific options
                     tickDecimals: null, // no. of decimals, null means auto
                     tickSize: null, // number or [number, "unit"]
@@ -256,7 +256,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     },
                     lines: {
                         // we don't put in show: false so we can see
-                        // whether lines were actively disabled 
+                        // whether lines were actively disabled
                         lineWidth: 2, // in pixels
                         fill: false,
                         fillColor: null,
@@ -268,7 +268,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                         barWidth: 1, // in units of the x axis
                         fill: true,
                         fillColor: null,
-                        align: "left", // or "center" 
+                        align: "left", // or "center"
                         horizontal: false
                     },
                     shadowSize: 3
@@ -362,7 +362,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
 
         // public attributes
         plot.hooks = hooks;
-        
+
         // initialize
         initPlugins(plot);
         parseOptions(options_);
@@ -387,17 +387,17 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     $.extend(true, options, p.options);
             }
         }
-        
+
         function parseOptions(opts) {
             var i;
-            
+
             $.extend(true, options, opts);
-            
+
             if (options.xaxis.color == null)
                 options.xaxis.color = options.grid.color;
             if (options.yaxis.color == null)
                 options.yaxis.color = options.grid.color;
-            
+
             if (options.xaxis.tickColor == null) // backwards-compatibility
                 options.xaxis.tickColor = options.grid.tickColor;
             if (options.yaxis.tickColor == null) // backwards-compatibility
@@ -407,7 +407,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                 options.grid.borderColor = options.grid.color;
             if (options.grid.tickColor == null)
                 options.grid.tickColor = $.color.parse(options.grid.color).scale('a', 0.22).toString();
-            
+
             // fill in defaults in axes, copy at least always the
             // first as the rest of the code assumes it'll be there
             for (i = 0; i < Math.max(1, options.xaxes.length); ++i)
@@ -460,7 +460,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
             fillInSeriesOptions();
             processData();
         }
-        
+
         function parseData(d) {
             var res = [];
             for (var i = 0; i < d.length; ++i) {
@@ -481,7 +481,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
 
             return res;
         }
-        
+
         function axisNumber(obj, coord) {
             var a = obj[coord + "axis"];
             if (typeof a == "object") // if we got a real axis, extract number
@@ -495,9 +495,9 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
             // return flat array without annoying null entries
             return $.grep(xaxes.concat(yaxes), function (a) { return a; });
         }
-        
+
         function canvasToAxisCoords(pos) {
-            // return an object with x/y corresponding to all used axes 
+            // return an object with x/y corresponding to all used axes
             var res = {}, i, axis;
             for (i = 0; i < xaxes.length; ++i) {
                 axis = xaxes[i];
@@ -510,7 +510,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                 if (axis && axis.used)
                     res["y" + axis.n] = axis.c2p(pos.top);
             }
-            
+
             if (res.x1 !== undefined)
                 res.x = res.x1;
             if (res.y1 !== undefined)
@@ -518,7 +518,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
 
             return res;
         }
-        
+
         function axisToCanvasCoords(pos) {
             // get canvas coords from the first pair of x/y found in pos
             var res = {}, i, axis, key;
@@ -536,7 +536,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     }
                 }
             }
-            
+
             for (i = 0; i < yaxes.length; ++i) {
                 axis = yaxes[i];
                 if (axis && axis.used) {
@@ -550,10 +550,10 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     }
                 }
             }
-            
+
             return res;
         }
-        
+
         function getOrCreateAxis(axes, number) {
             if (!axes[number - 1])
                 axes[number - 1] = {
@@ -561,13 +561,13 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     direction: axes == xaxes ? "x" : "y",
                     options: $.extend(true, {}, axes == xaxes ? options.xaxis : options.yaxis)
                 };
-                
+
             return axes[number - 1];
         }
 
         function fillInSeriesOptions() {
             var i;
-            
+
             // collect what we already got of colors
             var neededColors = series.length,
                 usedColors = [],
@@ -582,7 +582,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                         usedColors.push($.color.parse(series[i].color));
                 }
             }
-            
+
             // we might need to generate more colors if higher indices
             // are assigned
             for (i = 0; i < assignedColors.length; ++i) {
@@ -606,7 +606,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                 // FIXME: if we're getting to close to something else,
                 // we should probably skip this one
                 colors.push(c);
-                
+
                 ++i;
                 if (i >= options.colors.length) {
                     i = 0;
@@ -618,7 +618,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
             var colori = 0, s;
             for (i = 0; i < series.length; ++i) {
                 s = series[i];
-                
+
                 // assign colors
                 if (s.color == null) {
                     s.color = colors[colori].toString();
@@ -644,7 +644,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                 s.yaxis = getOrCreateAxis(yaxes, axisNumber(s, "y"));
             }
         }
-        
+
         function processData() {
             var topSentry = Number.POSITIVE_INFINITY,
                 bottomSentry = Number.NEGATIVE_INFINITY,
@@ -665,14 +665,14 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                 axis.datamax = bottomSentry;
                 axis.used = false;
             });
-            
+
             for (i = 0; i < series.length; ++i) {
                 s = series[i];
                 s.datapoints = { points: [] };
-                
+
                 executeHooks(hooks.processRawData, [ s, s.data, s.datapoints ]);
             }
-            
+
             // first pass: clean and copy data
             for (i = 0; i < series.length; ++i) {
                 s = series[i];
@@ -692,7 +692,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                             format[format.length - 1].x = true;
                         }
                     }
-                    
+
                     s.datapoints.format = format;
                 }
 
@@ -700,13 +700,13 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     continue; // already filled in
 
                 s.datapoints.pointsize = format.length;
-                
+
                 ps = s.datapoints.pointsize;
                 points = s.datapoints.points;
 
                 insertSteps = s.lines.show && s.lines.steps;
                 s.xaxis.used = s.yaxis.used = true;
-                
+
                 for (j = k = 0; j < data.length; ++j, k += ps) {
                     p = data[j];
 
@@ -730,16 +730,16 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                                 if (val == null) {
                                     if (f.required)
                                         nullify = true;
-                                    
+
                                     if (f.defaultValue != null)
                                         val = f.defaultValue;
                                 }
                             }
-                            
+
                             points[k + m] = val;
                         }
                     }
-                    
+
                     if (nullify) {
                         for (m = 0; m < ps; ++m) {
                             val = points[k + m];
@@ -779,7 +779,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
             // give the hooks a chance to run
             for (i = 0; i < series.length; ++i) {
                 s = series[i];
-                
+
                 executeHooks(hooks.processDatapoints, [ s, s.datapoints]);
             }
 
@@ -791,7 +791,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
 
                 var xmin = topSentry, ymin = topSentry,
                     xmax = bottomSentry, ymax = bottomSentry;
-                
+
                 for (j = 0; j < points.length; j += ps) {
                     if (points[j] == null)
                         continue;
@@ -801,7 +801,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                         f = format[m];
                         if (!f || val == fakeInfinity || val == -fakeInfinity)
                             continue;
-                        
+
                         if (f.x) {
                             if (val < xmin)
                                 xmin = val;
@@ -816,7 +816,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                         }
                     }
                 }
-                
+
                 if (s.bars.show) {
                     // make sure we got room for the bar on the dancing floor
                     var delta = s.bars.align == "left" ? 0 : -s.bars.barWidth/2;
@@ -829,7 +829,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                         xmax += delta + s.bars.barWidth;
                     }
                 }
-                
+
                 updateAxis(s.xaxis, xmin, xmax);
                 updateAxis(s.yaxis, ymin, ymax);
             }
@@ -847,25 +847,25 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
             c.className = cls;
             c.width = canvasWidth;
             c.height = canvasHeight;
-                    
+
             if (!skipPositioning)
                 $(c).css({ position: 'absolute', left: 0, top: 0 });
-                
+
             $(c).appendTo(placeholder);
-                
+
             if (!c.getContext) // excanvas hack
                 c = window.G_vmlCanvasManager.initElement(c);
 
             // used for resetting in case we get replotted
             c.getContext("2d").save();
-            
+
             return c;
         }
 
         function getCanvasDimensions() {
             canvasWidth = placeholder.width();
             canvasHeight = placeholder.height();
-            
+
             if (canvasWidth <= 0 || canvasHeight <= 0)
                 throw "Invalid dimensions for plot, width = " + canvasWidth + ", height = " + canvasHeight;
         }
@@ -887,7 +887,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
             // and save again
             cctx.save();
         }
-        
+
         function setupCanvases() {
             var reused,
                 existingCanvas = placeholder.children("canvas.base"),
@@ -895,16 +895,16 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
 
             if (existingCanvas.length == 0 || existingOverlay == 0) {
                 // init everything
-                
+
                 placeholder.html(""); // make sure placeholder is clear
-            
+
                 placeholder.css({ padding: 0 }); // padding messes up the positioning
-                
+
                 if (placeholder.css("position") == 'static')
                     placeholder.css("position", "relative"); // for positioning labels and overlay
 
                 getCanvasDimensions();
-                
+
                 canvas = makeCanvas(true, "base");
                 overlay = makeCanvas(false, "overlay"); // overlay canvas for interactive features
 
@@ -932,10 +932,10 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
 
                 // reset reused canvases
                 plot.resize();
-                
+
                 // make sure overlay pixels are cleared (canvas is cleared when we redraw)
                 octx.clearRect(0, 0, canvasWidth, canvasHeight);
-                
+
                 // then whack any remaining obvious garbage left
                 eventHolder.unbind();
                 placeholder.children().not([canvas, overlay]).remove();
@@ -961,23 +961,23 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
         function shutdown() {
             if (redrawTimeout)
                 clearTimeout(redrawTimeout);
-            
+
             eventHolder.unbind("mousemove", onMouseMove);
             eventHolder.unbind("mouseleave", onMouseLeave);
             eventHolder.unbind("click", onClick);
-            
+
             executeHooks(hooks.shutdown, [eventHolder]);
         }
 
         function setTransformationHelpers(axis) {
             // set helper functions on the axis, assumes plot area
             // has been computed already
-            
+
             function identity(x) { return x; }
-            
+
             var s, m, t = axis.options.transform || identity,
                 it = axis.options.inverseTransform;
-            
+
             // precompute how much the axis is scaling a point
             // in canvas space
             if (axis.direction == "x") {
@@ -1012,7 +1012,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                          + labels.join("") + '</div></div>')
                     .appendTo(placeholder);
             }
-            
+
             if (axis.direction == "x") {
                 // to avoid measuring the widths of the labels (it's slow), we
                 // construct fixed-size boxes and put the labels inside
@@ -1047,7 +1047,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     if (l)
                         labels.push('<div class="tickLabel">' + l + '</div>');
                 }
-                
+
                 if (labels.length > 0) {
                     dummyDiv = makeDummyDiv(labels, "");
                     if (w == null)
@@ -1099,14 +1099,14 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
             var innermost = $.inArray(axis, sameDirection) == 0;
             if (!innermost && tickLength == "full")
                 tickLength = 5;
-                
+
             if (!isNaN(+tickLength))
                 padding += +tickLength;
 
             // compute box
             if (axis.direction == "x") {
                 lh += padding;
-                
+
                 if (pos == "bottom") {
                     plotOffset.bottom += lh + axismargin;
                     axis.box = { top: canvasHeight - plotOffset.bottom, height: lh };
@@ -1118,7 +1118,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
             }
             else {
                 lw += padding;
-                
+
                 if (pos == "left") {
                     axis.box = { left: plotOffset.left + axismargin, width: lw };
                     plotOffset.left += lw + axismargin;
@@ -1147,7 +1147,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                 axis.box.height = plotHeight;
             }
         }
-        
+
         function setupGrid() {
             var i, axes = allAxes();
 
@@ -1157,7 +1157,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                 axis.show = axis.options.show;
                 if (axis.show == null)
                     axis.show = axis.used; // by default an axis is visible if it's got data
-                
+
                 axis.reserveSpace = axis.show || axis.options.reserveSpace;
 
                 setRange(axis);
@@ -1190,13 +1190,13 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     for (i = 0; i < series.length; ++i)
                         minMargin = Math.max(minMargin, series[i].points.radius + series[i].points.lineWidth/2);
                 }
-                    
+
                 for (var a in plotOffset) {
                     plotOffset[a] += options.grid.borderWidth;
                     plotOffset[a] = Math.max(minMargin, plotOffset[a]);
                 }
             }
-            
+
             plotWidth = canvasWidth - plotOffset.left - plotOffset.right;
             plotHeight = canvasHeight - plotOffset.bottom - plotOffset.top;
 
@@ -1212,10 +1212,10 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
 
                 insertAxisLabels();
             }
-            
+
             insertLegend();
         }
-        
+
         function setRange(axis) {
             var opts = axis.options,
                 min = +(opts.min != null ? opts.min : axis.datamin),
@@ -1257,7 +1257,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
 
         function setupTickGeneration(axis) {
             var opts = axis.options;
-                
+
             // estimate number of ticks
             var noTicks;
             if (typeof opts.ticks == "number" && opts.ticks > 0)
@@ -1272,7 +1272,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
 
             if (opts.mode == "time") {
                 // pretty handling of time
-                
+
                 // map of app. size of time units in milliseconds
                 var timeUnitSize = {
                     "second": 1000,
@@ -1288,9 +1288,9 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                 // an integer algorithm
                 var spec = [
                     [1, "second"], [2, "second"], [5, "second"], [10, "second"],
-                    [30, "second"], 
+                    [30, "second"],
                     [1, "minute"], [2, "minute"], [5, "minute"], [10, "minute"],
-                    [30, "minute"], 
+                    [30, "minute"],
                     [1, "hour"], [2, "hour"], [4, "hour"],
                     [8, "hour"], [12, "hour"],
                     [1, "day"], [2, "day"], [3, "day"],
@@ -1314,7 +1314,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                         break;
                 size = spec[i][0];
                 unit = spec[i][1];
-                
+
                 // special-case the possibility of several years
                 if (unit == "year") {
                     magn = Math.pow(10, Math.floor(Math.log(delta / timeUnitSize.year) / Math.LN10));
@@ -1332,12 +1332,12 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                 }
 
                 axis.tickSize = opts.tickSize || [size, unit];
-                
+
                 generator = function(axis) {
                     var ticks = [],
                         tickSize = axis.tickSize[0], unit = axis.tickSize[1],
                         d = new Date(axis.min);
-                    
+
                     var step = tickSize * timeUnitSize[unit];
 
                     if (unit == "second")
@@ -1350,7 +1350,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                         d.setUTCMonth(floorInBase(d.getUTCMonth(), tickSize));
                     if (unit == "year")
                         d.setUTCFullYear(floorInBase(d.getUTCFullYear(), tickSize));
-                    
+
                     // reset smaller components
                     d.setUTCMilliseconds(0);
                     if (step >= timeUnitSize.minute)
@@ -1402,11 +1402,11 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     // first check global format
                     if (opts.timeformat != null)
                         return $.plot.formatDate(d, opts.timeformat, opts.monthNames);
-                    
+
                     var t = axis.tickSize[0] * timeUnitSize[axis.tickSize[1]];
                     var span = axis.max - axis.min;
                     var suffix = (opts.twelveHourClock) ? " %p" : "";
-                    
+
                     if (t < timeUnitSize.minute)
                         fmt = "%h:%M:%S" + suffix;
                     else if (t < timeUnitSize.day) {
@@ -1425,7 +1425,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     }
                     else
                         fmt = "%y";
-                    
+
                     return $.plot.formatDate(d, fmt, opts.monthNames);
                 };
             }
@@ -1438,7 +1438,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
 
                 magn = Math.pow(10, -dec);
                 norm = delta / magn; // norm is between 1.0 and 10.0
-                
+
                 if (norm < 1.5)
                     size = 1;
                 else if (norm < 3) {
@@ -1455,7 +1455,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     size = 10;
 
                 size *= magn;
-                
+
                 if (opts.minTickSize != null && size < opts.minTickSize)
                     size = opts.minTickSize;
 
@@ -1493,7 +1493,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                         if (opts.max == null && niceTicks.length > 1)
                             axis.max = Math.max(axis.max, niceTicks[niceTicks.length - 1]);
                     }
-                    
+
                     generator = function (axis) {
                         // copy ticks, scaled to this axis
                         var ticks = [], v, i;
@@ -1504,7 +1504,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                         }
                         return ticks;
                     };
-                    
+
                     // we might need an extra decimal since forced
                     // ticks don't necessarily fit naturally
                     if (axis.mode != "time" && opts.tickDecimals == null) {
@@ -1526,7 +1526,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
             else
                 axis.tickFormatter = formatter;
         }
-        
+
         function setTicks(axis) {
             var oticks = axis.options.ticks, ticks = [];
             if (oticks == null || (typeof oticks == "number" && oticks > 0))
@@ -1568,7 +1568,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     axis.max = Math.max(axis.max, ticks[ticks.length - 1].v);
             }
         }
-      
+
         function draw() {
             ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 
@@ -1577,7 +1577,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
             // draw background, if any
             if (grid.show && grid.backgroundColor)
                 drawBackground();
-            
+
             if (grid.show && !grid.aboveData)
                 drawGrid();
 
@@ -1587,7 +1587,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
             }
 
             executeHooks(hooks.draw, [ctx]);
-            
+
             if (grid.show && grid.aboveData)
                 drawGrid();
         }
@@ -1622,10 +1622,10 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                 from = to;
                 to = tmp;
             }
-            
+
             return { from: from, to: to, axis: axis };
         }
-        
+
         function drawBackground() {
             ctx.save();
             ctx.translate(plotOffset.left, plotOffset.top);
@@ -1637,7 +1637,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
 
         function drawGrid() {
             var i;
-            
+
             ctx.save();
             ctx.translate(plotOffset.left, plotOffset.top);
 
@@ -1652,7 +1652,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     axes.xmax = axes.xaxis.max;
                     axes.ymin = axes.yaxis.min;
                     axes.ymax = axes.yaxis.max;
-                    
+
                     markings = markings(axes);
                 }
 
@@ -1689,7 +1689,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     xrange.to = xrange.axis.p2c(xrange.to);
                     yrange.from = yrange.axis.p2c(yrange.from);
                     yrange.to = yrange.axis.p2c(yrange.to);
-                    
+
                     if (xrange.from == xrange.to || yrange.from == yrange.to) {
                         // draw line
                         ctx.beginPath();
@@ -1708,7 +1708,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     }
                 }
             }
-            
+
             // draw the ticks
             var axes = allAxes(), bw = options.grid.borderWidth;
 
@@ -1717,7 +1717,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     t = axis.tickLength, x, y, xoff, yoff;
                 if (!axis.show || axis.ticks.length == 0)
                     continue
-                
+
                 ctx.strokeStyle = axis.options.tickColor || $.color.parse(axis.options.color).scale('a', 0.22).toString();
                 ctx.lineWidth = 1;
 
@@ -1736,7 +1736,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     else
                         x = box.left - plotOffset.left + (axis.position == "left" ? box.width : 0);
                 }
-                
+
                 // draw tick bar
                 if (!axis.innermost) {
                     ctx.beginPath();
@@ -1745,7 +1745,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                         xoff = plotWidth;
                     else
                         yoff = plotHeight;
-                    
+
                     if (ctx.lineWidth == 1) {
                         x = Math.floor(x) + 0.5;
                         y = Math.floor(y) + 0.5;
@@ -1760,7 +1760,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                 ctx.beginPath();
                 for (i = 0; i < axis.ticks.length; ++i) {
                     var v = axis.ticks[i].v;
-                    
+
                     xoff = yoff = 0;
 
                     if (v < axis.min || v > axis.max
@@ -1772,14 +1772,14 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     if (axis.direction == "x") {
                         x = axis.p2c(v);
                         yoff = t == "full" ? -plotHeight : t;
-                        
+
                         if (axis.position == "top")
                             yoff = -yoff;
                     }
                     else {
                         y = axis.p2c(v);
                         xoff = t == "full" ? -plotWidth : t;
-                        
+
                         if (axis.position == "left")
                             xoff = -xoff;
                     }
@@ -1794,11 +1794,11 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     ctx.moveTo(x, y);
                     ctx.lineTo(x + xoff, y + yoff);
                 }
-                
+
                 ctx.stroke();
             }
-            
-            
+
+
             // draw border
             if (bw) {
                 ctx.lineWidth = bw;
@@ -1811,7 +1811,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
 
         function insertAxisLabels() {
             placeholder.find(".tickLabels").remove();
-            
+
             var html = ['<div class="tickLabels" style="font-size:smaller">'];
 
             var axes = allAxes();
@@ -1827,7 +1827,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                         continue;
 
                     var pos = {}, align;
-                    
+
                     if (axis.direction == "x") {
                         align = "center";
                         pos.left = Math.round(plotOffset.left + axis.p2c(tick.v) - axis.labelWidth/2);
@@ -1853,7 +1853,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     var style = ["position:absolute", "text-align:" + align ];
                     for (var a in pos)
                         style.push(a + ":" + pos[a] + "px")
-                    
+
                     html.push('<div class="tickLabel" style="' + style.join(';') + '">' + tick.label + '</div>');
                 }
                 html.push('</div>');
@@ -1872,18 +1872,18 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
             if (series.points.show)
                 drawSeriesPoints(series);
         }
-        
+
         function drawSeriesLines(series) {
             function plotLine(datapoints, xoffset, yoffset, axisx, axisy) {
                 var points = datapoints.points,
                     ps = datapoints.pointsize,
                     prevx = null, prevy = null;
-                
+
                 ctx.beginPath();
                 for (var i = ps; i < points.length; i += ps) {
                     var x1 = points[i - ps], y1 = points[i - ps + 1],
                         x2 = points[i], y2 = points[i + 1];
-                    
+
                     if (x1 == null || x2 == null)
                         continue;
 
@@ -1946,7 +1946,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
 
                     if (x1 != prevx || y1 != prevy)
                         ctx.moveTo(axisx.p2c(x1) + xoffset, axisy.p2c(y1) + yoffset);
-                    
+
                     prevx = x2;
                     prevy = y2;
                     ctx.lineTo(axisx.p2c(x2) + xoffset, axisy.p2c(y2) + yoffset);
@@ -1998,7 +1998,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                         continue;
 
                     // clip x values
-                    
+
                     // clip with xmin
                     if (x1 <= x2 && x1 < axisx.min) {
                         if (x2 < axisx.min)
@@ -2033,7 +2033,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                         ctx.moveTo(axisx.p2c(x1), axisy.p2c(bottom));
                         areaOpen = true;
                     }
-                    
+
                     // now first check the case where both is outside
                     if (y1 >= axisy.max && y2 >= axisy.max) {
                         ctx.lineTo(axisx.p2c(x1), axisy.p2c(axisy.max));
@@ -2045,7 +2045,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                         ctx.lineTo(axisx.p2c(x2), axisy.p2c(axisy.min));
                         continue;
                     }
-                    
+
                     // else it's a bit more complicated, there might
                     // be a flat maxed out rectangle first, then a
                     // triangular cutout or reverse; to find these
@@ -2054,7 +2054,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
 
                     // clip the y values, without shortcutting, we
                     // go through all cases in turn
-                    
+
                     // clip with ymin
                     if (y1 <= y2 && y1 < axisy.min && y2 >= axisy.min) {
                         x1 = (axisy.min - y1) / (y2 - y1) * (x2 - x1) + x1;
@@ -2081,7 +2081,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                         ctx.lineTo(axisx.p2c(x1old), axisy.p2c(y1));
                         // it goes to (x1, y1), but we fill that below
                     }
-                    
+
                     // fill triangular section, this sometimes result
                     // in redundant points if (x1, y1) hasn't changed
                     // from previous line to, but we just ignore that
@@ -2135,7 +2135,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     var x = points[i], y = points[i + 1];
                     if (x == null || x < axisx.min || x > axisx.max || y < axisy.min || y > axisy.max)
                         continue;
-                    
+
                     ctx.beginPath();
                     x = axisx.p2c(x);
                     y = axisy.p2c(y) + offset;
@@ -2144,7 +2144,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     else
                         symbol(ctx, x, y, radius, shadow);
                     ctx.closePath();
-                    
+
                     if (fillStyle) {
                         ctx.fillStyle = fillStyle;
                         ctx.fill();
@@ -2152,7 +2152,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     ctx.stroke();
                 }
             }
-            
+
             ctx.save();
             ctx.translate(plotOffset.left, plotOffset.top);
 
@@ -2223,12 +2223,12 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     drawTop = false;
                 }
             }
-           
+
             // clip
             if (right < axisx.min || left > axisx.max ||
                 top < axisy.min || bottom > axisy.max)
                 return;
-            
+
             if (left < axisx.min) {
                 left = axisx.min;
                 drawLeft = false;
@@ -2243,7 +2243,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                 bottom = axisy.min;
                 drawBottom = false;
             }
-            
+
             if (top > axisy.max) {
                 top = axisy.max;
                 drawTop = false;
@@ -2253,7 +2253,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
             bottom = axisy.p2c(bottom);
             right = axisx.p2c(right);
             top = axisy.p2c(top);
-            
+
             // fill the bar
             if (fillStyleCallback) {
                 c.beginPath();
@@ -2290,11 +2290,11 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                 c.stroke();
             }
         }
-        
+
         function drawSeriesBars(series) {
             function plotBars(datapoints, barLeft, barRight, offset, fillStyleCallback, axisx, axisy) {
                 var points = datapoints.points, ps = datapoints.pointsize;
-                
+
                 for (var i = 0; i < points.length; i += ps) {
                     if (points[i] == null)
                         continue;
@@ -2321,19 +2321,19 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
 
             if (filloptions.fillColor)
                 return getColorOrGradient(filloptions.fillColor, bottom, top, seriesColor);
-            
+
             var c = $.color.parse(seriesColor);
             c.a = typeof fill == "number" ? fill : 0.4;
             c.normalize();
             return c.toString();
         }
-        
+
         function insertLegend() {
             placeholder.find(".legend").remove();
 
             if (!options.legend.show)
                 return;
-            
+
             var fragments = [], rowStarted = false,
                 lf = options.legend.labelFormatter, s, label;
             for (var i = 0; i < series.length; ++i) {
@@ -2341,7 +2341,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                 label = s.label;
                 if (!label)
                     continue;
-                
+
                 if (i % options.legend.noColumns == 0) {
                     if (rowStarted)
                         fragments.push('</tr>');
@@ -2351,14 +2351,14 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
 
                 if (lf)
                     label = lf(label, s);
-                
+
                 fragments.push(
                     '<td class="legendColorBox"><div style="border:1px solid ' + options.legend.labelBoxBorderColor + ';padding:1px"><div style="width:4px;height:0;border:5px solid ' + s.color + ';overflow:hidden"></div></div></td>' +
                     '<td class="legendLabel">' + label + '</td>');
             }
             if (rowStarted)
                 fragments.push('</tr>');
-            
+
             if (fragments.length == 0)
                 return;
 
@@ -2402,10 +2402,10 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
 
 
         // interactive features
-        
+
         var highlights = [],
             redrawTimeout = null;
-        
+
         // returns the data item the mouse is over, or null if none is found
         function findNearbyItem(mouseX, mouseY, seriesFilter) {
             var maxDistance = options.grid.mouseActiveRadius,
@@ -2415,7 +2415,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
             for (i = series.length - 1; i >= 0; --i) {
                 if (!seriesFilter(series[i]))
                     continue;
-                
+
                 var s = series[i],
                     axisx = s.xaxis,
                     axisy = s.yaxis,
@@ -2432,13 +2432,13 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     maxx = Number.MAX_VALUE;
                 if (axisy.options.inverseTransform)
                     maxy = Number.MAX_VALUE;
-                
+
                 if (s.lines.show || s.points.show) {
                     for (j = 0; j < points.length; j += ps) {
                         var x = points[j], y = points[j + 1];
                         if (x == null)
                             continue;
-                        
+
                         // For points and lines, the cursor must be within a
                         // certain distance to the data point
                         if (x - mx > maxx || x - mx < -maxx ||
@@ -2459,19 +2459,19 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                         }
                     }
                 }
-                    
+
                 if (s.bars.show && !item) { // no other point can be nearby
                     var barLeft = s.bars.align == "left" ? 0 : -s.bars.barWidth/2,
                         barRight = barLeft + s.bars.barWidth;
-                    
+
                     for (j = 0; j < points.length; j += ps) {
                         var x = points[j], y = points[j + 1], b = points[j + 2];
                         if (x == null)
                             continue;
-  
+
                         // for a bar graph, the cursor must be inside the bar
-                        if (series[i].bars.horizontal ? 
-                            (mx <= Math.max(b, x) && mx >= Math.min(b, x) && 
+                        if (series[i].bars.horizontal ?
+                            (mx <= Math.max(b, x) && mx >= Math.min(b, x) &&
                              my >= y + barLeft && my <= y + barRight) :
                             (mx >= x + barLeft && mx <= x + barRight &&
                              my >= Math.min(b, y) && my <= Math.max(b, y)))
@@ -2484,13 +2484,13 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                 i = item[0];
                 j = item[1];
                 ps = series[i].datapoints.pointsize;
-                
+
                 return { datapoint: series[i].datapoints.points.slice(j * ps, (j + 1) * ps),
                          dataIndex: j,
                          series: series[i],
                          seriesIndex: i };
             }
-            
+
             return null;
         }
 
@@ -2540,11 +2540,11 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                           h.point[1] == item.datapoint[1]))
                         unhighlight(h.series, h.point);
                 }
-                
+
                 if (item)
                     highlight(item.series, item.datapoint, eventname);
             }
-            
+
             placeholder.trigger(eventname, [ pos, item ]);
         }
 
@@ -2560,7 +2560,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
             octx.save();
             octx.clearRect(0, 0, canvasWidth, canvasHeight);
             octx.translate(plotOffset.left, plotOffset.top);
-            
+
             var i, hi;
             for (i = 0; i < highlights.length; ++i) {
                 hi = highlights[i];
@@ -2571,10 +2571,10 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     drawPointHighlight(hi.series, hi.point);
             }
             octx.restore();
-            
+
             executeHooks(hooks.drawOverlay, [octx]);
         }
-        
+
         function highlight(s, point, auto) {
             if (typeof s == "number")
                 s = series[s];
@@ -2593,13 +2593,13 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
             else if (!auto)
                 highlights[i].auto = false;
         }
-            
+
         function unhighlight(s, point) {
             if (s == null && point == null) {
                 highlights = [];
                 triggerRedrawOverlay();
             }
-            
+
             if (typeof s == "number")
                 s = series[s];
 
@@ -2613,7 +2613,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                 triggerRedrawOverlay();
             }
         }
-        
+
         function indexOfHighlight(s, p) {
             for (var i = 0; i < highlights.length; ++i) {
                 var h = highlights[i];
@@ -2623,21 +2623,21 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
             }
             return -1;
         }
-        
+
         function drawPointHighlight(series, point) {
             var x = point[0], y = point[1],
                 axisx = series.xaxis, axisy = series.yaxis;
-            
+
             if (x < axisx.min || x > axisx.max || y < axisy.min || y > axisy.max)
                 return;
-            
+
             var pointRadius = series.points.radius + series.points.lineWidth / 2;
             octx.lineWidth = pointRadius;
             octx.strokeStyle = $.color.parse(series.color).scale('a', 0.5).toString();
             var radius = 1.5 * pointRadius,
                 x = axisx.p2c(x),
                 y = axisy.p2c(y);
-            
+
             octx.beginPath();
             if (series.points.symbol == "circle")
                 octx.arc(x, y, radius, 0, 2 * Math.PI, false);
@@ -2664,7 +2664,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                 // supports a simple vertical gradient properly, so that's
                 // what we support too
                 var gradient = ctx.createLinearGradient(0, top, 0, bottom);
-                
+
                 for (var i = 0, l = spec.colors.length; i < l; ++i) {
                     var c = spec.colors[i];
                     if (typeof c != "string") {
@@ -2677,7 +2677,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     }
                     gradient.addColorStop(i / (l - 1), c);
                 }
-                
+
                 return gradient;
             }
         }
@@ -2691,7 +2691,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
     };
 
     $.plot.version = "0.7";
-    
+
     $.plot.plugins = [];
 
     // returns a string with the date d formatted according to fmt
@@ -2700,7 +2700,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
             n = "" + n;
             return n.length == 1 ? "0" + n : n;
         };
-        
+
         var r = [];
         var escape = false, padNext = false;
         var hours = d.getUTCHours();
@@ -2717,7 +2717,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
         }
         for (var i = 0; i < fmt.length; ++i) {
             var c = fmt.charAt(i);
-            
+
             if (escape) {
                 switch (c) {
                 case 'h': c = "" + hours; break;
@@ -2749,25 +2749,25 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
         }
         return r.join("");
     };
-    
+
     // round to nearby lower multiple of base
     function floorInBase(n, base) {
         return base * Math.floor(n / base);
     }
-    
+
 })(jQuery);
 
 /*
  * jquery.flot.tooltip
- * 
+ *
  * description: easy-to-use tooltips for Flot charts
  * version: 0.6.2
  * author: Krzysztof Urbas @krzysu [myviews.pl]
  * website: https://github.com/krzysu/flot.tooltip
- * 
+ *
  * build on 2013-09-30
  * released under MIT License, 2012
-*/ 
+*/
 (function(t){var o={tooltip:!1,tooltipOpts:{content:"%s | X: %x | Y: %y",xDateFormat:null,yDateFormat:null,shifts:{x:10,y:20},defaultTheme:!0,onHover:function(){}}},i=function(t){this.tipPosition={x:0,y:0},this.init(t)};i.prototype.init=function(o){function i(t){var o={};o.x=t.pageX,o.y=t.pageY,s.updateTooltipPosition(o)}function e(t,o,i){var e=s.getDomElement();if(i){var n;n=s.stringFormat(s.tooltipOptions.content,i),e.html(n),s.updateTooltipPosition({x:o.pageX,y:o.pageY}),e.css({left:s.tipPosition.x+s.tooltipOptions.shifts.x,top:s.tipPosition.y+s.tooltipOptions.shifts.y}).show(),"function"==typeof s.tooltipOptions.onHover&&s.tooltipOptions.onHover(i,e)}else e.hide().html("")}var s=this;o.hooks.bindEvents.push(function(o,n){s.plotOptions=o.getOptions(),s.plotOptions.tooltip!==!1&&void 0!==s.plotOptions.tooltip&&(s.tooltipOptions=s.plotOptions.tooltipOpts,s.getDomElement(),t(o.getPlaceholder()).bind("plothover",e),t(n).bind("mousemove",i))}),o.hooks.shutdown.push(function(o,s){t(o.getPlaceholder()).unbind("plothover",e),t(s).unbind("mousemove",i)})},i.prototype.getDomElement=function(){var o;return t("#flotTip").length>0?o=t("#flotTip"):(o=t("<div />").attr("id","flotTip"),o.appendTo("body").hide().css({position:"absolute"}),this.tooltipOptions.defaultTheme&&o.css({background:"#fff","z-index":"100",padding:"0.4em 0.6em","border-radius":"0.5em","font-size":"0.8em",border:"1px solid #111",display:"none","white-space":"nowrap"})),o},i.prototype.updateTooltipPosition=function(o){var i=t("#flotTip").outerWidth()+this.tooltipOptions.shifts.x,e=t("#flotTip").outerHeight()+this.tooltipOptions.shifts.y;o.x-t(window).scrollLeft()>t(window).innerWidth()-i&&(o.x-=i),o.y-t(window).scrollTop()>t(window).innerHeight()-e&&(o.y-=e),this.tipPosition.x=o.x,this.tipPosition.y=o.y},i.prototype.stringFormat=function(t,o){var i=/%p\.{0,1}(\d{0,})/,e=/%s/,s=/%x\.{0,1}(?:\d{0,})/,n=/%y\.{0,1}(?:\d{0,})/;return"function"==typeof t&&(t=t(o.series.label,o.series.data[o.dataIndex][0],o.series.data[o.dataIndex][1],o)),o.series.percent!==void 0&&(t=this.adjustValPrecision(i,t,o.series.percent)),o.series.label!==void 0&&(t=t.replace(e,o.series.label)),this.isTimeMode("xaxis",o)&&this.isXDateFormat(o)&&(t=t.replace(s,this.timestampToDate(o.series.data[o.dataIndex][0],this.tooltipOptions.xDateFormat))),this.isTimeMode("yaxis",o)&&this.isYDateFormat(o)&&(t=t.replace(n,this.timestampToDate(o.series.data[o.dataIndex][1],this.tooltipOptions.yDateFormat))),"number"==typeof o.series.data[o.dataIndex][0]&&(t=this.adjustValPrecision(s,t,o.series.data[o.dataIndex][0])),"number"==typeof o.series.data[o.dataIndex][1]&&(t=this.adjustValPrecision(n,t,o.series.data[o.dataIndex][1])),o.series.xaxis.tickFormatter!==void 0&&(t=t.replace(s,o.series.xaxis.tickFormatter(o.series.data[o.dataIndex][0],o.series.xaxis))),o.series.yaxis.tickFormatter!==void 0&&(t=t.replace(n,o.series.yaxis.tickFormatter(o.series.data[o.dataIndex][1],o.series.yaxis))),t},i.prototype.isTimeMode=function(t,o){return o.series[t].options.mode!==void 0&&"time"===o.series[t].options.mode},i.prototype.isXDateFormat=function(){return this.tooltipOptions.xDateFormat!==void 0&&null!==this.tooltipOptions.xDateFormat},i.prototype.isYDateFormat=function(){return this.tooltipOptions.yDateFormat!==void 0&&null!==this.tooltipOptions.yDateFormat},i.prototype.timestampToDate=function(o,i){var e=new Date(o);return t.plot.formatDate(e,i)},i.prototype.adjustValPrecision=function(t,o,i){var e,s=o.match(t);return null!==s&&""!==RegExp.$1&&(e=RegExp.$1,i=i.toFixed(e),o=o.replace(t,i)),o};var e=function(t){new i(t)};t.plot.plugins.push({init:e,options:o,name:"tooltip",version:"0.6.1"})})(jQuery);
 /**
  * Flot plugin that provides spline interpolation for line graphs
@@ -3022,7 +3022,7 @@ can just fix the size of their placeholders.
             plot.setupGrid();
             plot.draw();
         }
-        
+
         function bindEvents(plot, eventHolder) {
             plot.getPlaceholder().resize(onResize);
         }
@@ -3030,11 +3030,11 @@ can just fix the size of their placeholders.
         function shutdown(plot, eventHolder) {
             plot.getPlaceholder().unbind("resize", onResize);
         }
-        
+
         plot.hooks.bindEvents.push(bindEvents);
         plot.hooks.shutdown.push(shutdown);
     }
-    
+
     $.plot.plugins.push({
         init: init,
         options: options,
@@ -3043,11 +3043,11 @@ can just fix the size of their placeholders.
     });
 })(jQuery);
 /*
-Flot plugin for rendering pie charts. The plugin assumes the data is 
-coming is as a single data value for each series, and each of those 
-values is a positive value or zero (negative numbers don't make 
-any sense and will cause strange effects). The data values do 
-NOT need to be passed in as percentage values because it 
+Flot plugin for rendering pie charts. The plugin assumes the data is
+coming is as a single data value for each series, and each of those
+values is a positive value or zero (negative numbers don't make
+any sense and will cause strange effects). The data values do
+NOT need to be passed in as percentage values because it
 internally calculates the total and percentages.
 
 * Created by Brian Medendorp, June 2009
@@ -3059,7 +3059,7 @@ internally calculates the total and percentages.
 	2009-11-11: Added basic hover from btburnett3 - does not work in IE, and center is off in Chrome and Opera
 	2009-11-17: Added IE hover capability submitted by Anthony Aragues
 	2009-11-18: Added bug fix submitted by Xavi Ivars (issues with arrays when other JS libraries are included as well)
-		
+
 
 Available options are:
 series: {
@@ -3102,7 +3102,7 @@ More detail and specific examples can be found in the included HTML file.
 
 */
 
-(function ($) 
+(function ($)
 {
 	function init(plot) // this is the "body" of the plugin
 	{
@@ -3118,13 +3118,13 @@ More detail and specific examples can be found in the included HTML file.
 		var legendWidth = 0;
 		var processed = false;
 		var raw = false;
-		
-		// interactive variables	
-		var highlights = [];	
-	
+
+		// interactive variables
+		var highlights = [];
+
 		// add hook to determine if pie plugin in enabled, and then perform necessary operations
 		plot.hooks.processOptions.push(checkPieEnabled);
-		plot.hooks.bindEvents.push(bindEvents);	
+		plot.hooks.bindEvents.push(bindEvents);
 
 		// check to see if the pie plugin is enabled
 		function checkPieEnabled(plot, options)
@@ -3133,48 +3133,48 @@ More detail and specific examples can be found in the included HTML file.
 			{
 				//disable grid
 				options.grid.show = false;
-				
+
 				// set labels.show
 				if (options.series.pie.label.show=='auto')
 					if (options.legend.show)
 						options.series.pie.label.show = false;
 					else
 						options.series.pie.label.show = true;
-				
+
 				// set radius
 				if (options.series.pie.radius=='auto')
 					if (options.series.pie.label.show)
 						options.series.pie.radius = 3/4;
 					else
 						options.series.pie.radius = 1;
-						
+
 				// ensure sane tilt
 				if (options.series.pie.tilt>1)
 					options.series.pie.tilt=1;
 				if (options.series.pie.tilt<0)
 					options.series.pie.tilt=0;
-			
+
 				// add processData hook to do transformations on the data
 				plot.hooks.processDatapoints.push(processDatapoints);
-				plot.hooks.drawOverlay.push(drawOverlay);	
-				
+				plot.hooks.drawOverlay.push(drawOverlay);
+
 				// add draw hook
 				plot.hooks.draw.push(draw);
 			}
 		}
-	
+
 		// bind hoverable events
-		function bindEvents(plot, eventHolder) 		
-		{		
+		function bindEvents(plot, eventHolder)
+		{
 			var options = plot.getOptions();
-			
+
 			if (options.series.pie.show && options.grid.hoverable)
 				eventHolder.unbind('mousemove').mousemove(onMouseMove);
-				
+
 			if (options.series.pie.show && options.grid.clickable)
 				eventHolder.unbind('click').click(onClick);
-		}	
-		
+		}
+
 
 		// debugging function that prints out an object
 		function alertObject(obj)
@@ -3188,7 +3188,7 @@ More detail and specific examples can be found in the included HTML file.
 				{
 					for (var j=0; j<depth; j++)
 						msg += '\t';
-				
+
 					if( typeof obj[i] == "object")
 					{	// its an object
 						msg += ''+i+':\n';
@@ -3203,7 +3203,7 @@ More detail and specific examples can be found in the included HTML file.
 			traverse(obj);
 			alert(msg);
 		}
-		
+
 		function calcTotal(data)
 		{
 			for (var i = 0; i < data.length; ++i)
@@ -3212,31 +3212,31 @@ More detail and specific examples can be found in the included HTML file.
 				if (item)
 					total += item;
 			}
-		}	
-		
-		function processDatapoints(plot, series, data, datapoints) 
-		{	
+		}
+
+		function processDatapoints(plot, series, data, datapoints)
+		{
 			if (!processed)
 			{
 				processed = true;
-			
+
 				canvas = plot.getCanvas();
 				target = $(canvas).parent();
 				options = plot.getOptions();
-			
+
 				plot.setData(combine(plot.getData()));
 			}
 		}
-		
+
 		function setupPie()
 		{
 			legendWidth = target.children().filter('.legend').children().width();
-		
+
 			// calculate maximum radius and center point
 			maxRadius =  Math.min(canvas.width,(canvas.height/options.series.pie.tilt))/2;
 			centerTop = (canvas.height/2)+options.series.pie.offset.top;
 			centerLeft = (canvas.width/2);
-			
+
 			if (options.series.pie.offset.left=='auto')
 				if (options.legend.position.match('w'))
 					centerLeft += legendWidth/2;
@@ -3244,13 +3244,13 @@ More detail and specific examples can be found in the included HTML file.
 					centerLeft -= legendWidth/2;
 			else
 				centerLeft += options.series.pie.offset.left;
-					
+
 			if (centerLeft<maxRadius)
 				centerLeft = maxRadius;
 			else if (centerLeft>canvas.width-maxRadius)
 				centerLeft = canvas.width-maxRadius;
 		}
-		
+
 		function fixData(data)
 		{
 			for (var i = 0; i < data.length; ++i)
@@ -3262,12 +3262,12 @@ More detail and specific examples can be found in the included HTML file.
 					if (typeof(data[i].data)!='undefined' && typeof(data[i].data.label)!='undefined')
 						data[i].label = data[i].data.label; // fix weirdness coming from flot
 					data[i].data = [[1,0]];
-					
+
 				}
 			}
 			return data;
 		}
-		
+
 		function combine(data)
 		{
 			data = fixData(data);
@@ -3275,7 +3275,7 @@ More detail and specific examples can be found in the included HTML file.
 			var combined = 0;
 			var numCombined = 0;
 			var color = options.series.pie.combine.color;
-			
+
 			var newdata = [];
 			for (var i = 0; i < data.length; ++i)
 			{
@@ -3283,19 +3283,19 @@ More detail and specific examples can be found in the included HTML file.
 				data[i].data[0][1] = parseFloat(data[i].data[0][1]);
 				if (!data[i].data[0][1])
 					data[i].data[0][1] = 0;
-					
+
 				if (data[i].data[0][1]/total<=options.series.pie.combine.threshold)
 				{
 					combined += data[i].data[0][1];
 					numCombined++;
 					if (!color)
 						color = data[i].color;
-				}				
+				}
 				else
 				{
 					newdata.push({
-						data: [[1,data[i].data[0][1]]], 
-						color: data[i].color, 
+						data: [[1,data[i].data[0][1]]],
+						color: data[i].color,
 						label: data[i].label,
 						angle: (data[i].data[0][1]*(Math.PI*2))/total,
 						percent: (data[i].data[0][1]/total*100)
@@ -3304,23 +3304,23 @@ More detail and specific examples can be found in the included HTML file.
 			}
 			if (numCombined>0)
 				newdata.push({
-					data: [[1,combined]], 
-					color: color, 
+					data: [[1,combined]],
+					color: color,
 					label: options.series.pie.combine.label,
 					angle: (combined*(Math.PI*2))/total,
 					percent: (combined/total*100)
 				});
 			return newdata;
-		}		
-		
+		}
+
 		function draw(plot, newCtx)
 		{
 			if (!target) return; // if no series were passed
 			ctx = newCtx;
-		
+
 			setupPie();
 			var slices = plot.getData();
-		
+
 			var attempts = 0;
 			while (redraw && attempts<redrawAttempts)
 			{
@@ -3337,37 +3337,37 @@ More detail and specific examples can be found in the included HTML file.
 				clear();
 				target.prepend('<div class="error">Could not draw pie with labels contained inside canvas</div>');
 			}
-			
+
 			if ( plot.setSeries && plot.insertLegend )
 			{
 				plot.setSeries(slices);
 				plot.insertLegend();
 			}
-			
+
 			// we're actually done at this point, just defining internal functions at this point
-			
+
 			function clear()
 			{
 				ctx.clearRect(0,0,canvas.width,canvas.height);
 				target.children().filter('.pieLabel, .pieLabelBackground').remove();
 			}
-			
+
 			function drawShadow()
 			{
 				var shadowLeft = 5;
 				var shadowTop = 15;
 				var edge = 10;
 				var alpha = 0.02;
-			
+
 				// set radius
 				if (options.series.pie.radius>1)
 					var radius = options.series.pie.radius;
 				else
 					var radius = maxRadius * options.series.pie.radius;
-					
+
 				if (radius>=(canvas.width/2)-shadowLeft || radius*options.series.pie.tilt>=(canvas.height/2)-shadowTop || radius<=edge)
 					return;	// shadow would be outside canvas, so don't draw it
-			
+
 				ctx.save();
 				ctx.translate(shadowLeft,shadowTop);
 				ctx.globalAlpha = alpha;
@@ -3376,7 +3376,7 @@ More detail and specific examples can be found in the included HTML file.
 				// center and rotate to starting position
 				ctx.translate(centerLeft,centerTop);
 				ctx.scale(1, options.series.pie.tilt);
-				
+
 				//radius -= edge;
 				for (var i=1; i<=edge; i++)
 				{
@@ -3384,27 +3384,27 @@ More detail and specific examples can be found in the included HTML file.
 					ctx.arc(0,0,radius,0,Math.PI*2,false);
 					ctx.fill();
 					radius -= i;
-				}	
-				
+				}
+
 				ctx.restore();
 			}
-			
+
 			function drawPie()
 			{
 				startAngle = Math.PI*options.series.pie.startAngle;
-				
+
 				// set radius
 				if (options.series.pie.radius>1)
 					var radius = options.series.pie.radius;
 				else
 					var radius = maxRadius * options.series.pie.radius;
-				
+
 				// center and rotate to starting position
 				ctx.save();
 				ctx.translate(centerLeft,centerTop);
 				ctx.scale(1, options.series.pie.tilt);
 				//ctx.rotate(startAngle); // start at top; -- This doesn't work properly in Opera
-				
+
 				// draw slices
 				ctx.save();
 				var currentAngle = startAngle;
@@ -3414,7 +3414,7 @@ More detail and specific examples can be found in the included HTML file.
 					drawSlice(slices[i].angle, slices[i].color, true);
 				}
 				ctx.restore();
-				
+
 				// draw slice outlines
 				ctx.save();
 				ctx.lineWidth = options.series.pie.stroke.width;
@@ -3422,22 +3422,22 @@ More detail and specific examples can be found in the included HTML file.
 				for (var i = 0; i < slices.length; ++i)
 					drawSlice(slices[i].angle, options.series.pie.stroke.color, false);
 				ctx.restore();
-					
+
 				// draw donut hole
 				drawDonutHole(ctx);
-				
+
 				// draw labels
 				if (options.series.pie.label.show)
 					drawLabels();
-				
+
 				// restore to original state
 				ctx.restore();
-				
+
 				function drawSlice(angle, color, fill)
-				{	
+				{
 					if (angle<=0)
 						return;
-				
+
 					if (fill)
 						ctx.fillStyle = color;
 					else
@@ -3445,7 +3445,7 @@ More detail and specific examples can be found in the included HTML file.
 						ctx.strokeStyle = color;
 						ctx.lineJoin = 'round';
 					}
-						
+
 					ctx.beginPath();
 					if (Math.abs(angle - Math.PI*2) > 0.000000001)
 						ctx.moveTo(0,0); // Center of the pie
@@ -3456,35 +3456,35 @@ More detail and specific examples can be found in the included HTML file.
 					ctx.closePath();
 					//ctx.rotate(angle); // This doesn't work properly in Opera
 					currentAngle += angle;
-					
+
 					if (fill)
 						ctx.fill();
 					else
 						ctx.stroke();
 				}
-				
+
 				function drawLabels()
 				{
 					var currentAngle = startAngle;
-					
+
 					// set radius
 					if (options.series.pie.label.radius>1)
 						var radius = options.series.pie.label.radius;
 					else
 						var radius = maxRadius * options.series.pie.label.radius;
-					
+
 					for (var i = 0; i < slices.length; ++i)
 					{
 						if (slices[i].percent >= options.series.pie.label.threshold*100)
 							drawLabel(slices[i], currentAngle, i);
 						currentAngle += slices[i].angle;
 					}
-					
+
 					function drawLabel(slice, startAngle, index)
 					{
 						if (slice.data[0][1]==0)
 							return;
-							
+
 						// format label text
 						var lf = options.legend.labelFormatter, text, plf = options.series.pie.label.formatter;
 						if (lf)
@@ -3493,11 +3493,11 @@ More detail and specific examples can be found in the included HTML file.
 							text = slice.label;
 						if (plf)
 							text = plf(text, slice);
-							
+
 						var halfAngle = ((startAngle+slice.angle) + startAngle)/2;
 						var x = centerLeft + Math.round(Math.cos(halfAngle) * radius);
 						var y = centerTop + Math.round(Math.sin(halfAngle) * radius) * options.series.pie.tilt;
-						
+
 						var html = '<span class="pieLabel" id="pieLabel'+index+'" style="position:absolute;top:' + y + 'px;left:' + x + 'px;">' + text + "</span>";
 						target.append(html);
 						var label = target.children('#pieLabel'+index);
@@ -3505,11 +3505,11 @@ More detail and specific examples can be found in the included HTML file.
 						var labelLeft = (x - label.width()/2);
 						label.css('top', labelTop);
 						label.css('left', labelLeft);
-						
+
 						// check to make sure that the label is not outside the canvas
 						if (0-labelTop>0 || 0-labelLeft>0 || canvas.height-(labelTop+label.height())<0 || canvas.width-(labelLeft+label.width())<0)
 							redraw = true;
-						
+
 						if (options.series.pie.label.background.opacity != 0) {
 							// put in the transparent background separately to avoid blended labels and label boxes
 							var c = options.series.pie.label.background.color;
@@ -3523,8 +3523,8 @@ More detail and specific examples can be found in the included HTML file.
 				} // end drawLabels function
 			} // end drawPie function
 		} // end draw function
-		
-		// Placed here because it needs to be accessed from multiple locations 
+
+		// Placed here because it needs to be accessed from multiple locations
 		function drawDonutHole(layer)
 		{
 			// draw donut hole
@@ -3540,7 +3540,7 @@ More detail and specific examples can be found in the included HTML file.
 				layer.fill();
 				layer.closePath();
 				layer.restore();
-				
+
 				// add inner stroke
 				layer.save();
 				layer.beginPath();
@@ -3552,9 +3552,9 @@ More detail and specific examples can be found in the included HTML file.
 				// TODO: add extra shadow inside hole (with a mask) if the pie is tilted.
 			}
 		}
-		
+
 		//-- Additional Interactive related functions --
-		
+
 		function isPointInPoly(poly, pt)
 		{
 			for(var c = false, i = -1, l = poly.length, j = l - 1; ++i < l; j = i)
@@ -3563,17 +3563,17 @@ More detail and specific examples can be found in the included HTML file.
 				&& (c = !c);
 			return c;
 		}
-		
+
 		function findNearbySlice(mouseX, mouseY)
 		{
 			var slices = plot.getData(),
 				options = plot.getOptions(),
 				radius = options.series.pie.radius > 1 ? options.series.pie.radius : maxRadius * options.series.pie.radius;
-			
-			for (var i = 0; i < slices.length; ++i) 
+
+			for (var i = 0; i < slices.length; ++i)
 			{
-				var s = slices[i];	
-				
+				var s = slices[i];
+
 				if(s.pie.show)
 				{
 					ctx.save();
@@ -3595,7 +3595,7 @@ More detail and specific examples can be found in the included HTML file.
 					}
 					else
 					{
-						// excanvas for IE doesn;t support isPointInPath, this is a workaround. 
+						// excanvas for IE doesn;t support isPointInPath, this is a workaround.
 						p1X = (radius * Math.cos(s.startAngle));
 						p1Y = (radius * Math.sin(s.startAngle));
 						p2X = (radius * Math.cos(s.startAngle+(s.angle/4)));
@@ -3613,60 +3613,60 @@ More detail and specific examples can be found in the included HTML file.
 						{
 							ctx.restore();
 							return {datapoint: [s.percent, s.data], dataIndex: 0, series: s, seriesIndex: i};
-						}			
+						}
 					}
 					ctx.restore();
 				}
 			}
-			
+
 			return null;
 		}
 
-		function onMouseMove(e) 
+		function onMouseMove(e)
 		{
 			triggerClickHoverEvent('plothover', e);
 		}
-		
-        function onClick(e) 
+
+        function onClick(e)
 		{
 			triggerClickHoverEvent('plotclick', e);
         }
 
 		// trigger click or hover event (they send the same parameters so we share their code)
-		function triggerClickHoverEvent(eventname, e) 
+		function triggerClickHoverEvent(eventname, e)
 		{
 			var offset = plot.offset(),
 				canvasX = parseInt(e.pageX - offset.left),
 				canvasY =  parseInt(e.pageY - offset.top),
 				item = findNearbySlice(canvasX, canvasY);
-			
-			if (options.grid.autoHighlight) 
+
+			if (options.grid.autoHighlight)
 			{
 				// clear auto-highlights
-				for (var i = 0; i < highlights.length; ++i) 
+				for (var i = 0; i < highlights.length; ++i)
 				{
 					var h = highlights[i];
 					if (h.auto == eventname && !(item && h.series == item.series))
 						unhighlight(h.series);
 				}
 			}
-			
+
 			// highlight the slice
-			if (item) 
+			if (item)
 			    highlight(item.series, eventname);
-				
+
 			// trigger any hover bind events
 			var pos = { pageX: e.pageX, pageY: e.pageY };
-			target.trigger(eventname, [ pos, item ]);	
+			target.trigger(eventname, [ pos, item ]);
 		}
 
-		function highlight(s, auto) 
+		function highlight(s, auto)
 		{
 			if (typeof s == "number")
 				s = series[s];
 
 			var i = indexOfHighlight(s);
-			if (i == -1) 
+			if (i == -1)
 			{
 				highlights.push({ series: s, auto: auto });
 				plot.triggerRedrawOverlay();
@@ -3675,28 +3675,28 @@ More detail and specific examples can be found in the included HTML file.
 				highlights[i].auto = false;
 		}
 
-		function unhighlight(s) 
+		function unhighlight(s)
 		{
-			if (s == null) 
+			if (s == null)
 			{
 				highlights = [];
 				plot.triggerRedrawOverlay();
 			}
-			
+
 			if (typeof s == "number")
 				s = series[s];
 
 			var i = indexOfHighlight(s);
-			if (i != -1) 
+			if (i != -1)
 			{
 				highlights.splice(i, 1);
 				plot.triggerRedrawOverlay();
 			}
 		}
 
-		function indexOfHighlight(s) 
+		function indexOfHighlight(s)
 		{
-			for (var i = 0; i < highlights.length; ++i) 
+			for (var i = 0; i < highlights.length; ++i)
 			{
 				var h = highlights[i];
 				if (h.series == s)
@@ -3705,32 +3705,32 @@ More detail and specific examples can be found in the included HTML file.
 			return -1;
 		}
 
-		function drawOverlay(plot, octx) 
+		function drawOverlay(plot, octx)
 		{
 			//alert(options.series.pie.radius);
 			var options = plot.getOptions();
 			//alert(options.series.pie.radius);
-			
+
 			var radius = options.series.pie.radius > 1 ? options.series.pie.radius : maxRadius * options.series.pie.radius;
 
 			octx.save();
 			octx.translate(centerLeft, centerTop);
 			octx.scale(1, options.series.pie.tilt);
-			
-			for (i = 0; i < highlights.length; ++i) 
+
+			for (i = 0; i < highlights.length; ++i)
 				drawHighlight(highlights[i].series);
-			
+
 			drawDonutHole(octx);
 
 			octx.restore();
 
-			function drawHighlight(series) 
+			function drawHighlight(series)
 			{
 				if (series.angle < 0) return;
-				
+
 				//octx.fillStyle = parseColor(options.series.pie.highlight.color).scale(null, null, null, options.series.pie.highlight.opacity).toString();
 				octx.fillStyle = "rgba(255, 255, 255, "+options.series.pie.highlight.opacity+")"; // this is temporary until we have access to parseColor
-				
+
 				octx.beginPath();
 				if (Math.abs(series.angle - Math.PI*2) > 0.000000001)
 					octx.moveTo(0,0); // Center of the pie
@@ -3738,11 +3738,11 @@ More detail and specific examples can be found in the included HTML file.
 				octx.closePath();
 				octx.fill();
 			}
-			
-		}	
-		
+
+		}
+
 	} // end init (plugin body)
-	
+
 	// define pie specific options and their default values
 	var options = {
 		series: {
@@ -3784,7 +3784,7 @@ More detail and specific examples can be found in the included HTML file.
 			}
 		}
 	};
-    
+
 	$.plot.plugins.push({
 		init: init,
 		options: options,
@@ -4395,7 +4395,7 @@ function animationHover(element, animation){
 $(function() {
     $(window).bind("load resize", function() {
         wrapperMinHeight();
-        
+
         if ($(this).width() < 769) {
             $('body').addClass('body-small')
         } else {
@@ -4444,7 +4444,7 @@ function WinMove() {
 function wrapperMinHeight()
 {
     var $wrap = $('#content-wrapper');
-    var winH = $(window).height(); 
+    var winH = $(window).height();
     $wrap.css('min-height', winH);
 };
 /*!
@@ -4678,7 +4678,7 @@ var tblAjaxLoad = function(elem, success_callback, no_url_callback)
 	var after_append_callback = $this.attr('data-after-append');
 
 	$loadBtn.text('LOADING...');
-	$loadBtn.attr('disabled', 'disabled'); 
+	$loadBtn.attr('disabled', 'disabled');
 
 	if(!url || $this.hasClass('all-loaded')){
 		if (typeof no_url_callback === "function") {
@@ -4706,7 +4706,7 @@ var tblAjaxLoad = function(elem, success_callback, no_url_callback)
 		error: function(r) {
 			var html = '';
 			if(r.status == 422){
-				
+
 				html = jsonErrorToHtml(r.responseJSON);
 			}else{
 
@@ -4750,8 +4750,8 @@ var tblAjaxLoad = function(elem, success_callback, no_url_callback)
 	   		}
 
 	   		if(data.meta.pagination.total_pages > data.meta.pagination.current_page){
-		   		
-		   		$this.attr('data-url', data.meta.pagination.links.next);		   			
+
+		   		$this.attr('data-url', data.meta.pagination.links.next);
 	   		}else{
 	   			$this.attr('data-url', null);
 	   			$loadBtn.hide();
@@ -4759,14 +4759,14 @@ var tblAjaxLoad = function(elem, success_callback, no_url_callback)
 	   		}
 
 	   		if (typeof success_callback === "function") {
-				success_callback();			
+				success_callback();
 	   		}
 	   	}
 	}).complete(function(){
 		rmLoadingTbl();
 		Waypoint.refreshAll();
 		$loadBtn.text('LOAD MORE');
-		$loadBtn.removeAttr('disabled'); 		
+		$loadBtn.removeAttr('disabled');
 	});
 };
 
@@ -4782,7 +4782,7 @@ var waypointInit = function() {
 		tblAjaxLoad($(this));
 	});
 
-	
+
 };
 
 var tblLoadMore = function() {
@@ -4810,11 +4810,11 @@ var ajaxTblLetterBtn = function($btn) {
 	        scrollTop: $td.offset().top
 	    }, 500, function(){
 	    	$td.addClass('blink-warning');
-	    	
+
 	    	setTimeout(function(){
 	    		$td.removeClass('blink-warning');
 	    	}, 2000);
-	    });			
+	    });
 	}else{
 
 		if($cont.hasClass('all-loaded')){
@@ -4841,8 +4841,8 @@ var ajaxTblLetterBtn = function($btn) {
 			}, function(){
 
 				ajaxTblLetterBtn($btn);
-			});		    	
-		});	
+			});
+		});
 
 	}
 };
@@ -4887,7 +4887,7 @@ var messageTblTd = function(k, row) {
 	}else if(k === 'content'){
 		attr = {class: 'mail-subject'};
 	 	html = '<a href="' + showUrl + '">' + row.last_message.body_excerpt + '</a>';
-		
+
 	}else if(k === 'time'){
 		html = row.last_message.created_at_human;
 		attr = {class: 'text-right mail-date'};
@@ -4930,7 +4930,7 @@ var fieldAutoComplete = function()
 					},
 					success: function( data ) {
 						response( data );
-					}	      
+					}
 			    });
 		  	},
 			messages: {
@@ -4966,7 +4966,7 @@ var dealerModalFindSelectPopulateCat = function(){
 	   		});
 
 	   	}
-	});		
+	});
 };
 
 var dealerModalFindSelect = function(field_name, dealer_id, dealer_name){
@@ -5011,7 +5011,7 @@ var dealerModalShowSubmit = function()
 				text: 'Zip field is required.',
 				time: 8000,
 				class_name: 'gritter-danger'
-			});			
+			});
 
 			return false;
 		}
@@ -5023,10 +5023,10 @@ var dealerModalShowSubmit = function()
 				text: 'Category field is required.',
 				time: 8000,
 				class_name: 'gritter-danger'
-			});			
+			});
 
 			return false;
-		}		
+		}
 
 		$.ajax({
 			url: url,
@@ -5036,7 +5036,7 @@ var dealerModalShowSubmit = function()
 			error: function(r) {
 				var html = '';
 				if(r.status == 422){
-					
+
 					html = jsonErrorToHtml(r.responseJSON);
 				}else{
 
@@ -5079,7 +5079,7 @@ var dealerModalShowSubmit = function()
 		   	}
 		}).complete(function(){
 
-		});	
+		});
 
 	});
 };
@@ -5093,7 +5093,7 @@ var officeHoursFieldSetCheck = function(elem)
 		$('select', $hours).prop('disabled', true);
 	}else{
 		$('select', $hours).prop('disabled', false);
-	}	
+	}
 }
 
 var officeHoursField = function()
@@ -5108,7 +5108,7 @@ var officeHoursField = function()
 
 	$('.field-hours-of-operations input[type="checkbox"]').on('ifUnchecked', function(){
 		officeHoursFieldSetCheck(this);
-	});	
+	});
 };
 
 $(document).ready(function(){
@@ -29789,7 +29789,7 @@ function forEach(list, iterator, context) {
     if (arguments.length < 3) {
         context = this
     }
-    
+
     if (toString.call(list) === '[object Array]')
         forEachArray(list, iterator, context)
     else if (typeof list === 'string')
@@ -31817,12 +31817,12 @@ var mediaFormUpload = function(){
 	if($('#lbt-file-upload-frm').length < 1){
 		$('body').append(html);
 	}
-}; 
+};
 
 var mediaField = function(){
 
 	$('.media-field').each(function(){
-		
+
 		var $container = $(this);
 		var $btn = $('.media-upload', $container);
 		var $list = $('.media-unorderlist', $container);
@@ -31836,19 +31836,19 @@ var mediaField = function(){
 			if($('.media-field').length > 0 && $('#lbt-file-upload-frm').length < 1){
 				mediaFormUpload();
 			}
-			
-			var $file = $('#lbt-file-upload-frm input[type="file"]');			
+
+			var $file = $('#lbt-file-upload-frm input[type="file"]');
 			$file.attr('accept', field_accepts);
 			$file.trigger('click');
 
 			$file.on('change', function(){
-				
-				var formData = new FormData(); 
+
+				var formData = new FormData();
 			    $.each($(this)[0].files,function(j, file){
 			        formData.append('files['+j+']', file);
 			    });
 				mediaUpload(formData, $list, field_name);
-			});			
+			});
 		});
 	});
 };
@@ -31862,7 +31862,7 @@ return '' +
 //return '<embed type="application/x-vlc-plugin" pluginspage="http://www.videolan.org" version="VideoLAN.VLCPlugin.2" width="320" height="240" target=src="' + url + '" id="vlc"></embed>';
 } else {
 	return '' +
-	'<video class="video-js" width="320" height="240" controls>' + 
+	'<video class="video-js" width="320" height="240" controls>' +
 		'<source src="' + url + '" type="video/' + ext + '">' +
 	'</video>';
 }
@@ -31878,13 +31878,13 @@ var mediaModalDelete = function(guid, li_guid){
 	var liGuid = "'" + li_guid + "'";
 	return '<div class="modal inmodal" id="media_modal_delete_' + guid + '" tabindex="-1" role="dialog" aria-hidden="true">' +
 			    '<div class="modal-dialog modal-sm">' +
-			        '<div class="modal-content animated bounceInRight">' + 
+			        '<div class="modal-content animated bounceInRight">' +
 			            '<div class="modal-header">' +
 			                '<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>' +
 			                '<h4 class="modal-title">Question</h4>' +
 			            '</div>' +
-			            '<div class="modal-body">' + 
-			                '<p>Are you sure you want to delete this file?</p>' + 
+			            '<div class="modal-body">' +
+			                '<p>Are you sure you want to delete this file?</p>' +
 			            '</div>' +
 			            '<div class="modal-footer">' +
 			                '<button type="button" class="btn btn-white" data-dismiss="modal">Cancel</button>' +
@@ -31929,8 +31929,8 @@ var mediaAddMediaToList = function($list, data, field_name){
 			body = mediaVideoPlayer(row.url, row.extension);
 		}
 
-		var modal = 
-		'<div class="modal inmodal" id="' + guid + '" tabindex="-1" role="dialog" aria-hidden="true">' + 
+		var modal =
+		'<div class="modal inmodal" id="' + guid + '" tabindex="-1" role="dialog" aria-hidden="true">' +
 		    '<div class="modal-dialog">' +
 			    '<div class="modal-content animated bounceInRight">' +
 			        '<div class="modal-header">' +
@@ -31948,7 +31948,7 @@ var mediaAddMediaToList = function($list, data, field_name){
 			        		'</div>' +
 			     			'<div class="col-sm-6">' +
 					            '<button type="button" class="btn btn-white" data-target="#media_modal_delete_' + guid + '" data-toggle="modal" data-dismiss="modal">Delete</button>' +
-					            footerHtml + 
+					            footerHtml +
 			     			'</div>' +
 			        '</div>' +
 		        '</div>' +
@@ -31979,7 +31979,7 @@ var mediaUpload = function(form_data, $list, field_name){
 	$.ajax({
 		url: url,
 		processData: false,
-		contentType: false,			
+		contentType: false,
 		dataType: 'json',
 		data: form_data,
 		type: 'POST',
@@ -32013,7 +32013,7 @@ var mediaUpload = function(form_data, $list, field_name){
 					text: 'Uknown error found.',
 					time: 8000,
 					class_name: 'gritter-danger'
-				});				
+				});
 			}
 	   	},
 	   	success: function(data) {
@@ -32035,7 +32035,7 @@ var mediaUpload = function(form_data, $list, field_name){
 var loadMedia = function($container, field_name){
 	var $list = $('.media-unorderlist', $container);
 	var ids = $container.attr('data-field-value');
-	
+
 	if(ids == ""){
 		return false;
 	}
@@ -32045,13 +32045,13 @@ var loadMedia = function($container, field_name){
 	$.ajax({
 		url: url,
 		processData: false,
-		contentType: false,			
+		contentType: false,
 		dataType: 'json',
 		type: 'GET',
 		error: function(r) {
 			var html = '';
 			if(r.status == 422){
-				
+
 				html = jsonErrorToHtml(r.responseJSON);
 			}else{
 
@@ -32070,7 +32070,7 @@ var loadMedia = function($container, field_name){
 	   	}
 	}).complete(function(){
 
-	});		
+	});
 };
 
 var openField = function(elem) {
@@ -32081,7 +32081,7 @@ var openField = function(elem) {
     } else if (element.fireEvent) {
         elem[0].fireEvent("onmousedown");
     }
-}	
+}
 
 var editSelectField = function(){
 
@@ -32105,11 +32105,11 @@ var mediaDelete = function(li_id){
 
 var offerModalFooter = function(d, li_id){
 	if(d.type === 'image'){
-		return '<button type="button" class="btn btn-primary" data-dismiss="modal" onClick="offerSetThumb(' + d.id + ')">Set as Featured Image</button>';		
+		return '<button type="button" class="btn btn-primary" data-dismiss="modal" onClick="offerSetThumb(' + d.id + ')">Set as Featured Image</button>';
 	}
 
 	return '';
-}		
+}
 
 var offerSetThumb = function(media_id){
 	$('#thumbnail_id').val(media_id);
@@ -32131,7 +32131,7 @@ var mediaAddedTrigger = function(){
 };
 
 $(document).ready(function(){
-	
+
 	mediaField();
 	editSelectField();
 	mediaAddedTrigger();
@@ -37214,7 +37214,7 @@ var iCheckfield = function()
     $('.i-checks').iCheck({
         checkboxClass: 'icheckbox_square-green',
         radioClass: 'iradio_square-green',
-    });	
+    });
 
 };
 
@@ -37246,7 +37246,7 @@ var jsonErrorToHtml = function(jsonResp)
  */
 var simpleAjaxRq = function(url, frm_data, is_valid, success_callback, callback_param, method, param)
 {
-	
+
 	if(is_valid === null || is_valid === undefined){
 		is_valid = true;
 	}
@@ -37271,7 +37271,7 @@ var simpleAjaxRq = function(url, frm_data, is_valid, success_callback, callback_
 			error: function(r) {
 				var html = '';
 				if(r.status == 422){
-					
+
 					html = jsonErrorToHtml(r.responseJSON);
 				}else{
 
@@ -37293,7 +37293,7 @@ var simpleAjaxRq = function(url, frm_data, is_valid, success_callback, callback_
 						time: 3000
 					});
 				}
-				
+
 				if (typeof success_callback === "function") {
 					success_callback(callback_param, data);
 				}
@@ -37301,7 +37301,7 @@ var simpleAjaxRq = function(url, frm_data, is_valid, success_callback, callback_
 		   	}
 		}).complete(function(){
 			rmBodyProcessing();
-		});		
+		});
 	}
 
 }
@@ -37395,17 +37395,17 @@ var registerFieldWizard = function()
 	        isDone = $(this).hasClass('doneBtn');
 
 	        if($(this).hasClass('next-submit')){
-	        	 
+
 	        	if(isDone){
 	        		simpleAjaxRq(url, formData, isValid, successDoneStep, nextStepWizard, null, {success_msg: successMsg});
 	        	}else{
-	        		simpleAjaxRq(url, formData, isValid, successNextStep, nextStepWizard, null, {success_msg: successMsg});	        		
+	        		simpleAjaxRq(url, formData, isValid, successNextStep, nextStepWizard, null, {success_msg: successMsg});
 	        	}
 	        }
 	  	});
 
 		var totalSteps = $('div.setup-panel div a').length;
-	  	var countDisabled = $('div.setup-panel div a.open-done').length; 
+	  	var countDisabled = $('div.setup-panel div a.open-done').length;
 
 	  	$('.register-page.setup-content').eq(countDisabled - 1).show();
 	  	$('.stepwizard-step').eq(countDisabled - 1).addClass('active');
@@ -37417,7 +37417,7 @@ var registerFieldWizard = function()
 
 var registerSearchDealer = function()
 {
-	
+
 	/**
 	 * Add dealers listing
 	 *
@@ -37430,7 +37430,7 @@ var registerSearchDealer = function()
 			$.gritter.add({
 				text: 'Dealer found!',
 				time: 3000
-			});	
+			});
 
 			var html = '<ul>';
 			$.each(data['data'], function(k, v){
@@ -37445,7 +37445,7 @@ var registerSearchDealer = function()
 			}else{
 				$('#dealers-container').addClass('hidden');
 			}
-	
+
 			iCheckfield();
 
 		}else{
@@ -37454,7 +37454,7 @@ var registerSearchDealer = function()
 				text: 'No dealer found!',
 				time: 8000,
 				class_name: 'gritter-danger'
-			});			
+			});
 
 			$('#dealers-container').addClass('hidden');
 		}
@@ -37468,7 +37468,7 @@ var registerSearchDealer = function()
 
 		if(zipVal != '')
 		{
-			simpleAjaxRq(url, formData, true, populateDealers, null, 'GET', {});			
+			simpleAjaxRq(url, formData, true, populateDealers, null, 'GET', {});
 		}else{
 			$.gritter.add({
 				title: 'Error!',
@@ -37492,8 +37492,8 @@ var scrollTo = function()
 			    $('html, body').animate({
 			        scrollTop: $target.offset().top
 			    }, 500);
-			}, 1000);	
-		}	
+			}, 1000);
+		}
 	});
 }
 
@@ -37542,7 +37542,7 @@ var offerSelectField = function()
 	$('#addLBTOfferModal').on('hidden.bs.modal', function () {
 		var $modal = $(this);
 		$('ul.offer li', $modal).remove();
-	});	
+	});
 };
 
 var offerSelectFieldPopulate = function(url, $modal)
@@ -37562,12 +37562,12 @@ var offerSelectFieldPopulate = function(url, $modal)
 
 		if(data.meta.pagination.links.next)
 		{
-			$modal.attr('data-url', data.meta.pagination.links.next);	
+			$modal.attr('data-url', data.meta.pagination.links.next);
 		}else{
 
 			$modal.attr('data-url', 0);
 		}
-		
+
 
 	})
 };
@@ -37581,7 +37581,7 @@ var offerLoadAll = function(url, success_callback)
 		error: function(r) {
 			var html = '';
 			if(r.status == 422){
-				
+
 				html = jsonErrorToHtml(r.responseJSON);
 			}else{
 
@@ -37638,7 +37638,7 @@ var setGlobalTz = function()
 		error: function(r) {
 			var html = '';
 			if(r.status == 422){
-				
+
 				html = jsonErrorToHtml(r.responseJSON);
 			}else{
 
@@ -37650,7 +37650,7 @@ var setGlobalTz = function()
 	   	success: function(data) {
 
 	   	}
-	});	
+	});
 };
 
 var salesRepAgreementModal = function()
@@ -37706,7 +37706,7 @@ var btnCtrlCollaps = function()
 		var normalTxt      = $(this).text();
 		var collapsedClass = $(this).attr('data-collapsed-class') + ' btn-control-collapsed';
 		var normalClass    = $(this).attr('class');
-		var href 		   = $(this).attr('href');	
+		var href 		   = $(this).attr('href');
 		var $this 		   = $(this);
 
 		$(this).attr('data-normal-class', normalClass);
@@ -37729,7 +37729,7 @@ var beforeBrandAssignment = function(elem)
 	var k        = $item.attr('data-key');
 	var val      = $("option:selected", elem).val();
 
-	$(elem).attr('data-old-value', val);	
+	$(elem).attr('data-old-value', val);
 };
 
 var brandAssignment = function(elem)
@@ -37772,7 +37772,7 @@ var changeProspectBa = function(elem, customer_id)
 		error: function(r) {
 			var html = '';
 			if(r.status == 422){
-				
+
 				html = jsonErrorToHtml(r.responseJSON);
 			}else{
 
@@ -37792,7 +37792,7 @@ var changeProspectBa = function(elem, customer_id)
 	}).complete(function(){
 		$modal.removeClass('disabled');
 		//$m.modal('hide');
-	});	
+	});
 };
 
 var prospectShowProfileSetSign = function()
@@ -37818,7 +37818,7 @@ var acceptLead = function(elem)
 		error: function(r) {
 			var html = '';
 			if(r.status == 422){
-				
+
 				html = jsonErrorToHtml(r.responseJSON);
 			}else{
 
@@ -37833,7 +37833,7 @@ var acceptLead = function(elem)
 			});
 	   	},
 	   	success: function(data) {
-	   		location.reload();	   		
+	   		location.reload();
 	   	}
 	}).complete(function(){
 
@@ -37856,7 +37856,7 @@ var rejectLead = function(elem)
 		error: function(r) {
 			var html = '';
 			if(r.status == 422){
-				
+
 				html = jsonErrorToHtml(r.responseJSON);
 			}else{
 
@@ -37870,8 +37870,8 @@ var rejectLead = function(elem)
 				class_name: 'gritter-danger'
 			});
 	   	},
-	   	success: function(data) {  
-	   		window.location.href = laroute.route('admin.prospects.leads');		
+	   	success: function(data) {
+	   		window.location.href = laroute.route('admin.prospects.leads');
 	   	}
 	}).complete(function(){
 
@@ -37925,7 +37925,7 @@ var categoryDestroyConfirm = function(elem)
 			messages = [];
 
 			if(r.status == 422){
-				
+
 				messages = [r.responseJSON.error];
 			}else{
 
@@ -37952,8 +37952,8 @@ var categoryDestroyConfirm = function(elem)
 	        $('#category_delete_modal').modal('show');
 	   	}
 	}).complete(function(){
-	
-	});	
+
+	});
 };
 
 var categoryUpdate = function(elem)
@@ -37972,7 +37972,7 @@ var categoryUpdate = function(elem)
 			messages = [];
 
 			if(r.status == 422){
-				
+
 				messages = [r.responseJSON.error];
 			}else{
 
@@ -38000,12 +38000,12 @@ var categoryUpdate = function(elem)
 	        $('#category_edit_form_modal').modal('show');
 	   	}
 	}).complete(function(){
-	
-	});	
+
+	});
 };
 
 var messageTblListDeleteIds = function(elem)
-{	
+{
 	var name = $(elem).attr('name');
 	var ids = [];
 	$.each($('input[name="' + name + '"]:checked'), function(k, dom){
@@ -38038,7 +38038,7 @@ var triggerMessageListDelete = function(elem)
 			messages = [];
 
 			if(r.status == 422){
-				
+
 				messages = [r.responseJSON.error];
 			}else{
 
@@ -38050,8 +38050,8 @@ var triggerMessageListDelete = function(elem)
 	   		window.location.href = data.data.url;
 	   	}
 	}).complete(function(){
-	
-	});	
+
+	});
 };
 
 var messageDeleteListModal = function()
@@ -38061,7 +38061,7 @@ var messageDeleteListModal = function()
 	if(!strIds)
 	{
 		return false;
-	}	
+	}
 
 	$('#deleteMessageListModal').modal();
 	$('#deleteMessageListModal').modal('show');
@@ -38081,7 +38081,7 @@ var formValidationSubmit = function()
 
 		$('[name]', $form).each(function(){
 			var name = $(this).attr('name');
-			var val = $(this).val(); 
+			var val = $(this).val();
 			data[name] = val;
 
 			if($(this).is('button'))
@@ -38095,7 +38095,7 @@ var formValidationSubmit = function()
 			return true;
 		}
 
-		e.preventDefault();		
+		e.preventDefault();
 
 		simpleAjaxRq(url, $.param(data), true, function(){
 			$form.addClass('validated');
@@ -38114,12 +38114,12 @@ $(document).ready(function () {
 	scrollTo();
 	offerSelectField();
 	salesRepAgreementModal();
-	sidebarSetCounts();	
+	sidebarSetCounts();
 	registerSearchDealer();
 	btnCtrlCollaps();
 	sideMenuDropTrigger();
 	formValidationSubmit();
 	//brandAssignment();
-		
+
 });
 //# sourceMappingURL=app.js.map

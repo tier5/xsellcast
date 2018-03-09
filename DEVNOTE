@@ -55,3 +55,8 @@ Prospect offers v1.0 #stable
 a) Created offer filter by category
 b) Created offer filter by brand
 
+Prospect offers v1.1 #stable
+a) Created API to Add offer in customer lookbook
+b) Created Api to View offer details
+c) Fixed offer filter API issue.
+

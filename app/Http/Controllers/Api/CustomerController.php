@@ -170,16 +170,34 @@ class CustomerController extends Controller
      */
     public function addOffer(CustomerOfferPostRequest $request)
     {
+        try{
         $customerId = $request->get('customer_id');
         $offerId    = $request->get('offer_id');
         $customer   = $this->customer->skipPresenter()->find($customerId);
 
         $this->customer->setOfferToCustomer($offerId, $customer);
 
-       // $offer->customers()->save($customer);
 
-        return response()
-            ->json(array());
+        return response()->json([
+                    'status'=>true,
+                    'code'=>config('responses.success.status_code'),
+                    'data'=>'Offer added succesfully',
+                    'message'=>config('responses.success.status_message'),
+                ], config('responses.success.status_code'));
+            }
+        catch (\Exception $e) {
+            // dd($e->getMessage());
+            return response()->json([
+                'status'=>false,
+                'code'=>config('responses.bad_request.status_code'),
+                'data'=>null,
+                'message'=>$e->getMessage()
+            ],
+                config('responses.bad_request.status_code')
+            );
+        }
+
+
     }
 
     /**

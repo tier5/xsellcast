@@ -10,7 +10,7 @@ use App\Http\Requests\Request;
 class CustomerOfferPostRequest extends Request
 {
     protected $redirectRoute = 'api.errors';
-    
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -30,8 +30,28 @@ class CustomerOfferPostRequest extends Request
     {
         return [
             'access_token' => 'required',
-            'customer_id'  => 'required',
-            'offer_id'     => 'required'
+            'customer_id'  => 'required|exists:user_customer,id',
+            'offer_id'     => 'required|exists:offers,id'
         ];
+    }
+
+     /**
+     * Response error message as json
+     *
+     * @param array $errors
+     * @return mixed
+     */
+    public function response(array $errors){
+
+        return response()->json([
+                    'status'=>false,
+                    'code'=>config('responses.bad_request.status_code'),
+                    'data'=>null,
+                    'errors'=>$errors,
+                    'message'=>config('responses.bad_request.status_message'),
+                ],
+                config('responses.bad_request.status_code')
+            );
+        // return Response::json($errors, config('responses.bad_request.status_code'));
     }
 }

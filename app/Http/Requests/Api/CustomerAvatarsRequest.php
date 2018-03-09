@@ -30,7 +30,25 @@ class CustomerAvatarsRequest extends Request
     {
         return [
             'access_token' => 'required',
-            'customer_id'  => 'required',
+            'customer_id'  => 'required|exists:user_customer,id',
         ];
+    }
+    /**
+     * Response error message as json
+     *
+     * @param array $errors
+     * @return mixed
+     */
+    public function response(array $errors){
+
+        return response()->json([
+                    'status'=>false,
+                    'code'=>config('responses.bad_request.status_code'),
+                    'data'=>null,
+                    'errors'=>$errors,
+                    'message'=>config('responses.bad_request.status_message'),
+                ],
+                config('responses.bad_request.status_code')
+            );
     }
 }

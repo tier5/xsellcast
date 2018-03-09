@@ -40,7 +40,7 @@ class CustomerNotificationBrandRequest extends Request
             'customer_id'  => 'required|exists:user_customer,id',
             // 'brand_ids' => 'required',
 
-            'brands.*' => 'required|exists:brands,id',
+            'brands' => 'required|exists:brands,id',
             // 'status'  => 'required',
         ];
 
