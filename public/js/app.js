@@ -31855,10 +31855,17 @@ var mediaField = function(){
 
 var mediaVideoPlayer = function(url, ext){
 
+if(ext == "qt")
+{
+return '' +
+	'<video width="320" height="240" controls src="' + url + '">';
+//return '<embed type="application/x-vlc-plugin" pluginspage="http://www.videolan.org" version="VideoLAN.VLCPlugin.2" width="320" height="240" target=src="' + url + '" id="vlc"></embed>';
+} else {
 	return '' +
 	'<video class="video-js" width="320" height="240" controls>' + 
 		'<source src="' + url + '" type="video/' + ext + '">' +
 	'</video>';
+}
 };
 
 var mediaImg = function(url)
