@@ -55,11 +55,31 @@ class RequestInfoController extends Controller
 	 */
 	public function index(RequestTypeAllIndexRequest $request)
 	{
+		try{
 		$user     = $this->customer->skipPresenter()->find($request->get('customer_id'))->user;
+
 		$messages = $this->message->sentByUser($user->id)->queryInfoMessage()->orderBy('created_at', 'desc')->paginate(20);
 
-    	return response()->json($messages);
-	}
+		$data=[
+				'status'=>true,
+                'code'=>config('responses.success.status_code'),
+                'message'=>config('responses.success.status_message'),
+                ];
+
+        $data=array_merge($data,$messages);
+
+    	return response()->json($data, config('responses.success.status_code'));
+
+    	}catch(\Exception $e){
+
+    		return response()->json([
+				'status'=>false,
+                'code'=>config('responses.bad_request.status_code'),
+                'data'=>null,
+                'message'=>$e->getMessage()
+			]);
+    	}
+    }
 
 	/**
 	 * Single
@@ -72,10 +92,29 @@ class RequestInfoController extends Controller
 	 */
 	public function show(RequestTypeAllShowRequest $request)
 	{
-		$user    = $this->customer->skipPresenter()->find($request->get('customer_id'))->user;
-		$message = $this->message->sentByUser($user->id)->queryInfoMessage()->find($request->get('message_id'));
+		try{
 
-    	return response()->json($message);
+			$user    = $this->customer->skipPresenter()->find($request->get('customer_id'))->user;
+
+			$message = $this->message->sentByUser($user->id)->queryInfoMessage()->find($request->get('message_id'));
+
+    		return response()->json([
+	                    'status'=>true,
+	                    'code'=>config('responses.success.status_code'),
+	                    'data'=>$message,
+	                    'message'=>config('responses.success.status_message'),
+	                ], config('responses.success.status_code'));
+
+		}catch(\Exception $e){
+
+			return response()->json([
+				'status'=>false,
+                'code'=>config('responses.bad_request.status_code'),
+                'data'=>null,
+                'message'=>$e->getMessage()
+			]);
+
+		}
 	}
 
 	/**
@@ -89,11 +128,32 @@ class RequestInfoController extends Controller
 	 */
 	public function store(RequestTypeAllStoreRequest $request)
 	{
-		$customer = $this->customer->skipPresenter()->find($request->get('customer_id'));
-		$offer    = $this->offer->skipPresenter()->find($request->get('offer_id'));
-		$body     = $request->get('body');
-		$thread   = $this->customer_request->sendRequest($customer, $offer, 'info', $body);
+		try{
 
-		return response()->json($thread);
+			$customer = $this->customer->skipPresenter()->find($request->get('customer_id'));
+
+			$offer    = $this->offer->skipPresenter()->find($request->get('offer_id'));
+
+			$body     = $request->get('body');
+
+			$thread   = $this->customer_request->sendRequest($customer, $offer, 'info', $body);
+
+		 	return response()->json([
+	                    'status'=>true,
+	                    'code'=>config('responses.success.status_code'),
+	                    'data'=>$thread,
+	                    'message'=>config('responses.success.status_message'),
+	                ], config('responses.success.status_code'));
+
+		}catch(\Exception $e){
+
+			return response()->json([
+				'status'=>false,
+                'code'=>config('responses.bad_request.status_code'),
+                'data'=>null,
+                'message'=>$e->getMessage()
+			]);
+
+		}
 	}
 }

@@ -56,11 +56,33 @@ class RequestApptController extends Controller
 	 */
 	public function index(RequestTypeAllIndexRequest $request)
 	{
+		try{
+
 		$user     = $this->customer->skipPresenter()->find($request->get('customer_id'))->user;
+
 		$messages = $this->message->sentByUser($user->id)->queryApptMessage()->orderBy('created_at', 'desc')->paginate(20);
 
-    	return response()->json($messages);
+		$data=[
+				'status'=>true,
+                'code'=>config('responses.success.status_code'),
+                'message'=>config('responses.success.status_message'),
+                ];
+
+        $data=array_merge($data,$messages);
+
+    	return response()->json($data, config('responses.success.status_code'));
+
+    	}catch(\Exception $e){
+
+    		return response()->json([
+				'status'=>false,
+                'code'=>config('responses.bad_request.status_code'),
+                'data'=>null,
+                'message'=>$e->getMessage()
+			]);
+    	}
 	}
+
 
 	/**
 	 * Single
@@ -73,10 +95,30 @@ class RequestApptController extends Controller
 	 */
 	public function show(RequestTypeAllShowRequest $request)
 	{
+		try{
+
 		$user    = $this->customer->skipPresenter()->find($request->get('customer_id'))->user;
+
 		$message = $this->message->sentByUser($user->id)->queryApptMessage()->find($request->get('message_id'));
 
-    	return response()->json($message);
+    	$data=[
+				'status'=>true,
+                'code'=>config('responses.success.status_code'),
+                'message'=>config('responses.success.status_message'),
+                ];
+
+        $data=array_merge($data,$message);
+
+    	return response()->json($data, config('responses.success.status_code'));
+    	}catch(\Exception $e){
+
+    		return response()->json([
+				'status'=>false,
+                'code'=>config('responses.bad_request.status_code'),
+                'data'=>null,
+                'message'=>$e->getMessage()
+			]);
+    	}
 	}
 
 	/**
@@ -90,13 +132,33 @@ class RequestApptController extends Controller
 	 */
 	public function store(RequestTypeAllStoreRequest $request)
 	{
-		$customer = $this->customer->skipPresenter()->find($request->get('customer_id'));
-		//$salesrep = $this->salesrep->skipPresenter()->find($request->get('salesrep_id'));
-		$offer    = $this->offer->skipPresenter()->find($request->get('offer_id'));
-		$body     = $request->get('body');
 
-		$thread = $this->customer_request->sendRequest($customer, $offer, 'appt', $body);
+		try{
 
-		return response()->json($thread);
+			$customer = $this->customer->skipPresenter()->find($request->get('customer_id'));
+
+			$offer    = $this->offer->skipPresenter()->find($request->get('offer_id'));
+
+			$body     = $request->get('body');
+
+			$thread = $this->customer_request->sendRequest($customer, $offer, 'appt', $body);
+
+			return response()->json([
+                    'status'=>true,
+                    'code'=>config('responses.success.status_code'),
+                    'data'=>$thread,
+                    'message'=>config('responses.success.status_message'),
+                ], config('responses.success.status_code'));
+
+		}catch(\Exception $e){
+
+			return response()->json([
+				'status'=>false,
+                'code'=>config('responses.bad_request.status_code'),
+                'data'=>null,
+                'message'=>$e->getMessage()
+			]);
+
+		}
 	}
 }

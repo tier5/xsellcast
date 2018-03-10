@@ -151,12 +151,30 @@ class CustomerController extends Controller
      *
      * @return     Response
      */
-    public function offers(SimpleGetRequest $request, $customer_id)
+    public function offers(SimpleGetRequest $request)
     {
-        $offers = $this->offer->getByCustomer($customer_id)->paginate();
 
-        return response()
-            ->json($offers);
+        try{
+        $customer_id = $request->get('customer_id');
+        $offers = $this->offer->getByCustomer($customer_id)->paginate();
+        return response()->json([
+                    'status'=>true,
+                    'code'=>config('responses.success.status_code'),
+                    'data'=>$offers,
+                    'message'=>config('responses.success.status_message'),
+                ], config('responses.success.status_code'));
+            }
+        catch (\Exception $e) {
+            // dd($e->getMessage());
+            return response()->json([
+                'status'=>false,
+                'code'=>config('responses.bad_request.status_code'),
+                'data'=>null,
+                'message'=>$e->getMessage()
+            ],
+                config('responses.bad_request.status_code')
+            );
+        }
     }
 
     /**
@@ -212,16 +230,35 @@ class CustomerController extends Controller
      */
     public function deleteOffer(CustomerOfferDeleteRequest $request)
     {
-        $customerId = $request->get('customer_id');
-        $offerId    = $request->get('offer_id');
-        $offer      = $this->customer->skipPresenter()
-            ->find($customerId)
-            ->pivotOffers()->where('offer_id', $offerId)->first(); //->delete();
-        $offer->added = false;
-        $offer->save();
+        try{
+            $customer_id = $request->get('customer_id');
+            $offer_id    = $request->get('offer_id');
+            $offer      = $this->customer->skipPresenter()
+                ->find($customer_id)
+                ->pivotOffers()->where('offer_id', $offer_id)->first(); //->delete();
+            $offer->added = false;
+            $offer->save();
 
-        return response()
-            ->json($offer);
+        // return response()
+        //     ->json($offer);
+             return response()->json([
+                    'status'=>true,
+                    'code'=>config('responses.success.status_code'),
+                    'data'=>$offer,
+                    'message'=>config('responses.success.status_message'),
+                ], config('responses.success.status_code'));
+            }
+        catch (\Exception $e) {
+            // dd($e->getMessage());
+            return response()->json([
+                'status'=>false,
+                'code'=>config('responses.bad_request.status_code'),
+                'data'=>null,
+                'message'=>$e->getMessage()
+            ],
+                config('responses.bad_request.status_code')
+            );
+        }
     }
 
     /**

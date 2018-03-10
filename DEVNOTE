@@ -60,3 +60,11 @@ a) Created API to Add offer in customer lookbook
 b) Created Api to View offer details
 c) Fixed offer filter API issue.
 
+Prospect offers v1.2 #stable
+	a) Crated API to request an appointment by prospect
+	b) Implemented validation and  exception handling in  view prospect appointment details API
+	c) Implemented validation and  exception handling in  view prospect appointments API
+	d) Modified view lookbook API
+	e) Modified add info request API added validation and implemented exception handling
+	f) Modified view list and info details API added validation and implemented exception handling
+	g) Implemented validation and  exception handling in  delete offer from Lookbook API

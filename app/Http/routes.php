@@ -701,15 +701,15 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Api'), function()
             'as'           => 'api.v1.customers.brands-associates',
             'uses'         => 'CustomerController@salesReps'));
 
-        Route::get('customer/{id}/offers', array(
-            'as'           => 'api.v1.customers.offers',
+        Route::get('customer/lookbook/offers', array(
+            'as'           => 'api.v1.customers.lookbook.offers',
             'uses'         => 'CustomerController@offers'));
 
-        Route::post('customer/offer', array(
-            'as'           => 'api.v1.customers.offer.add',
+        Route::post('customer/lookbook/offer', array(
+            'as'           => 'api.v1.customers.offer.lookbook.add',
             'uses'         => 'CustomerController@addOffer'));
 
-        Route::delete('customer/offer', array(
+        Route::delete('customer/lookbook/offer', array(
             'as'           => 'api.v1.customers.offer.delete',
             'uses'         => 'CustomerController@deleteOffer'));
 
@@ -771,28 +771,17 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Api'), function()
                 'as'           => 'api.v1.customers.notification.brand',
                 'uses'         => 'CustomerNotificationSettingController@createBrand'));
 
-
             // Route::get('brands', array(
             //     'as'           => 'api.v1.customers.notification.brands',
             //     'uses'         => 'CustomerNotificationSettingController@indexBrand'));
-
-
-
 
             Route::post('ba', array(
                 'as'           => 'api.v1.customers.notification.brand-associate',
                 'uses'         => 'CustomerNotificationSettingController@createBrandAssociate'));
 
-
             // Route::post('brand-associates', array(
             //     'as'           => 'api.v1.customers.notification.brand-associates',
             //     'uses'         => 'CustomerNotificationSettingController@indexBrandAssociate'));
-
-
-            // Route::post('brand-associates/delete', array(
-            //     'as'           => 'api.v1.customers.notification.brand-associates.delete',
-            //     'uses'         => 'CustomerNotificationSettingController@destroyBrandAssociate'));
-
             });
 
         /**
@@ -863,6 +852,10 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Api'), function()
                 Route::get('{id}', array(
                     'uses'  => 'RequestInfoController@show',
                     'as'    => 'admin.api.messages.request.info.show' ));
+
+                // Route::get('view', array(
+                //     'uses'  => 'RequestInfoController@view',
+                //     'as'    => 'admin.api.messages.request.info.view' ));
 
                 Route::post('store', array(
                     'uses'  => 'RequestInfoController@store',
