@@ -67,7 +67,7 @@ class MessageRepositoryEloquent extends BaseRepository implements MessageReposit
         })
         ->where('user_id', '!=', $user_id);
 
-        return $this;        
+        return $this;
     }
 
     public function sentByUser($user_id, $search = null)
@@ -81,7 +81,7 @@ class MessageRepositoryEloquent extends BaseRepository implements MessageReposit
         })
         ->where('user_id', '=', $user_id);
 
-        return $this;        
+        return $this;
     }
 
     public function queryDirectMessage()
@@ -100,7 +100,7 @@ class MessageRepositoryEloquent extends BaseRepository implements MessageReposit
         });
 
         return $this;
-    }    
+    }
 
     public function queryPriceMessage()
     {
@@ -108,7 +108,7 @@ class MessageRepositoryEloquent extends BaseRepository implements MessageReposit
             $q->where('type', 'price');
         });
 
-        return $this;        
+        return $this;
     }
 
     public function queryInfoMessage()
@@ -117,8 +117,8 @@ class MessageRepositoryEloquent extends BaseRepository implements MessageReposit
             $q->where('type', 'info');
         });
 
-        return $this;        
-    }    
+        return $this;
+    }
 
     public function draftQuerySearch($search = null)
     {
@@ -135,8 +135,8 @@ class MessageRepositoryEloquent extends BaseRepository implements MessageReposit
                         $query->WhereHas('user', function($query) use($search){
                             $query->where('firstname', 'like', $search);
                             $query->orWhere('lastname', 'like', $search);
-                        });                    
-                    });                
+                        });
+                    });
             }
         });
 
@@ -184,7 +184,7 @@ class MessageRepositoryEloquent extends BaseRepository implements MessageReposit
         }
 
         return $this;
-    }    
+    }
 
     public function allMessages($search, $user_id, $type = null, $sent = false, $draft_only = false)
     {
@@ -201,13 +201,13 @@ class MessageRepositoryEloquent extends BaseRepository implements MessageReposit
                     $query->forSearch($search);
                 }
             });
-                            
+
             if(!$sent){
                 if(!$draft_only)
                 {
-                    $query->where('user_id', '!=', $user_id);    
+                    $query->where('user_id', '!=', $user_id);
                 }
-                
+
                 $query->allMessagesForUser($user_id, function($query) use($draft_only, $search){
                     if($draft_only)
                     {
@@ -217,7 +217,7 @@ class MessageRepositoryEloquent extends BaseRepository implements MessageReposit
                     if($search)
                     {
                         $query->forSearch($search);
-                    }                    
+                    }
                 });
             }else{
 
@@ -230,10 +230,10 @@ class MessageRepositoryEloquent extends BaseRepository implements MessageReposit
                     if($search)
                     {
                         $query->forSearch($search);
-                    }                    
+                    }
                 });
             }
-            
+
             if($type){
                 $query->forType($type, function($query) use($draft_only, $search){
                     if($draft_only)
@@ -244,11 +244,11 @@ class MessageRepositoryEloquent extends BaseRepository implements MessageReposit
                     if($search)
                     {
                         $query->forSearch($search);
-                    }                    
+                    }
                 });
             }
 
-        }); 
+        });
 
         return $this;
     }
@@ -275,19 +275,19 @@ class MessageRepositoryEloquent extends BaseRepository implements MessageReposit
                     $messages->forget($k);
                 }
             }
-            
-        }   
 
-        return $messages;     
+        }
+
+        return $messages;
     }
 
     public function listWithApprovedAll($user, $type)
-    { 
+    {
         $isSalesRep = $user->is_salesrep;
         $messages   = $this->model
             ->allMessagesForUser($user->id)
             ->whereHas('reads', function($q) use($user){
-                
+
                 $q->where('user_id', $user->id);
             }, '<', 1)
             ->forType($type)
@@ -295,7 +295,7 @@ class MessageRepositoryEloquent extends BaseRepository implements MessageReposit
             ->get();
 
         foreach($messages as $k => $message)
-        { 
+        {
             if($message->user && $message->user->is_customer && $isSalesRep)
             {
 
@@ -308,10 +308,10 @@ class MessageRepositoryEloquent extends BaseRepository implements MessageReposit
                 }
             }
 
-        }   
+        }
 
-        return $messages;     
-    }    
+        return $messages;
+    }
 
     public function allForSalesRepNoPending($user, $search = null)
     {
@@ -381,5 +381,19 @@ class MessageRepositoryEloquent extends BaseRepository implements MessageReposit
             });
 
         return $messages;
+    }
+
+    public function isValidRequest($user_id,$message_id)
+    {
+        $this->model = $this->model->whereHas('thread', function($q) use($search, $user_id){
+
+            $q->whereHas('participants', function($q) use($user_id,$message_id){
+                $q->where('user_id', $user_id);
+                $q->where('thread_id', $message_id);
+            });
+        })
+        ->where('user_id', '=', $user_id);
+
+        return $this;
     }
 }

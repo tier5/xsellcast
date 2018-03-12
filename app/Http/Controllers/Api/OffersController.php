@@ -108,6 +108,30 @@ class OffersController extends Controller
         }
     }
 
+     public function showOffer(OffersShowRequest $request)
+    {
+
+        try{
+            $offer = $this->offer->find($request->offer_id);
+            return response()->json([
+                    'status'=>true,
+                    'code'=>config('responses.success.status_code'),
+                    'offers'=>$offer,
+                    'message'=>config('responses.success.status_message'),
+                ], config('responses.success.status_code'));
+        }
+        catch (\Exception $e) {
+            return response()->json([
+                'status'=>false,
+                'code'=>config('responses.bad_request.status_code'),
+                'data'=>null,
+                'message'=>$e->getMessage()
+            ],
+                config('responses.bad_request.status_code')
+            );
+        }
+    }
+
     /**
      * Create
      *

@@ -13,6 +13,7 @@ use App\Storage\SalesRep\SalesRepRepository;
 use App\Http\Requests\Api\RequestTypeAllIndexRequest;
 use App\Http\Requests\Api\RequestTypeAllShowRequest;
 use App\Http\Requests\Api\RequestTypeAllStoreRequest;
+use App\Http\Requests\Api\RequestInfoShowRequest;
 use App\Storage\CustomerRequest\CustomerRequest;
 use App\Storage\Offer\OfferRepository;
 /**
@@ -58,6 +59,7 @@ class RequestInfoController extends Controller
 		try{
 		$user     = $this->customer->skipPresenter()->find($request->get('customer_id'))->user;
 
+
 		$messages = $this->message->sentByUser($user->id)->queryInfoMessage()->orderBy('created_at', 'desc')->paginate(20);
 
 		$data=[
@@ -90,9 +92,10 @@ class RequestInfoController extends Controller
 	 *
 	 * @return     Response
 	 */
-	public function show(RequestTypeAllShowRequest $request)
+	public function show(RequestInfoShowRequest $request)
 	{
 		try{
+
 
 			$user    = $this->customer->skipPresenter()->find($request->get('customer_id'))->user;
 

@@ -3,6 +3,8 @@
 namespace App\Http\Requests\Api;
 
 use App\Http\Requests\Request;
+use App\Storage\Customer\Customer;
+use App\Storage\Messenger\Thread;
 
 class RequestTypeAllShowRequest extends Request
 {
@@ -25,14 +27,34 @@ class RequestTypeAllShowRequest extends Request
      */
     public function rules()
     {
+         $user    = Customer::find($this->customer_id)->user;
+
+         $pivotFound = false;
+
+        if($user)
+        {
+            $pivot = $user->pivotParticipant()->where('thread_id', $this->message_id)->first();
+
+            if($pivot)
+            {
+                $pivotFound = true;
+            }
+        }
+
         return [
             'access_token'  => 'required',
-            'customer_id'   => 'required|exists:user_customer,id',
-            'message_id'    => 'required'
+            'customer_id'   => 'required|exists:user_customer,id|is_message_assign:' . $pivotFound,
+            'message_id'    => 'required|exists:messenger_threads,id'
         ];
     }
 
+  public function messages()
+    {
 
+        return [
+            'customer_id.is_message_assign' => 'Prospect is not assigned to Action.'
+        ];
+    }
     /**
      * Response error message as json
      *

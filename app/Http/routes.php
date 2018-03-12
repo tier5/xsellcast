@@ -673,6 +673,10 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Api'), function()
             'as'           => 'api.v1.offers.show',
             'uses'         => 'OffersController@show'));
 
+        Route::post('individual-offers', array(
+            'as'           => 'api.v1.offers.showOffer',
+            'uses'         => 'OffersController@showOffer'));
+
         Route::post('offer', array(
             'as'           => 'api.v1.offers.store',
             'uses'         => 'OffersController@store'));

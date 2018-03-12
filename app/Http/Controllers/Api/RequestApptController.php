@@ -11,7 +11,8 @@ use App\Storage\Messenger\ThreadRepository;
 use App\Storage\Customer\CustomerRepository;
 use App\Storage\SalesRep\SalesRepRepository;
 use App\Http\Requests\Api\RequestTypeAllIndexRequest;
-use App\Http\Requests\Api\RequestTypeAllShowRequest;
+
+use App\Http\Requests\Api\RequestAptShowRequest;
 use App\Http\Requests\Api\RequestTypeAllStoreRequest;
 use App\Storage\CustomerRequest\CustomerRequest;
 use App\Storage\Offer\OfferRepository;
@@ -93,7 +94,7 @@ class RequestApptController extends Controller
 	 *
 	 * @return     Response
 	 */
-	public function show(RequestTypeAllShowRequest $request)
+	public function show(RequestAptShowRequest $request)
 	{
 		try{
 

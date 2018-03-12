@@ -57,9 +57,9 @@ class Thread extends Model implements Transformable
     public function getCreatedAtAttribute($value)
     {
         $createdAt = new \Carbon\Carbon($value);
-        
+
         return carbonToLocal($createdAt);
-    }	
+    }
 
 	public function scopeWithMessage($query, $message_id)
 	{
@@ -99,10 +99,10 @@ class Thread extends Model implements Transformable
     public function scopeForMeta($query)
     {
         return $query->join($this->metaTable, $this->table.'.id', '=', $this->metaTable.'.'.$this->getMetaKeyName());
-    }	
+    }
 
     public function scopeForSearch($query, $key)
-    {	
+    {
     	$key = urldecode($key);
     	return $query->whereHas('messages', function($query) use($key){
 	    		$query->where('body', 'like', '%' . $key . '%');
@@ -137,7 +137,12 @@ class Thread extends Model implements Transformable
         $updatedAt = new \Carbon\Carbon($this->updated_at);
 
         return carbonToLocal($updatedAt);
-    }      
+    }
+
+    public function pivotParticipant()
+    {
+        return $this->hasMany('App\Storage\CustomerMedia\MessageParticipants', 'thread_id', 'id');
+    }
 }
 
 ?>

@@ -361,4 +361,6 @@ class CustomerRepositoryEloquent extends BaseRepository implements CustomerRepos
     exit;
     return $this->model->media;
     }
+
+
 }

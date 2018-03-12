@@ -21,21 +21,21 @@ class ValidatorServiceProvider extends ServiceProvider {
             $count = count(explode(',', $value));
 
             return ($count <= $max);
-        });	
+        });
 
         Validator::extend('is_media_image', function ($attribute, $value, $parameters, $validator) {
 
         	$imageCount = Media::whereIn('id', $value)->where('type', 'image')->count();
 
         	return ($imageCount > 0);
-        });	
-        
+        });
+
         Validator::extend('is_valid_message_type', function ($attribute, $value, $parameters, $validator) {
 
         	$keys = array_keys(config('lbt.message_types'));
-            
+
         	return (in_array($value, $keys));
-        });	        
+        });
 
         Validator::extend('required_if_message_direct', function ($attribute, $value, $parameters, $validator) {
 
@@ -45,22 +45,22 @@ class ValidatorServiceProvider extends ServiceProvider {
         Validator::extend('required_if_not_messege_direct', function ($attribute, $value, $parameters, $validator) {
 
         	//($value != '' && )
-            
+
         	if(!isset($validator->attributes()[$parameters[0]])){
         		return false;
         	}
 
-			$type = $validator->attributes()[$parameters[0]];        	
+			$type = $validator->attributes()[$parameters[0]];
 
         	return ($value != '' && $type != 'message');
-        });	  
+        });
 
         Validator::extend('in_contact_email_of', function ($attribute, $value, $parameters, $validator) {
             $c = User::where('email', $value)->count();
 
             return ($c > 0);
         });
-        
+
         /**
          * This is use for validating "hours of operation" field.
          */
@@ -84,7 +84,7 @@ class ValidatorServiceProvider extends ServiceProvider {
         Validator::extend('password_exist_to_user', function ($attribute, $value, $parameters, $validator) {
 
             return Auth::attempt(['email' => $parameters[0], 'password' => $value], false, false);
-        });      
+        });
 
         /**
          * Check weather a category don't have an offer.
@@ -92,7 +92,7 @@ class ValidatorServiceProvider extends ServiceProvider {
         Validator::extend('category_no_has_offer', function ($attribute, $value, $parameters, $validator) {
 
             return false;
-        });          
+        });
 
         /**
          * Check weather a BA is assigned to prospect.
@@ -100,7 +100,23 @@ class ValidatorServiceProvider extends ServiceProvider {
         Validator::extend('is_salesrep_assign', function ($attribute, $value, $parameters, $validator) {
 
             return ($parameters[0] == 1);
-        });  
+        });
+
+        /**
+         * Check weather a message is assigned to prospect.
+         */
+        Validator::extend('is_message_assign', function ($attribute, $value, $parameters, $validator) {
+
+            return ($parameters[0] == 1);
+        });
+
+        /**
+         * Check weather a pivot .
+         */
+        Validator::extend('is_pivot_assign', function ($attribute, $value, $parameters, $validator) {
+
+            return ($parameters[0] == 1);
+        });
 
 	}
 
@@ -111,8 +127,8 @@ class ValidatorServiceProvider extends ServiceProvider {
 	*/
 	public function register()
 	{
-   
-	
+
+
 	}
 
-}      
+}

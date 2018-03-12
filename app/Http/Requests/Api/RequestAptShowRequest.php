@@ -4,11 +4,9 @@ namespace App\Http\Requests\Api;
 
 use App\Http\Requests\Request;
 use App\Storage\Customer\Customer;
+use App\Storage\Messenger\MessageParticipants;
 
-/**
- * Use for simple API request with access token for a post.
- */
-class CustomerOfferDeleteRequest extends Request
+class RequestAptShowRequest extends Request
 {
     protected $redirectRoute = 'api.errors';
 
@@ -25,40 +23,41 @@ class CustomerOfferDeleteRequest extends Request
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return     array
+     * @return array
      */
     public function rules()
     {
-        $customer=Customer::find($this->customer_id);
-        $offer_id= $this->offer_id;
-        $pivotFound = false;
 
-        if($customer)
+        $user    = Customer::find($this->customer_id)->user;
+        // dd( $user);
+          $pivotFound = false;
+
+        if($user)
         {
-            $pivot = $customer->pivotOffers()->where('offer_id', $offer_id)->first();
+            $pivot = $user->pivotParticipant()->where('thread_id', $this->message_id)->first();
             // dd($pivot);
             if($pivot)
             {
                 $pivotFound = true;
             }
         }
+
         return [
-            'access_token' => 'required',
-            // '_method'      => 'required|in:DELETE',
-             'customer_id'  => 'required|integer|exists:user_customer,id|is_pivot_assign:' . $pivotFound,
-            'offer_id'     => 'required|integer|exists:offers,id'
+            'access_token'  => 'required',
+            'customer_id'   => 'required|exists:user_customer,id|is_message_assign:' . $pivotFound,
+            'message_id'    => 'required|exists:messenger_threads,id,type,appt',
         ];
     }
 
-    public function messages()
+     public function messages()
     {
 
         return [
-            'customer_id.is_pivot_assign' => 'Prospect is not added offer in lookbook.'
+            'customer_id.is_message_assign' => 'Prospect is not assigned to Action.'
         ];
     }
 
-      /**
+    /**
      * Response error message as json
      *
      * @param array $errors
@@ -75,6 +74,5 @@ class CustomerOfferDeleteRequest extends Request
                 ],
                 config('responses.bad_request.status_code')
             );
-        // return Response::json($errors, config('responses.bad_request.status_code'));
     }
 }

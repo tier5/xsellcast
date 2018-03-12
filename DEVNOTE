@@ -68,3 +68,10 @@ Prospect offers v1.2 #stable
 	e) Modified add info request API added validation and implemented exception handling
 	f) Modified view list and info details API added validation and implemented exception handling
 	g) Implemented validation and  exception handling in  delete offer from Lookbook API
+
+Prospect offers v1.3 #stable
+	a) Modified view request information details API.
+	b) Add pivot validation in information details API.
+	c) Add pivot validation in lookbook delete API.
+	d) Modified view individual offer API.
+	e) Implemented send mail to BA on add new offer to lookbook

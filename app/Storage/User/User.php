@@ -105,6 +105,8 @@ class User extends Authenticatable implements Transformable
         return $this->hasMany('App\Storage\UserAction\UserAction', 'id', 'user_id');
     }
 
+
+
     public function saveAsUnConfirmedInvited()
     {
         $this->status = 'invited_unconfirmed';
@@ -164,6 +166,9 @@ class User extends Authenticatable implements Transformable
 
         return ($fbRegistered && ($this->email == '' || !$this->email));
     }
-
+    public function pivotParticipant()
+    {
+        return $this->hasMany('App\Storage\Messenger\MessageParticipants', 'user_id', 'id');
+    }
 
 }

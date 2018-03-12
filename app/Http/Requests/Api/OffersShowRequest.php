@@ -26,7 +26,8 @@ class OffersShowRequest extends Request
     public function rules()
     {
         return [
-            'access_token' => 'required'
+            'access_token' => 'required',
+            'offer_id'=>'required|integer|exists:offers,id'
         ];
     }
     /**
