@@ -29,8 +29,9 @@ class OffersDeleteRequest extends Request
     {
         return [
             'access_token'  => 'required',
-            'offer_id'      => 'required|exists:offers,id'
+            'offer_id'      => 'required|integer|exists:offers,id'
+
         ];
     }
-    
+
 }

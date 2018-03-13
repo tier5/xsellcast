@@ -33,8 +33,8 @@ class SimpleListGetRequest extends Request
             'limit'        => 'integer',
             'sort'         => 'in:desc,asc',
             'page'         => 'integer',
-            'brand_id'     => 'exists:brands,id',
-            'category_id'  => 'exists:categories,id'
+            'brand_id'     => 'integer|exists:brands,id',
+            'category_id'  => 'integer|exists:categories,id'
         ];
     }
 

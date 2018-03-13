@@ -41,7 +41,7 @@ class CustomerPutRequest extends Request
 
         return [
             'access_token' => 'required',
-            'customer_id'  => 'required|exists:user_customer,id',
+            'customer_id'  => 'required|integer|exists:user_customer,id',
             'wp_userid'    => $wpIdRules,
             'address1'     => isset($this->address1)?'required':'',
             'address2'     => '',

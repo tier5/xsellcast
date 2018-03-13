@@ -36,8 +36,8 @@ class OffersStorePostRequest extends Request
             'status'        => 'required|in:publish,draft,pending',
             'title'         => 'required',
             'wpid'          => 'unique:offers,wpid',
-            'brand_id'      => 'required|exists:brands,id'
+            'brand_id'      => 'required|integer|exists:brands,id'
         ];
     }
-    
+
 }

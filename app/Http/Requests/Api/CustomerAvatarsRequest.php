@@ -30,7 +30,7 @@ class CustomerAvatarsRequest extends Request
     {
         return [
             'access_token' => 'required',
-            'customer_id'  => 'required|exists:user_customer,id',
+            'customer_id'  => 'required|integer|exists:user_customer,id',
         ];
     }
     /**

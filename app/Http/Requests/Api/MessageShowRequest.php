@@ -7,7 +7,7 @@ use App\Http\Requests\Request;
 class MessageShowRequest extends Request
 {
     protected $redirectRoute = 'api.errors';
-    
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -27,7 +27,7 @@ class MessageShowRequest extends Request
     {
         return [
             'access_token' => 'required',
-            'message_id'    => 'required'
+            'message_id'    => 'required|integer|exists:messenger_threads,id',
         ];
     }
 }

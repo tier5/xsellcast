@@ -30,8 +30,8 @@ class CustomerOfferPostRequest extends Request
     {
         return [
             'access_token' => 'required',
-            'customer_id'  => 'required|exists:user_customer,id',
-            'offer_id'     => 'required|exists:offers,id'
+            'customer_id'  => 'required|integer|exists:user_customer,id',
+            'offer_id'     => 'required|integer|exists:offers,id'
         ];
     }
 

@@ -75,3 +75,8 @@ Prospect offers v1.3 #stable
 	c) Add pivot validation in lookbook delete API.
 	d) Modified view individual offer API.
 	e) Implemented send mail to BA on add new offer to lookbook
+
+Prospect offers v1.4 #stable
+	a) Implemented mailing feature for BA on new Appointment Request.
+	b) Implemented mailing feature for Prospect on new Appointment Request.
+	c) Fixed validation issue in all API.

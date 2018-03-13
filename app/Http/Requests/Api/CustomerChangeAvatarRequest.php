@@ -30,8 +30,8 @@ class CustomerChangeAvatarRequest extends Request
     {
         return [
             'access_token' => 'required',
-            'customer_id'  => 'required|exists:user_customer,id',
-            'avatar_id'  => 'required|exists:customer_medias,media_id,customer_id,'.$this->customer_id,
+            'customer_id'  => 'required|integer|exists:user_customer,id',
+            'avatar_id'  => 'required|integer|exists:customer_medias,media_id,customer_id,'.$this->customer_id,
         ];
 
     }

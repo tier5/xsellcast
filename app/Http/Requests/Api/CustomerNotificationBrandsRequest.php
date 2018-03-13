@@ -30,7 +30,7 @@ class CustomerNotificationBrandsRequest extends Request
     {
         return [
             'access_token' => 'required',
-            'customer_id'  => 'required|integer',
+            'customer_id'  => 'required|integer|exists:user_customer,id',
 
 
         ];

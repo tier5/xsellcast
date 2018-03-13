@@ -190,34 +190,34 @@ class CustomerController extends Controller
     {
         try{
 
-        $customerId = $request->get('customer_id');
-        $offerId    = $request->get('offer_id');
-        $customer   = $this->customer->skipPresenter()->find($customerId);
+            $customerId = $request->get('customer_id');
+            $offerId    = $request->get('offer_id');
+            $customer   = $this->customer->skipPresenter()->find($customerId);
 
-        $this->customer->setOfferToCustomer($offerId, $customer);
-        $offer=$this->offer->skipPresenter()->find($offerId);
-        $ba=$this->customer->findNereastBAOfOffer($offer,$customer);
+            $this->customer->setOfferToCustomer($offerId, $customer);
+            $offer=$this->offer->skipPresenter()->find($offerId);
+            $ba=$this->customer->findNereastBAOfOffer($offer,$customer);
 
-        $user=$ba->user;
+            $user=$ba->user;
 
-         // $beautymail = app()->make(Beautymail::class);
-         //        $beautymail->send('emails.api.ba-addoffer', compact('user','offer','customer'), function($message) use($user)
-         //        {
-         //             // $token = str_random(64);
-         //            $message
-         //                ->from(env('NO_REPLY'))
-         //                // ->from(env('MAIL_USERNAME'))
-         //                ->to($user->email, $user->firstname . ' ' . $user->lastname)
-         //                ->subject('New Offer added to Lookbook');
-         //        });
+             // $beautymail = app()->make(Beautymail::class);
+             //        $beautymail->send('emails.api.ba-addoffer', compact('user','offer','customer'), function($message) use($user)
+             //        {
+             //             // $token = str_random(64);
+             //            $message
+             //                ->from(env('NO_REPLY'))
+             //                // ->from(env('MAIL_USERNAME'))
+             //                ->to($user->email, $user->firstname . ' ' . $user->lastname)
+             //                ->subject('New Offer added to Lookbook');
+             //        });
 
-        return response()->json([
-                    'status'=>true,
-                    'code'=>config('responses.success.status_code'),
-                    'data'=>'Offer added succesfully',
-                    'message'=>config('responses.success.status_message'),
-                ], config('responses.success.status_code'));
-            }
+            return response()->json([
+                        'status'=>true,
+                        'code'=>config('responses.success.status_code'),
+                        'data'=>'Offer added succesfully',
+                        'message'=>config('responses.success.status_message'),
+                    ], config('responses.success.status_code'));
+        }
         catch (\Exception $e) {
             // dd($e->getMessage());
             return response()->json([

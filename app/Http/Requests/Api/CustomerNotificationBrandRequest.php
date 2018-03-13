@@ -37,10 +37,10 @@ class CustomerNotificationBrandRequest extends Request
         $this->replace($input);
            $rules= [
             'access_token' => 'required',
-            'customer_id'  => 'required|exists:user_customer,id',
+            'customer_id'  => 'required|integer|exists:user_customer,id',
             // 'brand_ids' => 'required',
 
-            'brands' => 'required|exists:brands,id',
+            'brands' => 'required|integer|exists:brands,id',
             // 'status'  => 'required',
         ];
 

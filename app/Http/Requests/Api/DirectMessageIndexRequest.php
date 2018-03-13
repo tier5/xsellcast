@@ -7,14 +7,14 @@ use App\Http\Requests\Request;
 class DirectMessageIndexRequest extends Request
 {
     protected $redirectRoute = 'api.errors';
-    
+
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
     public function authorize()
-    { 
+    {
         return true;
     }
 
@@ -27,7 +27,8 @@ class DirectMessageIndexRequest extends Request
     {
         return [
             'access_token' => 'required',
-            'customer_id' => 'required'
+            'customer_id'  => 'required|integer|exists:user_customer,id',
+
         ];
     }
 }

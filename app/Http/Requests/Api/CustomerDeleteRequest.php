@@ -10,7 +10,7 @@ use App\Http\Requests\Request;
 class CustomerDeleteRequest extends Request
 {
     protected $redirectRoute = 'api.errors';
-    
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -24,13 +24,13 @@ class CustomerDeleteRequest extends Request
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return     array 
+     * @return     array
      */
     public function rules()
     {
         return [
             'access_token' => 'required',
-            'customer_id'  => 'required|integer'
+            'customer_id'  => 'required|integer|exists:user_customer,id',
         ];
     }
 }

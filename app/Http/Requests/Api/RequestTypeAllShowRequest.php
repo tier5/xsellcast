@@ -43,8 +43,8 @@ class RequestTypeAllShowRequest extends Request
 
         return [
             'access_token'  => 'required',
-            'customer_id'   => 'required|exists:user_customer,id|is_message_assign:' . $pivotFound,
-            'message_id'    => 'required|exists:messenger_threads,id'
+            'customer_id'   => 'required|integer|exists:user_customer,id|is_message_assign:' . $pivotFound,
+            'message_id'    => 'required|integer|exists:messenger_threads,id'
         ];
     }
 

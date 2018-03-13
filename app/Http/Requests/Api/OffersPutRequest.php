@@ -61,7 +61,7 @@ class OffersPutRequest extends Request
 
             if($offer && $offer->wpid)
             {
-                $wpIdRules .= '|unique:offers,wpid,' . $offer->wpid;   
+                $wpIdRules .= '|unique:offers,wpid,' . $offer->wpid;
             }else{
 
                 $wpIdRules .= '|unique:offers,wpid';
@@ -79,9 +79,9 @@ class OffersPutRequest extends Request
             'status'        => 'in:publish,draft,pending',
             'title'         => '',
             'wpid'          => $wpIdRules,
-            'brand_id'      => 'exists:brands,id',
-            'offer_id'      => 'exists:offers,id'
+            'brand_id'      => 'integer|exists:brands,id',
+            'offer_id'      => 'integer|exists:offers,id'
         ];
     }
-    
+
 }

@@ -7,7 +7,7 @@ use App\Http\Requests\Request;
 class RequestTypeContactStoreRequest extends Request
 {
     protected $redirectRoute = 'api.errors';
-    
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -27,10 +27,10 @@ class RequestTypeContactStoreRequest extends Request
     {
         return [
             'access_token' => 'required',
-            'customer_id'  => 'required',
             'phone_number' => 'required',
-            'offer_id'     => 'required',
-            'body'         => 'required'
+            'body'         => 'required',
+            'customer_id'  => 'required|integer|exists:user_customer,id',
+            'offer_id'     => 'required|integer|exists:offers,id',
         ];
     }
 }

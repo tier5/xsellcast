@@ -9,14 +9,14 @@ use App\Storage\SalesRep\SalesRep;
 class DirectMessageStoreRequest extends Request
 {
     protected $redirectRoute = 'api.errors';
-    
+
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
     public function authorize()
-    { 
+    {
         return true;
     }
 
@@ -33,20 +33,20 @@ class DirectMessageStoreRequest extends Request
 
         if($customer && $salesrep)
         {
-            $pivot = $salesrep->customersPivot()->where('customer_id', $customer->id)->first();   
+            $pivot = $salesrep->customersPivot()->where('customer_id', $customer->id)->first();
             if($pivot)
             {
                 $pivotFound = true;
-            } 
+            }
         }
 
         return [
             'access_token'  => 'required',
-            'customer_id'   => 'required|exists:user_customer,id|is_salesrep_assign:' . $pivotFound,
-            'salesrep_id'   => 'required|exists:user_salesreps,id',
+            'customer_id'   => 'required|integer|exists:user_customer,id|is_salesrep_assign:' . $pivotFound,
+            'salesrep_id'   => 'required|integer|exists:user_salesreps,id',
          //   'message_id'    => 'required',
             'body'          => 'required',
-            'offer_id'      => 'exists:offers,id'
+            'offer_id'      => 'integer|exists:offers,id'
         ];
     }
 

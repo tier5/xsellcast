@@ -7,14 +7,14 @@ use App\Http\Requests\Request;
 class DirectMessageShowRequest extends Request
 {
     protected $redirectRoute = 'api.errors';
-    
+
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
     public function authorize()
-    { 
+    {
         return true;
     }
 
@@ -27,8 +27,9 @@ class DirectMessageShowRequest extends Request
     {
         return [
             'access_token'  => 'required',
-            'customer_id'   => 'required',
-            'message_id'    => 'required',
+            'customer_id'  => 'required|integer|exists:user_customer,id',
+            'message_id'    => 'required|integer|exists:messenger_threads,id',
+
         ];
     }
 }
