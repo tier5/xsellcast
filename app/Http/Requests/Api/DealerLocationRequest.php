@@ -3,12 +3,8 @@
 namespace App\Http\Requests\Api;
 
 use App\Http\Requests\Request;
-use App\Storage\Customer\Customer;
 
-/**
- * Use for simple API request with access token for a post.
- */
-class CustomerOfferDeleteRequest extends Request
+class DealerLocationRequest extends Request
 {
     protected $redirectRoute = 'api.errors';
 
@@ -25,40 +21,20 @@ class CustomerOfferDeleteRequest extends Request
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return     array
+     * @return array
      */
     public function rules()
     {
-        $customer=Customer::find($this->customer_id);
-        $offer_id= $this->offer_id;
-        $pivotFound = false;
 
-        if($customer)
-        {
-            $pivot = $customer->pivotOffers()->where('offer_id', $offer_id)->first();
-            // dd($pivot);
-            if($pivot)
-            {
-                $pivotFound = true;
-            }
-        }
         return [
             'access_token' => 'required',
-            // '_method'      => 'required|in:DELETE',
-             'customer_id'  => 'required|integer|exists:user_customer,id|is_pivot_assign:' . $pivotFound,
-            'offer_id'     => 'required|integer|exists:offers,id'
+            'dealer_id'  => 'required|integer|exists:dealers,id',
+
         ];
     }
 
-    public function messages()
-    {
 
-        return [
-            'customer_id.is_pivot_assign' => 'Prospect has not added offer in lookbook.'
-        ];
-    }
-
-      /**
+    /**
      * Response error message as json
      *
      * @param array $errors

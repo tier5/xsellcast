@@ -16,6 +16,8 @@ use App\Http\Requests\Api\RequestTypeAllStoreRequest;
 use App\Http\Requests\Api\RequestInfoShowRequest;
 use App\Storage\CustomerRequest\CustomerRequest;
 use App\Storage\Offer\OfferRepository;
+use Snowfire\Beautymail\Beautymail;
+
 /**
  * @resource Request Info
  *
@@ -140,6 +142,29 @@ class RequestInfoController extends Controller
 			$body     = $request->get('body');
 
 			$thread   = $this->customer_request->sendRequest($customer, $offer, 'info', $body);
+
+			//send mail to BA
+            $ba=$this->customer->findNereastBAOfOffer($offer,$customer);
+
+            $beautymail = app()->make(Beautymail::class);
+            $beautymail->send('emails.api.ba-addinfo', compact('ba','offer','customer'), function($message) use($ba)
+            {
+                $message
+                    ->from(env('NO_REPLY'))
+                    // ->from(env('MAIL_USERNAME'))
+                    ->to($ba->user->email, $ba->user->firstname . ' ' . $ba->user->lastname)
+                    ->subject('New Information Request');
+            });
+            //send mail to prospect
+            $prospectMail = app()->make(Beautymail::class);
+            $prospectMail->send('emails.api.prospect-newappt', compact('ba','offer','customer'), function($message) use($customer)
+            {
+                $message
+                    ->from(env('NO_REPLY'))
+                    // ->from(env('MAIL_USERNAME'))
+                    ->to($customer->user->email, $customer->user->firstname . ' ' . $customer->user->lastname)
+                    ->subject('Information Request');
+            });
 
 		 	return response()->json([
 	                    'status'=>true,

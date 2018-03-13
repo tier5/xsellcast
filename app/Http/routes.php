@@ -644,6 +644,12 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Api'), function()
             'as'           => 'api.v1.dealers.show',
             'uses'         => 'DealersController@show'));
 
+
+        Route::get('dealer_location', array(
+            'as'           => 'api.v1.dealers.show',
+            'uses'         => 'DealersController@dealerLocation'));
+
+
         Route::get('dealer/{id}/brands', array(
             'as'           => 'api.v1.dealers.show.brands',
             'uses'         => 'DealersController@brands'));

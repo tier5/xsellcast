@@ -80,3 +80,8 @@ Prospect offers v1.4 #stable
 	a) Implemented mailing feature for BA on new Appointment Request.
 	b) Implemented mailing feature for Prospect on new Appointment Request.
 	c) Fixed validation issue in all API.
+
+Prospect offers v1.4.1 #stable
+	a) Created API to map Dealer location.
+	b) Implemented Send mail to BA on new Info Request.
+	c) Implemented Send mail to Prospect on new Info Request.

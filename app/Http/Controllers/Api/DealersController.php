@@ -12,6 +12,7 @@ use App\Storage\Dealer\DealerRepository;
 use App\Storage\SalesRep\SalesRepRepository;
 
 use App\Http\Requests\Api\DealerGetRequest;
+use App\Http\Requests\Api\DealerLocationRequest;
 use App\Http\Requests\Api\DealersGetRequest;
 
 use App\Storage\ZipCodeApi\ZipCodeApi;
@@ -103,6 +104,30 @@ class DealersController extends Controller
 
 		return response()
 			->json($dealer);
+    }
+    public function dealerLocation(DealerLocationRequest $request)
+    {
+        try{
+            $dealer_id=$request->dealer_id;
+            $dealer = $this->dealer->find($dealer_id);
+            return response()->json([
+                    'status'=>true,
+                    'code'=>config('responses.success.status_code'),
+                    'data'=>$dealer,
+                    'message'=>config('responses.success.status_message'),
+                ], config('responses.success.status_code'));
+        }
+        catch (\Exception $e) {
+            // dd($e->getMessage());
+            return response()->json([
+                'status'=>false,
+                'code'=>config('responses.bad_request.status_code'),
+                'data'=>null,
+                'message'=>$e->getMessage()
+            ],
+                config('responses.bad_request.status_code')
+            );
+        }
     }
 
     /**
