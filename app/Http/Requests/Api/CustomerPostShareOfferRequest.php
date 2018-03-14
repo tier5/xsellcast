@@ -31,7 +31,8 @@ class CustomerPostShareOfferRequest extends Request
         return [
             'access_token' => 'required',
             'customer_id'  => 'required|integer|exists:user_customer,id',
-            'offer_id'     => 'required|integer|exists:offers,id'
+            'offer_id'     => 'required|integer|exists:offers,id',
+            'email'        => 'required|email'
         ];
     }
 

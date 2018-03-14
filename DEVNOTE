@@ -92,3 +92,4 @@ Prospect offers v1.4.2 #stable
 	c) Fixed validation issue in view information details Request.
 Prospect offers v1.4.3 #stable
 	a) Fixed route issue for Dealer Location
+	b) Created prospect Share offer api by email.

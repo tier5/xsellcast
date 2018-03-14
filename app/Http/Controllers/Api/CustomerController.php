@@ -1019,10 +1019,22 @@ class CustomerController extends Controller
         try {
 
             $customer = $this->customer->skipPresenter()->find($request->get('customer_id'));
-            $user= $customer->user;
+            // $user= $customer->user;
+            $offer = $this->offer->skipPresenter()->find($request->offer_id);
 
-            if(!empty($user)){
+            $email= $request->email;
 
+            if(!empty($customer)){
+                    $beautymail = app()->make(Beautymail::class);
+                    $beautymail->send('emails.api.prospect-shareoffer', compact('offer','customer'), function($message) use($email)
+                    {
+
+                        $message
+                            ->from(env('NO_REPLY'))
+                            // ->from(env('MAIL_USERNAME'))
+                            ->to($email)
+                            ->subject('Offer Shared');
+                    });
                 return response()->json([
                     'status'=>true,
                     'code'=>config('responses.success.status_code'),
