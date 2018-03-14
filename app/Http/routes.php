@@ -645,7 +645,7 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Api'), function()
             'uses'         => 'DealersController@show'));
 
 
-        Route::get('dealer_location', array(
+        Route::post('dealer-location', array(
             'as'           => 'api.v1.dealers.show',
             'uses'         => 'DealersController@dealerLocation'));
 
@@ -769,6 +769,10 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Api'), function()
         Route::post('customer/change-avatar', array(
             'as'           => 'api.v1.customers.change-avatar',
             'uses'         => 'CustomerController@changeAvatar'));
+
+        Route::post('customer/share-offer', array(
+            'as'           => 'api.v1.customers.share-offer',
+            'uses'         => 'CustomerController@shareOffer'));
 
         Route::group(array('prefix' => 'customer/notification'), function(){
 

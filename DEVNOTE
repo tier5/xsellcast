@@ -90,3 +90,5 @@ Prospect offers v1.4.2 #stable
 	a) Fixed validation issue in remove offer form lookbook
 	b) Fixed validation issue in view appointment details Request.
 	c) Fixed validation issue in view information details Request.
+Prospect offers v1.4.3 #stable
+	a) Fixed route issue for Dealer Location

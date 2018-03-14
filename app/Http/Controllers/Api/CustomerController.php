@@ -32,6 +32,7 @@ use App\Http\Requests\Api\CustomerUploadAvatarRequest;
 use App\Http\Requests\Api\CustomerAvatarsRequest;
 use App\Http\Requests\Api\CustomerChangeAvatarRequest;
 use App\Http\Requests\Api\CustomerPostLogoutRequest;
+use App\Http\Requests\Api\CustomerPostShareOfferRequest;
 use Snowfire\Beautymail\Beautymail;
 use Hash;
 use Mail;
@@ -980,6 +981,52 @@ class CustomerController extends Controller
                     'status'=>true,
                     'code'=>config('responses.success.status_code'),
                     'data'=>'Logout succesfully.',
+                    'message'=>config('responses.success.status_message'),
+                    ], config('responses.success.status_code'));
+            }
+            return response()->json([
+               'status'=>false,
+                'code'=>config('responses.bad_request.status_code'),
+                'data'=>[],
+                'message'=>'Invalid Customer' ,
+            ], config('responses.bad_request.status_code'));
+
+        }
+        catch (\Exception $e) {
+            // dd($e->getMessage());
+            return response()->json([
+                'status'=>false,
+                'code'=>config('responses.bad_request.status_code'),
+                'data'=>null,
+                'message'=>$e->getMessage()
+            ],
+                config('responses.bad_request.status_code')
+            );
+        }
+    }
+
+
+    /**
+     *
+     *  customer share offer
+     *
+     * @param      \App\Http\Requests\Api\CustomerPostShareOfferRequest  $request  The request
+     *
+     * @return     <type>                                      ( description_of_the_return_value )
+     */
+    public function shareOffer(CustomerPostShareOfferRequest $request)
+    {
+        try {
+
+            $customer = $this->customer->skipPresenter()->find($request->get('customer_id'));
+            $user= $customer->user;
+
+            if(!empty($user)){
+
+                return response()->json([
+                    'status'=>true,
+                    'code'=>config('responses.success.status_code'),
+                    'data'=>'Offer Share succesfully',
                     'message'=>config('responses.success.status_message'),
                     ], config('responses.success.status_code'));
             }
