@@ -28,12 +28,15 @@ class RequestInfoShowRequest extends Request
     public function rules()
     {
 
-        $user    = Customer::find($this->customer_id)->user;
+        $customer_id=$this->customer_id;
+        $customer    = Customer::find($customer_id);
         // dd( $user);
           $pivotFound = false;
 
-        if($user)
+        if(!empty($customer))
         {
+            $user=$customer->user;
+            if(!empty($user))
             $pivot = $user->pivotParticipant()->where('thread_id', $this->message_id)->first();
             // dd($pivot);
             if($pivot)
@@ -41,6 +44,7 @@ class RequestInfoShowRequest extends Request
                 $pivotFound = true;
             }
         }
+
 
         return [
             'access_token'  => 'required',

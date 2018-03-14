@@ -193,8 +193,8 @@ class CustomerController extends Controller
             $customerId = $request->get('customer_id');
             $offerId    = $request->get('offer_id');
             $customer   = $this->customer->skipPresenter()->find($customerId);
-
             $this->customer->setOfferToCustomer($offerId, $customer);
+
             $offer=$this->offer->skipPresenter()->find($offerId);
             $ba=$this->customer->findNereastBAOfOffer($offer,$customer);
 

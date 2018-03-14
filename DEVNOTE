@@ -85,3 +85,8 @@ Prospect offers v1.4.1 #stable
 	a) Created API to map Dealer location.
 	b) Implemented Send mail to BA on new Info Request.
 	c) Implemented Send mail to Prospect on new Info Request.
+
+Prospect offers v1.4.2 #stable
+	a) Fixed validation issue in remove offer form lookbook
+	b) Fixed validation issue in view appointment details Request.
+	c) Fixed validation issue in view information details Request.

@@ -35,7 +35,7 @@ class CustomerOfferDeleteRequest extends Request
 
         if($customer)
         {
-            $pivot = $customer->pivotOffers()->where('offer_id', $offer_id)->first();
+            $pivot = $customer->pivotOffers()->where('offer_id', $offer_id)->where('added','1')->first();
             // dd($pivot);
             if($pivot)
             {
