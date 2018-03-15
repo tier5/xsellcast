@@ -774,6 +774,10 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Api'), function()
             'as'           => 'api.v1.customers.share-offer',
             'uses'         => 'CustomerController@shareOffer'));
 
+        Route::post('customer/my-offers', array(
+            'as'           => 'api.v1.customers.my-offer',
+            'uses'         => 'CustomerController@myOffers'));
+
         Route::group(array('prefix' => 'customer/notification'), function(){
 
             Route::post('global', array(

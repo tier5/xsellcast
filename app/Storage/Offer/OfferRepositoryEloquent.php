@@ -219,4 +219,22 @@ class OfferRepositoryEloquent extends BaseRepository implements OfferRepository
             return $this->model;
 
     }
+
+    public function myOffers($dealerIds)
+    {
+        $this->model = $this->model->where(function($query) use($dealerIds){
+            $query->Where(function($query) use($dealerIds){
+                $query->inDealers($dealerIds);
+                // $query->where('author_type', '!=', 'custom');
+            });
+        });
+
+        // if($type){
+        //     $this->ofAuthorType($type);
+        // }
+
+        return $this;
+    }
+
+
 }

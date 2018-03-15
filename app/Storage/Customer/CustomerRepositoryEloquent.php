@@ -362,5 +362,35 @@ class CustomerRepositoryEloquent extends BaseRepository implements CustomerRepos
     return $this->model->media;
     }
 
+    /**
+     *
+     * @param      Offer  $offer     The offer
+     * @param      Customer  $customer  The customer
+     *
+     * @return     offer
+     */
+    public function findNereastOffer($customer)
+    {
+
+
+        $dealers = $dealers;
+        $nearestDis = 99999999999;
+        $nearestDealer = $dealers->first();
+
+        foreach($dealers as $dealer)
+        {
+            $distance = $this->distance($customer->geo_lat, $customer->geo_long, $dealer->geo_lat, $dealer->geo_long);
+
+            if($nearestDis > $distance)
+            {
+                $nearestDis = $distance;
+                $nearestDealer = $dealer;
+            }
+        }
+
+        $salesrep = $nearestDealer->salesReps->shuffle()->first();
+
+        return $salesrep;
+    }
 
 }

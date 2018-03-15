@@ -93,3 +93,7 @@ Prospect offers v1.4.2 #stable
 Prospect offers v1.4.3 #stable
 	a) Fixed route issue for Dealer Location
 	b) Created prospect Share offer api by email.
+
+Prospect offers v1.5 #stable
+	a) Modified prospect Share offer api by email.Implemented Email validation.
+	b) Created API to display offer for prospect.

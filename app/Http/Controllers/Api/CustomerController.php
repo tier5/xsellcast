@@ -12,6 +12,10 @@ use App\Storage\Offer\OfferRepository;
 use App\Storage\Customer\Customer;
 use App\Storage\User\User;
 use App\Storage\Media\MediaRepository;
+use App\Storage\Dealer\DealerRepository;
+use App\Storage\Dealer\Dealer;
+use App\Storage\SalesRep\SalesRep;
+
 
 use App\Http\Requests\Api\CustomersRequest;
 use App\Http\Requests\Api\CustomersShowRequest;
@@ -33,10 +37,12 @@ use App\Http\Requests\Api\CustomerAvatarsRequest;
 use App\Http\Requests\Api\CustomerChangeAvatarRequest;
 use App\Http\Requests\Api\CustomerPostLogoutRequest;
 use App\Http\Requests\Api\CustomerPostShareOfferRequest;
+use App\Http\Requests\Api\CustomerMyOfferRequest;
 use Snowfire\Beautymail\Beautymail;
 use Hash;
 use Mail;
 use DB;
+use App\Storage\ZipCodeApi\ZipCodeApi;
 /**
  * @resource Customer
  *
@@ -47,14 +53,16 @@ class CustomerController extends Controller
 	protected $customer;
 
     protected $salesrep;
+    protected $dealer;
     protected $media;
 
-	public function __construct(CustomerRepository $customer, SalesRepRepository $salesrep, OfferRepository $offer, MediaRepository $media)
+	public function __construct(CustomerRepository $customer, SalesRepRepository $salesrep, OfferRepository $offer, MediaRepository $media,DealerRepository $dealer )
 	{
         $this->customer = $customer;
         $this->salesrep = $salesrep;
         $this->offer    = $offer;
         $this->media    = $media;
+        $this->dealer    = $dealer;
 	}
 
 	/**
@@ -158,6 +166,7 @@ class CustomerController extends Controller
         try{
         $customer_id = $request->get('customer_id');
         $offers = $this->offer->getByCustomer($customer_id)->paginate();
+
         return response()->json([
                     'status'=>true,
                     'code'=>config('responses.success.status_code'),
@@ -1038,7 +1047,7 @@ class CustomerController extends Controller
                 return response()->json([
                     'status'=>true,
                     'code'=>config('responses.success.status_code'),
-                    'data'=>'Offer Share succesfully',
+                    'data'=>'Offer shared succesfully',
                     'message'=>config('responses.success.status_message'),
                     ], config('responses.success.status_code'));
             }
@@ -1062,4 +1071,62 @@ class CustomerController extends Controller
             );
         }
     }
+
+    /**
+     *
+     *  customer offer
+     *
+     * @param      \App\Http\Requests\Api\CustomerMyOfferRequest  $request  The request
+     *
+     * @return     <type>                                      ( description_of_the_return_value )
+     */
+    public function myOffers(CustomerMyOfferRequest $request)
+    {
+        try {
+
+            $customer = $this->customer->skipPresenter()->find($request->get('customer_id'));
+            // $user= $customer->user;
+            // $offer = $this->offer->skipPresenter()->find($request->offer_id);
+             $per_page=$request->get('per_page') !='' ?$request->get('per_page'):20;
+            if(!empty($customer)){
+
+                //1 get all zip codes using zip api
+                $zip=new ZipCodeApi();
+                $zip_codes=$zip->getNearest($customer->zip,1000);
+                if($zip_codes->getFoundZips()!=null){
+                $delears_id=Dealer::whereIn('zip',$zip_codes->getFoundZips())->pluck('id');
+                //3 get offers
+               $offers= $this->offer->myOffers($delears_id)->paginate($per_page);
+
+                }
+
+                return response()->json([
+                    'status'=>true,
+                    'code'=>config('responses.success.status_code'),
+                    'data'=>$offers,
+                    'message'=>config('responses.success.status_message'),
+                    ], config('responses.success.status_code'));
+            }
+            return response()->json([
+               'status'=>false,
+                'code'=>config('responses.bad_request.status_code'),
+                'data'=>[],
+                'message'=>'Invalid Customer' ,
+            ], config('responses.bad_request.status_code'));
+
+        }
+        catch (\Exception $e) {
+            // dd($e->getMessage());
+            return response()->json([
+                'status'=>false,
+                'code'=>config('responses.bad_request.status_code'),
+                'data'=>null,
+                'message'=>$e->getMessage()
+            ],
+                config('responses.bad_request.status_code')
+            );
+        }
+    }
+
+
 }

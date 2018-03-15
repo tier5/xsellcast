@@ -30,7 +30,7 @@ class ZipCodeApi
 		return $this->error;
 	}
 
-	public static function getNearest($zip)
+	public static function getNearest($zip,$distance=50)
 	{
 		$apiKey = config('lbt.zipcodeapi_key');
 		$z = new ZipCodeApi();
@@ -40,7 +40,7 @@ class ZipCodeApi
 		 *
 		 * @var        string
 		 */
-		$distance = '50';
+		// $distance = '50';
 		$url = "https://www.zipcodeapi.com/rest/" . $apiKey . "/radius.json/" . $zip . "/" . $distance . "/miles?minimal";
 
 		/**
