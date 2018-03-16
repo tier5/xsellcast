@@ -102,3 +102,6 @@ Prospect offers v1.5.1 #stable
 	b) Modified prospect remove offer from lookbook API.
 	c) Modified My offer API. Implemented validation.
 
+Prospect offers v1.5.2 #stable
+	a) Created keyword search and pagination option in My offer API.
+

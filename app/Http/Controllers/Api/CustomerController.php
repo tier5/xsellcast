@@ -1096,16 +1096,25 @@ class CustomerController extends Controller
                 $zip=new ZipCodeApi();
                 $zip_codes=$zip->getNearest($customer->zip,1000);
                 if($zip_codes->getFoundZips()!=null){
-                $delears_id=Dealer::whereIn('zip',$zip_codes->getFoundZips())->pluck('id');
-                //3 get offers
-                $offers= $this->offer->myOffers($delears_id)->paginate($per_page);
+                    $delears_id=Dealer::whereIn('zip',$zip_codes->getFoundZips())->pluck('id');
+                    //3 get offers
+                    $offer= $this->offer->myOffers($delears_id);
+                    if($request->get('keyword')!=''){
+                        $offer->whereOffers($request->get('keyword'));
+                        // $offer->whereBrands($request->get('keyword'));
 
-                 return response()->json([
-                    'status'=>true,
-                    'code'=>config('responses.success.status_code'),
-                    'data'=>$offers,
-                    'message'=>config('responses.success.status_message'),
-                    ], config('responses.success.status_code'));
+                    }
+
+                   $offers=$offer->paginate($per_page);
+//                    $offers=$offer->mySql();
+// exit;
+                     return response()->json([
+                        'status'=>true,
+                        'code'=>config('responses.success.status_code'),
+                        'data'=>$offers,
+                        'message'=>config('responses.success.status_message'),
+                        ], config('responses.success.status_code'));
+
                     }else{
                         $msg='Unable to find nearest offer';
                     }

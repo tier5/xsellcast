@@ -236,5 +236,38 @@ class OfferRepositoryEloquent extends BaseRepository implements OfferRepository
         return $this;
     }
 
+    /**
+     * @param      string  $key    The key
+     *
+     * @return     $this
+     */
+    public function whereOffers($key)
+    {
+        $model = $this->model->where(function($q) use($key){
+            $q->orWhere('offers.contents', 'like', '%' . $key . '%')
+            ->orWhere('offers.pdf_contents', 'like', '%' . $key . '%')
+            ->orWhere('offers.title', 'like', '%' . $key . '%');
+        });
+
+        $this->model = $model;
+
+        return $this;
+    }
+ // /**
+ //     * @param      string  $key    The key
+ //     *
+ //     * @return     $this
+ //     */
+ //    public function whereBrands($key)
+ //    {
+ //        $model = $this->model->where(function($q) use($key){
+ //            $q->orWhere('brands.name1', 'like', '%' . $key . '%');
+ //        });
+
+ //        $this->model = $model;
+
+ //        return $this;
+ //    }
+
 
 }
