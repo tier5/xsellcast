@@ -264,8 +264,6 @@ class CustomerController extends Controller
             $offer->added = false;
             $offer->save();
 
-        // return response()
-        //     ->json($offer);
              return response()->json([
                     'status'=>true,
                     'code'=>config('responses.success.status_code'),
@@ -1088,7 +1086,11 @@ class CustomerController extends Controller
             // $user= $customer->user;
             // $offer = $this->offer->skipPresenter()->find($request->offer_id);
              $per_page=$request->get('per_page') !='' ?$request->get('per_page'):20;
-            if(!empty($customer)){
+             $offers=[];
+             $msg='';
+                $customer_zip=$customer->zip;
+                if($customer_zip!=''){
+
 
                 //1 get all zip codes using zip api
                 $zip=new ZipCodeApi();
@@ -1096,22 +1098,28 @@ class CustomerController extends Controller
                 if($zip_codes->getFoundZips()!=null){
                 $delears_id=Dealer::whereIn('zip',$zip_codes->getFoundZips())->pluck('id');
                 //3 get offers
-               $offers= $this->offer->myOffers($delears_id)->paginate($per_page);
+                $offers= $this->offer->myOffers($delears_id)->paginate($per_page);
 
-                }
-
-                return response()->json([
+                 return response()->json([
                     'status'=>true,
                     'code'=>config('responses.success.status_code'),
                     'data'=>$offers,
                     'message'=>config('responses.success.status_message'),
                     ], config('responses.success.status_code'));
-            }
+                    }else{
+                        $msg='Unable to find nearest offer';
+                    }
+                }else{
+                    $msg='Customer zip code is invalid.';
+                }
+
+
+
             return response()->json([
                'status'=>false,
                 'code'=>config('responses.bad_request.status_code'),
                 'data'=>[],
-                'message'=>'Invalid Customer' ,
+                'message'=> $msg,
             ], config('responses.bad_request.status_code'));
 
         }

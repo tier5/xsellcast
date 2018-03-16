@@ -97,3 +97,8 @@ Prospect offers v1.4.3 #stable
 Prospect offers v1.5 #stable
 	a) Modified prospect Share offer api by email.Implemented Email validation.
 	b) Created API to display offer for prospect.
+Prospect offers v1.5.1 #stable
+	a) Modified prospect add offer to lookbook API.
+	b) Modified prospect remove offer from lookbook API.
+	c) Modified My offer API. Implemented validation.
+

@@ -100,9 +100,11 @@ class CustomerRepositoryEloquent extends BaseRepository implements CustomerRepos
          * Return null if offer already exists.
          */
         $offer = $customer->offers()->find($offer_id);
+
         if($offer)
         {
-          $customerOffer = $customer->pivotOffers()->first();
+          $customerOffer = $customer->pivotOffers()->where('offer_id',$offer_id)->first();
+
         }else{
 
           $customerOffer = $customer->setOffer($offer_id);
@@ -111,7 +113,7 @@ class CustomerRepositoryEloquent extends BaseRepository implements CustomerRepos
 
       //  $co                       = $customerOffer->first();
         $customerOffer->added     = $is_added;
-
+// dd($customerOffer);
         if($request_type && $request_type == 'appt')
         {
           $customerOffer->is_appt = true;
