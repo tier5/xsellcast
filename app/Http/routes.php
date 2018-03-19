@@ -711,7 +711,7 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Api'), function()
             'as'           => 'api.v1.customers.brands-associates',
             'uses'         => 'CustomerController@salesReps'));
 
-         Route::get('customer/brand-associates', array(
+         Route::post('customer/brand-associates', array(
             'as'           => 'api.v1.customers.brand-associates-list',
             'uses'         => 'CustomerController@viewSalesReps'));
 
@@ -784,6 +784,7 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Api'), function()
         Route::post('customer/my-dealers', array(
             'as'           => 'api.v1.customers.my-offer',
             'uses'         => 'CustomerController@myDealers'));
+
 
 
         Route::group(array('prefix' => 'customer/notification'), function(){

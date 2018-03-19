@@ -164,15 +164,20 @@ class CustomerController extends Controller
     {
 
        try{
-        $customer_id = $request->get('customer_id');
-        $salesreps = $this->customer->getByCustomer($customer_id)->paginate();
+            $customer_id = $request->get('customer_id');
+            // $salesreps = $this->customer->getByCustomer($customer_id)->paginate();
+            $customer=Customer::find($customer_id)->salesReps()->paginate(20)->toArray();
 
-        return response()->json([
+            //
+            $data=[
                     'status'=>true,
                     'code'=>config('responses.success.status_code'),
-                    'data'=>$salesreps,
                     'message'=>config('responses.success.status_message'),
-                ], config('responses.success.status_code'));
+                    ];
+                $data=array_merge($data,$customer);
+
+            return response()->json($data, config('responses.success.status_code'));
+
             }
         catch (\Exception $e) {
             // dd($e->getMessage());
