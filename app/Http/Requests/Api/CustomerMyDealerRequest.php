@@ -7,7 +7,7 @@ use App\Http\Requests\Request;
 /**
  * Use for simple API request with access token for a post.
  */
-class CustomerPostShareOfferRequest extends Request
+class CustomerMyDealerRequest extends Request
 {
     protected $redirectRoute = 'api.errors';
 
@@ -31,8 +31,9 @@ class CustomerPostShareOfferRequest extends Request
         return [
             'access_token' => 'required',
             'customer_id'  => 'required|integer|exists:user_customer,id',
-            'offer_id'     => 'required|integer|exists:offers,id',
-            'email'        => "required|email|regex:/^[_a-z0-9-]+(\.[_a-z0-9-+]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/"
+            'per_page' => 'integer',
+            'page' => 'integer',
+
         ];
     }
 

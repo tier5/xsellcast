@@ -105,3 +105,8 @@ Prospect offers v1.5.1 #stable
 Prospect offers v1.5.2 #stable
 	a) Created keyword search and pagination option in My offer API.
 
+Prospect offers v1.5.3 #stable
+	a) Modified prospect share offer by email API.
+	b) Modified My offer API implemented spacial character search
+	c) Crated API to view nearest dealers.
+

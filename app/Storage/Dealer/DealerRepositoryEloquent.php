@@ -41,7 +41,7 @@ class DealerRepositoryEloquent extends BaseRepository implements DealerRepositor
 
     public function presenter()
     {
-        
+
         return DealerPresenter::class;
     }
 
@@ -59,7 +59,7 @@ class DealerRepositoryEloquent extends BaseRepository implements DealerRepositor
         $this->model = $this->model->where($where);
 
         return $this;
-    }   
+    }
 
     public function withCategoryId($category_id)
     {
@@ -85,7 +85,7 @@ class DealerRepositoryEloquent extends BaseRepository implements DealerRepositor
             'name'               => $data['name'],
             'address1'           => $data['address1'],
             'address2'           => $data['address2'],
-            'city'               => $data['city'], 
+            'city'               => $data['city'],
             'state'              => $data['state'],
             'phone'              => $data['phone'],
             'fax'                => $data['address2'],
@@ -119,7 +119,7 @@ class DealerRepositoryEloquent extends BaseRepository implements DealerRepositor
             'name'               => $data['name'],
             'address1'           => $data['address1'],
             'address2'           => $data['address2'],
-            'city'               => $data['city'], 
+            'city'               => $data['city'],
             'state'              => $data['state'],
             'phone'              => $data['phone'],
             'fax'                => $data['fax'],
@@ -131,7 +131,7 @@ class DealerRepositoryEloquent extends BaseRepository implements DealerRepositor
 
         $dealer->brands()->detach();
         $dealer->save();
-        
+
         if($brand){
             $dealer->brands()->save($brand);
         }
@@ -159,30 +159,30 @@ class DealerRepositoryEloquent extends BaseRepository implements DealerRepositor
             ->leftJoin('brands', 'dealer_brands.brand_id', '=', 'brands.id')
             ->orderBy('brands.name', $order)
             ->select('dealers.*');
-    
+
         return $this;
-    } 
+    }
 
     public function orderByCity($order = 'desc')
     {
         $this->model = $this->model->orderBy('city', $order);
 
         return $this;
-    }   
+    }
 
     public function orderByZip($order = 'desc')
     {
         $this->model = $this->model->orderBy('zip', $order);
 
         return $this;
-    }    
+    }
 
     public function orderByState($order = 'desc')
     {
         $this->model = $this->model->orderBy('state', $order);
 
         return $this;
-    }           
+    }
 
     public function scopeInBrand($brand)
     {
@@ -225,7 +225,12 @@ class DealerRepositoryEloquent extends BaseRepository implements DealerRepositor
                 $nearestDealer = $dealer;
             }
         }
-        
+
         return collect([$nearestDealer]);
     }
+
+
+
+
+
 }

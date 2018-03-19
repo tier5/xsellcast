@@ -395,4 +395,12 @@ class CustomerRepositoryEloquent extends BaseRepository implements CustomerRepos
         return $salesrep;
     }
 
+     public function salesRepsPivot($customer_id)
+    {
+      $this->model = $this->model->leftJoin('customer_salesreps', 'user_customer.id', '=', 'customer_salesreps.customer_id')
+      ->select('user_customer.*');
+
+      return $this;
+    }
+
 }

@@ -38,6 +38,7 @@ use App\Http\Requests\Api\CustomerChangeAvatarRequest;
 use App\Http\Requests\Api\CustomerPostLogoutRequest;
 use App\Http\Requests\Api\CustomerPostShareOfferRequest;
 use App\Http\Requests\Api\CustomerMyOfferRequest;
+use App\Http\Requests\Api\CustomerMyDealerRequest;
 use Snowfire\Beautymail\Beautymail;
 use Hash;
 use Mail;
@@ -148,6 +149,42 @@ class CustomerController extends Controller
 
         return response()
             ->json($customers);
+    }
+    /**
+     * Brand Associates
+     *
+     * Get a list of brand associates related to a customer.
+     *
+     * @param      \App\Http\Requests\Api\CustomerSalesRepGetRequest  $request      The request
+     * @param      Integer                                   $customer_id  The customer identifier
+     *
+     * @return     Response
+     */
+    public function viewSalesReps(CustomerSalesRepGetRequest $request)
+    {
+
+       try{
+        $customer_id = $request->get('customer_id');
+        $salesreps = $this->customer->getByCustomer($customer_id)->paginate();
+
+        return response()->json([
+                    'status'=>true,
+                    'code'=>config('responses.success.status_code'),
+                    'data'=>$salesreps,
+                    'message'=>config('responses.success.status_message'),
+                ], config('responses.success.status_code'));
+            }
+        catch (\Exception $e) {
+            // dd($e->getMessage());
+            return response()->json([
+                'status'=>false,
+                'code'=>config('responses.bad_request.status_code'),
+                'data'=>null,
+                'message'=>$e->getMessage()
+            ],
+                config('responses.bad_request.status_code')
+            );
+        }
     }
 
     /**
@@ -1100,20 +1137,85 @@ class CustomerController extends Controller
                     //3 get offers
                     $offer= $this->offer->myOffers($delears_id);
                     if($request->get('keyword')!=''){
-                        $offer->whereOffers($request->get('keyword'));
-                        // $offer->whereBrands($request->get('keyword'));
-
+                        $keyword= $request->get('keyword') ;
+                        $offer->whereOffers(escape_like($keyword));
                     }
 
                    $offers=$offer->paginate($per_page);
-//                    $offers=$offer->mySql();
-// exit;
                      return response()->json([
                         'status'=>true,
                         'code'=>config('responses.success.status_code'),
                         'data'=>$offers,
                         'message'=>config('responses.success.status_message'),
                         ], config('responses.success.status_code'));
+
+                    }else{
+                        $msg='Unable to find nearest offer';
+                    }
+                }else{
+                    $msg='Customer zip code is invalid.';
+                }
+
+
+
+            return response()->json([
+               'status'=>false,
+                'code'=>config('responses.bad_request.status_code'),
+                'data'=>[],
+                'message'=> $msg,
+            ], config('responses.bad_request.status_code'));
+
+        }
+        catch (\Exception $e) {
+            // dd($e->getMessage());
+            return response()->json([
+                'status'=>false,
+                'code'=>config('responses.bad_request.status_code'),
+                'data'=>null,
+                'message'=>$e->getMessage()
+            ],
+                config('responses.bad_request.status_code')
+            );
+        }
+    }
+
+    /**
+     *
+     *  customer   Dealers
+     *
+     * @param      \App\Http\Requests\Api\CustomerMyDealerRequest  $request  The request
+     *
+     * @return     <type>                                      ( description_of_the_return_value )
+     */
+    public function myDealers(CustomerMyDealerRequest $request)
+    {
+        try {
+
+            $customer = $this->customer->skipPresenter()->find($request->get('customer_id'));
+            // $user= $customer->user;
+            // $offer = $this->offer->skipPresenter()->find($request->offer_id);
+             $per_page=$request->get('per_page') !='' ?$request->get('per_page'):20;
+             $delears=[];
+             $msg='';
+                $customer_zip=$customer->zip;
+                if($customer_zip!=''){
+
+
+                //1 get all zip codes using zip api
+                $zip=new ZipCodeApi();
+                $zip_codes=$zip->getNearest($customer->zip,1000);
+                if($zip_codes->getFoundZips()!=null){
+
+                    $delear=$this->dealer->whereInZips($zip_codes->getFoundZips());
+                    $delears=$delear->paginate($per_page);
+                    $data=[
+                        'status'=>true,
+                        'code'=>config('responses.success.status_code'),
+                        'message'=>config('responses.success.status_message'),
+                        ];
+                    $data=array_merge($data,$delears);
+
+                    return response()->json($data, config('responses.success.status_code'));
 
                     }else{
                         $msg='Unable to find nearest offer';

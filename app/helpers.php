@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 function carbonToLocal($carbon)
 {
@@ -17,8 +17,8 @@ function carbonToLocal($carbon)
     $weekAgo = \Carbon\Carbon::today()->subWeek();
     $isInWeek = $carbon->between($weekAgo, $today);
 
-    return $carbon;//->format($format);        
-}   
+    return $carbon;//->format($format);
+}
 
 function states()
 {
@@ -74,9 +74,17 @@ function states()
         'WV'=>'West Virginia',
         'WI'=>'Wisconsin',
         'WY'=>'Wyoming',
-    );    
+    );
 
     return $states;
 }
+
+
+ function escape_like($string)
+    {
+        $search = array('%', '_');
+        $replace   = array('\%', '\_');
+        return str_replace($search, $replace, $string);
+    }
 
 ?>
