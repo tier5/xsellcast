@@ -32,7 +32,7 @@ class CustomerPostShareOfferRequest extends Request
             'access_token' => 'required',
             'customer_id'  => 'required|integer|exists:user_customer,id',
             'offer_id'     => 'required|integer|exists:offers,id',
-            'email'        => "required|email|regex:/^[_a-z0-9-+]+(\.[_a-z0-9-+]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/"
+            'email'        => "required|email|regex:/^[_a-zA-Z0-9-+]+(\.[_a-z0-9-+]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z0-9]{2,3})$/"
         ];
     }
 
