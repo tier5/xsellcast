@@ -119,3 +119,9 @@ Prospect offers v1.6 #stable
 Prospect offers v1.6.1 #stable
 	a) Modified prospect share offer by email API.
 
+Prospect offers v1.7 #stable
+	a) Created API to find nearest BA offers
+	b) Created API to find nearest dealer
+
+
+

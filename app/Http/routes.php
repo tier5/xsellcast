@@ -784,6 +784,12 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Api'), function()
         Route::post('customer/my-dealers', array(
             'as'           => 'api.v1.customers.my-offer',
             'uses'         => 'CustomerController@myDealers'));
+        Route::post('customer/brand-associates/offers', array(
+            'as'           => 'api.v1.customers.brand-associates.offers',
+            'uses'         => 'CustomerController@baOffers'));
+        Route::post('customer/nearest-dealers', array(
+            'as'           => 'api.v1.customers.nearest-dealers',
+            'uses'         => 'CustomerController@nearestDealers'));
 
 
 

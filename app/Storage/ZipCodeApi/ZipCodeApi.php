@@ -3,6 +3,7 @@
 class ZipCodeApi
 {
 	protected $foundZips = null;
+	protected $zipcode = null;
 
 	protected $error = null;
 
@@ -17,6 +18,17 @@ class ZipCodeApi
 	{
 		return $this->foundZips;
 	}
+	public function setZipCode($zips)
+	{
+		$this->zipcode = $zips;
+
+		return $this;
+	}
+
+	public function setZipCode()
+	{
+		return $this->zipcode;
+	}
 
 	public function setError($error)
 	{
@@ -30,7 +42,7 @@ class ZipCodeApi
 		return $this->error;
 	}
 
-	public static function getNearest($zip,$distance=50)
+	public static function getNearest($zip,$distance=200)
 	{
 		$apiKey = config('lbt.zipcodeapi_key');
 		$z = new ZipCodeApi();
@@ -66,4 +78,35 @@ class ZipCodeApi
 
 		return $z;
 	}
+
+	public static function getZipByIP($ip)
+	{
+
+		$z = new ZipCodeApi();
+
+		$url = "http://ip-api.com/json/" .$ip
+
+		/**
+		 * Do curl request to fetch zip list.
+		 */
+		$curl = curl_init();
+		curl_setopt_array($curl, array(
+		    CURLOPT_RETURNTRANSFER => 1,
+		    CURLOPT_URL => $url
+		));
+
+		$result = json_decode(curl_exec($curl));
+
+		if(isset($result->status) && $result->status =='success'){
+
+			$z->setZipCode($result->zip_codes);
+		}else{
+			$z->setError($result->message);
+		}
+
+		return $z;
+	}
+
+
+
 }
