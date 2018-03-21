@@ -41,6 +41,7 @@ use App\Http\Requests\Api\CustomerMyOfferRequest;
 use App\Http\Requests\Api\CustomerMyDealerRequest;
 use App\Http\Requests\Api\CustomerBaOfferRequest;
 use App\Http\Requests\Api\CustomerNearestDealerRequest;
+use App\Http\Requests\Api\CustomerViewSalesRepRequest;
 use Snowfire\Beautymail\Beautymail;
 use Hash;
 use Mail;
@@ -157,12 +158,12 @@ class CustomerController extends Controller
      *
      * Get a list of brand associates related to a customer.
      *
-     * @param      \App\Http\Requests\Api\CustomerSalesRepGetRequest  $request      The request
+     * @param      \App\Http\Requests\Api\CustomerViewSalesRepRequest  $request      The request
      * @param      Integer                                   $customer_id  The customer identifier
      *
      * @return     Response
      */
-    public function viewSalesReps(CustomerSalesRepGetRequest $request)
+    public function viewSalesReps(CustomerViewSalesRepRequest $request)
     {
 
        try{
@@ -1270,22 +1271,48 @@ class CustomerController extends Controller
     {
         try {
 
-                $zip=$request->get('zip');
+                $zip=new ZipCodeApi();
+                $zip_code=$request->get('zip');
+                $brand_id=$request->get('brand_id');
                 $ip=$request->get('ip');
-                $ip=$request->get('ip');
+                $geo_lat=$request->get('geo_lat');
+                $geo_long=$request->get('geo_long');
                 $per_page=$request->get('per_page') !='' ?$request->get('per_page'):20;
                 $delears=[];
                 $msg='';
-                $customer_zip=$customer->zip;
-                if($customer_zip!=''){
+                if($zip_code==''){
+                    if($ip!=''){
+                        //get zip form Ip
+                       $zip_ip= $zip->getZipByIP($ip);
+                       if($zip_ip->getZipCode()!=null){
+                            $zip_code=$zip_ip->getZipCode();
+                        }else{
+                        $msg='IP Address is invalid.';
+                        }
+                    }
+                }
+                if($zip_code==''){
+                    if($geo_lat!='' && $geo_long!=''){
+                        //get zip form geo
+                       $zip_geo=  $zip->getZipByGeo($geo_lat,$geo_long);
+                        if($zip_geo->getZipCode()!=null){
+                            $zip_code=$zip_geo->getZipCode();
+                        }else{
+                        // $msg=$zip_geo->getError();
+                        $msg='Invalid latitude or longitude parameter';
+                        }
+
+                    }
+                }
+
+                if($zip_code!=''){
 
 
-                    //1 get all zip codes using zip api
-                    $zip=new ZipCodeApi();
-                    $zip_codes=$zip->getNearest($zip,200);
+                    //1 get all Nearest zip codes using zip api
+                    $zip_codes=$zip->getNearest($zip_code,200);
                     if($zip_codes->getFoundZips()!=null){
 
-                        $delear=$this->dealer->whereInZips($zip_codes->getFoundZips());
+                        $delear=$this->dealer->whereBrandInZips($zip_codes->getFoundZips(),$brand_id);
                         $delears=$delear->paginate($per_page);
                         $data=[
                             'status'=>true,
@@ -1299,8 +1326,6 @@ class CustomerController extends Controller
                         }else{
                             $msg='Unable to find nearest Dealers';
                         }
-                }else{
-                    $msg='Customer zip code is invalid.';
                 }
 
 

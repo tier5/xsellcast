@@ -18,14 +18,15 @@ class ZipCodeApi
 	{
 		return $this->foundZips;
 	}
-	public function setZipCode($zips)
+
+	public function setZipCode($zip)
 	{
-		$this->zipcode = $zips;
+		$this->zipcode = $zip;
 
 		return $this;
 	}
 
-	public function setZipCode()
+	public function getZipCode()
 	{
 		return $this->zipcode;
 	}
@@ -84,7 +85,7 @@ class ZipCodeApi
 
 		$z = new ZipCodeApi();
 
-		$url = "http://ip-api.com/json/" .$ip
+		$url = "http://ip-api.com/json/" .$ip;
 
 		/**
 		 * Do curl request to fetch zip list.
@@ -99,7 +100,8 @@ class ZipCodeApi
 
 		if(isset($result->status) && $result->status =='success'){
 
-			$z->setZipCode($result->zip_codes);
+			$z->setZipCode($result->zip);
+
 		}else{
 			$z->setError($result->message);
 		}
@@ -107,6 +109,50 @@ class ZipCodeApi
 		return $z;
 	}
 
+
+	public static function getZipByGeo($geo_lat,$geo_long)
+	{
+
+		$z = new ZipCodeApi();
+		// https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=AIzaSyA-PveyfxZiAnCbUiAl-Up6ddUZAa8EEGw
+		$url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=".$geo_lat.",".$geo_long."&key=" .env('GOOGLE_MAP_API_KEY');
+
+		/**
+		 * Do curl request to fetch zip list.
+		 */
+		$curl = curl_init();
+		curl_setopt_array($curl, array(
+		    CURLOPT_RETURNTRANSFER => 1,
+		    CURLOPT_URL => $url
+		));
+		$zip_code='';
+		$results = json_decode(curl_exec($curl));
+		if($results->status!='INVALID_REQUEST'){
+
+			foreach ($results as $result) {
+				foreach ($result as $address_components) {
+					foreach ($address_components as $address_component) {
+						foreach ($address_component as $value) {
+
+							if($value->types[0]=='postal_code'){
+								$zip_code=$value->long_name;
+								break;
+							}
+						}break;
+
+					}
+					break;
+				}
+			break;
+			}
+			$z->setZipCode($zip_code);
+		}
+	  	else{
+			$z->setError($results->error_message);
+		}
+
+		return $z;
+	}
 
 
 }

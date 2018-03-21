@@ -145,6 +145,16 @@ class DealerRepositoryEloquent extends BaseRepository implements DealerRepositor
 
         return $this;
     }
+    public function whereBrandInZips($zips,$brand_id)
+    {
+        // $this->model = $this->model->whereIn('zip', $zips);
+         $this->model = $this->model->leftJoin('dealer_brands', 'dealers.id', '=', 'dealer_brands.dealer_id')
+            ->whereIn('zip', $zips)
+            ->where('dealer_brands.brand_id', $brand_id)
+            ;
+
+        return $this;
+    }
 
     public function orderByName($order = 'desc')
     {
