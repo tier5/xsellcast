@@ -253,6 +253,26 @@ class OfferRepositoryEloquent extends BaseRepository implements OfferRepository
         return $this;
     }
 
+    public function myBaBrandOffers($dealerIds)
+    {
+        $this->model = $this->model->where(function($query) use($dealerIds){
+            $query->Where(function($query) use($dealerIds){
+                $query->inDealers($dealerIds);
+                $query->where('author_type', '=', 'custom');
+            });
+
+        });
+        // ->join('brand_offers', 'brand_offers.offer_id', '=', 'offers.id')
+        // ->where('brand_offers.offer_id',$brand_id)
+        // ;
+
+        // if($type){
+        //     $this->ofAuthorType($type);
+        // }
+
+        return $this;
+    }
+
     /**
      * @param      string  $key    The key
      *

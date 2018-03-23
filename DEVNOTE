@@ -127,6 +127,10 @@ Find Dealer v1.0 #stable
 	a) Modified API to find nearest dealer.
 	b) Modified view assigned BA Api .
 
+BA Offers v1.0 #stable
+ 	a) Created  Api to list BA offers for a customer by selected brand.
+	b) Modified find nearest dealer API.
+
 
 
 

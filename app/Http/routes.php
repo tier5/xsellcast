@@ -714,6 +714,9 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Api'), function()
          Route::post('customer/brand-associates', array(
             'as'           => 'api.v1.customers.brand-associates-list',
             'uses'         => 'CustomerController@viewSalesReps'));
+        Route::post('customer/brand-associate/offers', array(
+            'as'           => 'api.v1.customers.brand-associates-list',
+            'uses'         => 'CustomerController@salesRepsOffer'));
 
         Route::get('customer/lookbook/offers', array(
             'as'           => 'api.v1.customers.lookbook.offers',
