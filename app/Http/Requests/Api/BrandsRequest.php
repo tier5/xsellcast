@@ -7,7 +7,7 @@ use App\Http\Requests\Request;
 class BrandsRequest extends Request
 {
     protected $redirectRoute = 'api.errors';
-    
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -27,7 +27,28 @@ class BrandsRequest extends Request
     {
         return [
             'access_token' => 'required',
-            'page' => 'integer'
+            'page' => 'integer',
+            'per_page' => 'integer',
         ];
+    }
+
+     /**
+     * Response error message as json
+     *
+     * @param array $errors
+     * @return mixed
+     */
+    public function response(array $errors){
+
+        return response()->json([
+                    'status'=>false,
+                    'code'=>config('responses.bad_request.status_code'),
+                    'data'=>null,
+                    'errors'=>$errors,
+                    'message'=>config('responses.bad_request.status_message'),
+                ],
+                config('responses.bad_request.status_code')
+            );
+        // return Response::json($errors, config('responses.bad_request.status_code'));
     }
 }

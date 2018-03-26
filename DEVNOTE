@@ -131,6 +131,14 @@ BA Offers v1.0 #stable
  	a) Created  Api to list BA offers for a customer by selected brand.
 	b) Modified find nearest dealer API.
 
+Brand v1.0 #stable
+	a) Modified  Api to list BA offers for a customer by selected brand.
+	b) Implemented Keyword search BA Offers
+	c) Created API to display assigned brand associate offers.
+	d) Modified  brands list api. Implemented validation and exception handling.
+	e) Added pagination in brand list API.
+	f) Created API to add brand in system
+
 
 
 

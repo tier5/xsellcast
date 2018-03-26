@@ -10,6 +10,7 @@ use App\Storage\Customer\CustomerRepository;
 use App\Storage\SalesRep\SalesRepRepository;
 use App\Storage\Offer\OfferRepository;
 use App\Storage\Customer\Customer;
+use App\Storage\Customer\CustomerSalesRep;
 use App\Storage\User\User;
 use App\Storage\Media\MediaRepository;
 use App\Storage\Dealer\DealerRepository;
@@ -43,6 +44,7 @@ use App\Http\Requests\Api\CustomerBaOfferRequest;
 use App\Http\Requests\Api\CustomerNearestDealerRequest;
 use App\Http\Requests\Api\CustomerViewSalesRepRequest;
 use App\Http\Requests\Api\CustomerBaBrandOfferRequest;
+use App\Http\Requests\Api\CustomerAssignedBaOfferRequest;
 use Snowfire\Beautymail\Beautymail;
 use Hash;
 use Mail;
@@ -1442,65 +1444,118 @@ class CustomerController extends Controller
      */
     public function salesRepsOffer(CustomerBaBrandOfferRequest $request)
     {
-
         try{
-        $customer_id = $request->get('customer_id');
-        $brand_id = $request->get('brand_id');
+                $customer_id = $request->get('customer_id');
+                $brand_id = $request->get('brand_id');
 
-        $customer = $this->customer->skipPresenter()->find($request->get('customer_id'));
-            // $user= $customer->user;
-            // $offer = $this->offer->skipPresenter()->find($request->offer_id);
-             $per_page=$request->get('per_page') !='' ?$request->get('per_page'):20;
-             $delears=[];
-             $msg='';
+                $customer = $this->customer->skipPresenter()->find($request->get('customer_id'));
+                // $user= $customer->user;
+                // $offer = $this->offer->skipPresenter()->find($request->offer_id);
+                $per_page=$request->get('per_page') !='' ?$request->get('per_page'):20;
+                $delears=[];
+                $msg='';
                 $customer_zip=$customer->zip;
                 if($customer_zip!=''){
 
 
-                //1 get all zip codes using zip api
-                $zip=new ZipCodeApi();
-                $zip_codes=$zip->getNearest($customer->zip,1000);
-                if($zip_codes->getFoundZips()!=null){
-                    // 2 Get delears_id
-                    $delears_ids=Dealer::whereIn('zip',$zip_codes->getFoundZips())->pluck('id');
+                    //1 get all zip codes using zip api
+                    $zip=new ZipCodeApi();
+                    $zip_codes=$zip->getNearest($customer->zip,1000);
+                    if($zip_codes->getFoundZips()!=null){
+                        // 2 Get delears_id
+                        $delears_ids=Dealer::whereIn('zip',$zip_codes->getFoundZips())->pluck('id');
 
-                    //3 get offers
-                    $offer= $this->offer->myBaBrandOffers($delears_ids)->offerByBrand($brand_id);
+                        //3 get offers
+                        $offer= $this->offer->myBaBrandOffers($delears_ids)->offerByBrand($brand_id);
 
-                    if($request->get('keyword')!=''){
-                        $keyword= $request->get('keyword') ;
-                        $offer->whereOffers(escape_like($keyword));
-                    }
+                        if($request->get('keyword')!=''){
+                            $keyword= $request->get('keyword') ;
+                            $offer->whereOffers(escape_like($keyword));
+                        }
 
-                   $offers=$offer->paginate($per_page)->toArray();
+                       $offers=$offer->paginate($per_page)->toArray();
 
-                    $data=[
-                        'status'=>true,
-                        'code'=>config('responses.success.status_code'),
-                        'message'=>config('responses.success.status_message'),
-                        ];
-                    $data=array_merge($data,$offers);
+                        $data=[
+                            'status'=>true,
+                            'code'=>config('responses.success.status_code'),
+                            'message'=>config('responses.success.status_message'),
+                            ];
+                        $data=array_merge($data,$offers);
 
-                    return response()->json($data, config('responses.success.status_code'));
+                        return response()->json($data, config('responses.success.status_code'));
 
+                        }else{
+                            $msg='Unable to find nearest offer';
+                        }
                     }else{
-                        $msg='Unable to find nearest offer';
+                        $msg='Customer zip code is invalid.';
                     }
-                }else{
-                    $msg='Customer zip code is invalid.';
-                }
 
-
-
-            return response()->json([
-               'status'=>false,
-                'code'=>config('responses.bad_request.status_code'),
-                'data'=>[],
-                'message'=> $msg,
-            ], config('responses.bad_request.status_code'));
+                return response()->json([
+                   'status'=>false,
+                    'code'=>config('responses.bad_request.status_code'),
+                    'data'=>[],
+                    'message'=> $msg,
+                ], config('responses.bad_request.status_code'));
 
             }
-        catch (\Exception $e) {
+            catch (\Exception $e) {
+            // dd($e->getMessage());
+            return response()->json([
+                'status'=>false,
+                'code'=>config('responses.bad_request.status_code'),
+                'data'=>null,
+                'message'=>$e->getMessage()
+            ],
+                config('responses.bad_request.status_code')
+            );
+        }
+    }
+    /**
+     * Customer Ba Offer
+     *
+     * Get a list of offers created by assigned BA.
+     *
+     * @param      \App\Http\Requests\Api\CustomerAssignedBaOfferRequest  $request      The request
+     * @param      Integer                                   $customer_id  The customer identifier
+     * @param      Integer                                   $brand_id  The brand identifier
+     *
+     * @return     Response
+     */
+    public function assignedBaOffers(CustomerAssignedBaOfferRequest $request)
+    {
+        try{
+                $customer_id = $request->get('customer_id');
+                $brand_id = $request->get('brand_id');
+                $per_page=$request->get('per_page') !='' ?$request->get('per_page'):20;
+                $delears=[];
+                $msg='';
+
+                $salesreps=CustomerSalesRep::where('customer_id',$customer_id)->pluck('salesrep_id');
+                $offer=$this->offer->assignedBaOffers($salesreps);
+
+                if($brand_id!=''){
+                $offer->offerByBrand($brand_id);
+                }
+
+                if($request->get('keyword')!=''){
+                            $keyword= $request->get('keyword') ;
+                            $offer->whereOffers(escape_like($keyword));
+                }
+
+                $offers=$offer->paginate($per_page);
+                       // dd($offers);
+                $data=[
+                    'status'=>true,
+                    'code'=>config('responses.success.status_code'),
+                    'message'=>config('responses.success.status_message'),
+                    ];
+                $data=array_merge($data,$offers);
+
+                return response()->json($data, config('responses.success.status_code'));
+
+            }
+            catch (\Exception $e) {
             // dd($e->getMessage());
             return response()->json([
                 'status'=>false,

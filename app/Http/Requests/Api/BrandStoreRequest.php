@@ -1,13 +1,13 @@
 <?php
-
 namespace App\Http\Requests\Api;
 
 use App\Http\Requests\Request;
 
-class BrandsShowRequest extends Request
+/**
+ * This request is for App\Http\Controllers\Api\Brand\BrandsController@store
+ */
+class BrandStoreRequest extends Request
 {
-    protected $redirectRoute = 'api.errors';
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -26,9 +26,21 @@ class BrandsShowRequest extends Request
     public function rules()
     {
         return [
-            'access_token' => 'required',
-            'wp_brand_id'=>'required|integer|exists:brands,id'
-            // 'wp_brand_id'=>'required|integer|exists:brands,wp_brand_id'
+
+            'name'        => 'required',
+            'logo'        => 'required|image',
+            'category_id' => 'required|integer|exists:categories,id',
+            'catalog_url' => 'url|active_url',
+            'opid'        => 'required',
+            'wp_brand_id'=>'required|unique:brands,wp_brand_id'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'The brand name field is required.',
+            'opid.required' => 'The Ontraport tag field is required',
         ];
     }
 

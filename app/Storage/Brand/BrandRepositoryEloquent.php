@@ -123,4 +123,10 @@ class BrandRepositoryEloquent extends BaseRepository implements BrandRepository
 
         return $this;
     }
+
+    public function getId($wp_brand_id){
+        return $wp_brand_id;
+        // return $this->model->where('wp_brand_id',$wp_brand_id)->first()->id;
+
+    }
 }

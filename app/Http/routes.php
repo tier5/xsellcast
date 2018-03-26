@@ -664,9 +664,13 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Api'), function()
             'as'           => 'api.v1.brands',
             'uses'         => 'BrandsController@index'));
 
-        Route::get('brand/{id}', array(
+        Route::get('brand', array(
             'as'           => 'api.v1.brands.show',
             'uses'         => 'BrandsController@show'));
+
+        Route::post('brand', array(
+            'as'           => 'api.v1.brands.store',
+            'uses'         => 'BrandsController@store'));
 
         /**
          * Offer routes
@@ -793,6 +797,10 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Api'), function()
         Route::post('customer/nearest-dealers', array(
             'as'           => 'api.v1.customers.nearest-dealers',
             'uses'         => 'CustomerController@nearestDealers'));
+        Route::post('customer/assigned-brand-associate/offers', array(
+            'as'           => 'api.v1.customers.nearest-dealers',
+            'uses'         => 'CustomerController@assignedBaOffers'));
+
 
 
 

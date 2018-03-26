@@ -4,7 +4,10 @@ namespace App\Http\Requests\Api;
 
 use App\Http\Requests\Request;
 
-class BrandsShowRequest extends Request
+/**
+ * Use for simple API request with access token for a post.
+ */
+class CustomerAssignedBaOfferRequest extends Request
 {
     protected $redirectRoute = 'api.errors';
 
@@ -27,8 +30,8 @@ class BrandsShowRequest extends Request
     {
         return [
             'access_token' => 'required',
-            'wp_brand_id'=>'required|integer|exists:brands,id'
-            // 'wp_brand_id'=>'required|integer|exists:brands,wp_brand_id'
+            'customer_id'  => 'required|integer|exists:user_customer,id',
+            'brand_id'     => 'required|integer|exists:brands,id'
         ];
     }
 

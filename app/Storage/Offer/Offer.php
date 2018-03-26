@@ -69,7 +69,7 @@ class Offer extends Model implements Transformable
     {
         return $this->pivotCustomers()
             ->updateOrCreate(['customer_id' => $customer_id, 'offer_id' => $this->id])
-            ->offer();        
+            ->offer();
     }
 
     public function tags()
@@ -82,9 +82,9 @@ class Offer extends Model implements Transformable
         $mediaMeta = $this->getMeta('media');
 
         if(is_array($mediaMeta)){
-            return Media::whereIn('id', $mediaMeta);    
+            return Media::whereIn('id', $mediaMeta);
         }
-        
+
         return null;
     }
 
@@ -127,11 +127,11 @@ class Offer extends Model implements Transformable
     {
         $medias = $this->medias();
         $thumb =  ($medias ? $medias->where('id', $this->getMeta('thumbnail_id')) : null);
-        
+
         if($thumb){
             return $thumb->first();
         }
-        
+
         return null;
     }
 
@@ -151,6 +151,14 @@ class Offer extends Model implements Transformable
                 $query->whereIn('dealers.id', $dealers_id);
             });
         });
+    }
+
+    public function scopeInSalesreps($query, $salesreps_id)
+    {
+        return  $query->whereHas('salesrep', function($query) use($salesreps_id){
+                    $query->whereIn('salesrep_offers.salesrep_id', $salesreps_id);
+                });
+
     }
 
     public function isEditable()

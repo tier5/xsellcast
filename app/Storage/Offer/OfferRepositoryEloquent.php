@@ -236,7 +236,7 @@ class OfferRepositoryEloquent extends BaseRepository implements OfferRepository
         return $this;
     }
 
-       public function myBaOffers($dealerIds)
+    public function myBaOffers($dealerIds)
     {
         $this->model = $this->model->where(function($query) use($dealerIds){
             $query->Where(function($query) use($dealerIds){
@@ -270,6 +270,19 @@ class OfferRepositoryEloquent extends BaseRepository implements OfferRepository
         //     $this->ofAuthorType($type);
         // }
 
+        return $this;
+    }
+
+    public function assignedBaOffers($salesreps_id)
+    {
+
+       $this->model = $this->model->where(function($query) use($salesreps_id){
+            $query->Where(function($query) use($salesreps_id){
+                $query->inSalesreps($salesreps_id);
+                $query->where('author_type', '=', 'custom');
+            });
+
+        });
         return $this;
     }
 

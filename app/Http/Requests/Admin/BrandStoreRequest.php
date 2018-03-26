@@ -43,5 +43,5 @@ class BrandStoreRequest extends Request
     public function forbiddenResponse()
     {
         return response()->view('errors.403');
-    }  
+    }
 }
