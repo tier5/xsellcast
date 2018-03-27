@@ -81,6 +81,7 @@ class BrandRepositoryEloquent extends BaseRepository implements BrandRepository
         $mediaIds   = (isset($data['media_ids']) ? $data['media_ids'] : '');
         $categoryId   = (isset($data['category']) ? $data['category'] : null);
         $opId = (isset($data['opid']) ? $data['opid'] : null);
+        $wp_brand_id = (isset($data['wp_brand_id']) ? $data['wp_brand_id'] : null);
 
         if(is_array($mediaIds))
         {
@@ -90,7 +91,16 @@ class BrandRepositoryEloquent extends BaseRepository implements BrandRepository
             $mediaIds = '';
         }
 
-        $insert = ['name' => $name, 'parent_id' => $parentId, 'media_logo_id' => $logoId, 'description' => $desc, 'catalog_url' => $catalogUrl, 'media_ids' => $mediaIds, 'opid' => $opId];
+        $insert = [
+                    'name' => $name,
+                    'parent_id' => $parentId,
+                    'media_logo_id' => $logoId,
+                    'description' => $desc,
+                    'catalog_url' => $catalogUrl,
+                    'media_ids' => $mediaIds,
+                    'opid' => $opId,
+                    'wp_brand_id' => $wp_brand_id
+                ];
 
         $brand = $this->skipPresenter()->create($insert);
         $category = Category::find($categoryId);
@@ -128,5 +138,27 @@ class BrandRepositoryEloquent extends BaseRepository implements BrandRepository
         return $wp_brand_id;
         // return $this->model->where('wp_brand_id',$wp_brand_id)->first()->id;
 
+    }
+
+    public function updateOne($data,Brand $brand){
+
+        $brandFields   = \Schema::getColumnListing($brand->getTable());
+
+        foreach($brandFields as $field)
+        {
+            if($field == 'id' || $field == 'wp_brand_id')
+            {
+                continue;
+            }
+
+            if(isset($data[$field]))
+            {
+                $brand->{$field} = $data[$field];
+            }
+        }
+
+        $brand->save();
+
+        return $brand;
     }
 }

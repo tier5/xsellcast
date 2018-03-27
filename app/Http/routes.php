@@ -659,7 +659,7 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Api'), function()
             'uses'         => 'DealersController@salesReps'));
 
         //End Dealer
-
+        //Brand
         Route::get('brands', array(
             'as'           => 'api.v1.brands',
             'uses'         => 'BrandsController@index'));
@@ -671,6 +671,9 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Api'), function()
         Route::post('brand', array(
             'as'           => 'api.v1.brands.store',
             'uses'         => 'BrandsController@store'));
+        Route::post('brand/update', array(
+            'as'           => 'api.v1.brands.edit',
+            'uses'         => 'BrandsController@edit'));
 
         /**
          * Offer routes

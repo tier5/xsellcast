@@ -10,7 +10,7 @@ class Brand extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $fillable = ['name', 'parent_id', 'media_logo_id', 'description', 'catalog_url', 'media_ids', 'opid'];
+    protected $fillable = ['name', 'parent_id', 'media_logo_id', 'description', 'catalog_url', 'media_ids', 'opid','wp_brand_id'];
 
     protected $table = 'brands';
 

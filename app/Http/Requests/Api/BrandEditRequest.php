@@ -4,9 +4,9 @@ namespace App\Http\Requests\Api;
 use App\Http\Requests\Request;
 
 /**
- * This request is for App\Http\Controllers\Api\Brand\BrandsController@store
+ * This request is for App\Http\Controllers\Api\Brand\BrandsController@edit
  */
-class BrandStoreRequest extends Request
+class BrandEditRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,14 +25,15 @@ class BrandStoreRequest extends Request
      */
     public function rules()
     {
-        return [
 
-            'name'        => 'required',
-            'logo'        => 'required|image',
-            'category_id' => 'required|integer|exists:categories,id',
-            'catalog_url' => 'url|active_url',
-            'opid'        => 'required',
-            'wp_brand_id' => 'required|unique:brands,wp_brand_id'
+        return [
+			'wp_brand_id' => 'required|exists:brands,wp_brand_id',
+            'name'        => isset($this->name)?'required':'',
+            'logo'        => isset($this->logo)?'required|image':'',
+            'category_id' => isset($this->category_id)?'required|integer|exists:categories,id':'',
+            'catalog_url' => isset($this->catalog_url)?'url|active_url':'',
+            'opid'        => isset($this->opid)?'required':'',
+
         ];
     }
 

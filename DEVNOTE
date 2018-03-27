@@ -138,7 +138,9 @@ Brand v1.0 #stable
 	d) Modified  brands list api. Implemented validation and exception handling.
 	e) Added pagination in brand list API.
 	f) Created API to add brand in system
-
+Brand v1.1 #stable
+	a) Created API to edit brand details
+	b) Implemented image logo update option in Brand update API.
 
 
 

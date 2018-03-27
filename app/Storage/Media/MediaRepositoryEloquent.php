@@ -46,7 +46,7 @@ class MediaRepositoryEloquent extends BaseRepository implements MediaRepository
 
     public function presenter()
     {
-        
+
         return MediaPresenter::class;
     }
 
@@ -60,6 +60,7 @@ class MediaRepositoryEloquent extends BaseRepository implements MediaRepository
 
     public function setUploadPath()
     {
+
         $this->upload_dir = public_path() . '/uploads';
 
         return $this;
@@ -150,15 +151,15 @@ class MediaRepositoryEloquent extends BaseRepository implements MediaRepository
             $metaKey = 'size_' . $s->getWidth();
 
             if(isset($size[1])){
-                $metaKey .= 'x' . $s->getHeight();   
+                $metaKey .= 'x' . $s->getHeight();
             }
 
             $origMedia->setMeta($metaKey, '/uploads/' . $filename);
-        }   
+        }
 
         $origMedia->save();
 
-        return $origMedia; 
+        return $origMedia;
     }
 
     /**
@@ -175,7 +176,7 @@ class MediaRepositoryEloquent extends BaseRepository implements MediaRepository
     protected function generateImgSizename($filename, $ext, $width, $height)
     {
         $filenameSize   = $filename . '-' . $width . 'x' . $height . '.' . $ext;
-  
+
         return $this->uniqueFilename($this->upload_dir, $filenameSize, $ext);
     }
 
@@ -191,11 +192,11 @@ class MediaRepositoryEloquent extends BaseRepository implements MediaRepository
     public function generateFilename($filename, $ext)
     {
         $filename .= '.' . $ext;
-        return $this->uniqueFilename($this->upload_dir, $filename, $ext);      
+        return $this->uniqueFilename($this->upload_dir, $filename, $ext);
     }
 
     function uniqueFilename($path, $name, $ext) {
-        
+
         $output = $name;
         $basename = basename($name, '.' . $ext);
         $i = 2;
@@ -204,9 +205,9 @@ class MediaRepositoryEloquent extends BaseRepository implements MediaRepository
             $output = $basename . '-' . $i . '.' . $ext;
             $i ++;
         }
-        
+
         return $output;
-    }  
+    }
 
     public function uploadImgFrmFb($url)
     {
@@ -216,7 +217,7 @@ class MediaRepositoryEloquent extends BaseRepository implements MediaRepository
         $uploadInfo = $this->skipPresenter()->uploadImg($img, [[48, 48], [140, 140], [150, 100]]);
         unlink($img);
         return $uploadInfo;
-    }  
+    }
 
     public function errorMessage($filename)
     {
