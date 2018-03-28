@@ -30,7 +30,7 @@ class BrandEditRequest extends Request
 			'wp_brand_id' => 'required|exists:brands,wp_brand_id',
             'name'        => isset($this->name)?'required':'',
             'logo'        => isset($this->logo)?'required|image':'',
-            'category_id' => isset($this->category_id)?'required|integer|exists:categories,id':'',
+            'wp_category_id' => isset($this->category_id)?'required|integer|exists:categories,wp_category_id':'',
             'catalog_url' => isset($this->catalog_url)?'url|active_url':'',
             'opid'        => isset($this->opid)?'required':'',
 

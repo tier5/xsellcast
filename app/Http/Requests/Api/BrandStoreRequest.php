@@ -29,7 +29,7 @@ class BrandStoreRequest extends Request
 
             'name'        => 'required',
             'logo'        => 'required|image',
-            'category_id' => 'required|integer|exists:categories,id',
+            'wp_category_id' => 'required|integer|exists:categories,wp_category_id',
             'catalog_url' => 'url|active_url',
             'opid'        => 'required',
             'wp_brand_id' => 'required|unique:brands,wp_brand_id'

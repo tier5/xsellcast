@@ -140,8 +140,9 @@ class BrandRepositoryEloquent extends BaseRepository implements BrandRepository
 
     }
 
-    public function updateOne($data,Brand $brand){
+    public function updateOne($data,$brand_id){
 
+        $brand=$this->model->find($brand_id);
         $brandFields   = \Schema::getColumnListing($brand->getTable());
 
         foreach($brandFields as $field)

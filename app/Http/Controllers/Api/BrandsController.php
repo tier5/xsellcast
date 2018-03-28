@@ -13,6 +13,9 @@ use App\Http\Requests\Api\BrandsRequest;
 use App\Http\Requests\Api\BrandsShowRequest;
 use App\Http\Requests\Api\BrandStoreRequest;
 use App\Http\Requests\Api\BrandEditRequest;
+use App\Http\Requests\Api\BrandDeleteRequest;
+
+use App\Storage\LbtWp\WpConvetor;
 
 /**
  * @resource Brand
@@ -86,12 +89,12 @@ class BrandsController extends Controller
 
          try{
 
-            $wp_brand_id=$request->get('wp_brand_id');
-            $brand_id=$this->brand->getId($wp_brand_id);
-            $brand = $this->brand->find($brand_id);
+                $wp_brand_id=$request->get('wp_brand_id');
+                $wp=new WpConvetor();
+                $brand_id=$wp->getId('brand',$wp_brand_id);
+                $brand = $this->brand->find($brand_id);
 
-
-            $data=[
+                $data=[
                     'status'=>true,
                     'code'=>config('responses.success.status_code'),
                     'message'=>config('responses.success.status_message'),
@@ -163,13 +166,18 @@ class BrandsController extends Controller
 
 
             }
+            //Convert wp_category_id to category_id
+            $wp_category_id=$request->get('wp_category_id');
+            $wp=new WpConvetor();
+            $category_id=$wp->getId('category',$wp_category_id);
+
             $brand= $this->brand->createOne([
                 'name'          => $request->get('name'),
                 'media_logo_id' => $media_id,
                 'description'   => $request->get('desc'),
                 'catalog_url'   => $request->get('catalog_url'),
                 'media_ids'     => $request->get('images'),
-                'category'      => $request->get('category_id'),
+                'category'      => $category_id,
                 'opid'          => $request->get('opid'),
                 'wp_brand_id'          => $request->get('wp_brand_id')
             ]);
@@ -216,8 +224,9 @@ class BrandsController extends Controller
 
             $data     = $request->all();
             $wp_brand_id=$request->get('wp_brand_id');
-            $brand_id=$this->brand->getId($wp_brand_id);
-            $brand = $this->brand->skipPresenter()->find($brand_id);
+            $wp=new WpConvetor();
+            $brand_id=$wp->getId('brand',$wp_brand_id);
+            // $brand = $this->brand->find($brand_id);
             $media_id='';
             if(isset($data['logo'])){
 
@@ -255,16 +264,6 @@ class BrandsController extends Controller
                 }
             }
 
-// $arr=[
-//                 'name'          => $request->get('name'),
-//                 'media_logo_id' => $media_id,
-//                 'description'   => $request->get('desc'),
-//                 'catalog_url'   => $request->get('catalog_url'),
-//                 'media_ids'     => $request->get('images'),
-//                 'category'      => $request->get('category_id'),
-//                 'opid'          => $request->get('opid'),
-//                 'wp_brand_id'          => $request->get('wp_brand_id')
-//             ];
             $update_arr=[];
             if(isset($data['name'])){
             $update_arr['name']=$data['name'];
@@ -286,18 +285,23 @@ class BrandsController extends Controller
             }
 
             if(isset($data['category_id'])){
-            $update_arr['category']=$data['category_id'];
+                 //Convert wp_category_id to category_id
+            $wp_category_id=$request->get('wp_category_id');
+            $wp=new WpConvetor();
+            $category_id=$wp->getId('category',$wp_category_id);
+            $update_arr['category']=$category_id;
             }
 
-            $brand= $this->brand->updateOne($data,$brand);
+            $this->brand->updateOne($data,$brand_id);
 
+            $brand = $this->brand->find($brand_id);
             $data=[
                     'status'=>true,
                     'code'=>config('responses.success.status_code'),
                     'message'=>config('responses.success.status_message'),
-                    'data'=>$brand
-                    ];
 
+                    ];
+            $data=array_merge($data,$brand);
 
             return response()->json($data, config('responses.success.status_code'));
 
@@ -315,4 +319,47 @@ class BrandsController extends Controller
         }
     }
 
+    /**
+     * Delete
+     *
+     * Delete a brand details
+     *
+     *
+     * @param      \App\Http\Requests\Api\BrandEditRequest  $request    The request
+     *
+     * @return     Response
+     */
+
+    public function destroy(BrandDeleteRequest $request){
+
+
+         try{
+
+            $wp_brand_id=$request->get('wp_brand_id');
+            $wp=new WpConvetor();
+            $brand_id=$wp->getId('brand',$wp_brand_id);
+            $brand = $this->brand->skipPresenter()->delete($brand_id);
+            $data=[
+                    'status'=>true,
+                    'code'=>config('responses.success.status_code'),
+                    'message'=>"Brand has been deleted!",//config('responses.success.status_message'),
+                    'data'=> [],
+                    ];
+                // $data=array_merge($data,$brand);
+
+            return response()->json($data, config('responses.success.status_code'));
+
+        }
+        catch (\Exception $e) {
+            // dd($e->getMessage());
+            return response()->json([
+                'status'=>false,
+                'code'=>config('responses.bad_request.status_code'),
+                'data'=>null,
+                'message'=>$e->getMessage()
+            ],
+                config('responses.bad_request.status_code')
+            );
+        }
+    }
 }

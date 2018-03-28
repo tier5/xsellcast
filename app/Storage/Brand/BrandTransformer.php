@@ -25,7 +25,7 @@ class BrandTransformer extends TransformerAbstract
 
             /* place your other model properties here */
             'name'       => $model->name,
-            'wpid'       => $model->wpid,
+            'wp_brand_id'       => $model->wp_brand_id,
             'parent_id'  => $model->parent_id,
             'created_at' => $model->created_at,
             'updated_at' => $model->updated_at,

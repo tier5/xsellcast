@@ -141,6 +141,12 @@ Brand v1.0 #stable
 Brand v1.1 #stable
 	a) Created API to edit brand details
 	b) Implemented image logo update option in Brand update API.
+Brand v1.2 #stable
+	a) Modified Add brand API.
+	b) Created API to  Delete Brand details
+	c) Modified Edit brand . Implemented wp_brand_id
+	d) Created Class to convert wp_brand_id to brand id
+	e) Created  migration to added wp_category_id in category table.
 
 
 

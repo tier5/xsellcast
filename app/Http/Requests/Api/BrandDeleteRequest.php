@@ -4,7 +4,7 @@ namespace App\Http\Requests\Api;
 
 use App\Http\Requests\Request;
 
-class BrandsShowRequest extends Request
+class BrandDeleteRequest extends Request
 {
     protected $redirectRoute = 'api.errors';
 
@@ -27,7 +27,6 @@ class BrandsShowRequest extends Request
     {
         return [
             'access_token' => 'required',
-            // 'brand_id'=>'required|integer|exists:brands,id',
             'wp_brand_id'=>'required|integer|exists:brands,wp_brand_id'
         ];
     }

@@ -674,6 +674,9 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Api'), function()
         Route::post('brand/update', array(
             'as'           => 'api.v1.brands.edit',
             'uses'         => 'BrandsController@edit'));
+        Route::delete('brand', array(
+            'as'           => 'api.v1.brands.delete',
+            'uses'         => 'BrandsController@destroy'));
 
         /**
          * Offer routes
