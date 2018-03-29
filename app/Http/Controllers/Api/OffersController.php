@@ -13,6 +13,14 @@ use App\Http\Requests\Api\OffersStorePostRequest;
 use App\Http\Requests\Api\OffersDeleteRequest;
 use App\Http\Requests\Api\OffersPutRequest;
 use App\Http\Requests\Api\SimpleListGetRequest;
+use App\Storage\Dealer\Dealer;
+
+use App\Storage\LbtWp\WpConvetor;
+use App\Storage\ZipCodeApi\ZipCodeApi;
+
+
+
+
 
 /**
  * @resource Offer
@@ -40,26 +48,67 @@ class OffersController extends Controller
     public function index(SimpleListGetRequest $request)
     {
     	try{
-            $brand_id=$request->brand_id;
-            $category_id=$request->category_id;
-            $offer = $this->offer->skipPresenter();
+            $wp_brand_id=$request->get('wp_brand_id');
+            $wp_category_id=$request->wp_category_id;
+            $pre_page=$request->pre_page!=''?$request->pre_page:20;
+            $offers=[];
+            $offer = $this->offer;//->skipPresenter();
+            $ip=$request->get('ip');
+            $zip_code='';
+            if($ip!=''){
+                //1 get all zip codes using zip api
+                $zip=new ZipCodeApi();
+               //get zip form Ip
+               $zip_ip= $zip->getZipByIP($ip);
 
-            if($brand_id!=''){
-            $offer=$this->offer->offerByBrand($brand_id);
+               if($zip_ip->getZipCode()!=null){
+
+                    $zip_code=$zip_ip->getZipCode();
+
+                }else{
+                    $msg='IP Address is invalid.';
+                    return response()->json([
+                       'status'=>false,
+                        'code'=>config('responses.bad_request.status_code'),
+                        'data'=>[],
+                        'message'=> $msg,
+                    ], config('responses.bad_request.status_code'));
+                }
+                 $zip_codes=$zip->getNearest($zip_code,200);
+                    if($zip_codes->getFoundZips()!=null){
+                        $delears_id=Dealer::whereIn('zip',$zip_codes->getFoundZips())->pluck('id');
+                        $offer=$offer->dealerOffers($delears_id);
+                    }
+                     $offers=$offer->paginate($pre_page);
             }
 
-            if($category_id!=''){
-            $offer=$this->offer->offerByCaregory($category_id);
+            if($wp_brand_id!=''){
+
+                $wp=new WpConvetor();
+                $brand_id=$wp->getId('brand',$wp_brand_id);
+                $offer=$offer->offerByBrand($brand_id);
+                // $offer=$offer->skipPresenter()->brands()->where('brand_id',$brand_id);
+                 $offers=$offer->paginate($pre_page)->toArray();
             }
-            $offers=$offer->paginate(20);
 
+            if($wp_category_id!=''){
+                $wp=new WpConvetor();
+                $category_id=$wp->getId('category',$wp_category_id);
+                $offer=$this->offer->offerByCaregory($category_id);
+                $offers=$offer->paginate($pre_page)->toArray();
+            }
 
-            return response()->json([
+// echo '<pre>';
+//         print_r($offers);
+
+            $data=[
                     'status'=>true,
                     'code'=>config('responses.success.status_code'),
-                    'offers'=>$offers,
                     'message'=>config('responses.success.status_message'),
-                ], config('responses.success.status_code'));
+                    ];
+            $data=array_merge($data,$offers);
+
+             return response()->json($data, config('responses.success.status_code'));
         }
         catch (\Exception $e) {
             return response()->json([
@@ -143,17 +192,36 @@ class OffersController extends Controller
      */
     public function store(OffersStorePostRequest $request)
     {
-        $data = $request->all();
+        try{
+            $data = $request->all();
+            $wp_brand_id=$request->wp_brand_id;
+            if(!isset($data['wpid']) || !is_interger($data['wpid']))
+            {
+                $data['wpid'] = null;
+            }
 
-        if(!isset($data['wpid']) || !is_interger($data['wpid']))
-        {
-            $data['wpid'] = null;
+            $wp=new WpConvetor();
+            $brand_id=$wp->getId('brand',$wp_brand_id);
+            $data['brand_id']=$brand_id;
+            $offer = $this->offer->createOne($data);
+                return response()->json([
+                    'status'=>true,
+                    'code'=>config('responses.success.status_code'),
+                    'offers'=>$offer,
+                    'message'=>config('responses.success.status_message'),
+                ], config('responses.success.status_code'));
+
         }
-
-        $offer = $this->offer->createOne($data);
-
-        return response()
-            ->json($offer);
+        catch (\Exception $e) {
+            return response()->json([
+                'status'=>false,
+                'code'=>config('responses.bad_request.status_code'),
+                'data'=>null,
+                'message'=>$e->getMessage()
+            ],
+                config('responses.bad_request.status_code')
+            );
+        }
     }
 
     /**

@@ -148,5 +148,13 @@ Brand v1.2 #stable
 	d) Created Class to convert wp_brand_id to brand id
 	e) Created  migration to added wp_category_id in category table.
 
+Offer v1.0 #stable
+	a) Implemented IP search in offer api.
+	b) Change brand_id to wp_brand_id in search offer by brand API.
+	c) Change category_id to wp_category_id in search offer by Category API.
+	d) Modified Add offer , Implemented validation and exception handling.
+	e) Modified brand_id to wp_brand_id in add offer API.
+
+
 
 

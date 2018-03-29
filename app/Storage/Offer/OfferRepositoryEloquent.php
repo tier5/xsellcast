@@ -203,10 +203,15 @@ class OfferRepositoryEloquent extends BaseRepository implements OfferRepository
     }
 
     public function offerByBrand($brand_id){
-        $this->model = $this->model
-            ->join('brand_offers', 'brand_offers.offer_id', '=', 'offers.id')
-            ->where('brand_offers.brand_id',$brand_id)
-            ->select('offers.*');
+        // $this->model = $this->model
+        //     ->join('brand_offers', 'brand_offers.offer_id', '=', 'offers.id')
+        //     ->where('brand_offers.brand_id',$brand_id);
+            // ->select('offers.*');
+         $this->model = $this->model->where(function($query) use($brand_id){
+            $query->whereHas('brands', function($query) use($brand_id){
+                $query->where('brand_offers.brand_id', $brand_id);
+            });
+        });
             return $this->model;
 
     }
@@ -303,21 +308,19 @@ class OfferRepositoryEloquent extends BaseRepository implements OfferRepository
 
         return $this;
     }
- // /**
- //     * @param      string  $key    The key
- //     *
- //     * @return     $this
- //     */
- //    public function whereBrands($key)
- //    {
- //        $model = $this->model->where(function($q) use($key){
- //            $q->orWhere('brands.name1', 'like', '%' . $key . '%');
- //        });
+     public function dealerOffers($dealerIds)
+    {
+        $this->model = $this->model->where(function($query) use($dealerIds){
+            $query->Where(function($query) use($dealerIds){
+                $query->inDealers($dealerIds);
+                // $query->where('author_type', '=', 'custom');
+            });
 
- //        $this->model = $model;
+        });
 
- //        return $this;
- //    }
+        return $this;
+    }
+
 
 
 }

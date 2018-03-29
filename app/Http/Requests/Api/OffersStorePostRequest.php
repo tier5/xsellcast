@@ -35,8 +35,10 @@ class OffersStorePostRequest extends Request
             'media'         => '',
             'status'        => 'required|in:publish,draft,pending',
             'title'         => 'required',
-            'wpid'          => 'unique:offers,wpid',
-            'brand_id'      => 'required|integer|exists:brands,id'
+            'wpid'          => 'integer|unique:offers,wpid',
+            'wp_brand_id'      => 'required|integer|exists:brands,wp_brand_id',
+            'auther_type' =>'required|in:brand,dealer,custom',
+            'wp_dealer_id' =>'required_if:auther_type,dealer'
         ];
     }
 

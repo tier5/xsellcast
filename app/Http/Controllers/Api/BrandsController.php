@@ -55,7 +55,7 @@ class BrandsController extends Controller
                     'code'=>config('responses.success.status_code'),
                     'message'=>config('responses.success.status_message'),
                     ];
-                $data=array_merge($data,$brands);
+            $data=array_merge($data,$brands);
 
             return response()->json($data, config('responses.success.status_code'));
 
@@ -101,7 +101,7 @@ class BrandsController extends Controller
                     ];
                 $data=array_merge($data,$brand);
 
-            return response()->json($data, config('responses.success.status_code'));
+                return response()->json($data, config('responses.success.status_code'));
 
         }
         catch (\Exception $e) {

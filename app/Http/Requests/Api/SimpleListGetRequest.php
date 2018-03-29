@@ -30,11 +30,12 @@ class SimpleListGetRequest extends Request
     {
         return [
             'access_token' => 'required',
-            'limit'        => 'integer',
+            'per_page'     => 'integer',
             'sort'         => 'in:desc,asc',
             'page'         => 'integer',
-            'brand_id'     => 'integer|exists:brands,id',
-            'category_id'  => 'integer|exists:categories,id'
+            'ip'           => isset($this->ip)?'required|ip':'ip',
+            'wp_brand_id'     => 'integer|exists:brands,wp_brand_id',
+            'wp_category_id'  => 'integer|exists:categories,wp_category_id',
         ];
     }
 
