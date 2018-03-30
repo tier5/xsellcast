@@ -10,7 +10,7 @@ class NotificationNews extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $fillable = ['customer_id'];//'status'
+    protected $fillable = ['customer_id','status'];//
 
     protected $table = 'customer_notification_global';
 

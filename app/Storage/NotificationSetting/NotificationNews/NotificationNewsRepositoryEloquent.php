@@ -72,14 +72,16 @@ class NotificationNewsRepositoryEloquent extends BaseRepository implements Notif
     }
     public function createNews($data){
 
-        $notification_type      = (isset($data['notification_type']) ? $data['notification_type'] : '1' );
+        // $notification_type      = (isset($data['notification_type']) ? $data['notification_type'] : '1' );
         $customer_id            = (isset($data['customer_id']) ? $data['customer_id'] : 0);
         $status                 = (isset($data['status']) ? $data['status'] : 1);
         $insert                 =[
             // 'notification_type'=>$notification_type,
-            'customer_id'=>$customer_id,'status'=> $status];
-
-        $notification=$this->skipPresenter()->create($insert);
+            'customer_id' =>$customer_id,
+            'status'      => $status
+        ];
+// dd($insert);
+        $notification=$this->model->create($insert);
         return $notification;
     }
 
@@ -88,11 +90,13 @@ class NotificationNewsRepositoryEloquent extends BaseRepository implements Notif
         $notification_type      = (isset($data['notification_type']) ? $data['notification_type'] : '1' );
         $customer_id            = (isset($data['customer_id']) ? $data['customer_id'] : 0);
         $status                 = (isset($data['status']) ? $data['status'] : 1);
-        $notification                 = $this->skipPresenter()->update([
-            // 'notification_type' =>$notification_type,
-            'customer_id'       =>$customer_id,
-            'status'            => $status], $notification->id);
-
+        // $notification           = $this->model->find([
+        //     // 'notification_type' =>$notification_type,
+        //     'customer_id'       =>$customer_id,
+        //     'status'            => $status
+        // ], $notification->id);
+        $notification->status=$status;
+        $notification->save();
         return $notification;
     }
 

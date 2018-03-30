@@ -30,8 +30,8 @@ class CustomerNotificationNewsRequest extends Request
     {
         return [
             'access_token' => 'required',
-            'customer_id'  => 'required|integer|exists:user_customer,id',
-            // 'status'  => 'required',
+            'wp_customer_id'  => 'required|integer|exists:user_customer,wp_userid',
+            'status'  => 'required|in:1,0',
         ];
 
     }

@@ -306,7 +306,7 @@ class CustomerRepositoryEloquent extends BaseRepository implements CustomerRepos
       // dd( $srFields);
         foreach($userFields as $field)
         {
-            if($field == 'id' || $field == 'password')
+            if($field == 'id' || $field == 'password' || $field == 'wp_userid')
             {
                 continue;
             }

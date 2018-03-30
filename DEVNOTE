@@ -155,6 +155,20 @@ Offer v1.0 #stable
 	d) Modified Add offer , Implemented validation and exception handling.
 	e) Modified brand_id to wp_brand_id in add offer API.
 
+Offer v1.1 #stable
+	a) Add wp_customer_id in Prospect Login  API
+	b) Implemented wp_customer_id in Prospect Login API
+	c) Implemented wp_customer_id in Prospect Logout API
+	d) Implemented wp_userid in Add Prospect API
+	e) Implemented wp_userid in Edit Prospect API
+	f) Removed customer_id in Edit Prospect API
+	g) Implemented wp_userid in Add Prospect Social API
+	h) Implemented wp_customer_id in Prospect Upload Avatar API
+	i) Implemented wp_customer_id in Global Notification Settings  API
+	j) Added status in Global Notification Settings  API
+	k) Implemented wp_customer_id in National Notification Settings  API
+	l) Implemented wp_brands in National Notification Settings  API
+	m) Implemented ba_ids in  Brand Associate Notification Settings  API
 
 
 

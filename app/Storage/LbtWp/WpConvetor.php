@@ -27,6 +27,11 @@ class WpConvetor
 				$id=$category->id;
 
 				break;
+			case 'customer':
+				$customer=\App\Storage\Customer\Customer::where('wp_userid',$wp_id)->first();
+				$id=$customer->id;
+
+				break;
 
 			default:
 				// code...

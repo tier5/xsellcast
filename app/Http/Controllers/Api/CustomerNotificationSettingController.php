@@ -20,6 +20,7 @@ use App\Http\Requests\Api\CustomerNotificationNewsRequest;
 use App\Http\Requests\Api\CustomerNotificationBrandRequest;
 use App\Http\Requests\Api\CustomerNotificationBrandsRequest;
 use App\Http\Requests\Api\CustomerNotificationBrandAssociateRequest;
+use App\Storage\LbtWp\WpConvetor;
 
 /**
  * @resource Customer Notification Setting
@@ -47,76 +48,89 @@ class CustomerNotificationSettingController extends Controller
         $this->notificationBrand = $notificationBrand;
 
 	}
-    public function createGlobal(CustomerNotificationNewsRequest $request){
+  public function createGlobal(CustomerNotificationNewsRequest $request){
+
+    try
+    {
+      $data=$request->all();
+      $wp_customer_id=$request->get('wp_customer_id');
+      $wp=new WpConvetor();
+      $customer_id=$wp->getId('customer',$wp_customer_id);
+      $data['customer_id']=$customer_id;
+      $news=$this->news->isNews($data,1);
+      if(empty($news)){
+        $news=$this->news->createNews($data);
+      }else{
+
+        $news=$this->news->updateNews($news,$data);
+      }
+      $news=$this->news->find($news->id);
+      return response()->json([
+        'status'=>true,
+        'code'=>config('responses.success.status_code'),
+        'data'=> $news,
+        'message'=>config('responses.success.status_message'),
+      ], config('responses.success.status_code'));
+    }
+    catch (\Exception $e) {
+            // dd($e->getMessage());
+      return response()->json([
+        'status'=>false,
+        'code'=>config('responses.bad_request.status_code'),
+        'data'=>null,
+        'message'=>$e->getMessage()
+      ],
+      config('responses.bad_request.status_code')
+    );
+    }
+  }
+  public function createBrand(CustomerNotificationBrandRequest $request){
 
       try
+      {
+        $data=$request->all();
+        $wp_customer_id=$request->get('wp_customer_id');
+        $wp=new WpConvetor();
+        $customer_id=$wp->getId('customer',$wp_customer_id);
+        $data['customer_id']=$customer_id;
+
+        $customer = $this->customer->skipPresenter()->find($customer_id);
+        $wp_brands       = (isset($data['wp_brands']) ? $data['wp_brands'] : []);
+
+
+        foreach($customer->pivotNotificationBrand()->get() as $pivot)
         {
-           $data=$request->all();
-           $news=$this->news->isNews($data,1);
-           if(empty($news)){
-                $news=$this->news->createNews($data);
-            }else{
+          $pivot->delete();
+        }
 
-                $news=$this->news->updateNews($news,$data);
-            }
-                 return response()->json([
-                    'status'=>true,
-                    'code'=>config('responses.success.status_code'),
-                    'data'=> $news,
-                    'message'=>config('responses.success.status_message'),
-                ], config('responses.success.status_code'));
-        }
-        catch (\Exception $e) {
-            // dd($e->getMessage());
-            return response()->json([
-                'status'=>false,
-                'code'=>config('responses.bad_request.status_code'),
-                'data'=>null,
-                'message'=>$e->getMessage()
-            ],
-                config('responses.bad_request.status_code')
-            );
-        }
+      foreach ($wp_brands as $wp_brand_id) {
+
+        $brand_id=$wp->getId('brand',$wp_brand_id);
+
+        $customer->setNotificationBrand($brand_id);
+      }
+      $brands=$customer->notificationBrand;
+
+
+      return response()->json([
+        'status'=>true,
+        'code'=>config('responses.success.status_code'),
+        'data'=> $brands,
+        'message'=>config('responses.success.status_message'),
+      ], config('responses.success.status_code'));
     }
-    public function createBrand(CustomerNotificationBrandRequest $request){
-
-	  try
-        {
-           $data=$request->all();
-           $customer = $this->customer->skipPresenter()->find($request->get('customer_id'));
-           $brands       = (isset($data['brands']) ? $data['brands'] : []);
-
-
-              foreach($customer->pivotNotificationBrand()->get() as $pivot)
-              {
-                  $pivot->delete();
-              }
-
-            foreach ($brands as $brand_id) {
-                    $customer->setNotificationBrand($brand_id);
-            }
-            $brands=$customer->notificationBrand;
-
-
-            return response()->json([
-                    'status'=>true,
-                    'code'=>config('responses.success.status_code'),
-                    'data'=> $brands,
-                    'message'=>config('responses.success.status_message'),
-             ], config('responses.success.status_code'));
-        }
-        catch (\Exception $e) {
+    catch (\Exception $e) {
             // dd($e->getMessage());
-            return response()->json([
-                'status'=>false,
-                'code'=>config('responses.bad_request.status_code'),
-                'data'=>null,
-                'message'=>$e->getMessage()
-            ],
-                config('responses.bad_request.status_code')
-            );
-        }
+      return response()->json([
+        'status'=>false,
+        'code'=>config('responses.bad_request.status_code'),
+        'data'=>null,
+        'message'=>$e->getMessage()
+      ],
+      config('responses.bad_request.status_code')
+    );
     }
+  }
 
 
       public function indexBrand(CustomerNotificationBrandsRequest $request){
@@ -153,7 +167,7 @@ class CustomerNotificationSettingController extends Controller
         {
            $data=$request->all();
            $customer = $this->customer->skipPresenter()->find($request->get('customer_id'));
-           $salesreps              = (isset($data['salesreps']) ? $data['salesreps'] : []);
+           $salesreps              = (isset($data['ba_ids']) ? $data['ba_ids'] : []);
 
            foreach($customer->pivotNotificationBrandAssociates()->get() as $pivot)
               {

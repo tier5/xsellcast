@@ -27,9 +27,9 @@ class CustomerUploadAvatarRequest extends Request
     {
 
         return [
-            'access_token' => 'required',
-            'customer_id'  => 'required|integer|exists:user_customer,id',
-            'avatar'       => 'required|image'
+            'access_token'      => 'required',
+            'wp_customer_id'    => 'required|integer|exists:user_customer,wp_userid',
+            'avatar'            => 'required|image'
         ];
     }
 

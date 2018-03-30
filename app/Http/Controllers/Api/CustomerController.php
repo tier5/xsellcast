@@ -50,6 +50,8 @@ use Hash;
 use Mail;
 use DB;
 use App\Storage\ZipCodeApi\ZipCodeApi;
+use App\Storage\LbtWp\WpConvetor;
+
 /**
  * @resource Customer
  *
@@ -445,7 +447,11 @@ class CustomerController extends Controller
         {
             // $custData = $request->except(['id', 'email', 'lastname', 'firstname']);
             $data     = $request->all();
-            $customer = $this->customer->skipPresenter()->find($request->get('customer_id'));
+            $wp_customer_id=$request->get('wp_customer_id');
+            $wp=new WpConvetor();
+            $customer_id=$wp->getId('customer',$wp_customer_id);
+
+            $customer = $this->customer->skipPresenter()->find($customer_id);
             $this->customer->updateOne($customer, $data);
 
             // $$this->customer->skipPresenter(false)->find($customer->id)
@@ -534,11 +540,11 @@ class CustomerController extends Controller
                 if(Hash::check($password,$user->password))
                     {
 
-            $data=[
-                'customer_id'=>$user->customer->id,
-                'user_id'=>$user->customer->user_id,
-                // 'wp_userid'=>$user->customer->wp_userid
-                ];
+                        $data=[
+                            'customer_id'=>$user->customer->id,
+                            'user_id'=>$user->customer->user_id,
+                            'wp_customer_id'=>$user->customer->wp_userid
+                            ];
                         return response()->json([
                         'status'=>true,
                         'code'=>config('responses.success.status_code'),
@@ -548,12 +554,12 @@ class CustomerController extends Controller
                     }
 
             }
-                return response()->json([
-                    'status'=>true,
-                    'code'=>config('responses.success.status_code'),
-                    'data'=>[],
-                    'message'=>'Invalid email or password',
-                ], config('responses.bad_request.status_code'));
+            return response()->json([
+                'status'=>true,
+                'code'=>config('responses.success.status_code'),
+                'data'=>[],
+                'message'=>'Invalid email or password',
+            ], config('responses.bad_request.status_code'));
 
             // $customer
 
@@ -637,18 +643,12 @@ class CustomerController extends Controller
     public function forgotPassword(CustomerForgotPasswordRequest $request)
     {
         try {
-            $email             = $request->email;
-            $user= User::where('email','=',$email)->first();
-            // $customer=$user->customer;
-            if(!empty($user)){
-            $token=   app('auth.password.broker')->createToken($user);
-            $user->token=$token;
-           // echo $token = str_random(64);
-
-           //  DB::table('password_resets')->insert([
-           //      'email' => $user->email,
-           //      'token' => $token
-           //  ]);
+                $email             = $request->email;
+                $user= User::where('email','=',$email)->first();
+                // $customer=$user->customer;
+                if(!empty($user)){
+                $token=   app('auth.password.broker')->createToken($user);
+                $user->token=$token;
 
                 $beautymail = app()->make(Beautymail::class);
                 $beautymail->send('emails.auth.api.password-reset', compact('user'), function($message) use($user)
@@ -660,15 +660,7 @@ class CustomerController extends Controller
                         ->to($user->email, $user->firstname . ' ' . $user->lastname)
                         ->subject('Password Reset Link');
                 });
-                // \Mail::send('emails.auth.api.password-reset', compact('user'), function($message) use($user)
-                // {
-                //      // $token = str_random(64);
 
-                //     $message
-                //         ->from(env('NO_REPLY'))
-                //         ->to($user->email, $user->firstname . ' ' . $user->lastname)
-                //         ->subject('Password Reset Link');
-                // });
 
                 return response()->json([
                 'status'=>true,
@@ -676,14 +668,14 @@ class CustomerController extends Controller
                 'data'=>['token'=>$token],
                 'message'=>'We have e-mailed your password reset link!',
                 ], config('responses.success.status_code'));
-            }
+                }
 
-            return response()->json([
-               'status'=>false,
-                'code'=>config('responses.bad_request.status_code'),
-                'data'=>[],
-                'message'=>'Invalid Email ' ,
-            ], config('responses.bad_request.status_code'));
+                return response()->json([
+                   'status'=>false,
+                    'code'=>config('responses.bad_request.status_code'),
+                    'data'=>[],
+                    'message'=>'Invalid Email ' ,
+                ], config('responses.bad_request.status_code'));
 
             }
         catch (\Exception $e) {
@@ -717,14 +709,12 @@ class CustomerController extends Controller
             $password          = $request->password;
             $user= User::where('email','=',$email)->first();
 
-            // $customer=$user->customer;
             if(!empty($user)){
-
 
             $credentials=['email'=>$email, 'password' =>$password , 'token' => $token ,'password_confirmation'=> $password];
 
                $response =app('auth.password.broker')->reset($credentials, function ($user, $password) {
-                 // dd($user);
+
                     // if(!empty($issettoken)){
                         $this->resetPassword($user, $password);
 
@@ -740,8 +730,6 @@ class CustomerController extends Controller
                         'message'=>config('responses.success.status_message'),
                         ], config('responses.success.status_code'));
                    }
-
-
             }
 
             return response()->json([
@@ -840,7 +828,10 @@ class CustomerController extends Controller
     {
         try {
             $data     = $request->all();
-            $customer = $this->customer->skipPresenter()->find($request->get('customer_id'));
+            $wp_customer_id=$request->get('wp_customer_id');
+            $wp=new WpConvetor();
+            $customer_id=$wp->getId('customer',$wp_customer_id);
+            $customer = $this->customer->skipPresenter()->find($customer_id);
 
             $user= $customer->user;
 
@@ -1029,24 +1020,27 @@ class CustomerController extends Controller
     {
         try {
 
-            $customer = $this->customer->skipPresenter()->find($request->get('customer_id'));
-            $user= $customer->user;
+                $wp_customer_id=$request->get('wp_customer_id');
+                $wp=new WpConvetor();
+                $customer_id=$wp->getId('customer',$wp_customer_id);
+                $customer = $this->customer->skipPresenter()->find($customer_id);
+                $user= $customer->user;
 
-            if(!empty($user)){
+                if(!empty($user)){
 
+                    return response()->json([
+                        'status'=>true,
+                        'code'=>config('responses.success.status_code'),
+                        'data'=>'Logout succesfully.',
+                        'message'=>config('responses.success.status_message'),
+                        ], config('responses.success.status_code'));
+                }
                 return response()->json([
-                    'status'=>true,
-                    'code'=>config('responses.success.status_code'),
-                    'data'=>'Logout succesfully.',
-                    'message'=>config('responses.success.status_message'),
-                    ], config('responses.success.status_code'));
-            }
-            return response()->json([
-               'status'=>false,
-                'code'=>config('responses.bad_request.status_code'),
-                'data'=>[],
-                'message'=>'Invalid Customer' ,
-            ], config('responses.bad_request.status_code'));
+                   'status'=>false,
+                    'code'=>config('responses.bad_request.status_code'),
+                    'data'=>[],
+                    'message'=>'Invalid Customer' ,
+                ], config('responses.bad_request.status_code'));
 
         }
         catch (\Exception $e) {

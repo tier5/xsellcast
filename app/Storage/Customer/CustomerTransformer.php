@@ -44,7 +44,8 @@ class CustomerTransformer extends TransformerAbstract
             'geo_lat'      => $model->geo_lat,
             'homephone'    => $model->homephone,
             'officephone'  => $model->officephone,
-            'cellphone'    => $model->cellphone
+            'cellphone'    => $model->cellphone,
+            'wp_userid'    => $model->wp_userid
         ];
     }
 }
