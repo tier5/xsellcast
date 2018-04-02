@@ -170,5 +170,7 @@ Offer v1.1 #stable
 	l) Implemented wp_brands in National Notification Settings  API
 	m) Implemented ba_ids in  Brand Associate Notification Settings  API
 
-
+Offer v1.2 #stable
+	a)Change brand_id to wp_brand_id
+	b)Implemented  wp_dealer_id in created offer API
 

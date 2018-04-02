@@ -7,13 +7,17 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Storage\Offer\OfferRepository;
+use App\Storage\Media\MediaRepository;
+use App\Storage\Dealer\DealerRepository;
+
+use App\Storage\Dealer\Dealer;
+
 use App\Http\Requests\Api\OffersRequest;
 use App\Http\Requests\Api\OffersShowRequest;
 use App\Http\Requests\Api\OffersStorePostRequest;
 use App\Http\Requests\Api\OffersDeleteRequest;
 use App\Http\Requests\Api\OffersPutRequest;
 use App\Http\Requests\Api\SimpleListGetRequest;
-use App\Storage\Dealer\Dealer;
 
 use App\Storage\LbtWp\WpConvetor;
 use App\Storage\ZipCodeApi\ZipCodeApi;
@@ -30,10 +34,13 @@ use App\Storage\ZipCodeApi\ZipCodeApi;
 class OffersController extends Controller
 {
 	protected $offer;
-
-	public function __construct(OfferRepository $offer)
+    protected $dealer;
+    protected $media;
+	public function __construct(OfferRepository $offer, MediaRepository $media,DealerRepository $dealer)
 	{
-		$this->offer = $offer;
+        $this->offer = $offer;
+        $this->media = $media;
+		$this->dealer = $dealer;
 	}
 
 	/**
@@ -192,18 +199,64 @@ class OffersController extends Controller
      */
     public function store(OffersStorePostRequest $request)
     {
-        try{
+        // try{
             $data = $request->all();
-            $wp_brand_id=$request->wp_brand_id;
-            if(!isset($data['wpid']) || !is_interger($data['wpid']))
+            $brand_id='';
+            $delear_id='';
+            if(!isset($data['wpid']))
             {
                 $data['wpid'] = null;
             }
-
+            $wp_brand_id=$request->wp_brand_id;
             $wp=new WpConvetor();
             $brand_id=$wp->getId('brand',$wp_brand_id);
             $data['brand_id']=$brand_id;
-            $offer = $this->offer->createOne($data);
+            //1 Convert wp_dealer_id
+            if($data['auther_type']=='dealer'){
+            $wp_dealer_id=$request->wp_dealer_id;
+            $wp=new WpConvetor();
+            $dealer_id=$wp->getId('dealer',$wp_dealer_id);
+            $data['dealer_id']=$dealer_id;
+            }
+            //2 upload image for thumb
+            if(!empty($data['thumbnail'])){
+
+                $file=$data['thumbnail'];
+
+                $type = explode('/', $file->getClientMimeType());
+                $ext = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
+                $baseName = basename($file->getClientOriginalName(), '.' . $ext);
+                $fileName = $this->media->setUploadPath()->generateFilename($baseName, $ext);
+
+                try {
+                    $targetFile = $file->move($this->media->getUploadPath(), $fileName);
+                    $thumb = $this->media->skipPresenter()->uploadImg($targetFile->getPathname(),[[150, 100]], false);
+                    $data['thumbnail_id']=$thumb->id;
+                    $data['media']=[$thumb->id];
+
+                }
+                catch (\Exception $e) {
+
+                    $erroMsg = $this->media->errorMessage($file->getClientOriginalName());
+                    $error = [
+                        'title' => $erroMsg[0],
+                        'body'  => $erroMsg[1]
+                    ];
+                    return response()->json([
+                        'status'=>false,
+                        'code'=>config('responses.bad_request.status_code'),
+                        'data'=>$error,
+                        'message'=> $erroMsg ,
+                        ], config('responses.bad_request.status_code'));
+
+
+                }
+            }
+
+
+
+            $offer = $this->offer->createOne($data,$data['auther_type']);
+
                 return response()->json([
                     'status'=>true,
                     'code'=>config('responses.success.status_code'),
@@ -211,17 +264,17 @@ class OffersController extends Controller
                     'message'=>config('responses.success.status_message'),
                 ], config('responses.success.status_code'));
 
-        }
-        catch (\Exception $e) {
-            return response()->json([
-                'status'=>false,
-                'code'=>config('responses.bad_request.status_code'),
-                'data'=>null,
-                'message'=>$e->getMessage()
-            ],
-                config('responses.bad_request.status_code')
-            );
-        }
+        // }
+        // catch (\Exception $e) {
+        //     return response()->json([
+        //         'status'=>false,
+        //         'code'=>config('responses.bad_request.status_code'),
+        //         'data'=>null,
+        //         'message'=>$e->getMessage()
+        //     ],
+        //         config('responses.bad_request.status_code')
+        //     );
+        // }
     }
 
     /**

@@ -30,16 +30,34 @@ class OffersStorePostRequest extends Request
     {
         return [
             'access_token'  => 'required',
-            'contents'      => 'required',
-            'thumbnail_url' => 'url',
-            'media'         => '',
-            'status'        => 'required|in:publish,draft,pending',
-            'title'         => 'required',
             'wpid'          => 'integer|unique:offers,wpid',
-            'wp_brand_id'      => 'required|integer|exists:brands,wp_brand_id',
-            'auther_type' =>'required|in:brand,dealer,custom',
-            'wp_dealer_id' =>'required_if:auther_type,dealer'
+            'title'         => 'required',
+            'contents'      => 'required',
+            'thumbnail'     => 'image',
+            'media'         => 'image',
+            'status'        => 'required|in:publish,draft,pending',
+            'wp_brand_id'   => 'required|integer|exists:brands,wp_brand_id',
+            'auther_type'   =>'required|in:brand,dealer,custom',
+            'wp_dealer_id'  =>'required_if:auther_type,dealer|exists:dealers,wpid'
         ];
     }
+    /**
+     * Response error message as json
+     *
+     * @param array $errors
+     * @return mixed
+     */
+    public function response(array $errors){
 
+        return response()->json([
+                    'status'=>false,
+                    'code'=>config('responses.bad_request.status_code'),
+                    'data'=>null,
+                    'errors'=>$errors,
+                    'message'=>config('responses.bad_request.status_message'),
+                ],
+                config('responses.bad_request.status_code')
+            );
+        // return Response::json($errors, config('responses.bad_request.status_code'));
+    }
 }

@@ -189,6 +189,7 @@ class OfferRepositoryEloquent extends BaseRepository implements OfferRepository
             abort(422, 'Invalid brand ID.');
         }
 
+        //created Brand Offer
         $offer = $this->skipPresenter()->create([
             'contents'      => $data['contents'],
             'status'        => $data['status'],
@@ -196,11 +197,56 @@ class OfferRepositoryEloquent extends BaseRepository implements OfferRepository
             'wpid'          => $data['wpid'],
             'author_type'   => $author_type
         ]);
+        //attach an offer
+        // if($data['auther_type']=='brand'){
 
-        $offer->brands()->save($brand);
+                $offer->brands()->save($brand);
+        // }
+
+        if(isset($data['thumbnail_id'])){
+
+            if(!isset($data['media']) || !is_array($data['media']) ){
+            $data['media'] = array(0);
+            }
+            // if(!isset($data['thumbnail_id']) || $data['thumbnail_id'] == ''){
+
+            //    $data['thumbnail_id'] = Media::whereIn('id', $data['media'])->where('type', 'image')->first()->id;
+            // }
+
+            //created Offer medias
+            $this->createOfferMedia($offer, $data['media'], $data['thumbnail_id']);
+        }
 
         return $this->skipPresenter(false)->find($offer->id);
     }
+
+
+    // public function createForDealer($param, $dealer_id)
+    // {
+    //     $offer = $this->skipPresenter()->create($param);
+
+    //     if(!is_array($param['media'])){
+    //         $param['media'] = array(0);
+    //     }
+
+    //     if(!$param['thumbnail_id'] || $param['thumbnail_id'] == ''){
+
+    //        $param['thumbnail_id'] = Media::whereIn('id', $param['media'])->where('type', 'image')->first()->id;
+    //     }
+
+    //     $this->createOfferMedia($offer, $param['media'], $param['thumbnail_id']);
+
+    //     $count = SalesrepOffer::where('offer_id', $offer->id)->where('salesrep_id', $salesrep_id)->count();
+
+    //     if($count < 1){
+    //         $pivot = new SalesrepOffer();
+    //         $pivot->offer_id = $offer->id;
+    //         $pivot->salesrep_id = $salesrep_id;
+    //         $pivot->save();
+    //     }
+
+    //     return $offer;
+    // }
 
     public function offerByBrand($brand_id){
         // $this->model = $this->model

@@ -32,6 +32,11 @@ class WpConvetor
 				$id=$customer->id;
 
 				break;
+			case 'dealer':
+				$dealer=\App\Storage\Dealer\Dealer::where('wpid',$wp_id)->first();
+				$id=$dealer->id;
+
+				break;
 
 			default:
 				// code...
