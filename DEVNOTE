@@ -174,3 +174,7 @@ Offer v1.2 #stable
 	a)Change brand_id to wp_brand_id
 	b)Implemented  wp_dealer_id in created offer API
 
+Dealer v1.0 $stable
+	a) Added Brand information in nearest Dealer API
+
+

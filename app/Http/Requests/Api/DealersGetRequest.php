@@ -7,7 +7,7 @@ use App\Http\Requests\Request;
 class DealersGetRequest extends Request
 {
     protected $redirectRoute = 'api.errors';
-    
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -29,10 +29,29 @@ class DealersGetRequest extends Request
             'access_token' => 'required',
             'page'         => 'integer',
             'zip'          => '',
-            'limit'        => 'integer',
-            'category'     => '',
+            'pre_page'     => 'integer',
+            'wp_category_id'     => 'integer|categories,wp',
             'sort'         => 'in:desc,asc',
-            'page'         => 'integer'            
+            'page'         => 'integer'
         ];
+    }
+      /**
+     * Response error message as json
+     *
+     * @param array $errors
+     * @return mixed
+     */
+    public function response(array $errors){
+
+        return response()->json([
+                    'status'=>false,
+                    'code'=>config('responses.bad_request.status_code'),
+                    'data'=>null,
+                    'errors'=>$errors,
+                    'message'=>config('responses.bad_request.status_message'),
+                ],
+                config('responses.bad_request.status_code')
+            );
+        // return Response::json($errors, config('responses.bad_request.status_code'));
     }
 }

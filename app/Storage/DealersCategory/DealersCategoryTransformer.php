@@ -26,7 +26,7 @@ class DealersCategoryTransformer extends TransformerAbstract
             'slug'       => $model->slug,
 
             /* place your other model properties here */
-            
+
             'created_at' => $model->created_at,
             'updated_at' => $model->updated_at
         ];

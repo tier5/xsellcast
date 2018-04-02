@@ -40,7 +40,8 @@ class DealerTransformer extends TransformerAbstract
             'geo_long' => $model->geo_long,
             'geo_lat' => $model->geo_lat,
             'created_at' => $model->created_at,
-            'updated_at' => $model->updated_at
+            'updated_at' => $model->updated_at,
+            'brand' => $model->brands
         ];
     }
 }

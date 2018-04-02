@@ -1311,6 +1311,7 @@ class CustomerController extends Controller
 
                         $delear=$this->dealer->whereBrandInZips($zip_codes->getFoundZips(),$brand_id);
                         $delears=$delear->paginate($per_page);
+                        // dd($delears);
                         $data=[
                             'status'=>true,
                             'code'=>config('responses.success.status_code'),
