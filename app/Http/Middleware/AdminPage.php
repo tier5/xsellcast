@@ -37,9 +37,9 @@ class AdminPage
         {
           Auth::logout();
 
-          $request->session()->flash('errors', "<strong>Oops</strong>, we don't recognize your username and password combination. Please try again."); 
+          $request->session()->flash('errors', "<strong>Oops</strong>, we don't recognize your username and password combination. Please try again.");
           Auth::logout();
-          return redirect()->guest(route('auth.login'));          
+          return redirect()->guest(route('auth.login'));
         }
 
         /**
@@ -51,7 +51,7 @@ class AdminPage
           $reglvl       = $salesrepRepo->maxLevelRegistration($user->salesRep);
 
           if($reglvl < 2){
-            return redirect()->route('register');   
+            return redirect()->route('register');
           }
         }
 
@@ -60,7 +60,7 @@ class AdminPage
         /**
          * Count messaages
          * TODO: create better and cleaner way for couting messages.
-         *  
+         *
          * @var        array
          */
      //   $counts = array('all' => 0, 'all-unread' => 0);
@@ -93,7 +93,7 @@ class AdminPage
           /**
            * Messages
            */
-          $menu->add('MESSAGES', [])
+        /*  $menu->add('MESSAGES', [])
             ->data('icon_class', 'fa fa-envelope-o')
             ->data('labelcolor', 'warning')
             ->restricSalesRep()
@@ -123,7 +123,7 @@ class AdminPage
             $menu->admin_messages->add('Contact Requests', ['url' => route('admin.messages', ['type' => 'contact_me'])])
               ->data('icon_class', 'fa fa-phone')
               ->setCountRoute('admin.api.sidebar.counter.messages.contact_me')
-              ->forRoleOnly('sales-rep');              
+              ->forRoleOnly('sales-rep');
 
             $menu->admin_messages->add('Direct Messages', ['url' => route('admin.messages', ['type' => 'message'])])
               ->data('icon_class', 'fa fa-comment-o')
@@ -132,57 +132,57 @@ class AdminPage
             $menu->admin_messages->add('Sent Messages', ['route' => 'admin.messages.sent'])
               ->data('icon_class', 'fa fa-mail-reply');
             $menu->admin_messages->add('Drafts', ['route' => 'admin.messages.draft'])
-              ->data('icon_class', 'fa fa-eraser');  
+              ->data('icon_class', 'fa fa-eraser');
 
           // End messages
-          
+          */
           /**
            * BA
            */
-          $menu->add('BRAND ASSOCIATES', [])
-            ->data('icon_class', 'fa fa-barcode')
-            ->nickname('admin_ba')
-            ->forRoleOnly('csr')
-            ->restricSalesRep();
-           // ->setCountRoute('admin.api.sidebar.counter.prospect');
-            //->data('count', $prospectCount);
+          // $menu->add('BRAND ASSOCIATES', [])
+          //   ->data('icon_class', 'fa fa-barcode')
+          //   ->nickname('admin_ba')
+          //   ->forRoleOnly('csr')
+          //   ->restricSalesRep();
+          //  // ->setCountRoute('admin.api.sidebar.counter.prospect');
+          //   //->data('count', $prospectCount);
 
-            $menu->admin_ba->add('Invite New BA', ['route' => 'admin.brand.associate.invite']);
-            $menu->admin_ba->add('All BAs', ['route' => 'admin.salesrep']);            
+          //   $menu->admin_ba->add('Invite New BA', ['route' => 'admin.brand.associate.invite']);
+          //   $menu->admin_ba->add('All BAs', ['route' => 'admin.salesrep']);
           //End BA
 
           /**
            * Prospects
            */
-          $menu->add('PROSPECTS', ['route' => 'admin.prospects'])
-            ->data('icon_class', 'fa fa-bullseye')
-            ->nickname('admin_prospects')
-            ->restricSalesRep()
-            ->setCountRoute('admin.api.sidebar.counter.prospect');
+          // $menu->add('PROSPECTS', ['route' => 'admin.prospects'])
+          //   ->data('icon_class', 'fa fa-bullseye')
+          //   ->nickname('admin_prospects')
+          //   ->restricSalesRep()
+          //   ->setCountRoute('admin.api.sidebar.counter.prospect');
 
-            $menu->admin_prospects->add('New Prospects', ['route' => 'admin.prospects.leads'])
-              ->forRoleOnly('sales-rep')
-              ->setCountRoute('admin.api.sidebar.counter.new.prospect');
-            $menu->admin_prospects->add('Unmatched Leads', ['route' => 'admin.prospects.unmatched.lead'])
-              ->forRoleOnly('csr');
-            $menu->admin_prospects->add('All Prospects', ['route' => 'admin.prospects']);            
+          //   $menu->admin_prospects->add('New Prospects', ['route' => 'admin.prospects.leads'])
+          //     ->forRoleOnly('sales-rep')
+          //     ->setCountRoute('admin.api.sidebar.counter.new.prospect');
+          //   $menu->admin_prospects->add('Unmatched Leads', ['route' => 'admin.prospects.unmatched.lead'])
+          //     ->forRoleOnly('csr');
+          //   $menu->admin_prospects->add('All Prospects', ['route' => 'admin.prospects']);
           //End Prospect
 
           /**
            * Prospect Activity
            */
-          $menu->add('PROSPECT ACTIVITY', ['route' => 'admin.prospects.activity'])
-            ->data('icon_class', 'fa fa-eye')
-            ->data('count', 7)
-            ->forRoleOnly('sales-rep')
-            ->restricSalesRep()
-            ->nickname('admin_prospect_activity');
+          // $menu->add('PROSPECT ACTIVITY', ['route' => 'admin.prospects.activity'])
+          //   ->data('icon_class', 'fa fa-eye')
+          //   ->data('count', 7)
+          //   ->forRoleOnly('sales-rep')
+          //   ->restricSalesRep()
+          //   ->nickname('admin_prospect_activity');
 
-            $menu->admin_prospect_activity->add('All Activity', ['url' => route('admin.prospects.activity')]);
-            $menu->admin_prospect_activity->add('Requests', ['url' => route('admin.prospects.activity', ['f' => 'request'])]);
-            $menu->admin_prospect_activity->add('Lookbook Saves', ['url' => route('admin.prospects.activity', ['f' => 'lookbook'])]);
+          //   $menu->admin_prospect_activity->add('All Activity', ['url' => route('admin.prospects.activity')]);
+          //   $menu->admin_prospect_activity->add('Requests', ['url' => route('admin.prospects.activity', ['f' => 'request'])]);
+          //   $menu->admin_prospect_activity->add('Lookbook Saves', ['url' => route('admin.prospects.activity', ['f' => 'lookbook'])]);
           // End Prospect activity
-          
+
           /**
            * Deprecated
            */
@@ -204,22 +204,22 @@ class AdminPage
           /**
            * Offers
            */
-          $menu->add('OFFERS')
-            ->data('icon_class', 'fa fa-tag')
-            ->restricSalesRep()
-            ->nickname('admin_offers');    
+          // $menu->add('OFFERS')
+          //   ->data('icon_class', 'fa fa-tag')
+          //   ->restricSalesRep()
+          //   ->nickname('admin_offers');
 
-            $menu->admin_offers->add('All Offers', ['route' => 'admin.offers']);
-            $menu->admin_offers->add( ($user->hasRole('csr') ? 'BA Offers' : 'Custom Offers'), ['url' => route('admin.offers', ['author_type' => 'custom'])]); 
+          //   $menu->admin_offers->add('All Offers', ['route' => 'admin.offers']);
+          //   $menu->admin_offers->add( ($user->hasRole('csr') ? 'BA Offers' : 'Custom Offers'), ['url' => route('admin.offers', ['author_type' => 'custom'])]);
 
-            if(config('lbt.offer.enable_dealer_offers'))
-            {
-              $menu->admin_offers->add('Dealer Offers', ['url' => route('admin.offers', ['author_type' => 'dealer'])]);
-            }
+          //   if(config('lbt.offer.enable_dealer_offers'))
+          //   {
+          //     $menu->admin_offers->add('Dealer Offers', ['url' => route('admin.offers', ['author_type' => 'dealer'])]);
+          //   }
 
-            $menu->admin_offers->add('Brand Offers', ['url' => route('admin.offers', ['author_type' => 'brand'])]);  
+          //   $menu->admin_offers->add('Brand Offers', ['url' => route('admin.offers', ['author_type' => 'brand'])]);
           // End offer
-        
+
           /**
            * Dealers
            */
@@ -229,7 +229,7 @@ class AdminPage
             ->nickname('admin_dealers');
 
             $menu->admin_dealers->add('Add New Dealer', ['route' => 'admin.dealers.create']);
-            $menu->admin_dealers->add('All Dealers', ['route' => 'admin.dealers']);         
+            $menu->admin_dealers->add('All Dealers', ['route' => 'admin.dealers']);
           //End Dealers
 
           /**
@@ -241,8 +241,8 @@ class AdminPage
             ->nickname('admin_categories');
 
            // $menu->admin_categories->add('Add New Category', []);
-            $menu->admin_categories->add('All Categories', ['route' => 'admin.categories']);       
-            
+            $menu->admin_categories->add('All Categories', ['route' => 'admin.categories']);
+
           //End Dealers
 
           /**
@@ -254,7 +254,7 @@ class AdminPage
             ->nickname('admin_brand');
 
             $menu->admin_brand->add('Add New Brand', ['route' => 'admin.brands.create']);
-            $menu->admin_brand->add('All Brands', ['route' => 'admin.brands']);         
+            $menu->admin_brand->add('All Brands', ['route' => 'admin.brands']);
           //End Brand
 
           /**
@@ -264,10 +264,10 @@ class AdminPage
             ->data('icon_class', 'fa fa-user-circle')
             ->nickname('admin_settings');
           $menu->admin_settings->add('My Profile', ['route' => 'admin.settings.profile']);
-          $menu->admin_settings->add('Notifications', ['route' => 'admin.settings.notifications'])->restricSalesRep();
+          // $menu->admin_settings->add('Notifications', ['route' => 'admin.settings.notifications'])->restricSalesRep();
           $menu->admin_settings->add('Change Password', ['route' => 'admin.settings.change.password']);
           // End settings
-          
+
           /**
            * Logout
            */

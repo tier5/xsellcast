@@ -19,30 +19,31 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $layoutColumns = $this->crud->layoutColumn();
+
         $user          = $request->user();
         $search        = $request->get('s');
         $thread_count  = $this->message->allMessages($search, $user->id)->skipPresenter()->all()->count();
         $urlParam      = [];
         $showAction    = false;
-        
-        if($search)
-        {
-            $urlParam['s'] = urlencode($search);
-        }
 
-        $url = route('admin.api.messages', $urlParam);
-        $tbl = MessageCrud::ajaxTable($url);
+        // if($search)
+        // {
+        //     $urlParam['s'] = urlencode($search);
+        // }
 
-        if($user->hasRole('csr'))
-        {
-            $layoutColumns->addItem('admin.home.csr', ['show_box' => false]);            
-        }else{
+        // $url = route('admin.api.messages', $urlParam);
+        // $tbl = MessageCrud::ajaxTable($url);
 
-            $layoutColumns->addItem('admin.home.ba', ['show_box' => false]);  
-        }
+        // if($user->hasRole('csr'))
+        // {
+            // $layoutColumns->addItem('admin.home.csr', ['show_box' => false]);
+        // }else{
 
-        $layoutColumns->addItem('admin.messages.list', 
-            ['show_box' => false, 'view_args' => compact('thread_count', 'tbl', 'showAction'), 'column_size' => 12]);
+            // $layoutColumns->addItem('admin.home.ba', ['show_box' => false]);
+        // }
+
+        // $layoutColumns->addItem('admin.messages.list',
+            // ['show_box' => false, 'view_args' => compact('thread_count', 'tbl', 'showAction'), 'column_size' => 12]);
 
 		return $this->crud->pageView($layoutColumns);
     }

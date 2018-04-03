@@ -199,7 +199,7 @@ class OffersController extends Controller
      */
     public function store(OffersStorePostRequest $request)
     {
-        try{
+        // try{
             $data = $request->all();
             $brand_id='';
             $delear_id='';
@@ -264,17 +264,17 @@ class OffersController extends Controller
                     'message'=>config('responses.success.status_message'),
                 ], config('responses.success.status_code'));
 
-        }
-        catch (\Exception $e) {
-            return response()->json([
-                'status'=>false,
-                'code'=>config('responses.bad_request.status_code'),
-                'data'=>null,
-                'message'=>$e->getMessage()
-            ],
-                config('responses.bad_request.status_code')
-            );
-        }
+        // }
+        // catch (\Exception $e) {
+        //     return response()->json([
+        //         'status'=>false,
+        //         'code'=>config('responses.bad_request.status_code'),
+        //         'data'=>null,
+        //         'message'=>$e->getMessage()
+        //     ],
+        //         config('responses.bad_request.status_code')
+        //     );
+        // }
     }
 
     /**
