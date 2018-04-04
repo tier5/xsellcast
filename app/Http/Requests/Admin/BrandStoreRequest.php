@@ -29,7 +29,12 @@ class BrandStoreRequest extends Request
             'logo'        => 'required',
             'category'    => 'required',
             'catalog_url' => 'url|active_url',
-            'opid' => 'required'];
+            'opid' => 'required',
+            'slug'        =>  'slug',
+            'image_url'   => 'url|active_url',
+            'image_link'  => 'url|active_url',
+            'image_text'  => '',
+        ];
     }
 
     public function messages()
@@ -37,6 +42,7 @@ class BrandStoreRequest extends Request
         return [
             'name.required' => 'The brand name field is required.',
             'opid.required' => 'The Ontraport tag field is required',
+            'slug.slug' => 'The Slug field is invalid',
         ];
     }
 

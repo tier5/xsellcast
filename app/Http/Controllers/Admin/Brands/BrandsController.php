@@ -38,7 +38,7 @@ class BrandsController extends Controller
 
         $layoutColumns->addItemTable($table, $model->paginate(20));
 
-        return $this->crud->pageView($layoutColumns);       
+        return $this->crud->pageView($layoutColumns);
     }
 
     public function create()
@@ -54,16 +54,23 @@ class BrandsController extends Controller
     public function store(BrandStoreRequest $request)
     {
         $this->brand->createOne([
-            'name'          => $request->get('name'), 
-            'media_logo_id' => $request->get('logo'), 
-            'description'   => $request->get('desc'), 
-            'catalog_url'   => $request->get('catalog_url'), 
-            'media_ids'     => $request->get('images'), 
+            'name'          => $request->get('name'),
+            'media_logo_id' => $request->get('logo'),
+            'description'   => $request->get('desc'),
+            'catalog_url'   => $request->get('catalog_url'),
+            'media_ids'     => $request->get('images'),
             'category'      => $request->get('category'),
-            'opid'          => $request->get('opid')]);
+            'opid'          => $request->get('opid'),
+            'slug'          => $request->get('slug'),
+            'image_url'     => $request->get('image_url'),
+            'image_link'    => $request->get('image_link'),
+            'image_text'    => $request->get('image_text'),
+
+
+        ]);
 
         $request->session()->flash('message', 'The new brand was successfully added!');
-        return redirect()->route('admin.brands');           
+        return redirect()->route('admin.brands');
     }
 
     public function edit(Request $request, $brand_id)
@@ -79,15 +86,15 @@ class BrandsController extends Controller
         $deleteUrl = route('admin.brands.delete', ['brand_id' => $brand->id]);
         $modalMsg = 'Are you sure you would like to permanently delete this brand?';
 
-        $layoutColumns->addItem('admin.partials.table-top-delete', 
+        $layoutColumns->addItem('admin.partials.table-top-delete',
             [
-                'view_args' => compact('deleteUrl', 'modalMsg'), 
-                'show_box' => false, 
+                'view_args' => compact('deleteUrl', 'modalMsg'),
+                'show_box' => false,
                 'column_class' => 'm-b-md text-right']);
         $layoutColumns->addItemForm('App\Storage\Brand\BrandCrud@editForm', compact('brand'));
         $this->crud->setExtra('sidemenu_active', 'admin_brand');
 
-        return $this->crud->pageView($layoutColumns);        
+        return $this->crud->pageView($layoutColumns);
     }
 
     public function update(Request $request, $brand_id)
@@ -100,12 +107,17 @@ class BrandsController extends Controller
         }
 
         $category = Category::find($request->get('category'));
+
         $brand->name = $request->get('name');
         $brand->media_logo_id = $request->get('logo');
         $brand->description = $request->get('desc');
         $brand->catalog_url = $request->get('catalog_url');
         $brand->media_ids    = ($request->get('images') ? implode(',', $request->get('images')) : '' );
         $brand->opid = $request->get('opid');
+        $brand->slug = $request->get('slug');
+        $brand->image_url = $request->get('image_url');
+        $brand->image_link = $request->get('image_link');
+        $brand->image_text = $request->get('image_text');
 
         $brand->categories()->detach();
         $brand->save();
@@ -116,7 +128,7 @@ class BrandsController extends Controller
         }
 
         $request->session()->flash('message', 'The brand was successfully updated!');
-        return redirect()->route('admin.brands');           
+        return redirect()->route('admin.brands');
     }
 
     public function destroy(Request $request, $brand_id)
@@ -127,12 +139,12 @@ class BrandsController extends Controller
         {
             abort(402, "Brand don't exist.");
         }
-        
+
         $brand->categories()->detach();
         $brand->save();
         $brand->delete();
 
         $request->session()->flash('message', 'The brand was successfully deleted!');
-        return redirect()->route('admin.brands');                    
+        return redirect()->route('admin.brands');
     }
 }

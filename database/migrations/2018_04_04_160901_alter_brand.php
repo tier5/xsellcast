@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCategoryTable extends Migration
+class AlterBrand extends Migration
 {
     /**
      * Run the migrations.
@@ -12,14 +12,12 @@ class CreateCategoryTable extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
-
-            $table->increments('id');
-
-            $table->string('name');
-
-            $table->timestamps();
-
+        Schema::table('brands', function($t) {
+            $t->string('slug')->nullable();
+            $t->string('image_url')->nullable();
+            $t->string('image_link')->nullable();
+            $t->string('image_text')->nullable();
+            $t->softDeletes();
         });
     }
 

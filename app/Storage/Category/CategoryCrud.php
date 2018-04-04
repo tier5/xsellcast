@@ -18,24 +18,36 @@ class CategoryCrud
             'label'         => 'Category Name',
             'type'          => 'text',
             'col-class'     => 'col-lg-6 col-md-12 col-sm-12 col-xs-12',
-            'clear_all'     => true));
+            'clear_all'     => true,
+            'field-attr'    => ['required' => 'required']
+     ));
+         $fields->addField(array(
+            'name'          => 'slug',
+            'label'         => 'Category Slug',
+            'type'          => 'text',
+            'col-class'     => 'col-lg-6 col-md-12 col-sm-12 col-xs-12',
+            'clear_all'     => true,
+           ));
 
         $fields->addField(array(
             'name'          => 'opid',
             'label'         => 'Ontraport Tag',
             'type'          => 'App\Storage\Crud\CustomFields@opTagSelect',
             'col-class'     => 'col-lg-6 col-md-12 col-sm-12 col-xs-12',
-            'clear_all'     => true));        
+            'clear_all'     => true,
+            'field-attr'    => ['required' => 'required']
+
+        ));
 
         $info = array(
-            'box_title'     => 'Create', 
+            'box_title'     => 'Create',
             'column_size'   => 12,
             'column_class'  => 'col-sm-12 col-xs-12');
 
         $box = new Box($info);
         $box->setForm($fields);
 
-        return $box;    
+        return $box;
     }
 
     public static function editForm($option)
@@ -45,7 +57,7 @@ class CategoryCrud
 
         $fields->setRoute('admin.categories.update');
         $fields->setModel($category);
-        $fields->setModelId($category->id);    
+        $fields->setModelId($category->id);
         $fields->setSubmitText('Save');
         $fields->addField(array(
             'name'          => 'name',
@@ -55,47 +67,57 @@ class CategoryCrud
             'field-attr'    => ['required' => 'required']));
 
         $fields->addField(array(
+            'name'          => 'slug',
+            'label'         => 'Category Slug',
+            'type'          => 'text',
+            'col-class'     => 'col-lg-6 col-md-12 col-sm-12 col-xs-12',
+             ));
+
+        $fields->addField(array(
             'name'          => 'opid',
             'label'         => 'Ontraport Tag',
             'type'          => 'App\Storage\Crud\CustomFields@opTagSelect',
             'col-class'     => 'col-lg-6 col-md-12 col-sm-12 col-xs-12',
-            'clear_all'     => true));      
+            'clear_all'     => true));
 
         $info = array(
-            'box_title'     => 'Edit', 
+            'box_title'     => 'Edit',
             'column_size'   => 12,
             'column_class'  => 'col-sm-12 col-xs-12');
 
         $box = new Box($info);
         $box->setForm($fields);
 
-        return $box;    
-    }    
+        return $box;
+    }
 
     public static function table($model)
     {
         $table  = new TableCollection();
         $all    = ($model ? $model->all() : [] );
-        $info   = array(  
-            'box_title'     => 'All Categories', 
-            'column_size'   => 8, 
+        $info   = array(
+            'box_title'     => 'All Categories',
+            'column_size'   => 8,
             'column_class'  => 'col-sm-12 col-xs-12',
             'box_float'     => 'left');
 
         $table = $table->make($all)
             ->columns(array(
-                'name' => 'Name'
+                'name' => 'Name',
+                'slug' => 'Slug',
+                'action' => 'Actions'
             ))
-            ->modify('name', function($row){
+
+            ->modify('action', function($row){
 
                 $deleteUrl = route('admin.categories.destroy', ['category_id' => $row->id]);
                 $editUrl = route('admin.categories.edit', $row->id);
 
-                return 
-                    $row->name .
+                return
+
                     ' <div class="pull-right">' .
                     HTML::link($editUrl, '<i class="fa fa-pencil"></i> Edit', ['class' => 'btn btn-white btn-sm m-l-sm', 'onclick' => 'categoryUpdate(this); return false;', 'data-id' => $row->id], null, false) . ' ' .
-                    HTML::link('#', '<i class="fa fa-trash"></i> Delete', ['class' => 'btn btn-white btn-sm', 'onclick' => 'categoryDestroyConfirm(this); return false;', 'data-id' => $row->id], null, false) . 
+                    HTML::link('#', '<i class="fa fa-trash"></i> Delete', ['class' => 'btn btn-white btn-sm', 'onclick' => 'categoryDestroyConfirm(this); return false;', 'data-id' => $row->id], null, false) .
                     '</div>';
             })
             ->sortable(['name'])
@@ -106,7 +128,7 @@ class CategoryCrud
             $label = $user->firstname . ' ' . $user->lastname;
 
             if(isset($user->customer->id)){
-              return HTML::linkRoute('admin.prospects.show', $label, $user->customer->id);  
+              return HTML::linkRoute('admin.prospects.show', $label, $user->customer->id);
             }else{
               return $label;
             }
@@ -114,8 +136,8 @@ class CategoryCrud
             */
 
         $box = new Box($info);
-        $box->setTable($table);    
+        $box->setTable($table);
 
-        return $box;          
+        return $box;
     }
 }

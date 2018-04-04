@@ -12,7 +12,7 @@ class BrandCrud
     {
         $table  = new TableCollection();
         $all    = ($model ? $model->all() : [] );
-        $info   = array(  
+        $info   = array(
           'box_title'     => 'Brands',
           'box_body_class' => 'no-padding',
           'column_size'   => 12);
@@ -38,9 +38,9 @@ class BrandCrud
             ->toActionShow(true);
 
         $box = new Box($info);
-        $box->setTable($table);    
+        $box->setTable($table);
 
-        return $box;    
+        return $box;
 
     }
 
@@ -56,6 +56,13 @@ class BrandCrud
         $fields->addField(array(
             'name'          => 'name',
             'label'         => 'Brand Name',
+            'type'          => 'text',
+            'col-class'     => 'col-lg-6 col-md-12 col-sm-12 col-xs-12',
+            'clear_all'     => true));
+
+        $fields->addField(array(
+            'name'          => 'slug',
+            'label'         => 'Brand Slug',
             'type'          => 'text',
             'col-class'     => 'col-lg-6 col-md-12 col-sm-12 col-xs-12',
             'clear_all'     => true));
@@ -111,17 +118,37 @@ class BrandCrud
             'type'      => 'App\Storage\Crud\CustomFields@opTagSelect',
             'col-class' => 'col-lg-4 col-md-4 col-sm-12 col-xs-12',
             'clear_all' => true,
-            'value'     => $brand->opid));        
+            'value'     => $brand->opid));
+        $fields->addField(array(
+            'name'          => 'image_url',
+            'label'         => 'Brand Image URL',
+            'type'          => 'text',
+            'col-class'     => 'col-lg-6 col-md-12 col-sm-12 col-xs-12',
+            'clear_all'     => true));
+
+        $fields->addField(array(
+            'name'          => 'image_link',
+            'label'         => 'Brand Image Link',
+            'type'          => 'text',
+            'col-class'     => 'col-lg-6 col-md-12 col-sm-12 col-xs-12',
+            'clear_all'     => true));
+
+        $fields->addField(array(
+            'name'          => 'image_text',
+            'label'         => 'Brand Image Text',
+            'type'          => 'text',
+            'col-class'     => 'col-lg-6 col-md-12 col-sm-12 col-xs-12',
+            'clear_all'     => true));
 
         $info = array(
-            'box_title'     => 'Brands - Create', 
+            'box_title'     => 'Brands - Create',
             'column_size'   => 12,
             'column_class'  => 'col-sm-12 col-xs-12');
 
         $box = new Box($info);
         $box->setForm($fields);
 
-        return $box;         
+        return $box;
     }
 
     public static function createForm()
@@ -132,6 +159,12 @@ class BrandCrud
         $fields->addField(array(
             'name'          => 'name',
             'label'         => 'Brand Name',
+            'type'          => 'text',
+            'col-class'     => 'col-lg-6 col-md-12 col-sm-12 col-xs-12',
+            'clear_all'     => true));
+        $fields->addField(array(
+            'name'          => 'slug',
+            'label'         => 'Brand Slug',
             'type'          => 'text',
             'col-class'     => 'col-lg-6 col-md-12 col-sm-12 col-xs-12',
             'clear_all'     => true));
@@ -182,17 +215,40 @@ class BrandCrud
             'label'         => 'Ontraport Tag',
             'type'          => 'App\Storage\Crud\CustomFields@opTagSelect',
             'col-class'     => 'col-lg-4 col-md-4 col-sm-12 col-xs-12',
-            'clear_all'     => true));        
+            'clear_all'     => true));
+
+        $fields->addField(array(
+            'name'          => 'image_url',
+            'label'         => 'Brand Image URL',
+            'type'          => 'text',
+            'col-class'     => 'col-lg-6 col-md-12 col-sm-12 col-xs-12',
+            'clear_all'     => true));
+
+        $fields->addField(array(
+            'name'          => 'image_link',
+            'label'         => 'Brand Image Link',
+            'type'          => 'text',
+            'col-class'     => 'col-lg-6 col-md-12 col-sm-12 col-xs-12',
+            'clear_all'     => true));
+
+        $fields->addField(array(
+            'name'          => 'image_text',
+            'label'         => 'Brand Image Text',
+            'type'          => 'text',
+            'col-class'     => 'col-lg-6 col-md-12 col-sm-12 col-xs-12',
+            'clear_all'     => true));
+
+
 
         $info = array(
-            'box_title'     => 'Brands - Create', 
+            'box_title'     => 'Brands - Create',
             'column_size'   => 12,
             'column_class'  => 'col-sm-12 col-xs-12');
 
         $box = new Box($info);
         $box->setForm($fields);
 
-        return $box;    
+        return $box;
     }
 
 }

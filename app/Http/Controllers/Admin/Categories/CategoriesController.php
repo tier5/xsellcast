@@ -20,7 +20,7 @@ class CategoriesController extends Controller
     public function index(Request $request)
     {
         $sort          = $request->get('sort', 'desc');
-        $sortBy        = $request->get('field', 'created_at');        
+        $sortBy        = $request->get('field', 'created_at');
         $layoutColumns = $this->crud->layoutColumn();
         $model         = $this->category->skipPresenter(); //->paginate(20);
         $category      = ($request->route('category_id') ? $this->category->skipPresenter()->find($request->route('category_id')) : null);
@@ -34,7 +34,7 @@ class CategoriesController extends Controller
         }
 
         switch($sortBy)
-        {   
+        {
             case 'name':
                 $model = $model->orderBy('name', $sort);
                 break;
@@ -43,7 +43,7 @@ class CategoriesController extends Controller
                 break;
         }
 
-        $layoutColumns->addItemTable('App\Storage\Category\CategoryCrud@table', $model->paginate(20), ['column_size' => 12]);  
+        $layoutColumns->addItemTable('App\Storage\Category\CategoryCrud@table', $model->paginate(20), ['column_size' => 12]);
 
         $this->crud->setExtra('sidemenu_active', 'admin_categories');
 
@@ -55,17 +55,21 @@ class CategoriesController extends Controller
         $category       = $this->category->skipPresenter()->find($category_id);
         $form           = \App\Storage\Category\CategoryCrud::editForm(compact('category'))->getForm();
         $category->form = $form->render();
-        
+
         return response()->json(['data' => $category]);
     }
 
     public function store(CategoryStoreRequest $request)
     {
-        $this->category->create(['name' => $request->get('name'), 
-            'opid' => $request->get('opid')]);
+
+        $this->category->create([
+            'name' => $request->get('name'),
+            'opid' => $request->get('opid'),
+            'slug' => $request->get('slug')
+        ]);
 
         $request->session()->flash('message', 'The category was successfully added!');
-        return redirect()->route('admin.categories');            
+        return redirect()->route('admin.categories');
     }
 
     public function update(CategoryStoreRequest $request, $category_id)
@@ -73,20 +77,23 @@ class CategoriesController extends Controller
         $category = $this->category->skipPresenter()->find($category_id);
         $category->name = $request->get('name');
         $category->opid = $request->get('opid');
+        $category->slug = $request->get('slug');
         $category->save();
 
         $request->session()->flash('message', 'The category was successfully updated!');
-        return redirect()->route('admin.categories');          
+        return redirect()->route('admin.categories');
     }
 
     public function destroy(CategoryDestroyRequest $request, $category_id)
     {
+
         $category = $request->get('category', null);
 
         $category->delete();
 
+
         $request->session()->flash('message', 'The category was successfully deleted!');
-        return redirect()->route('admin.categories');    
+        return redirect()->route('admin.categories');
     }
 
     public function confirmDestroy(CategoryDestroyRequest $request, $category_id)
@@ -94,6 +101,6 @@ class CategoriesController extends Controller
         $category = $request->get('category', null);
 
         return response()
-            ->json(['data' => ['id' => $category->id]]);    
+            ->json(['data' => ['id' => $category->id]]);
     }
 }

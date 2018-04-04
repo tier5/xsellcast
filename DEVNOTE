@@ -180,4 +180,10 @@ Dashboard v1.0 #stable
 	a) Modified Dashboard UI .
 	b) Modified Xsellcast menu for CSR
 
+Brand v1.0 #stable
+	a) Added new fields in brand
+	b) Modified brand insert and update option.
+	c) Added new fields in category
+	d) Modified category insert and update option.
+
 

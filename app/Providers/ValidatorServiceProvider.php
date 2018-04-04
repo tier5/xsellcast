@@ -118,6 +118,13 @@ class ValidatorServiceProvider extends ServiceProvider {
             return ($parameters[0] == 1);
         });
 
+        /**
+         * Validate slug
+         */
+        Validator::extend('slug', function($attribute, $value, $parameters, $validator) {
+            return preg_match('/^[a-z0-9]+(?:-[a-z0-9]+)*$/', $value);
+        });
+
 	}
 
 	/**

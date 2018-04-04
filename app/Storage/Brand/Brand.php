@@ -5,18 +5,36 @@ namespace App\Storage\Brand;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
+use Cviebrock\EloquentSluggable\Sluggable;
+
 
 class Brand extends Model implements Transformable
 {
     use TransformableTrait;
+    use Sluggable;
 
-    protected $fillable = ['name', 'parent_id', 'media_logo_id', 'description', 'catalog_url', 'media_ids', 'opid','wp_brand_id'];
+    protected $fillable = ['name', 'parent_id', 'media_logo_id', 'description', 'catalog_url', 'media_ids', 'opid','wp_brand_id','slug', 'image_url', 'image_link', 'image_text'];
 
     protected $table = 'brands';
 
     protected $category;
 
     protected $logo;
+
+     /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
+
 
     public function dealers()
     {

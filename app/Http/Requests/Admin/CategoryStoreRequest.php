@@ -26,19 +26,22 @@ class CategoryStoreRequest extends Request
     {
         return [
             'name'   => 'required',
-            'opid' => 'required'];
+            'opid' => 'required',
+            'slug' => 'slug'
+        ];
     }
 
     public function messages()
     {
         return [
             'name.required' => 'The category name field is required.',
-            'opid.required' => 'The Ontraport tag field is required'
+            'opid.required' => 'The Ontraport tag field is required',
+            'slug.slug' => 'The Slug field is invalid',
         ];
     }
 
     public function forbiddenResponse()
     {
         return response()->view('errors.403');
-    }  
+    }
 }

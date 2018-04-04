@@ -82,6 +82,13 @@ class BrandRepositoryEloquent extends BaseRepository implements BrandRepository
         $categoryId   = (isset($data['category']) ? $data['category'] : null);
         $opId = (isset($data['opid']) ? $data['opid'] : null);
         $wp_brand_id = (isset($data['wp_brand_id']) ? $data['wp_brand_id'] : null);
+        $slug = (isset($data['slug']) ? $data['slug'] : null);
+        $image_url = (isset($data['image_url']) ? $data['image_url'] : null);
+        $image_link = (isset($data['image_link']) ? $data['image_link'] : null);
+        $image_text = (isset($data['image_text']) ? $data['image_text'] : null);
+
+
+
 
         if(is_array($mediaIds))
         {
@@ -99,7 +106,12 @@ class BrandRepositoryEloquent extends BaseRepository implements BrandRepository
                     'catalog_url' => $catalogUrl,
                     'media_ids' => $mediaIds,
                     'opid' => $opId,
-                    'wp_brand_id' => $wp_brand_id
+                    'wp_brand_id' => $wp_brand_id,
+                    'slug'          => $slug,
+                    'image_url'     => $image_url,
+                    'image_link'    => $image_link,
+                    'image_text'    => $image_text,
+
                 ];
 
         $brand = $this->skipPresenter()->create($insert);

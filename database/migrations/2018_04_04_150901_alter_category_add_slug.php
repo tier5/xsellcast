@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCategoryTable extends Migration
+class AlterCategoryAddSlug extends Migration
 {
     /**
      * Run the migrations.
@@ -12,14 +12,9 @@ class CreateCategoryTable extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
-
-            $table->increments('id');
-
-            $table->string('name');
-
-            $table->timestamps();
-
+        Schema::table('categories', function($t) {
+            $t->string('slug')->nullable();
+            $t->softDeletes();
         });
     }
 

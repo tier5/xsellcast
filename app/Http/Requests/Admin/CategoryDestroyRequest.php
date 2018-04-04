@@ -16,8 +16,9 @@ class CategoryDestroyRequest extends Request
      */
     public function authorize()
     {
-    	$category = Category::find($this->route('category_id'));
-    	
+        $category_id=$this->route('category_id');
+    	$category = Category::find($category_id);
+
     	if(!$category)
     	{
     		return false;
@@ -54,5 +55,5 @@ class CategoryDestroyRequest extends Request
     	$error = 'Oops, this category cannot be deleted because one or more brands are associated with it. Please assign those brands to other categories before attempting to delete this category.';
 
         return new JsonResponse(['error' => $error], 422);
-    }  
+    }
 }

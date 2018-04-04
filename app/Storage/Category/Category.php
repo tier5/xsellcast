@@ -5,14 +5,30 @@ namespace App\Storage\Category;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class Category extends Model implements Transformable
 {
     use TransformableTrait;
+    use Sluggable;
 
-    protected $fillable = [ 'name', 'id', 'opid' ];
+    protected $fillable = [ 'name', 'id', 'opid','wp_category_id','slug'];
 
     protected $table = 'categories';
+
+     /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
 
     public function brands()
     {
@@ -26,4 +42,6 @@ class Category extends Model implements Transformable
     		$query->has('dealers');
     	});
     }
+
+
 }
