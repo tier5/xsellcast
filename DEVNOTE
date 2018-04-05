@@ -186,4 +186,7 @@ Brand v1.0 #stable
 	c) Added new fields in category
 	d) Modified category insert and update option.
 
+Find Dealer v1.1 #stable
+	a) Removed Zip form nearest Dealer API.
+	b) Fixed validation issue.
 

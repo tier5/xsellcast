@@ -31,16 +31,24 @@ class CustomerNearestDealerRequest extends Request
         return [
             'access_token' => 'required',
             'brand_id'  => 'required|integer|exists:brands,id',
-            'ip'=>'ip|required_without_all:geo_lat,geo_long,zip',
-            'zip'=>'integer|required_without_all:geo_lat,geo_long,ip',
-            'geo_lat'=>'required_with_all:geo_long|required_without_all:ip,zip',
-            'geo_long'=>'required_with_all:geo_lat|required_without_all:ip,zip',
+            'ip'=>'ip|required_without_all:geo_lat,geo_long',
+            // 'zip'=>'integer|required_without_all:geo_lat,geo_long,ip',
+            'geo_lat'=>'lat|required_with_all:geo_long|required_without_all:ip',
+            'geo_long'=>'lng|required_with_all:geo_lat|required_without_all:ip',
             'keyword'=>'',
             'per_page' => 'integer',
             'page' => 'integer',
 
 
         ];
+    }
+
+    public function messages(){
+        return [
+                'geo_lat.lat'=>'The latitude is invalid',
+                'geo_long.lng'=>'The longitude is invalid',
+
+            ];
     }
 
      /**

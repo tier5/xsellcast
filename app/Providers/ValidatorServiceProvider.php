@@ -124,6 +124,18 @@ class ValidatorServiceProvider extends ServiceProvider {
         Validator::extend('slug', function($attribute, $value, $parameters, $validator) {
             return preg_match('/^[a-z0-9]+(?:-[a-z0-9]+)*$/', $value);
         });
+        /**
+         * Validate lat
+         */
+        Validator::extend('lat', function($attribute, $value, $parameters, $validator) {
+            return preg_match('/^[-]?(([0-8]?[0-9])\.(\d+))|(90(\.0+)?)$/', $value);
+        });
+        /**
+         * Validate long
+         */
+        Validator::extend('lng', function($attribute, $value, $parameters, $validator) {
+            return preg_match('/^[-]?((((1[0-7][0-9])|([0-9]?[0-9]))\.(\d+))|180(\.0+)?)$/', $value);
+        });
 
 	}
 
