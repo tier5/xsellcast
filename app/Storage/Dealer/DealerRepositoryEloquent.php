@@ -86,6 +86,7 @@ class DealerRepositoryEloquent extends BaseRepository implements DealerRepositor
             'address1'           => $data['address1'],
             'address2'           => $data['address2'],
             'city'               => $data['city'],
+            'county'             => $data['county'],
             'state'              => $data['state'],
             'phone'              => $data['phone'],
             'fax'                => $data['address2'],
@@ -93,7 +94,13 @@ class DealerRepositoryEloquent extends BaseRepository implements DealerRepositor
             'zip'                => $data['zip'],
             'description'        => $data['description'],
             'hours_of_operation' => $hoursOfOperation,
-            'logo_media_id'      => $data['logo_media_id']];
+            'logo_media_id'      => $data['logo_media_id'],
+            'outlet'             => $data['outlet'],
+            'distributor_name'   => $data['distributor_name'],
+            'rep_name'           => $data['rep_name'],
+            'rep_email'          => $data['rep_email'],
+
+        ];
         $cityState = CityState::zipLook($data['zip'])->first();
 
         if($cityState)
@@ -120,6 +127,7 @@ class DealerRepositoryEloquent extends BaseRepository implements DealerRepositor
             'address1'           => $data['address1'],
             'address2'           => $data['address2'],
             'city'               => $data['city'],
+            'county'             => $data['county'],
             'state'              => $data['state'],
             'phone'              => $data['phone'],
             'fax'                => $data['fax'],
@@ -127,7 +135,13 @@ class DealerRepositoryEloquent extends BaseRepository implements DealerRepositor
             'zip'                => $data['zip'],
             'description'        => $data['description'],
             'hours_of_operation' => $hoursOfOperation,
-            'logo_media_id'      => $data['logo_media_id']], $dealer->id);
+            'logo_media_id'      => $data['logo_media_id'],
+            'outlet'             => $data['outlet'],
+            'distributor_name'   => $data['distributor_name'],
+            'rep_name'           => $data['rep_name'],
+            'rep_email'          => $data['rep_email'],
+
+        ], $dealer->id);
 
         $dealer->brands()->detach();
         $dealer->save();

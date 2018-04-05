@@ -3,6 +3,7 @@
 use App\Http\Controllers\Controller;
 use App\Storage\Crud\Crud;
 use App\Http\Requests\Admin\CategoryStoreRequest;
+use App\Http\Requests\Admin\CategoryPutRequest;
 use App\Http\Requests\Admin\CategoryDestroyRequest;
 use Illuminate\Http\Request;
 use App\Storage\Category\CategoryRepository;
@@ -92,7 +93,7 @@ class CategoriesController extends Controller
         }
     }
 
-    public function update(CategoryStoreRequest $request, $category_id)
+    public function update(CategoryPutRequest $request, $category_id)
     {
         try{
             $category = $this->category->skipPresenter()->find($category_id);

@@ -25,12 +25,12 @@ class BrandPutRequest extends Request
     public function rules()
     {
         return [
-            'name'        => 'required',
+            'name'        => 'required|unique:brands,name,'.$this->route('id'),
             'logo'        => 'required',
             'category'    => 'required',
             'catalog_url' => 'url|active_url',
             'opid' => 'required',
-            'slug'        =>  'required|slug',
+            'slug'        =>  'required|slug|unique:brands,slug,'.$this->route('id'),
             'image_url'   => 'url|active_url',
             'image_link'  => 'url|active_url',
             'image_text'  => '',

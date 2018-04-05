@@ -65,7 +65,7 @@ class DealerCrud
             'type'          => 'text',
             'field-attr' => ['data-mask' => '(999) 999-9999'],
             'col-class'     => 'col-lg-6 col-md-12 col-sm-12 col-xs-12',
-            'clear_all'     => true));        
+            'clear_all'     => true));
 
         $fields->addField(array(
             'name'          => 'address_1',
@@ -89,6 +89,13 @@ class DealerCrud
             'clear_all'     => true));
 
         $fields->addField(array(
+            'name'          => 'county',
+            'label'         => 'County',
+            'type'          => 'text',
+            'col-class'     => 'col-lg-6 col-md-12 col-sm-12 col-xs-12',
+            'clear_all'     => true));
+
+        $fields->addField(array(
             'name'          => 'state',
             'label'         => 'State',
             'type'          => 'App\Storage\Crud\CustomFields@statesList',
@@ -100,24 +107,59 @@ class DealerCrud
             'label'         => 'Zip Code',
             'type'          => 'text',
             'col-class'     => 'col-lg-4 col-md-12 col-sm-12 col-xs-12',
-            'clear_all'     => true));        
+            'clear_all'     => true));
 
         $fields->addField(array(
             'name'          => 'hours_of_operation',
             'label'         => 'Hours of Operation',
             'type'          => 'App\Storage\Crud\CustomFields@hoursOperation',
             'col-class'     => 'col-lg-6 col-md-12 col-sm-12 col-xs-12',
-            'clear_all'     => true));     
+            'clear_all'     => true));
+
+        $fields->addField(array(
+            'name'          => 'outlet',
+            'label'         => 'Outlet',
+            'type'          => 'text',
+            'col-class'     => 'col-lg-4 col-md-12 col-sm-12 col-xs-12',
+            'clear_all'     => true));
+
+        $fields->addField(array(
+            'name'          => 'distributor_name',
+            'label'         => 'Distributor Name',
+            'type'          => 'text',
+            'col-class'     => 'col-lg-4 col-md-12 col-sm-12 col-xs-12',
+            'clear_all'     => true));
+
+        $fields->addField(array(
+            'name'          => 'rep_name',
+            'label'         => 'Rep. Name',
+            'type'          => 'text',
+            'col-class'     => 'col-lg-4 col-md-12 col-sm-12 col-xs-12',
+            'clear_all'     => true));
+
+        $fields->addField(array(
+            'name'          => 'rep_email',
+            'label'         => 'Rep. Email',
+            'type'          => 'email',
+            'col-class'     => 'col-lg-4 col-md-12 col-sm-12 col-xs-12',
+            'clear_all'     => true));
+
+        // 'county',
+        // 'country_code',
+        // 'outlet',
+        // 'distributor_name',
+        // 'rep_name',
+        // 'rep_email'
 
         $info = array(
-            'box_title'     => 'Dealers - Create', 
+            'box_title'     => 'Dealers - Create',
             'column_size'   => 12,
             'column_class'  => 'col-sm-12 col-xs-12');
 
         $box = new Box($info);
         $box->setForm($fields);
 
-        return $box;   
+        return $box;
     }
 
     public static function editForm($opts)
@@ -129,7 +171,7 @@ class DealerCrud
 
         $fields->setRoute('admin.dealers.update');
         $fields->setModel($dealer);
-        $fields->setModelId($dealer->id);    
+        $fields->setModelId($dealer->id);
         $fields->setSubmitText('Save');
 
         $fields->addField(array(
@@ -186,7 +228,7 @@ class DealerCrud
             'type'       => 'text',
             'field-attr' => ['data-mask' => '(999) 999-9999'],
             'col-class'  => 'col-lg-6 col-md-12 col-sm-12 col-xs-12',
-            'clear_all'  => true));        
+            'clear_all'  => true));
 
         $fields->addField(array(
             'name'          => 'address1',
@@ -210,6 +252,14 @@ class DealerCrud
             'clear_all'     => true));
 
         $fields->addField(array(
+            'name'          => 'county',
+            'label'         => 'County',
+            'type'          => 'text',
+            'col-class'     => 'col-lg-6 col-md-12 col-sm-12 col-xs-12',
+            'clear_all'     => true));
+
+
+        $fields->addField(array(
             'name'          => 'state',
             'label'         => 'State',
             'type'          => 'App\Storage\Crud\CustomFields@statesList',
@@ -221,7 +271,7 @@ class DealerCrud
             'label'         => 'Zip Code',
             'type'          => 'text',
             'col-class'     => 'col-lg-4 col-md-12 col-sm-12 col-xs-12',
-            'clear_all'     => true));        
+            'clear_all'     => true));
 
         $fields->addField(array(
             'name'          => 'hours_of_operation',
@@ -229,24 +279,52 @@ class DealerCrud
             'type'          => 'App\Storage\Crud\CustomFields@hoursOperation',
             'col-class'     => 'col-lg-6 col-md-12 col-sm-12 col-xs-12',
             'value'         => $dealer->hours_of_operation,
-            'clear_all'     => true));     
+            'clear_all'     => true));
+
+        $fields->addField(array(
+            'name'          => 'outlet',
+            'label'         => 'Outlet',
+            'type'          => 'text',
+            'col-class'     => 'col-lg-4 col-md-12 col-sm-12 col-xs-12',
+            'clear_all'     => true));
+
+        $fields->addField(array(
+            'name'          => 'distributor_name',
+            'label'         => 'Distributor Name',
+            'type'          => 'text',
+            'col-class'     => 'col-lg-4 col-md-12 col-sm-12 col-xs-12',
+            'clear_all'     => true));
+
+        $fields->addField(array(
+            'name'          => 'rep_name',
+            'label'         => 'Rep. Name',
+            'type'          => 'text',
+            'col-class'     => 'col-lg-4 col-md-12 col-sm-12 col-xs-12',
+            'clear_all'     => true));
+
+        $fields->addField(array(
+            'name'          => 'rep_email',
+            'label'         => 'Rep. Email',
+            'type'          => 'email',
+            'col-class'     => 'col-lg-4 col-md-12 col-sm-12 col-xs-12',
+            'clear_all'     => true));
 
         $info = array(
-            'box_title'     => 'Dealers - Edit', 
+            'box_title'     => 'Dealers - Edit',
             'column_size'   => 12,
             'column_class'  => 'col-sm-12 col-xs-12');
 
         $box = new Box($info);
         $box->setForm($fields);
 
-        return $box;   
+        return $box;
     }
 
     public static function table($model, $opt)
     {
         $table  = new TableCollection();
         $all    = ($model ? $model->all() : [] );
-        $info   = array(  
+        $info   = array(
           'box_title'     => 'Dealers',
           'box_body_class' => 'no-padding',
           'column_size'   => 12);
@@ -295,7 +373,7 @@ class DealerCrud
 
                     return $span . '';
                 }
-                
+
                 return $span . $category->name;
             })
             ->modify('city', function($row){
@@ -316,9 +394,9 @@ class DealerCrud
             ->toActionShow(true);
 
         $box = new Box($info);
-        $box->setTable($table);    
+        $box->setTable($table);
 
-        return $box;    
+        return $box;
 
     }
 

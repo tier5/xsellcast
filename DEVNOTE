@@ -193,3 +193,8 @@ Find Dealer v1.1 #stable
 Brand v1.1 #stable
 	a) Implemented Exception handling in category and brand .
 	b) Fixed brand edit issue
+
+Dealer v2.0 #stable
+	a) Created migration to modified dealer table
+	b) Modified dealer create and edit form
+	c) Implemented Exception and validation in dealer create and edit option

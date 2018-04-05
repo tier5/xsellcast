@@ -25,9 +25,9 @@ class CategoryStoreRequest extends Request
     public function rules()
     {
         return [
-            'name'   => 'required',
+            'name'   => 'required|unique:categories,name',
             'opid' => 'required',
-            'slug' => 'slug'
+            'slug' => 'slug|unique:categories,slug',
         ];
     }
 

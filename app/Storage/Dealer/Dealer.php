@@ -14,7 +14,7 @@ class Dealer extends Model implements Transformable
         'name',
         'address1',
         'address2',
-        'city', 
+        'city',
         'state',
         'phone',
         'fax',
@@ -24,7 +24,15 @@ class Dealer extends Model implements Transformable
         'description',
         'logo_media_id',
         'geo_lat',
-        'geo_long'];
+        'geo_long',
+        'county',
+        'country_code',
+        'outlet',
+        'distributor_name',
+        'rep_name',
+        'rep_email'
+
+    ];
 
     protected $table = 'dealers';
 
@@ -40,11 +48,11 @@ class Dealer extends Model implements Transformable
 
     public function salesReps()
     {
-        return $this->belongsToMany('App\Storage\SalesRep\SalesRep', 'dealer_salesrep', 'dealer_id', 'salesrep_id');        
+        return $this->belongsToMany('App\Storage\SalesRep\SalesRep', 'dealer_salesrep', 'dealer_id', 'salesrep_id');
     }
 
     public function categories()
     {
-        return $this->belongsToMany('App\Storage\DealersCategory\DealersCategory', 'dealers_category_relation', 'dealer_id', 'category_id');           
+        return $this->belongsToMany('App\Storage\DealersCategory\DealersCategory', 'dealers_category_relation', 'dealer_id', 'category_id');
     }
 }
