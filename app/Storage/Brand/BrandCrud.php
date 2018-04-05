@@ -20,7 +20,7 @@ class BrandCrud
         $table = $table->make($all)
             ->columns(array(
                 'name'      => 'Name',
-                'category' => 'Category'
+                'category'  => 'Category'
             ))
             ->modify('category', function($row){
 

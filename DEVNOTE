@@ -190,3 +190,6 @@ Find Dealer v1.1 #stable
 	a) Removed Zip form nearest Dealer API.
 	b) Fixed validation issue.
 
+Brand v1.1 #stable
+	a) Implemented Exception handling in category and brand .
+	b) Fixed brand edit issue

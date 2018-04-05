@@ -8,7 +8,7 @@ class CustomFields
 
 	public function textAutoComplete($crud_field)
 	{
-		
+
 		return view('admin.crud.form.custom-fields.autocomplete', compact('crud_field'));
 	}
 
@@ -45,22 +45,22 @@ class CustomFields
 		}
 
 		return view('admin.crud.form.custom-fields.hours-operation', compact('crud_field', 'value'));
-	}	
+	}
 
 	public function brandCategoryList($crud_field)
 	{
 		$caregories = \App\Storage\Category\Category::all()->lists('name', 'id')->toArray();
-		$caregories = ['' => 'Select category...'] + $caregories;
-		
-		return Form::admin_select($crud_field->getOption('name'), $crud_field->getOption('label'), $caregories, $crud_field->getOption('selected'));	
+		// $caregories = ['' => 'Select category...'] + $caregories;
+
+		return Form::admin_select($crud_field->getOption('name'), $crud_field->getOption('label'), $caregories, $crud_field->getOption('selected'));
 	}
 
 	public function brandsList($crud_field)
 	{
 		$brands = \App\Storage\Brand\Brand::all()->lists('name', 'id')->toArray();
 		$brands = ['' => 'Select brand...'] + $brands;
-		
-		return Form::admin_select($crud_field->getOption('name'), $crud_field->getOption('label'), $brands, $crud_field->getOption('selected'));	
+
+		return Form::admin_select($crud_field->getOption('name'), $crud_field->getOption('label'), $brands, $crud_field->getOption('selected'));
 	}
 
 	public function statesList($crud_field)
@@ -87,7 +87,7 @@ class CustomFields
 		$tags  = $t->objects()->lists('tag_name', 'tag_id')->toArray();
 		$lists = ['' => 'Select tag...'] + $tags;
 		$f     =  Form::admin_select($crud_field->getOption('name'), $crud_field->getOption('label'), $lists, $crud_field->getOption('selected'), $crud_field->getOption('options'));
-	
+
 		return $f;
 	}
 }
