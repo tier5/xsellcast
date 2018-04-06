@@ -598,6 +598,14 @@ Route::group(array('prefix' => 'admin', 'middleware' => array('auth', 'admin-pag
             'as' => 'admin.categories.destroy',
             'uses' => 'CategoriesController@destroy'));
     });
+    // Appointment
+    Route::group(array('prefix' => 'appointment','namespace'=>'Appointment'), function()
+    {
+         Route::get('', array(
+            'as' => 'admin.appointment',
+            'uses' => 'AppointmentController@index'));
+
+    });
 
 });
 

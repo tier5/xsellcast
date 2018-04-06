@@ -244,6 +244,13 @@ class AdminPage
             $menu->admin_categories->add('All Categories', ['route' => 'admin.categories']);
 
           //End Dealers
+          /**
+           * Appointment
+           */
+          $menu->add('Appointment', ['route' => 'admin.appointment'])
+            ->data('icon_class', 'fa fa-notepad')
+            ->forRoleOnly('sales-rep')
+            ->nickname('admin_appointment');
 
           /**
            * Brand

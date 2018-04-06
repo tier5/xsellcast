@@ -89,7 +89,7 @@ class DealerRepositoryEloquent extends BaseRepository implements DealerRepositor
             'county'             => $data['county'],
             'state'              => $data['state'],
             'phone'              => $data['phone'],
-            'fax'                => $data['address2'],
+            'fax'                => $data['fax'],
             'website'            => $data['website'],
             'zip'                => $data['zip'],
             'description'        => $data['description'],
