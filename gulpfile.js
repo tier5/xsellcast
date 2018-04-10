@@ -14,6 +14,8 @@ var elixir = require('laravel-elixir');
 elixir(function(mix) {
     mix.sass('inspinia-scss/style.scss', 'public/css/admin-style.css');
     mix.sass('font-awesome/scss/font-awesome.scss', 'public/css/font-awesome.css');
+    mix.styles('plugins/fullcalendar/fullcalendar.css', 'public/css/fullcalendar.css');
+    mix.styles('plugins/fullcalendar/fullcalendar.print.css', 'public/css/fullcalendar.print.css');
     mix.scripts([
     	'resources/assets/js/jquery-2.1.1.js',
         'resources/assets/js/plugins/jquery-ui/jquery-ui.min.js',
@@ -32,19 +34,20 @@ elixir(function(mix) {
         'resources/assets/js/plugins/iCheck/icheck.min.js',
     	'resources/assets/js/plugins/gritter/jquery.gritter.min.js',
     	'resources/assets/js/plugins/easypiechart/jquery.easypiechart.js',
-    	'resources/assets/js/plugins/sparkline/jquery.sparkline.min.js',
+        'resources/assets/js/plugins/sparkline/jquery.sparkline.min.js',
     	'resources/assets/js/demo/sparkline-demo.js',
     	'resources/assets/js/plugins/chartJs/Chart.min.js',
         'resources/assets/js/inspinia.js',
-        'resources/assets/js/jquery.waypoints.min.js',     
-        'resources/assets/js/laroute.js', 
-        'resources/assets/js/mustache.min.js', 
+        'resources/assets/js/jquery.waypoints.min.js',
+        'resources/assets/js/laroute.js',
+        'resources/assets/js/mustache.min.js',
         'resources/assets/js/crud.js',
         'resources/assets/js/video.js',
         'resources/assets/js/media.js',
         'resources/assets/js/moment.js',
         'resources/assets/js/moment-timezone.js',
         'resources/assets/js/moment-timezone-with-data-2012-2022.min.js',
+        'resources/assets/js/plugins/fullcalendar/fullcalendar.min.js',
     	'resources/assets/js/custom.js',
     	], 'public/js/app.js');
 	mix.copy(

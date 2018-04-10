@@ -46,7 +46,7 @@ class SalesRep extends Model implements Transformable
     public function dealers()
     {
         return $this->belongsToMany('App\Storage\Dealer\Dealer', 'dealer_salesrep', 'salesrep_id', 'dealer_id');
-    }    
+    }
 
     /**
      * Determines if it has customer.
@@ -84,7 +84,7 @@ class SalesRep extends Model implements Transformable
     public function getIsAgreementAttribute()
     {
         $meta = $this->user->getMeta('salesrep_agreement');
-        
+
         if(is_bool($meta)){
 
             return $meta;
@@ -109,9 +109,9 @@ class SalesRep extends Model implements Transformable
     public function setFalseAgreement()
     {
         $this->user->setMeta('salesrep_agreement', false);
-        
+
         return $this->user->save();
-    }   
+    }
 
     public function setToPasswordChanged($boolean = true)
     {
@@ -124,12 +124,12 @@ class SalesRep extends Model implements Transformable
     public function getLocalCreatedAtAttribute()
     {
         return carbonToLocal($this->created_at);
-    } 
+    }
 
     public function getLocalAgreedAtAttribute()
     {
         $meta = $this->user->getMeta('salesrep_agreement', true);
-        
+
         if(isset($meta->value) && !$meta->value)
         {
             return null;
@@ -151,5 +151,10 @@ class SalesRep extends Model implements Transformable
     public function customersPivot()
     {
         return $this->hasMany('App\Storage\Customer\CustomerSalesRep', 'salesrep_id', 'id');
-    }    
+    }
+
+    public function cronofy()
+    {
+        return $this->hasOne('App\Storage\SalesrepCronofy\SalesrepCronofy', 'salesrep_id');
+    }
 }

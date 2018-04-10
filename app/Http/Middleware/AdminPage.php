@@ -248,7 +248,7 @@ class AdminPage
            * Appointment
            */
           $menu->add('Appointment', ['route' => 'admin.appointment'])
-            ->data('icon_class', 'fa fa-notepad')
+            ->data('icon_class', 'fa fa-calendar')
             ->forRoleOnly('sales-rep')
             ->nickname('admin_appointment');
 
@@ -272,6 +272,7 @@ class AdminPage
             ->nickname('admin_settings');
           $menu->admin_settings->add('My Profile', ['route' => 'admin.settings.profile']);
           // $menu->admin_settings->add('Notifications', ['route' => 'admin.settings.notifications'])->restricSalesRep();
+          $menu->admin_settings->add('Cronofy Settings', ['route' => 'admin.settings.salesrep.cronofysettings'])->restricSalesRep();
           $menu->admin_settings->add('Change Password', ['route' => 'admin.settings.change.password']);
           // End settings
 

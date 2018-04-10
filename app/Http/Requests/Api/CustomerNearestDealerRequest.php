@@ -47,6 +47,9 @@ class CustomerNearestDealerRequest extends Request
         return [
                 'geo_lat.lat'=>'The latitude is invalid',
                 'geo_long.lng'=>'The longitude is invalid',
+                'geo_lat.required_without_all'=>'The geo latitude field is required when ip is not present.',
+                'geo_long.required_without_all'=>'The geo longitude field is required when ip is not present.',
+
 
             ];
     }

@@ -3,7 +3,7 @@ var iCheckfield = function()
     $('.i-checks').iCheck({
         checkboxClass: 'icheckbox_square-green',
         radioClass: 'iradio_square-green',
-    });	
+    });
 
 };
 
@@ -35,7 +35,7 @@ var jsonErrorToHtml = function(jsonResp)
  */
 var simpleAjaxRq = function(url, frm_data, is_valid, success_callback, callback_param, method, param)
 {
-	
+
 	if(is_valid === null || is_valid === undefined){
 		is_valid = true;
 	}
@@ -60,7 +60,7 @@ var simpleAjaxRq = function(url, frm_data, is_valid, success_callback, callback_
 			error: function(r) {
 				var html = '';
 				if(r.status == 422){
-					
+
 					html = jsonErrorToHtml(r.responseJSON);
 				}else{
 
@@ -82,7 +82,7 @@ var simpleAjaxRq = function(url, frm_data, is_valid, success_callback, callback_
 						time: 3000
 					});
 				}
-				
+
 				if (typeof success_callback === "function") {
 					success_callback(callback_param, data);
 				}
@@ -90,7 +90,7 @@ var simpleAjaxRq = function(url, frm_data, is_valid, success_callback, callback_
 		   	}
 		}).complete(function(){
 			rmBodyProcessing();
-		});		
+		});
 	}
 
 }
@@ -184,17 +184,17 @@ var registerFieldWizard = function()
 	        isDone = $(this).hasClass('doneBtn');
 
 	        if($(this).hasClass('next-submit')){
-	        	 
+
 	        	if(isDone){
 	        		simpleAjaxRq(url, formData, isValid, successDoneStep, nextStepWizard, null, {success_msg: successMsg});
 	        	}else{
-	        		simpleAjaxRq(url, formData, isValid, successNextStep, nextStepWizard, null, {success_msg: successMsg});	        		
+	        		simpleAjaxRq(url, formData, isValid, successNextStep, nextStepWizard, null, {success_msg: successMsg});
 	        	}
 	        }
 	  	});
 
 		var totalSteps = $('div.setup-panel div a').length;
-	  	var countDisabled = $('div.setup-panel div a.open-done').length; 
+	  	var countDisabled = $('div.setup-panel div a.open-done').length;
 
 	  	$('.register-page.setup-content').eq(countDisabled - 1).show();
 	  	$('.stepwizard-step').eq(countDisabled - 1).addClass('active');
@@ -206,7 +206,7 @@ var registerFieldWizard = function()
 
 var registerSearchDealer = function()
 {
-	
+
 	/**
 	 * Add dealers listing
 	 *
@@ -219,7 +219,7 @@ var registerSearchDealer = function()
 			$.gritter.add({
 				text: 'Dealer found!',
 				time: 3000
-			});	
+			});
 
 			var html = '<ul>';
 			$.each(data['data'], function(k, v){
@@ -234,7 +234,7 @@ var registerSearchDealer = function()
 			}else{
 				$('#dealers-container').addClass('hidden');
 			}
-	
+
 			iCheckfield();
 
 		}else{
@@ -243,7 +243,7 @@ var registerSearchDealer = function()
 				text: 'No dealer found!',
 				time: 8000,
 				class_name: 'gritter-danger'
-			});			
+			});
 
 			$('#dealers-container').addClass('hidden');
 		}
@@ -257,7 +257,7 @@ var registerSearchDealer = function()
 
 		if(zipVal != '')
 		{
-			simpleAjaxRq(url, formData, true, populateDealers, null, 'GET', {});			
+			simpleAjaxRq(url, formData, true, populateDealers, null, 'GET', {});
 		}else{
 			$.gritter.add({
 				title: 'Error!',
@@ -281,8 +281,8 @@ var scrollTo = function()
 			    $('html, body').animate({
 			        scrollTop: $target.offset().top
 			    }, 500);
-			}, 1000);	
-		}	
+			}, 1000);
+		}
 	});
 }
 
@@ -331,7 +331,7 @@ var offerSelectField = function()
 	$('#addLBTOfferModal').on('hidden.bs.modal', function () {
 		var $modal = $(this);
 		$('ul.offer li', $modal).remove();
-	});	
+	});
 };
 
 var offerSelectFieldPopulate = function(url, $modal)
@@ -351,12 +351,12 @@ var offerSelectFieldPopulate = function(url, $modal)
 
 		if(data.meta.pagination.links.next)
 		{
-			$modal.attr('data-url', data.meta.pagination.links.next);	
+			$modal.attr('data-url', data.meta.pagination.links.next);
 		}else{
 
 			$modal.attr('data-url', 0);
 		}
-		
+
 
 	})
 };
@@ -370,7 +370,7 @@ var offerLoadAll = function(url, success_callback)
 		error: function(r) {
 			var html = '';
 			if(r.status == 422){
-				
+
 				html = jsonErrorToHtml(r.responseJSON);
 			}else{
 
@@ -427,7 +427,7 @@ var setGlobalTz = function()
 		error: function(r) {
 			var html = '';
 			if(r.status == 422){
-				
+
 				html = jsonErrorToHtml(r.responseJSON);
 			}else{
 
@@ -439,7 +439,7 @@ var setGlobalTz = function()
 	   	success: function(data) {
 
 	   	}
-	});	
+	});
 };
 
 var salesRepAgreementModal = function()
@@ -495,7 +495,7 @@ var btnCtrlCollaps = function()
 		var normalTxt      = $(this).text();
 		var collapsedClass = $(this).attr('data-collapsed-class') + ' btn-control-collapsed';
 		var normalClass    = $(this).attr('class');
-		var href 		   = $(this).attr('href');	
+		var href 		   = $(this).attr('href');
 		var $this 		   = $(this);
 
 		$(this).attr('data-normal-class', normalClass);
@@ -518,7 +518,7 @@ var beforeBrandAssignment = function(elem)
 	var k        = $item.attr('data-key');
 	var val      = $("option:selected", elem).val();
 
-	$(elem).attr('data-old-value', val);	
+	$(elem).attr('data-old-value', val);
 };
 
 var brandAssignment = function(elem)
@@ -561,7 +561,7 @@ var changeProspectBa = function(elem, customer_id)
 		error: function(r) {
 			var html = '';
 			if(r.status == 422){
-				
+
 				html = jsonErrorToHtml(r.responseJSON);
 			}else{
 
@@ -581,7 +581,7 @@ var changeProspectBa = function(elem, customer_id)
 	}).complete(function(){
 		$modal.removeClass('disabled');
 		//$m.modal('hide');
-	});	
+	});
 };
 
 var prospectShowProfileSetSign = function()
@@ -607,7 +607,7 @@ var acceptLead = function(elem)
 		error: function(r) {
 			var html = '';
 			if(r.status == 422){
-				
+
 				html = jsonErrorToHtml(r.responseJSON);
 			}else{
 
@@ -622,7 +622,7 @@ var acceptLead = function(elem)
 			});
 	   	},
 	   	success: function(data) {
-	   		location.reload();	   		
+	   		location.reload();
 	   	}
 	}).complete(function(){
 
@@ -645,7 +645,7 @@ var rejectLead = function(elem)
 		error: function(r) {
 			var html = '';
 			if(r.status == 422){
-				
+
 				html = jsonErrorToHtml(r.responseJSON);
 			}else{
 
@@ -659,8 +659,8 @@ var rejectLead = function(elem)
 				class_name: 'gritter-danger'
 			});
 	   	},
-	   	success: function(data) {  
-	   		window.location.href = laroute.route('admin.prospects.leads');		
+	   	success: function(data) {
+	   		window.location.href = laroute.route('admin.prospects.leads');
 	   	}
 	}).complete(function(){
 
@@ -714,7 +714,7 @@ var categoryDestroyConfirm = function(elem)
 			messages = [];
 
 			if(r.status == 422){
-				
+
 				messages = [r.responseJSON.error];
 			}else{
 
@@ -741,8 +741,8 @@ var categoryDestroyConfirm = function(elem)
 	        $('#category_delete_modal').modal('show');
 	   	}
 	}).complete(function(){
-	
-	});	
+
+	});
 };
 
 var categoryUpdate = function(elem)
@@ -761,7 +761,7 @@ var categoryUpdate = function(elem)
 			messages = [];
 
 			if(r.status == 422){
-				
+
 				messages = [r.responseJSON.error];
 			}else{
 
@@ -789,12 +789,12 @@ var categoryUpdate = function(elem)
 	        $('#category_edit_form_modal').modal('show');
 	   	}
 	}).complete(function(){
-	
-	});	
+
+	});
 };
 
 var messageTblListDeleteIds = function(elem)
-{	
+{
 	var name = $(elem).attr('name');
 	var ids = [];
 	$.each($('input[name="' + name + '"]:checked'), function(k, dom){
@@ -827,7 +827,7 @@ var triggerMessageListDelete = function(elem)
 			messages = [];
 
 			if(r.status == 422){
-				
+
 				messages = [r.responseJSON.error];
 			}else{
 
@@ -839,8 +839,8 @@ var triggerMessageListDelete = function(elem)
 	   		window.location.href = data.data.url;
 	   	}
 	}).complete(function(){
-	
-	});	
+
+	});
 };
 
 var messageDeleteListModal = function()
@@ -850,7 +850,7 @@ var messageDeleteListModal = function()
 	if(!strIds)
 	{
 		return false;
-	}	
+	}
 
 	$('#deleteMessageListModal').modal();
 	$('#deleteMessageListModal').modal('show');
@@ -870,7 +870,7 @@ var formValidationSubmit = function()
 
 		$('[name]', $form).each(function(){
 			var name = $(this).attr('name');
-			var val = $(this).val(); 
+			var val = $(this).val();
 			data[name] = val;
 
 			if($(this).is('button'))
@@ -884,7 +884,7 @@ var formValidationSubmit = function()
 			return true;
 		}
 
-		e.preventDefault();		
+		e.preventDefault();
 
 		simpleAjaxRq(url, $.param(data), true, function(){
 			$form.addClass('validated');
@@ -903,11 +903,10 @@ $(document).ready(function () {
 	scrollTo();
 	offerSelectField();
 	salesRepAgreementModal();
-	sidebarSetCounts();	
+	sidebarSetCounts();
 	registerSearchDealer();
 	btnCtrlCollaps();
 	sideMenuDropTrigger();
 	formValidationSubmit();
 	//brandAssignment();
-		
 });

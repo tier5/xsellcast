@@ -23,14 +23,14 @@ class Pages
             $page->add('admin.prospects', 'All Prospects')
                 ->breadcrumb(function($menu){
                     $menu->add('Prospects', [ 'route' => 'admin.prospects' ]);
-                    $menu->add('All Prospects')->active();                    
+                    $menu->add('All Prospects')->active();
                 });
 
             $page->add('admin.prospects.show', 'Prospects')
                 ->breadcrumb(function($menu){
                     $menu->add('Prospects', [ 'route' => 'admin.prospects' ]);
-                    $menu->add('Profile')->active();                    
-                });         
+                    $menu->add('Profile')->active();
+                });
 
             $page->add('admin.messages')
                 ->setTitle(function($item) use($vars){
@@ -39,20 +39,20 @@ class Pages
                 })
                 ->breadcrumb(function($menu) use($vars){
                     $menu->add('Messages', [ 'route' => ['admin.messages', $vars['type']] ]);
-                    $menu->add('Show')->active();                    
-                });   
+                    $menu->add('Show')->active();
+                });
 
             $page->add('admin.messages.sent', 'Sent Messages')
                 ->breadcrumb(function($menu){
                     $menu->add('Messages', ['route' => 'admin.messages']);
-                    $menu->add('Sent')->active();                    
-                });  
+                    $menu->add('Sent')->active();
+                });
 
             $page->add('admin.messages.draft', 'Draft Messages')
                 ->breadcrumb(function($menu){
                     $menu->add('Messages', ['route' => 'admin.messages']);
-                    $menu->add('Draft Messages')->active();                    
-                });  
+                    $menu->add('Draft Messages')->active();
+                });
 
             $page->add('admin.prospects.activity')
                 ->setTitle(function($item) use($vars){
@@ -70,27 +70,27 @@ class Pages
                         $name = 'All Activity';
                     }
                     $menu->add('Prospect Activity', ['route' => 'admin.prospects.activity']);
-                    $menu->add($name)->active();                    
-                });             
+                    $menu->add($name)->active();
+                });
 
             $page->add('admin.messages.create', 'Messages - New')
                 ->breadcrumb(function($menu){
                     $menu->add('Messages', ['route' => 'admin.messages']);
                     $menu->add('Inbox', ['route' => 'admin.messages']);
                     $menu->add('New', ['route' => 'admin.messages.create'])->active();
-                });   
+                });
 
             $page->add('admin.messages.draft.continue', 'Messages - Draft')
                 ->breadcrumb(function($menu){
                     $menu->add('Messages', ['route' => 'admin.messages']);
                     $menu->add('Inbox', ['route' => 'admin.messages']);
                     $menu->add('Draft')->active();
-                });     
-                
+                });
+
             $page->add('admin.offers', 'All Offers')
                 ->setTitle(function($item) use($vars){
                     if($vars['author_type'] == 'custom')
-                    {   
+                    {
                         $name = ($vars['user']->hasRole('csr') ? 'BA Offers' : 'Custom Offers');
                     }elseif($vars['author_type'] == 'dealer')
                     {
@@ -102,13 +102,13 @@ class Pages
                     }else
                     {
                         $name = 'All Offers';
-                    }  
-                    
-                    return $name;                  
+                    }
+
+                    return $name;
                 })
                 ->breadcrumb(function($menu) use($vars){
                     if($vars['author_type'] == 'custom')
-                    {   
+                    {
                         $name = ($vars['user']->hasRole('csr') ? 'BA Offers' : 'Custom Offers');
                     }elseif($vars['author_type'] == 'dealer')
                     {
@@ -120,23 +120,28 @@ class Pages
                     }else
                     {
                         $name = 'All Offers';
-                    }  
+                    }
 
                     $menu->add('Offers', ['route' => 'admin.offers']);
                     $menu->add($name)->active();
-                });      
+                });
 
-            $page->add('admin.settings.profile', 'Profile Settings')     
+            $page->add('admin.settings.profile', 'Profile Settings')
                 ->breadcrumb(function($menu){
                     $menu->add('My Settings');
                     $menu->add('My Profile')->active();
-                });     
+                });
 
-            $page->add('admin.settings.notifications', 'Notifications')     
+            $page->add('admin.settings.notifications', 'Notifications')
                 ->breadcrumb(function($menu){
                     $menu->add('My Settings');
                     $menu->add('Notifications')->active();
-                });    
+                });
+            $page->add('admin.settings.salesrep.cronofysettings', 'Cronofy')
+                ->breadcrumb(function($menu){
+                    $menu->add('My Settings');
+                    $menu->add('Cronofy Settings')->active();
+                });
 
             $page->add('admin.settings.change.password', 'Password')
                 ->breadcrumb(function($menu){
@@ -152,7 +157,7 @@ class Pages
             $page->add('debug.customer.action.request', 'Debug Tool')
                 ->breadcrumb(function($menu){
                     $menu->add('Debug')->active();
-                });                
+                });
 
             $page->add('admin.messages.show')
                 ->setTitle(function() use($vars){
@@ -161,53 +166,53 @@ class Pages
                 })
                 ->breadcrumb(function($menu){
                 	$menu->add('Messages')->active();
-                });                
-             
+                });
+
             $page->add('admin.offers.edit', 'Offers - Edit')
                 ->breadcrumb(function($menu){
                 	$menu->add('Offers', [ 'route' => 'admin.offers']);
                 	$menu->add('Edit')->active();
-                });  
+                });
 
             $page->add('admin.offers.create', 'Offers - Create')
                 ->breadcrumb(function($menu){
                 	$menu->add('Offers', [ 'route' => 'admin.offers']);
                 	$menu->add('Create')->active();
-                });  
+                });
 
             $page->add('admin.brand.associate.invite', 'Invite a New Brand Associate')
                 ->breadcrumb(function($menu){
                     $menu->add('Brand Associates', ['route' => 'admin.salesrep']);
                     $menu->add('Invite New BA')->active();
-                });  
+                });
 
             $page->add('admin.welcome.salesrep', 'Welcome to Xsellcast!')
                 ->breadcrumb(function($menu){
                     $menu->add('Welcome')->active();
-                });             
+                });
 
             $page->add('admin.salesrep', 'Brand Associates')
                 ->breadcrumb(function($menu){
                     $menu->add('Brand Associates')->active();
-                });  
+                });
 
             $page->add('admin.salesrep.show', 'Brand Associates')
                 ->breadcrumb(function($menu){
                     $menu->add('Brand Associates', ['route' => 'admin.salesrep']);
                     $menu->add('Profile')->active();
-                });   
+                });
 
             $page->add('admin.brands.create', 'Brands - Create')
                 ->breadcrumb(function($menu){
                     $menu->add('Brands');
                     $menu->add('Create')->active();
-                });   
+                });
 
             $page->add('admin.brands.edit', 'Brands - Edit')
                 ->breadcrumb(function($menu){
                     $menu->add('Brands');
                     $menu->add('Edit')->active();
-                });                   
+                });
 
             $page->add('admin.dealers.create', 'Dealers - Create')
                 ->breadcrumb(function($menu){
@@ -219,7 +224,7 @@ class Pages
                 ->breadcrumb(function($menu){
                     $menu->add('Dealers', ['route' => 'admin.dealers']);
                     $menu->add('Edit')->active();
-                });                
+                });
 
             $page->add('admin.dealers', 'Dealers')
                 ->breadcrumb(function($menu){
@@ -229,18 +234,18 @@ class Pages
             $page->add('admin.categories', 'Categories')
                 ->breadcrumb(function($menu){
                     $menu->add('Categories')->active();
-                });   
+                });
 
             $page->add('admin.brands', 'Brands')
                 ->breadcrumb(function($menu){
                     $menu->add('Brands')->active();
-                });         
+                });
 
             $page->add('admin.prospects.unmatched.lead', 'Unmatched Leads')
                 ->breadcrumb(function($menu){
                     $menu->add('Prospects', ['route' => 'admin.prospects']);
                     $menu->add('Unmatched Leads')->active();
-                });     
+                });
 
             $page->add('admin.prospects.offers')
                 ->setTitle(function($item) use($vars){
@@ -251,11 +256,17 @@ class Pages
                     $menu->add('Prospects', ['route' => 'admin.prospects']);
                     $menu->add($vars->user->firstname . ' ' . $vars->user->lastname, ['url' => route('admin.prospects.show', ['customer_id' => $vars->id])]);
                     $menu->add('Lookbook')->active();
-                });    
+                });
 
-        });	
-        
-        return $page;	
+
+            $page->add('admin.appointment', 'Appointment')
+                ->breadcrumb(function($menu){
+                    $menu->add('Appointment')->active();
+                });
+
+        });
+
+        return $page;
 	}
 
 }

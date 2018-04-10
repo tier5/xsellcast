@@ -202,3 +202,5 @@ Dealer v2.0 #stable
 Appointment v0.1 #stable
 	a) Fixed Dealer fax and validation issue
 	b) Created Repository for Appointment
+Appointment v0.2 #stable
+	a) Created cronofy settings

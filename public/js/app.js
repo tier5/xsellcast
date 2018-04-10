@@ -167,9 +167,9 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
 // for convenience
 
 /* Plugin for jQuery for working with colors.
- *
+ * 
  * Version 1.1.
- *
+ * 
  * Inspiration from jQuery color animation plugin by John Resig.
  *
  * Released under the MIT license by Ole Laursen, October 2009.
@@ -186,7 +186,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
  *
  * V. 1.1: Fix error handling so e.g. parsing an empty string does
  * produce a color rather than just crashing.
- */
+ */ 
 (function(B){B.color={};B.color.make=function(F,E,C,D){var G={};G.r=F||0;G.g=E||0;G.b=C||0;G.a=D!=null?D:1;G.add=function(J,I){for(var H=0;H<J.length;++H){G[J.charAt(H)]+=I}return G.normalize()};G.scale=function(J,I){for(var H=0;H<J.length;++H){G[J.charAt(H)]*=I}return G.normalize()};G.toString=function(){if(G.a>=1){return"rgb("+[G.r,G.g,G.b].join(",")+")"}else{return"rgba("+[G.r,G.g,G.b,G.a].join(",")+")"}};G.normalize=function(){function H(J,K,I){return K<J?J:(K>I?I:K)}G.r=H(0,parseInt(G.r),255);G.g=H(0,parseInt(G.g),255);G.b=H(0,parseInt(G.b),255);G.a=H(0,G.a,1);return G};G.clone=function(){return B.color.make(G.r,G.b,G.g,G.a)};return G.normalize()};B.color.extract=function(D,C){var E;do{E=D.css(C).toLowerCase();if(E!=""&&E!="transparent"){break}D=D.parent()}while(!B.nodeName(D.get(0),"body"));if(E=="rgba(0, 0, 0, 0)"){E="transparent"}return B.color.parse(E)};B.color.parse=function(F){var E,C=B.color.make;if(E=/rgb\(\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*\)/.exec(F)){return C(parseInt(E[1],10),parseInt(E[2],10),parseInt(E[3],10))}if(E=/rgba\(\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*,\s*([0-9]+(?:\.[0-9]+)?)\s*\)/.exec(F)){return C(parseInt(E[1],10),parseInt(E[2],10),parseInt(E[3],10),parseFloat(E[4]))}if(E=/rgb\(\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\%\s*\)/.exec(F)){return C(parseFloat(E[1])*2.55,parseFloat(E[2])*2.55,parseFloat(E[3])*2.55)}if(E=/rgba\(\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\s*\)/.exec(F)){return C(parseFloat(E[1])*2.55,parseFloat(E[2])*2.55,parseFloat(E[3])*2.55,parseFloat(E[4]))}if(E=/#([a-fA-F0-9]{2})([a-fA-F0-9]{2})([a-fA-F0-9]{2})/.exec(F)){return C(parseInt(E[1],16),parseInt(E[2],16),parseInt(E[3],16))}if(E=/#([a-fA-F0-9])([a-fA-F0-9])([a-fA-F0-9])/.exec(F)){return C(parseInt(E[1]+E[1],16),parseInt(E[2]+E[2],16),parseInt(E[3]+E[3],16))}var D=B.trim(F).toLowerCase();if(D=="transparent"){return C(255,255,255,0)}else{E=A[D]||[0,0,0];return C(E[0],E[1],E[2])}};var A={aqua:[0,255,255],azure:[240,255,255],beige:[245,245,220],black:[0,0,0],blue:[0,0,255],brown:[165,42,42],cyan:[0,255,255],darkblue:[0,0,139],darkcyan:[0,139,139],darkgrey:[169,169,169],darkgreen:[0,100,0],darkkhaki:[189,183,107],darkmagenta:[139,0,139],darkolivegreen:[85,107,47],darkorange:[255,140,0],darkorchid:[153,50,204],darkred:[139,0,0],darksalmon:[233,150,122],darkviolet:[148,0,211],fuchsia:[255,0,255],gold:[255,215,0],green:[0,128,0],indigo:[75,0,130],khaki:[240,230,140],lightblue:[173,216,230],lightcyan:[224,255,255],lightgreen:[144,238,144],lightgrey:[211,211,211],lightpink:[255,182,193],lightyellow:[255,255,224],lime:[0,255,0],magenta:[255,0,255],maroon:[128,0,0],navy:[0,0,128],olive:[128,128,0],orange:[255,165,0],pink:[255,192,203],purple:[128,0,128],violet:[128,0,128],red:[255,0,0],silver:[192,192,192],white:[255,255,255],yellow:[255,255,0]}})(jQuery);
 
 // the actual Flot code
@@ -196,7 +196,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
         //   [ series1, series2 ... ]
         // where series is either just the data as [ [x1, y1], [x2, y2], ... ]
         // or { data: [ [x1, y1], [x2, y2], ... ], label: "some label", ... }
-
+        
         var series = [],
             options = {
                 // the color theme used for graphs
@@ -230,7 +230,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     reserveSpace: null, // whether to reserve space even if axis isn't shown
                     tickLength: null, // size in pixels of ticks, or "full" for whole line
                     alignTicksWithAxis: null, // axis number or null for no sync
-
+                    
                     // mode specific options
                     tickDecimals: null, // no. of decimals, null means auto
                     tickSize: null, // number or [number, "unit"]
@@ -256,7 +256,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     },
                     lines: {
                         // we don't put in show: false so we can see
-                        // whether lines were actively disabled
+                        // whether lines were actively disabled 
                         lineWidth: 2, // in pixels
                         fill: false,
                         fillColor: null,
@@ -268,7 +268,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                         barWidth: 1, // in units of the x axis
                         fill: true,
                         fillColor: null,
-                        align: "left", // or "center"
+                        align: "left", // or "center" 
                         horizontal: false
                     },
                     shadowSize: 3
@@ -362,7 +362,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
 
         // public attributes
         plot.hooks = hooks;
-
+        
         // initialize
         initPlugins(plot);
         parseOptions(options_);
@@ -387,17 +387,17 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     $.extend(true, options, p.options);
             }
         }
-
+        
         function parseOptions(opts) {
             var i;
-
+            
             $.extend(true, options, opts);
-
+            
             if (options.xaxis.color == null)
                 options.xaxis.color = options.grid.color;
             if (options.yaxis.color == null)
                 options.yaxis.color = options.grid.color;
-
+            
             if (options.xaxis.tickColor == null) // backwards-compatibility
                 options.xaxis.tickColor = options.grid.tickColor;
             if (options.yaxis.tickColor == null) // backwards-compatibility
@@ -407,7 +407,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                 options.grid.borderColor = options.grid.color;
             if (options.grid.tickColor == null)
                 options.grid.tickColor = $.color.parse(options.grid.color).scale('a', 0.22).toString();
-
+            
             // fill in defaults in axes, copy at least always the
             // first as the rest of the code assumes it'll be there
             for (i = 0; i < Math.max(1, options.xaxes.length); ++i)
@@ -460,7 +460,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
             fillInSeriesOptions();
             processData();
         }
-
+        
         function parseData(d) {
             var res = [];
             for (var i = 0; i < d.length; ++i) {
@@ -481,7 +481,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
 
             return res;
         }
-
+        
         function axisNumber(obj, coord) {
             var a = obj[coord + "axis"];
             if (typeof a == "object") // if we got a real axis, extract number
@@ -495,9 +495,9 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
             // return flat array without annoying null entries
             return $.grep(xaxes.concat(yaxes), function (a) { return a; });
         }
-
+        
         function canvasToAxisCoords(pos) {
-            // return an object with x/y corresponding to all used axes
+            // return an object with x/y corresponding to all used axes 
             var res = {}, i, axis;
             for (i = 0; i < xaxes.length; ++i) {
                 axis = xaxes[i];
@@ -510,7 +510,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                 if (axis && axis.used)
                     res["y" + axis.n] = axis.c2p(pos.top);
             }
-
+            
             if (res.x1 !== undefined)
                 res.x = res.x1;
             if (res.y1 !== undefined)
@@ -518,7 +518,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
 
             return res;
         }
-
+        
         function axisToCanvasCoords(pos) {
             // get canvas coords from the first pair of x/y found in pos
             var res = {}, i, axis, key;
@@ -536,7 +536,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     }
                 }
             }
-
+            
             for (i = 0; i < yaxes.length; ++i) {
                 axis = yaxes[i];
                 if (axis && axis.used) {
@@ -550,10 +550,10 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     }
                 }
             }
-
+            
             return res;
         }
-
+        
         function getOrCreateAxis(axes, number) {
             if (!axes[number - 1])
                 axes[number - 1] = {
@@ -561,13 +561,13 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     direction: axes == xaxes ? "x" : "y",
                     options: $.extend(true, {}, axes == xaxes ? options.xaxis : options.yaxis)
                 };
-
+                
             return axes[number - 1];
         }
 
         function fillInSeriesOptions() {
             var i;
-
+            
             // collect what we already got of colors
             var neededColors = series.length,
                 usedColors = [],
@@ -582,7 +582,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                         usedColors.push($.color.parse(series[i].color));
                 }
             }
-
+            
             // we might need to generate more colors if higher indices
             // are assigned
             for (i = 0; i < assignedColors.length; ++i) {
@@ -606,7 +606,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                 // FIXME: if we're getting to close to something else,
                 // we should probably skip this one
                 colors.push(c);
-
+                
                 ++i;
                 if (i >= options.colors.length) {
                     i = 0;
@@ -618,7 +618,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
             var colori = 0, s;
             for (i = 0; i < series.length; ++i) {
                 s = series[i];
-
+                
                 // assign colors
                 if (s.color == null) {
                     s.color = colors[colori].toString();
@@ -644,7 +644,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                 s.yaxis = getOrCreateAxis(yaxes, axisNumber(s, "y"));
             }
         }
-
+        
         function processData() {
             var topSentry = Number.POSITIVE_INFINITY,
                 bottomSentry = Number.NEGATIVE_INFINITY,
@@ -665,14 +665,14 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                 axis.datamax = bottomSentry;
                 axis.used = false;
             });
-
+            
             for (i = 0; i < series.length; ++i) {
                 s = series[i];
                 s.datapoints = { points: [] };
-
+                
                 executeHooks(hooks.processRawData, [ s, s.data, s.datapoints ]);
             }
-
+            
             // first pass: clean and copy data
             for (i = 0; i < series.length; ++i) {
                 s = series[i];
@@ -692,7 +692,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                             format[format.length - 1].x = true;
                         }
                     }
-
+                    
                     s.datapoints.format = format;
                 }
 
@@ -700,13 +700,13 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     continue; // already filled in
 
                 s.datapoints.pointsize = format.length;
-
+                
                 ps = s.datapoints.pointsize;
                 points = s.datapoints.points;
 
                 insertSteps = s.lines.show && s.lines.steps;
                 s.xaxis.used = s.yaxis.used = true;
-
+                
                 for (j = k = 0; j < data.length; ++j, k += ps) {
                     p = data[j];
 
@@ -730,16 +730,16 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                                 if (val == null) {
                                     if (f.required)
                                         nullify = true;
-
+                                    
                                     if (f.defaultValue != null)
                                         val = f.defaultValue;
                                 }
                             }
-
+                            
                             points[k + m] = val;
                         }
                     }
-
+                    
                     if (nullify) {
                         for (m = 0; m < ps; ++m) {
                             val = points[k + m];
@@ -779,7 +779,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
             // give the hooks a chance to run
             for (i = 0; i < series.length; ++i) {
                 s = series[i];
-
+                
                 executeHooks(hooks.processDatapoints, [ s, s.datapoints]);
             }
 
@@ -791,7 +791,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
 
                 var xmin = topSentry, ymin = topSentry,
                     xmax = bottomSentry, ymax = bottomSentry;
-
+                
                 for (j = 0; j < points.length; j += ps) {
                     if (points[j] == null)
                         continue;
@@ -801,7 +801,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                         f = format[m];
                         if (!f || val == fakeInfinity || val == -fakeInfinity)
                             continue;
-
+                        
                         if (f.x) {
                             if (val < xmin)
                                 xmin = val;
@@ -816,7 +816,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                         }
                     }
                 }
-
+                
                 if (s.bars.show) {
                     // make sure we got room for the bar on the dancing floor
                     var delta = s.bars.align == "left" ? 0 : -s.bars.barWidth/2;
@@ -829,7 +829,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                         xmax += delta + s.bars.barWidth;
                     }
                 }
-
+                
                 updateAxis(s.xaxis, xmin, xmax);
                 updateAxis(s.yaxis, ymin, ymax);
             }
@@ -847,25 +847,25 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
             c.className = cls;
             c.width = canvasWidth;
             c.height = canvasHeight;
-
+                    
             if (!skipPositioning)
                 $(c).css({ position: 'absolute', left: 0, top: 0 });
-
+                
             $(c).appendTo(placeholder);
-
+                
             if (!c.getContext) // excanvas hack
                 c = window.G_vmlCanvasManager.initElement(c);
 
             // used for resetting in case we get replotted
             c.getContext("2d").save();
-
+            
             return c;
         }
 
         function getCanvasDimensions() {
             canvasWidth = placeholder.width();
             canvasHeight = placeholder.height();
-
+            
             if (canvasWidth <= 0 || canvasHeight <= 0)
                 throw "Invalid dimensions for plot, width = " + canvasWidth + ", height = " + canvasHeight;
         }
@@ -887,7 +887,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
             // and save again
             cctx.save();
         }
-
+        
         function setupCanvases() {
             var reused,
                 existingCanvas = placeholder.children("canvas.base"),
@@ -895,16 +895,16 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
 
             if (existingCanvas.length == 0 || existingOverlay == 0) {
                 // init everything
-
+                
                 placeholder.html(""); // make sure placeholder is clear
-
+            
                 placeholder.css({ padding: 0 }); // padding messes up the positioning
-
+                
                 if (placeholder.css("position") == 'static')
                     placeholder.css("position", "relative"); // for positioning labels and overlay
 
                 getCanvasDimensions();
-
+                
                 canvas = makeCanvas(true, "base");
                 overlay = makeCanvas(false, "overlay"); // overlay canvas for interactive features
 
@@ -932,10 +932,10 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
 
                 // reset reused canvases
                 plot.resize();
-
+                
                 // make sure overlay pixels are cleared (canvas is cleared when we redraw)
                 octx.clearRect(0, 0, canvasWidth, canvasHeight);
-
+                
                 // then whack any remaining obvious garbage left
                 eventHolder.unbind();
                 placeholder.children().not([canvas, overlay]).remove();
@@ -961,23 +961,23 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
         function shutdown() {
             if (redrawTimeout)
                 clearTimeout(redrawTimeout);
-
+            
             eventHolder.unbind("mousemove", onMouseMove);
             eventHolder.unbind("mouseleave", onMouseLeave);
             eventHolder.unbind("click", onClick);
-
+            
             executeHooks(hooks.shutdown, [eventHolder]);
         }
 
         function setTransformationHelpers(axis) {
             // set helper functions on the axis, assumes plot area
             // has been computed already
-
+            
             function identity(x) { return x; }
-
+            
             var s, m, t = axis.options.transform || identity,
                 it = axis.options.inverseTransform;
-
+            
             // precompute how much the axis is scaling a point
             // in canvas space
             if (axis.direction == "x") {
@@ -1012,7 +1012,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                          + labels.join("") + '</div></div>')
                     .appendTo(placeholder);
             }
-
+            
             if (axis.direction == "x") {
                 // to avoid measuring the widths of the labels (it's slow), we
                 // construct fixed-size boxes and put the labels inside
@@ -1047,7 +1047,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     if (l)
                         labels.push('<div class="tickLabel">' + l + '</div>');
                 }
-
+                
                 if (labels.length > 0) {
                     dummyDiv = makeDummyDiv(labels, "");
                     if (w == null)
@@ -1099,14 +1099,14 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
             var innermost = $.inArray(axis, sameDirection) == 0;
             if (!innermost && tickLength == "full")
                 tickLength = 5;
-
+                
             if (!isNaN(+tickLength))
                 padding += +tickLength;
 
             // compute box
             if (axis.direction == "x") {
                 lh += padding;
-
+                
                 if (pos == "bottom") {
                     plotOffset.bottom += lh + axismargin;
                     axis.box = { top: canvasHeight - plotOffset.bottom, height: lh };
@@ -1118,7 +1118,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
             }
             else {
                 lw += padding;
-
+                
                 if (pos == "left") {
                     axis.box = { left: plotOffset.left + axismargin, width: lw };
                     plotOffset.left += lw + axismargin;
@@ -1147,7 +1147,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                 axis.box.height = plotHeight;
             }
         }
-
+        
         function setupGrid() {
             var i, axes = allAxes();
 
@@ -1157,7 +1157,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                 axis.show = axis.options.show;
                 if (axis.show == null)
                     axis.show = axis.used; // by default an axis is visible if it's got data
-
+                
                 axis.reserveSpace = axis.show || axis.options.reserveSpace;
 
                 setRange(axis);
@@ -1190,13 +1190,13 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     for (i = 0; i < series.length; ++i)
                         minMargin = Math.max(minMargin, series[i].points.radius + series[i].points.lineWidth/2);
                 }
-
+                    
                 for (var a in plotOffset) {
                     plotOffset[a] += options.grid.borderWidth;
                     plotOffset[a] = Math.max(minMargin, plotOffset[a]);
                 }
             }
-
+            
             plotWidth = canvasWidth - plotOffset.left - plotOffset.right;
             plotHeight = canvasHeight - plotOffset.bottom - plotOffset.top;
 
@@ -1212,10 +1212,10 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
 
                 insertAxisLabels();
             }
-
+            
             insertLegend();
         }
-
+        
         function setRange(axis) {
             var opts = axis.options,
                 min = +(opts.min != null ? opts.min : axis.datamin),
@@ -1257,7 +1257,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
 
         function setupTickGeneration(axis) {
             var opts = axis.options;
-
+                
             // estimate number of ticks
             var noTicks;
             if (typeof opts.ticks == "number" && opts.ticks > 0)
@@ -1272,7 +1272,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
 
             if (opts.mode == "time") {
                 // pretty handling of time
-
+                
                 // map of app. size of time units in milliseconds
                 var timeUnitSize = {
                     "second": 1000,
@@ -1288,9 +1288,9 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                 // an integer algorithm
                 var spec = [
                     [1, "second"], [2, "second"], [5, "second"], [10, "second"],
-                    [30, "second"],
+                    [30, "second"], 
                     [1, "minute"], [2, "minute"], [5, "minute"], [10, "minute"],
-                    [30, "minute"],
+                    [30, "minute"], 
                     [1, "hour"], [2, "hour"], [4, "hour"],
                     [8, "hour"], [12, "hour"],
                     [1, "day"], [2, "day"], [3, "day"],
@@ -1314,7 +1314,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                         break;
                 size = spec[i][0];
                 unit = spec[i][1];
-
+                
                 // special-case the possibility of several years
                 if (unit == "year") {
                     magn = Math.pow(10, Math.floor(Math.log(delta / timeUnitSize.year) / Math.LN10));
@@ -1332,12 +1332,12 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                 }
 
                 axis.tickSize = opts.tickSize || [size, unit];
-
+                
                 generator = function(axis) {
                     var ticks = [],
                         tickSize = axis.tickSize[0], unit = axis.tickSize[1],
                         d = new Date(axis.min);
-
+                    
                     var step = tickSize * timeUnitSize[unit];
 
                     if (unit == "second")
@@ -1350,7 +1350,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                         d.setUTCMonth(floorInBase(d.getUTCMonth(), tickSize));
                     if (unit == "year")
                         d.setUTCFullYear(floorInBase(d.getUTCFullYear(), tickSize));
-
+                    
                     // reset smaller components
                     d.setUTCMilliseconds(0);
                     if (step >= timeUnitSize.minute)
@@ -1402,11 +1402,11 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     // first check global format
                     if (opts.timeformat != null)
                         return $.plot.formatDate(d, opts.timeformat, opts.monthNames);
-
+                    
                     var t = axis.tickSize[0] * timeUnitSize[axis.tickSize[1]];
                     var span = axis.max - axis.min;
                     var suffix = (opts.twelveHourClock) ? " %p" : "";
-
+                    
                     if (t < timeUnitSize.minute)
                         fmt = "%h:%M:%S" + suffix;
                     else if (t < timeUnitSize.day) {
@@ -1425,7 +1425,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     }
                     else
                         fmt = "%y";
-
+                    
                     return $.plot.formatDate(d, fmt, opts.monthNames);
                 };
             }
@@ -1438,7 +1438,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
 
                 magn = Math.pow(10, -dec);
                 norm = delta / magn; // norm is between 1.0 and 10.0
-
+                
                 if (norm < 1.5)
                     size = 1;
                 else if (norm < 3) {
@@ -1455,7 +1455,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     size = 10;
 
                 size *= magn;
-
+                
                 if (opts.minTickSize != null && size < opts.minTickSize)
                     size = opts.minTickSize;
 
@@ -1493,7 +1493,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                         if (opts.max == null && niceTicks.length > 1)
                             axis.max = Math.max(axis.max, niceTicks[niceTicks.length - 1]);
                     }
-
+                    
                     generator = function (axis) {
                         // copy ticks, scaled to this axis
                         var ticks = [], v, i;
@@ -1504,7 +1504,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                         }
                         return ticks;
                     };
-
+                    
                     // we might need an extra decimal since forced
                     // ticks don't necessarily fit naturally
                     if (axis.mode != "time" && opts.tickDecimals == null) {
@@ -1526,7 +1526,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
             else
                 axis.tickFormatter = formatter;
         }
-
+        
         function setTicks(axis) {
             var oticks = axis.options.ticks, ticks = [];
             if (oticks == null || (typeof oticks == "number" && oticks > 0))
@@ -1568,7 +1568,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     axis.max = Math.max(axis.max, ticks[ticks.length - 1].v);
             }
         }
-
+      
         function draw() {
             ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 
@@ -1577,7 +1577,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
             // draw background, if any
             if (grid.show && grid.backgroundColor)
                 drawBackground();
-
+            
             if (grid.show && !grid.aboveData)
                 drawGrid();
 
@@ -1587,7 +1587,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
             }
 
             executeHooks(hooks.draw, [ctx]);
-
+            
             if (grid.show && grid.aboveData)
                 drawGrid();
         }
@@ -1622,10 +1622,10 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                 from = to;
                 to = tmp;
             }
-
+            
             return { from: from, to: to, axis: axis };
         }
-
+        
         function drawBackground() {
             ctx.save();
             ctx.translate(plotOffset.left, plotOffset.top);
@@ -1637,7 +1637,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
 
         function drawGrid() {
             var i;
-
+            
             ctx.save();
             ctx.translate(plotOffset.left, plotOffset.top);
 
@@ -1652,7 +1652,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     axes.xmax = axes.xaxis.max;
                     axes.ymin = axes.yaxis.min;
                     axes.ymax = axes.yaxis.max;
-
+                    
                     markings = markings(axes);
                 }
 
@@ -1689,7 +1689,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     xrange.to = xrange.axis.p2c(xrange.to);
                     yrange.from = yrange.axis.p2c(yrange.from);
                     yrange.to = yrange.axis.p2c(yrange.to);
-
+                    
                     if (xrange.from == xrange.to || yrange.from == yrange.to) {
                         // draw line
                         ctx.beginPath();
@@ -1708,7 +1708,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     }
                 }
             }
-
+            
             // draw the ticks
             var axes = allAxes(), bw = options.grid.borderWidth;
 
@@ -1717,7 +1717,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     t = axis.tickLength, x, y, xoff, yoff;
                 if (!axis.show || axis.ticks.length == 0)
                     continue
-
+                
                 ctx.strokeStyle = axis.options.tickColor || $.color.parse(axis.options.color).scale('a', 0.22).toString();
                 ctx.lineWidth = 1;
 
@@ -1736,7 +1736,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     else
                         x = box.left - plotOffset.left + (axis.position == "left" ? box.width : 0);
                 }
-
+                
                 // draw tick bar
                 if (!axis.innermost) {
                     ctx.beginPath();
@@ -1745,7 +1745,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                         xoff = plotWidth;
                     else
                         yoff = plotHeight;
-
+                    
                     if (ctx.lineWidth == 1) {
                         x = Math.floor(x) + 0.5;
                         y = Math.floor(y) + 0.5;
@@ -1760,7 +1760,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                 ctx.beginPath();
                 for (i = 0; i < axis.ticks.length; ++i) {
                     var v = axis.ticks[i].v;
-
+                    
                     xoff = yoff = 0;
 
                     if (v < axis.min || v > axis.max
@@ -1772,14 +1772,14 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     if (axis.direction == "x") {
                         x = axis.p2c(v);
                         yoff = t == "full" ? -plotHeight : t;
-
+                        
                         if (axis.position == "top")
                             yoff = -yoff;
                     }
                     else {
                         y = axis.p2c(v);
                         xoff = t == "full" ? -plotWidth : t;
-
+                        
                         if (axis.position == "left")
                             xoff = -xoff;
                     }
@@ -1794,11 +1794,11 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     ctx.moveTo(x, y);
                     ctx.lineTo(x + xoff, y + yoff);
                 }
-
+                
                 ctx.stroke();
             }
-
-
+            
+            
             // draw border
             if (bw) {
                 ctx.lineWidth = bw;
@@ -1811,7 +1811,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
 
         function insertAxisLabels() {
             placeholder.find(".tickLabels").remove();
-
+            
             var html = ['<div class="tickLabels" style="font-size:smaller">'];
 
             var axes = allAxes();
@@ -1827,7 +1827,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                         continue;
 
                     var pos = {}, align;
-
+                    
                     if (axis.direction == "x") {
                         align = "center";
                         pos.left = Math.round(plotOffset.left + axis.p2c(tick.v) - axis.labelWidth/2);
@@ -1853,7 +1853,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     var style = ["position:absolute", "text-align:" + align ];
                     for (var a in pos)
                         style.push(a + ":" + pos[a] + "px")
-
+                    
                     html.push('<div class="tickLabel" style="' + style.join(';') + '">' + tick.label + '</div>');
                 }
                 html.push('</div>');
@@ -1872,18 +1872,18 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
             if (series.points.show)
                 drawSeriesPoints(series);
         }
-
+        
         function drawSeriesLines(series) {
             function plotLine(datapoints, xoffset, yoffset, axisx, axisy) {
                 var points = datapoints.points,
                     ps = datapoints.pointsize,
                     prevx = null, prevy = null;
-
+                
                 ctx.beginPath();
                 for (var i = ps; i < points.length; i += ps) {
                     var x1 = points[i - ps], y1 = points[i - ps + 1],
                         x2 = points[i], y2 = points[i + 1];
-
+                    
                     if (x1 == null || x2 == null)
                         continue;
 
@@ -1946,7 +1946,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
 
                     if (x1 != prevx || y1 != prevy)
                         ctx.moveTo(axisx.p2c(x1) + xoffset, axisy.p2c(y1) + yoffset);
-
+                    
                     prevx = x2;
                     prevy = y2;
                     ctx.lineTo(axisx.p2c(x2) + xoffset, axisy.p2c(y2) + yoffset);
@@ -1998,7 +1998,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                         continue;
 
                     // clip x values
-
+                    
                     // clip with xmin
                     if (x1 <= x2 && x1 < axisx.min) {
                         if (x2 < axisx.min)
@@ -2033,7 +2033,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                         ctx.moveTo(axisx.p2c(x1), axisy.p2c(bottom));
                         areaOpen = true;
                     }
-
+                    
                     // now first check the case where both is outside
                     if (y1 >= axisy.max && y2 >= axisy.max) {
                         ctx.lineTo(axisx.p2c(x1), axisy.p2c(axisy.max));
@@ -2045,7 +2045,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                         ctx.lineTo(axisx.p2c(x2), axisy.p2c(axisy.min));
                         continue;
                     }
-
+                    
                     // else it's a bit more complicated, there might
                     // be a flat maxed out rectangle first, then a
                     // triangular cutout or reverse; to find these
@@ -2054,7 +2054,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
 
                     // clip the y values, without shortcutting, we
                     // go through all cases in turn
-
+                    
                     // clip with ymin
                     if (y1 <= y2 && y1 < axisy.min && y2 >= axisy.min) {
                         x1 = (axisy.min - y1) / (y2 - y1) * (x2 - x1) + x1;
@@ -2081,7 +2081,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                         ctx.lineTo(axisx.p2c(x1old), axisy.p2c(y1));
                         // it goes to (x1, y1), but we fill that below
                     }
-
+                    
                     // fill triangular section, this sometimes result
                     // in redundant points if (x1, y1) hasn't changed
                     // from previous line to, but we just ignore that
@@ -2135,7 +2135,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     var x = points[i], y = points[i + 1];
                     if (x == null || x < axisx.min || x > axisx.max || y < axisy.min || y > axisy.max)
                         continue;
-
+                    
                     ctx.beginPath();
                     x = axisx.p2c(x);
                     y = axisy.p2c(y) + offset;
@@ -2144,7 +2144,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     else
                         symbol(ctx, x, y, radius, shadow);
                     ctx.closePath();
-
+                    
                     if (fillStyle) {
                         ctx.fillStyle = fillStyle;
                         ctx.fill();
@@ -2152,7 +2152,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     ctx.stroke();
                 }
             }
-
+            
             ctx.save();
             ctx.translate(plotOffset.left, plotOffset.top);
 
@@ -2223,12 +2223,12 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     drawTop = false;
                 }
             }
-
+           
             // clip
             if (right < axisx.min || left > axisx.max ||
                 top < axisy.min || bottom > axisy.max)
                 return;
-
+            
             if (left < axisx.min) {
                 left = axisx.min;
                 drawLeft = false;
@@ -2243,7 +2243,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                 bottom = axisy.min;
                 drawBottom = false;
             }
-
+            
             if (top > axisy.max) {
                 top = axisy.max;
                 drawTop = false;
@@ -2253,7 +2253,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
             bottom = axisy.p2c(bottom);
             right = axisx.p2c(right);
             top = axisy.p2c(top);
-
+            
             // fill the bar
             if (fillStyleCallback) {
                 c.beginPath();
@@ -2290,11 +2290,11 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                 c.stroke();
             }
         }
-
+        
         function drawSeriesBars(series) {
             function plotBars(datapoints, barLeft, barRight, offset, fillStyleCallback, axisx, axisy) {
                 var points = datapoints.points, ps = datapoints.pointsize;
-
+                
                 for (var i = 0; i < points.length; i += ps) {
                     if (points[i] == null)
                         continue;
@@ -2321,19 +2321,19 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
 
             if (filloptions.fillColor)
                 return getColorOrGradient(filloptions.fillColor, bottom, top, seriesColor);
-
+            
             var c = $.color.parse(seriesColor);
             c.a = typeof fill == "number" ? fill : 0.4;
             c.normalize();
             return c.toString();
         }
-
+        
         function insertLegend() {
             placeholder.find(".legend").remove();
 
             if (!options.legend.show)
                 return;
-
+            
             var fragments = [], rowStarted = false,
                 lf = options.legend.labelFormatter, s, label;
             for (var i = 0; i < series.length; ++i) {
@@ -2341,7 +2341,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                 label = s.label;
                 if (!label)
                     continue;
-
+                
                 if (i % options.legend.noColumns == 0) {
                     if (rowStarted)
                         fragments.push('</tr>');
@@ -2351,14 +2351,14 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
 
                 if (lf)
                     label = lf(label, s);
-
+                
                 fragments.push(
                     '<td class="legendColorBox"><div style="border:1px solid ' + options.legend.labelBoxBorderColor + ';padding:1px"><div style="width:4px;height:0;border:5px solid ' + s.color + ';overflow:hidden"></div></div></td>' +
                     '<td class="legendLabel">' + label + '</td>');
             }
             if (rowStarted)
                 fragments.push('</tr>');
-
+            
             if (fragments.length == 0)
                 return;
 
@@ -2402,10 +2402,10 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
 
 
         // interactive features
-
+        
         var highlights = [],
             redrawTimeout = null;
-
+        
         // returns the data item the mouse is over, or null if none is found
         function findNearbyItem(mouseX, mouseY, seriesFilter) {
             var maxDistance = options.grid.mouseActiveRadius,
@@ -2415,7 +2415,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
             for (i = series.length - 1; i >= 0; --i) {
                 if (!seriesFilter(series[i]))
                     continue;
-
+                
                 var s = series[i],
                     axisx = s.xaxis,
                     axisy = s.yaxis,
@@ -2432,13 +2432,13 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     maxx = Number.MAX_VALUE;
                 if (axisy.options.inverseTransform)
                     maxy = Number.MAX_VALUE;
-
+                
                 if (s.lines.show || s.points.show) {
                     for (j = 0; j < points.length; j += ps) {
                         var x = points[j], y = points[j + 1];
                         if (x == null)
                             continue;
-
+                        
                         // For points and lines, the cursor must be within a
                         // certain distance to the data point
                         if (x - mx > maxx || x - mx < -maxx ||
@@ -2459,19 +2459,19 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                         }
                     }
                 }
-
+                    
                 if (s.bars.show && !item) { // no other point can be nearby
                     var barLeft = s.bars.align == "left" ? 0 : -s.bars.barWidth/2,
                         barRight = barLeft + s.bars.barWidth;
-
+                    
                     for (j = 0; j < points.length; j += ps) {
                         var x = points[j], y = points[j + 1], b = points[j + 2];
                         if (x == null)
                             continue;
-
+  
                         // for a bar graph, the cursor must be inside the bar
-                        if (series[i].bars.horizontal ?
-                            (mx <= Math.max(b, x) && mx >= Math.min(b, x) &&
+                        if (series[i].bars.horizontal ? 
+                            (mx <= Math.max(b, x) && mx >= Math.min(b, x) && 
                              my >= y + barLeft && my <= y + barRight) :
                             (mx >= x + barLeft && mx <= x + barRight &&
                              my >= Math.min(b, y) && my <= Math.max(b, y)))
@@ -2484,13 +2484,13 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                 i = item[0];
                 j = item[1];
                 ps = series[i].datapoints.pointsize;
-
+                
                 return { datapoint: series[i].datapoints.points.slice(j * ps, (j + 1) * ps),
                          dataIndex: j,
                          series: series[i],
                          seriesIndex: i };
             }
-
+            
             return null;
         }
 
@@ -2540,11 +2540,11 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                           h.point[1] == item.datapoint[1]))
                         unhighlight(h.series, h.point);
                 }
-
+                
                 if (item)
                     highlight(item.series, item.datapoint, eventname);
             }
-
+            
             placeholder.trigger(eventname, [ pos, item ]);
         }
 
@@ -2560,7 +2560,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
             octx.save();
             octx.clearRect(0, 0, canvasWidth, canvasHeight);
             octx.translate(plotOffset.left, plotOffset.top);
-
+            
             var i, hi;
             for (i = 0; i < highlights.length; ++i) {
                 hi = highlights[i];
@@ -2571,10 +2571,10 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     drawPointHighlight(hi.series, hi.point);
             }
             octx.restore();
-
+            
             executeHooks(hooks.drawOverlay, [octx]);
         }
-
+        
         function highlight(s, point, auto) {
             if (typeof s == "number")
                 s = series[s];
@@ -2593,13 +2593,13 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
             else if (!auto)
                 highlights[i].auto = false;
         }
-
+            
         function unhighlight(s, point) {
             if (s == null && point == null) {
                 highlights = [];
                 triggerRedrawOverlay();
             }
-
+            
             if (typeof s == "number")
                 s = series[s];
 
@@ -2613,7 +2613,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                 triggerRedrawOverlay();
             }
         }
-
+        
         function indexOfHighlight(s, p) {
             for (var i = 0; i < highlights.length; ++i) {
                 var h = highlights[i];
@@ -2623,21 +2623,21 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
             }
             return -1;
         }
-
+        
         function drawPointHighlight(series, point) {
             var x = point[0], y = point[1],
                 axisx = series.xaxis, axisy = series.yaxis;
-
+            
             if (x < axisx.min || x > axisx.max || y < axisy.min || y > axisy.max)
                 return;
-
+            
             var pointRadius = series.points.radius + series.points.lineWidth / 2;
             octx.lineWidth = pointRadius;
             octx.strokeStyle = $.color.parse(series.color).scale('a', 0.5).toString();
             var radius = 1.5 * pointRadius,
                 x = axisx.p2c(x),
                 y = axisy.p2c(y);
-
+            
             octx.beginPath();
             if (series.points.symbol == "circle")
                 octx.arc(x, y, radius, 0, 2 * Math.PI, false);
@@ -2664,7 +2664,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                 // supports a simple vertical gradient properly, so that's
                 // what we support too
                 var gradient = ctx.createLinearGradient(0, top, 0, bottom);
-
+                
                 for (var i = 0, l = spec.colors.length; i < l; ++i) {
                     var c = spec.colors[i];
                     if (typeof c != "string") {
@@ -2677,7 +2677,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
                     }
                     gradient.addColorStop(i / (l - 1), c);
                 }
-
+                
                 return gradient;
             }
         }
@@ -2691,7 +2691,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
     };
 
     $.plot.version = "0.7";
-
+    
     $.plot.plugins = [];
 
     // returns a string with the date d formatted according to fmt
@@ -2700,7 +2700,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
             n = "" + n;
             return n.length == 1 ? "0" + n : n;
         };
-
+        
         var r = [];
         var escape = false, padNext = false;
         var hours = d.getUTCHours();
@@ -2717,7 +2717,7 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
         }
         for (var i = 0; i < fmt.length; ++i) {
             var c = fmt.charAt(i);
-
+            
             if (escape) {
                 switch (c) {
                 case 'h': c = "" + hours; break;
@@ -2749,25 +2749,25 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
         }
         return r.join("");
     };
-
+    
     // round to nearby lower multiple of base
     function floorInBase(n, base) {
         return base * Math.floor(n / base);
     }
-
+    
 })(jQuery);
 
 /*
  * jquery.flot.tooltip
- *
+ * 
  * description: easy-to-use tooltips for Flot charts
  * version: 0.6.2
  * author: Krzysztof Urbas @krzysu [myviews.pl]
  * website: https://github.com/krzysu/flot.tooltip
- *
+ * 
  * build on 2013-09-30
  * released under MIT License, 2012
-*/
+*/ 
 (function(t){var o={tooltip:!1,tooltipOpts:{content:"%s | X: %x | Y: %y",xDateFormat:null,yDateFormat:null,shifts:{x:10,y:20},defaultTheme:!0,onHover:function(){}}},i=function(t){this.tipPosition={x:0,y:0},this.init(t)};i.prototype.init=function(o){function i(t){var o={};o.x=t.pageX,o.y=t.pageY,s.updateTooltipPosition(o)}function e(t,o,i){var e=s.getDomElement();if(i){var n;n=s.stringFormat(s.tooltipOptions.content,i),e.html(n),s.updateTooltipPosition({x:o.pageX,y:o.pageY}),e.css({left:s.tipPosition.x+s.tooltipOptions.shifts.x,top:s.tipPosition.y+s.tooltipOptions.shifts.y}).show(),"function"==typeof s.tooltipOptions.onHover&&s.tooltipOptions.onHover(i,e)}else e.hide().html("")}var s=this;o.hooks.bindEvents.push(function(o,n){s.plotOptions=o.getOptions(),s.plotOptions.tooltip!==!1&&void 0!==s.plotOptions.tooltip&&(s.tooltipOptions=s.plotOptions.tooltipOpts,s.getDomElement(),t(o.getPlaceholder()).bind("plothover",e),t(n).bind("mousemove",i))}),o.hooks.shutdown.push(function(o,s){t(o.getPlaceholder()).unbind("plothover",e),t(s).unbind("mousemove",i)})},i.prototype.getDomElement=function(){var o;return t("#flotTip").length>0?o=t("#flotTip"):(o=t("<div />").attr("id","flotTip"),o.appendTo("body").hide().css({position:"absolute"}),this.tooltipOptions.defaultTheme&&o.css({background:"#fff","z-index":"100",padding:"0.4em 0.6em","border-radius":"0.5em","font-size":"0.8em",border:"1px solid #111",display:"none","white-space":"nowrap"})),o},i.prototype.updateTooltipPosition=function(o){var i=t("#flotTip").outerWidth()+this.tooltipOptions.shifts.x,e=t("#flotTip").outerHeight()+this.tooltipOptions.shifts.y;o.x-t(window).scrollLeft()>t(window).innerWidth()-i&&(o.x-=i),o.y-t(window).scrollTop()>t(window).innerHeight()-e&&(o.y-=e),this.tipPosition.x=o.x,this.tipPosition.y=o.y},i.prototype.stringFormat=function(t,o){var i=/%p\.{0,1}(\d{0,})/,e=/%s/,s=/%x\.{0,1}(?:\d{0,})/,n=/%y\.{0,1}(?:\d{0,})/;return"function"==typeof t&&(t=t(o.series.label,o.series.data[o.dataIndex][0],o.series.data[o.dataIndex][1],o)),o.series.percent!==void 0&&(t=this.adjustValPrecision(i,t,o.series.percent)),o.series.label!==void 0&&(t=t.replace(e,o.series.label)),this.isTimeMode("xaxis",o)&&this.isXDateFormat(o)&&(t=t.replace(s,this.timestampToDate(o.series.data[o.dataIndex][0],this.tooltipOptions.xDateFormat))),this.isTimeMode("yaxis",o)&&this.isYDateFormat(o)&&(t=t.replace(n,this.timestampToDate(o.series.data[o.dataIndex][1],this.tooltipOptions.yDateFormat))),"number"==typeof o.series.data[o.dataIndex][0]&&(t=this.adjustValPrecision(s,t,o.series.data[o.dataIndex][0])),"number"==typeof o.series.data[o.dataIndex][1]&&(t=this.adjustValPrecision(n,t,o.series.data[o.dataIndex][1])),o.series.xaxis.tickFormatter!==void 0&&(t=t.replace(s,o.series.xaxis.tickFormatter(o.series.data[o.dataIndex][0],o.series.xaxis))),o.series.yaxis.tickFormatter!==void 0&&(t=t.replace(n,o.series.yaxis.tickFormatter(o.series.data[o.dataIndex][1],o.series.yaxis))),t},i.prototype.isTimeMode=function(t,o){return o.series[t].options.mode!==void 0&&"time"===o.series[t].options.mode},i.prototype.isXDateFormat=function(){return this.tooltipOptions.xDateFormat!==void 0&&null!==this.tooltipOptions.xDateFormat},i.prototype.isYDateFormat=function(){return this.tooltipOptions.yDateFormat!==void 0&&null!==this.tooltipOptions.yDateFormat},i.prototype.timestampToDate=function(o,i){var e=new Date(o);return t.plot.formatDate(e,i)},i.prototype.adjustValPrecision=function(t,o,i){var e,s=o.match(t);return null!==s&&""!==RegExp.$1&&(e=RegExp.$1,i=i.toFixed(e),o=o.replace(t,i)),o};var e=function(t){new i(t)};t.plot.plugins.push({init:e,options:o,name:"tooltip",version:"0.6.1"})})(jQuery);
 /**
  * Flot plugin that provides spline interpolation for line graphs
@@ -3022,7 +3022,7 @@ can just fix the size of their placeholders.
             plot.setupGrid();
             plot.draw();
         }
-
+        
         function bindEvents(plot, eventHolder) {
             plot.getPlaceholder().resize(onResize);
         }
@@ -3030,11 +3030,11 @@ can just fix the size of their placeholders.
         function shutdown(plot, eventHolder) {
             plot.getPlaceholder().unbind("resize", onResize);
         }
-
+        
         plot.hooks.bindEvents.push(bindEvents);
         plot.hooks.shutdown.push(shutdown);
     }
-
+    
     $.plot.plugins.push({
         init: init,
         options: options,
@@ -3043,11 +3043,11 @@ can just fix the size of their placeholders.
     });
 })(jQuery);
 /*
-Flot plugin for rendering pie charts. The plugin assumes the data is
-coming is as a single data value for each series, and each of those
-values is a positive value or zero (negative numbers don't make
-any sense and will cause strange effects). The data values do
-NOT need to be passed in as percentage values because it
+Flot plugin for rendering pie charts. The plugin assumes the data is 
+coming is as a single data value for each series, and each of those 
+values is a positive value or zero (negative numbers don't make 
+any sense and will cause strange effects). The data values do 
+NOT need to be passed in as percentage values because it 
 internally calculates the total and percentages.
 
 * Created by Brian Medendorp, June 2009
@@ -3059,7 +3059,7 @@ internally calculates the total and percentages.
 	2009-11-11: Added basic hover from btburnett3 - does not work in IE, and center is off in Chrome and Opera
 	2009-11-17: Added IE hover capability submitted by Anthony Aragues
 	2009-11-18: Added bug fix submitted by Xavi Ivars (issues with arrays when other JS libraries are included as well)
-
+		
 
 Available options are:
 series: {
@@ -3102,7 +3102,7 @@ More detail and specific examples can be found in the included HTML file.
 
 */
 
-(function ($)
+(function ($) 
 {
 	function init(plot) // this is the "body" of the plugin
 	{
@@ -3118,13 +3118,13 @@ More detail and specific examples can be found in the included HTML file.
 		var legendWidth = 0;
 		var processed = false;
 		var raw = false;
-
-		// interactive variables
-		var highlights = [];
-
+		
+		// interactive variables	
+		var highlights = [];	
+	
 		// add hook to determine if pie plugin in enabled, and then perform necessary operations
 		plot.hooks.processOptions.push(checkPieEnabled);
-		plot.hooks.bindEvents.push(bindEvents);
+		plot.hooks.bindEvents.push(bindEvents);	
 
 		// check to see if the pie plugin is enabled
 		function checkPieEnabled(plot, options)
@@ -3133,48 +3133,48 @@ More detail and specific examples can be found in the included HTML file.
 			{
 				//disable grid
 				options.grid.show = false;
-
+				
 				// set labels.show
 				if (options.series.pie.label.show=='auto')
 					if (options.legend.show)
 						options.series.pie.label.show = false;
 					else
 						options.series.pie.label.show = true;
-
+				
 				// set radius
 				if (options.series.pie.radius=='auto')
 					if (options.series.pie.label.show)
 						options.series.pie.radius = 3/4;
 					else
 						options.series.pie.radius = 1;
-
+						
 				// ensure sane tilt
 				if (options.series.pie.tilt>1)
 					options.series.pie.tilt=1;
 				if (options.series.pie.tilt<0)
 					options.series.pie.tilt=0;
-
+			
 				// add processData hook to do transformations on the data
 				plot.hooks.processDatapoints.push(processDatapoints);
-				plot.hooks.drawOverlay.push(drawOverlay);
-
+				plot.hooks.drawOverlay.push(drawOverlay);	
+				
 				// add draw hook
 				plot.hooks.draw.push(draw);
 			}
 		}
-
+	
 		// bind hoverable events
-		function bindEvents(plot, eventHolder)
-		{
+		function bindEvents(plot, eventHolder) 		
+		{		
 			var options = plot.getOptions();
-
+			
 			if (options.series.pie.show && options.grid.hoverable)
 				eventHolder.unbind('mousemove').mousemove(onMouseMove);
-
+				
 			if (options.series.pie.show && options.grid.clickable)
 				eventHolder.unbind('click').click(onClick);
-		}
-
+		}	
+		
 
 		// debugging function that prints out an object
 		function alertObject(obj)
@@ -3188,7 +3188,7 @@ More detail and specific examples can be found in the included HTML file.
 				{
 					for (var j=0; j<depth; j++)
 						msg += '\t';
-
+				
 					if( typeof obj[i] == "object")
 					{	// its an object
 						msg += ''+i+':\n';
@@ -3203,7 +3203,7 @@ More detail and specific examples can be found in the included HTML file.
 			traverse(obj);
 			alert(msg);
 		}
-
+		
 		function calcTotal(data)
 		{
 			for (var i = 0; i < data.length; ++i)
@@ -3212,31 +3212,31 @@ More detail and specific examples can be found in the included HTML file.
 				if (item)
 					total += item;
 			}
-		}
-
-		function processDatapoints(plot, series, data, datapoints)
-		{
+		}	
+		
+		function processDatapoints(plot, series, data, datapoints) 
+		{	
 			if (!processed)
 			{
 				processed = true;
-
+			
 				canvas = plot.getCanvas();
 				target = $(canvas).parent();
 				options = plot.getOptions();
-
+			
 				plot.setData(combine(plot.getData()));
 			}
 		}
-
+		
 		function setupPie()
 		{
 			legendWidth = target.children().filter('.legend').children().width();
-
+		
 			// calculate maximum radius and center point
 			maxRadius =  Math.min(canvas.width,(canvas.height/options.series.pie.tilt))/2;
 			centerTop = (canvas.height/2)+options.series.pie.offset.top;
 			centerLeft = (canvas.width/2);
-
+			
 			if (options.series.pie.offset.left=='auto')
 				if (options.legend.position.match('w'))
 					centerLeft += legendWidth/2;
@@ -3244,13 +3244,13 @@ More detail and specific examples can be found in the included HTML file.
 					centerLeft -= legendWidth/2;
 			else
 				centerLeft += options.series.pie.offset.left;
-
+					
 			if (centerLeft<maxRadius)
 				centerLeft = maxRadius;
 			else if (centerLeft>canvas.width-maxRadius)
 				centerLeft = canvas.width-maxRadius;
 		}
-
+		
 		function fixData(data)
 		{
 			for (var i = 0; i < data.length; ++i)
@@ -3262,12 +3262,12 @@ More detail and specific examples can be found in the included HTML file.
 					if (typeof(data[i].data)!='undefined' && typeof(data[i].data.label)!='undefined')
 						data[i].label = data[i].data.label; // fix weirdness coming from flot
 					data[i].data = [[1,0]];
-
+					
 				}
 			}
 			return data;
 		}
-
+		
 		function combine(data)
 		{
 			data = fixData(data);
@@ -3275,7 +3275,7 @@ More detail and specific examples can be found in the included HTML file.
 			var combined = 0;
 			var numCombined = 0;
 			var color = options.series.pie.combine.color;
-
+			
 			var newdata = [];
 			for (var i = 0; i < data.length; ++i)
 			{
@@ -3283,19 +3283,19 @@ More detail and specific examples can be found in the included HTML file.
 				data[i].data[0][1] = parseFloat(data[i].data[0][1]);
 				if (!data[i].data[0][1])
 					data[i].data[0][1] = 0;
-
+					
 				if (data[i].data[0][1]/total<=options.series.pie.combine.threshold)
 				{
 					combined += data[i].data[0][1];
 					numCombined++;
 					if (!color)
 						color = data[i].color;
-				}
+				}				
 				else
 				{
 					newdata.push({
-						data: [[1,data[i].data[0][1]]],
-						color: data[i].color,
+						data: [[1,data[i].data[0][1]]], 
+						color: data[i].color, 
 						label: data[i].label,
 						angle: (data[i].data[0][1]*(Math.PI*2))/total,
 						percent: (data[i].data[0][1]/total*100)
@@ -3304,23 +3304,23 @@ More detail and specific examples can be found in the included HTML file.
 			}
 			if (numCombined>0)
 				newdata.push({
-					data: [[1,combined]],
-					color: color,
+					data: [[1,combined]], 
+					color: color, 
 					label: options.series.pie.combine.label,
 					angle: (combined*(Math.PI*2))/total,
 					percent: (combined/total*100)
 				});
 			return newdata;
-		}
-
+		}		
+		
 		function draw(plot, newCtx)
 		{
 			if (!target) return; // if no series were passed
 			ctx = newCtx;
-
+		
 			setupPie();
 			var slices = plot.getData();
-
+		
 			var attempts = 0;
 			while (redraw && attempts<redrawAttempts)
 			{
@@ -3337,37 +3337,37 @@ More detail and specific examples can be found in the included HTML file.
 				clear();
 				target.prepend('<div class="error">Could not draw pie with labels contained inside canvas</div>');
 			}
-
+			
 			if ( plot.setSeries && plot.insertLegend )
 			{
 				plot.setSeries(slices);
 				plot.insertLegend();
 			}
-
+			
 			// we're actually done at this point, just defining internal functions at this point
-
+			
 			function clear()
 			{
 				ctx.clearRect(0,0,canvas.width,canvas.height);
 				target.children().filter('.pieLabel, .pieLabelBackground').remove();
 			}
-
+			
 			function drawShadow()
 			{
 				var shadowLeft = 5;
 				var shadowTop = 15;
 				var edge = 10;
 				var alpha = 0.02;
-
+			
 				// set radius
 				if (options.series.pie.radius>1)
 					var radius = options.series.pie.radius;
 				else
 					var radius = maxRadius * options.series.pie.radius;
-
+					
 				if (radius>=(canvas.width/2)-shadowLeft || radius*options.series.pie.tilt>=(canvas.height/2)-shadowTop || radius<=edge)
 					return;	// shadow would be outside canvas, so don't draw it
-
+			
 				ctx.save();
 				ctx.translate(shadowLeft,shadowTop);
 				ctx.globalAlpha = alpha;
@@ -3376,7 +3376,7 @@ More detail and specific examples can be found in the included HTML file.
 				// center and rotate to starting position
 				ctx.translate(centerLeft,centerTop);
 				ctx.scale(1, options.series.pie.tilt);
-
+				
 				//radius -= edge;
 				for (var i=1; i<=edge; i++)
 				{
@@ -3384,27 +3384,27 @@ More detail and specific examples can be found in the included HTML file.
 					ctx.arc(0,0,radius,0,Math.PI*2,false);
 					ctx.fill();
 					radius -= i;
-				}
-
+				}	
+				
 				ctx.restore();
 			}
-
+			
 			function drawPie()
 			{
 				startAngle = Math.PI*options.series.pie.startAngle;
-
+				
 				// set radius
 				if (options.series.pie.radius>1)
 					var radius = options.series.pie.radius;
 				else
 					var radius = maxRadius * options.series.pie.radius;
-
+				
 				// center and rotate to starting position
 				ctx.save();
 				ctx.translate(centerLeft,centerTop);
 				ctx.scale(1, options.series.pie.tilt);
 				//ctx.rotate(startAngle); // start at top; -- This doesn't work properly in Opera
-
+				
 				// draw slices
 				ctx.save();
 				var currentAngle = startAngle;
@@ -3414,7 +3414,7 @@ More detail and specific examples can be found in the included HTML file.
 					drawSlice(slices[i].angle, slices[i].color, true);
 				}
 				ctx.restore();
-
+				
 				// draw slice outlines
 				ctx.save();
 				ctx.lineWidth = options.series.pie.stroke.width;
@@ -3422,22 +3422,22 @@ More detail and specific examples can be found in the included HTML file.
 				for (var i = 0; i < slices.length; ++i)
 					drawSlice(slices[i].angle, options.series.pie.stroke.color, false);
 				ctx.restore();
-
+					
 				// draw donut hole
 				drawDonutHole(ctx);
-
+				
 				// draw labels
 				if (options.series.pie.label.show)
 					drawLabels();
-
+				
 				// restore to original state
 				ctx.restore();
-
+				
 				function drawSlice(angle, color, fill)
-				{
+				{	
 					if (angle<=0)
 						return;
-
+				
 					if (fill)
 						ctx.fillStyle = color;
 					else
@@ -3445,7 +3445,7 @@ More detail and specific examples can be found in the included HTML file.
 						ctx.strokeStyle = color;
 						ctx.lineJoin = 'round';
 					}
-
+						
 					ctx.beginPath();
 					if (Math.abs(angle - Math.PI*2) > 0.000000001)
 						ctx.moveTo(0,0); // Center of the pie
@@ -3456,35 +3456,35 @@ More detail and specific examples can be found in the included HTML file.
 					ctx.closePath();
 					//ctx.rotate(angle); // This doesn't work properly in Opera
 					currentAngle += angle;
-
+					
 					if (fill)
 						ctx.fill();
 					else
 						ctx.stroke();
 				}
-
+				
 				function drawLabels()
 				{
 					var currentAngle = startAngle;
-
+					
 					// set radius
 					if (options.series.pie.label.radius>1)
 						var radius = options.series.pie.label.radius;
 					else
 						var radius = maxRadius * options.series.pie.label.radius;
-
+					
 					for (var i = 0; i < slices.length; ++i)
 					{
 						if (slices[i].percent >= options.series.pie.label.threshold*100)
 							drawLabel(slices[i], currentAngle, i);
 						currentAngle += slices[i].angle;
 					}
-
+					
 					function drawLabel(slice, startAngle, index)
 					{
 						if (slice.data[0][1]==0)
 							return;
-
+							
 						// format label text
 						var lf = options.legend.labelFormatter, text, plf = options.series.pie.label.formatter;
 						if (lf)
@@ -3493,11 +3493,11 @@ More detail and specific examples can be found in the included HTML file.
 							text = slice.label;
 						if (plf)
 							text = plf(text, slice);
-
+							
 						var halfAngle = ((startAngle+slice.angle) + startAngle)/2;
 						var x = centerLeft + Math.round(Math.cos(halfAngle) * radius);
 						var y = centerTop + Math.round(Math.sin(halfAngle) * radius) * options.series.pie.tilt;
-
+						
 						var html = '<span class="pieLabel" id="pieLabel'+index+'" style="position:absolute;top:' + y + 'px;left:' + x + 'px;">' + text + "</span>";
 						target.append(html);
 						var label = target.children('#pieLabel'+index);
@@ -3505,11 +3505,11 @@ More detail and specific examples can be found in the included HTML file.
 						var labelLeft = (x - label.width()/2);
 						label.css('top', labelTop);
 						label.css('left', labelLeft);
-
+						
 						// check to make sure that the label is not outside the canvas
 						if (0-labelTop>0 || 0-labelLeft>0 || canvas.height-(labelTop+label.height())<0 || canvas.width-(labelLeft+label.width())<0)
 							redraw = true;
-
+						
 						if (options.series.pie.label.background.opacity != 0) {
 							// put in the transparent background separately to avoid blended labels and label boxes
 							var c = options.series.pie.label.background.color;
@@ -3523,8 +3523,8 @@ More detail and specific examples can be found in the included HTML file.
 				} // end drawLabels function
 			} // end drawPie function
 		} // end draw function
-
-		// Placed here because it needs to be accessed from multiple locations
+		
+		// Placed here because it needs to be accessed from multiple locations 
 		function drawDonutHole(layer)
 		{
 			// draw donut hole
@@ -3540,7 +3540,7 @@ More detail and specific examples can be found in the included HTML file.
 				layer.fill();
 				layer.closePath();
 				layer.restore();
-
+				
 				// add inner stroke
 				layer.save();
 				layer.beginPath();
@@ -3552,9 +3552,9 @@ More detail and specific examples can be found in the included HTML file.
 				// TODO: add extra shadow inside hole (with a mask) if the pie is tilted.
 			}
 		}
-
+		
 		//-- Additional Interactive related functions --
-
+		
 		function isPointInPoly(poly, pt)
 		{
 			for(var c = false, i = -1, l = poly.length, j = l - 1; ++i < l; j = i)
@@ -3563,17 +3563,17 @@ More detail and specific examples can be found in the included HTML file.
 				&& (c = !c);
 			return c;
 		}
-
+		
 		function findNearbySlice(mouseX, mouseY)
 		{
 			var slices = plot.getData(),
 				options = plot.getOptions(),
 				radius = options.series.pie.radius > 1 ? options.series.pie.radius : maxRadius * options.series.pie.radius;
-
-			for (var i = 0; i < slices.length; ++i)
+			
+			for (var i = 0; i < slices.length; ++i) 
 			{
-				var s = slices[i];
-
+				var s = slices[i];	
+				
 				if(s.pie.show)
 				{
 					ctx.save();
@@ -3595,7 +3595,7 @@ More detail and specific examples can be found in the included HTML file.
 					}
 					else
 					{
-						// excanvas for IE doesn;t support isPointInPath, this is a workaround.
+						// excanvas for IE doesn;t support isPointInPath, this is a workaround. 
 						p1X = (radius * Math.cos(s.startAngle));
 						p1Y = (radius * Math.sin(s.startAngle));
 						p2X = (radius * Math.cos(s.startAngle+(s.angle/4)));
@@ -3613,60 +3613,60 @@ More detail and specific examples can be found in the included HTML file.
 						{
 							ctx.restore();
 							return {datapoint: [s.percent, s.data], dataIndex: 0, series: s, seriesIndex: i};
-						}
+						}			
 					}
 					ctx.restore();
 				}
 			}
-
+			
 			return null;
 		}
 
-		function onMouseMove(e)
+		function onMouseMove(e) 
 		{
 			triggerClickHoverEvent('plothover', e);
 		}
-
-        function onClick(e)
+		
+        function onClick(e) 
 		{
 			triggerClickHoverEvent('plotclick', e);
         }
 
 		// trigger click or hover event (they send the same parameters so we share their code)
-		function triggerClickHoverEvent(eventname, e)
+		function triggerClickHoverEvent(eventname, e) 
 		{
 			var offset = plot.offset(),
 				canvasX = parseInt(e.pageX - offset.left),
 				canvasY =  parseInt(e.pageY - offset.top),
 				item = findNearbySlice(canvasX, canvasY);
-
-			if (options.grid.autoHighlight)
+			
+			if (options.grid.autoHighlight) 
 			{
 				// clear auto-highlights
-				for (var i = 0; i < highlights.length; ++i)
+				for (var i = 0; i < highlights.length; ++i) 
 				{
 					var h = highlights[i];
 					if (h.auto == eventname && !(item && h.series == item.series))
 						unhighlight(h.series);
 				}
 			}
-
+			
 			// highlight the slice
-			if (item)
+			if (item) 
 			    highlight(item.series, eventname);
-
+				
 			// trigger any hover bind events
 			var pos = { pageX: e.pageX, pageY: e.pageY };
-			target.trigger(eventname, [ pos, item ]);
+			target.trigger(eventname, [ pos, item ]);	
 		}
 
-		function highlight(s, auto)
+		function highlight(s, auto) 
 		{
 			if (typeof s == "number")
 				s = series[s];
 
 			var i = indexOfHighlight(s);
-			if (i == -1)
+			if (i == -1) 
 			{
 				highlights.push({ series: s, auto: auto });
 				plot.triggerRedrawOverlay();
@@ -3675,28 +3675,28 @@ More detail and specific examples can be found in the included HTML file.
 				highlights[i].auto = false;
 		}
 
-		function unhighlight(s)
+		function unhighlight(s) 
 		{
-			if (s == null)
+			if (s == null) 
 			{
 				highlights = [];
 				plot.triggerRedrawOverlay();
 			}
-
+			
 			if (typeof s == "number")
 				s = series[s];
 
 			var i = indexOfHighlight(s);
-			if (i != -1)
+			if (i != -1) 
 			{
 				highlights.splice(i, 1);
 				plot.triggerRedrawOverlay();
 			}
 		}
 
-		function indexOfHighlight(s)
+		function indexOfHighlight(s) 
 		{
-			for (var i = 0; i < highlights.length; ++i)
+			for (var i = 0; i < highlights.length; ++i) 
 			{
 				var h = highlights[i];
 				if (h.series == s)
@@ -3705,32 +3705,32 @@ More detail and specific examples can be found in the included HTML file.
 			return -1;
 		}
 
-		function drawOverlay(plot, octx)
+		function drawOverlay(plot, octx) 
 		{
 			//alert(options.series.pie.radius);
 			var options = plot.getOptions();
 			//alert(options.series.pie.radius);
-
+			
 			var radius = options.series.pie.radius > 1 ? options.series.pie.radius : maxRadius * options.series.pie.radius;
 
 			octx.save();
 			octx.translate(centerLeft, centerTop);
 			octx.scale(1, options.series.pie.tilt);
-
-			for (i = 0; i < highlights.length; ++i)
+			
+			for (i = 0; i < highlights.length; ++i) 
 				drawHighlight(highlights[i].series);
-
+			
 			drawDonutHole(octx);
 
 			octx.restore();
 
-			function drawHighlight(series)
+			function drawHighlight(series) 
 			{
 				if (series.angle < 0) return;
-
+				
 				//octx.fillStyle = parseColor(options.series.pie.highlight.color).scale(null, null, null, options.series.pie.highlight.opacity).toString();
 				octx.fillStyle = "rgba(255, 255, 255, "+options.series.pie.highlight.opacity+")"; // this is temporary until we have access to parseColor
-
+				
 				octx.beginPath();
 				if (Math.abs(series.angle - Math.PI*2) > 0.000000001)
 					octx.moveTo(0,0); // Center of the pie
@@ -3738,11 +3738,11 @@ More detail and specific examples can be found in the included HTML file.
 				octx.closePath();
 				octx.fill();
 			}
-
-		}
-
+			
+		}	
+		
 	} // end init (plugin body)
-
+	
 	// define pie specific options and their default values
 	var options = {
 		series: {
@@ -3784,7 +3784,7 @@ More detail and specific examples can be found in the included HTML file.
 			}
 		}
 	};
-
+    
 	$.plot.plugins.push({
 		init: init,
 		options: options,
@@ -4395,7 +4395,7 @@ function animationHover(element, animation){
 $(function() {
     $(window).bind("load resize", function() {
         wrapperMinHeight();
-
+        
         if ($(this).width() < 769) {
             $('body').addClass('body-small')
         } else {
@@ -4444,7 +4444,7 @@ function WinMove() {
 function wrapperMinHeight()
 {
     var $wrap = $('#content-wrapper');
-    var winH = $(window).height();
+    var winH = $(window).height(); 
     $wrap.css('min-height', winH);
 };
 /*!
@@ -4678,7 +4678,7 @@ var tblAjaxLoad = function(elem, success_callback, no_url_callback)
 	var after_append_callback = $this.attr('data-after-append');
 
 	$loadBtn.text('LOADING...');
-	$loadBtn.attr('disabled', 'disabled');
+	$loadBtn.attr('disabled', 'disabled'); 
 
 	if(!url || $this.hasClass('all-loaded')){
 		if (typeof no_url_callback === "function") {
@@ -4706,7 +4706,7 @@ var tblAjaxLoad = function(elem, success_callback, no_url_callback)
 		error: function(r) {
 			var html = '';
 			if(r.status == 422){
-
+				
 				html = jsonErrorToHtml(r.responseJSON);
 			}else{
 
@@ -4750,8 +4750,8 @@ var tblAjaxLoad = function(elem, success_callback, no_url_callback)
 	   		}
 
 	   		if(data.meta.pagination.total_pages > data.meta.pagination.current_page){
-
-		   		$this.attr('data-url', data.meta.pagination.links.next);
+		   		
+		   		$this.attr('data-url', data.meta.pagination.links.next);		   			
 	   		}else{
 	   			$this.attr('data-url', null);
 	   			$loadBtn.hide();
@@ -4759,14 +4759,14 @@ var tblAjaxLoad = function(elem, success_callback, no_url_callback)
 	   		}
 
 	   		if (typeof success_callback === "function") {
-				success_callback();
+				success_callback();			
 	   		}
 	   	}
 	}).complete(function(){
 		rmLoadingTbl();
 		Waypoint.refreshAll();
 		$loadBtn.text('LOAD MORE');
-		$loadBtn.removeAttr('disabled');
+		$loadBtn.removeAttr('disabled'); 		
 	});
 };
 
@@ -4782,7 +4782,7 @@ var waypointInit = function() {
 		tblAjaxLoad($(this));
 	});
 
-
+	
 };
 
 var tblLoadMore = function() {
@@ -4810,11 +4810,11 @@ var ajaxTblLetterBtn = function($btn) {
 	        scrollTop: $td.offset().top
 	    }, 500, function(){
 	    	$td.addClass('blink-warning');
-
+	    	
 	    	setTimeout(function(){
 	    		$td.removeClass('blink-warning');
 	    	}, 2000);
-	    });
+	    });			
 	}else{
 
 		if($cont.hasClass('all-loaded')){
@@ -4841,8 +4841,8 @@ var ajaxTblLetterBtn = function($btn) {
 			}, function(){
 
 				ajaxTblLetterBtn($btn);
-			});
-		});
+			});		    	
+		});	
 
 	}
 };
@@ -4887,7 +4887,7 @@ var messageTblTd = function(k, row) {
 	}else if(k === 'content'){
 		attr = {class: 'mail-subject'};
 	 	html = '<a href="' + showUrl + '">' + row.last_message.body_excerpt + '</a>';
-
+		
 	}else if(k === 'time'){
 		html = row.last_message.created_at_human;
 		attr = {class: 'text-right mail-date'};
@@ -4930,7 +4930,7 @@ var fieldAutoComplete = function()
 					},
 					success: function( data ) {
 						response( data );
-					}
+					}	      
 			    });
 		  	},
 			messages: {
@@ -4966,7 +4966,7 @@ var dealerModalFindSelectPopulateCat = function(){
 	   		});
 
 	   	}
-	});
+	});		
 };
 
 var dealerModalFindSelect = function(field_name, dealer_id, dealer_name){
@@ -5011,7 +5011,7 @@ var dealerModalShowSubmit = function()
 				text: 'Zip field is required.',
 				time: 8000,
 				class_name: 'gritter-danger'
-			});
+			});			
 
 			return false;
 		}
@@ -5023,10 +5023,10 @@ var dealerModalShowSubmit = function()
 				text: 'Category field is required.',
 				time: 8000,
 				class_name: 'gritter-danger'
-			});
+			});			
 
 			return false;
-		}
+		}		
 
 		$.ajax({
 			url: url,
@@ -5036,7 +5036,7 @@ var dealerModalShowSubmit = function()
 			error: function(r) {
 				var html = '';
 				if(r.status == 422){
-
+					
 					html = jsonErrorToHtml(r.responseJSON);
 				}else{
 
@@ -5079,7 +5079,7 @@ var dealerModalShowSubmit = function()
 		   	}
 		}).complete(function(){
 
-		});
+		});	
 
 	});
 };
@@ -5093,7 +5093,7 @@ var officeHoursFieldSetCheck = function(elem)
 		$('select', $hours).prop('disabled', true);
 	}else{
 		$('select', $hours).prop('disabled', false);
-	}
+	}	
 }
 
 var officeHoursField = function()
@@ -5108,7 +5108,7 @@ var officeHoursField = function()
 
 	$('.field-hours-of-operations input[type="checkbox"]').on('ifUnchecked', function(){
 		officeHoursFieldSetCheck(this);
-	});
+	});	
 };
 
 $(document).ready(function(){
@@ -29789,7 +29789,7 @@ function forEach(list, iterator, context) {
     if (arguments.length < 3) {
         context = this
     }
-
+    
     if (toString.call(list) === '[object Array]')
         forEachArray(list, iterator, context)
     else if (typeof list === 'string')
@@ -31817,12 +31817,12 @@ var mediaFormUpload = function(){
 	if($('#lbt-file-upload-frm').length < 1){
 		$('body').append(html);
 	}
-};
+}; 
 
 var mediaField = function(){
 
 	$('.media-field').each(function(){
-
+		
 		var $container = $(this);
 		var $btn = $('.media-upload', $container);
 		var $list = $('.media-unorderlist', $container);
@@ -31836,36 +31836,29 @@ var mediaField = function(){
 			if($('.media-field').length > 0 && $('#lbt-file-upload-frm').length < 1){
 				mediaFormUpload();
 			}
-
-			var $file = $('#lbt-file-upload-frm input[type="file"]');
+			
+			var $file = $('#lbt-file-upload-frm input[type="file"]');			
 			$file.attr('accept', field_accepts);
 			$file.trigger('click');
 
 			$file.on('change', function(){
-
-				var formData = new FormData();
+				
+				var formData = new FormData(); 
 			    $.each($(this)[0].files,function(j, file){
 			        formData.append('files['+j+']', file);
 			    });
 				mediaUpload(formData, $list, field_name);
-			});
+			});			
 		});
 	});
 };
 
 var mediaVideoPlayer = function(url, ext){
 
-if(ext == "qt")
-{
-return '' +
-	'<video width="320" height="240" controls src="' + url + '">';
-//return '<embed type="application/x-vlc-plugin" pluginspage="http://www.videolan.org" version="VideoLAN.VLCPlugin.2" width="320" height="240" target=src="' + url + '" id="vlc"></embed>';
-} else {
 	return '' +
-	'<video class="video-js" width="320" height="240" controls>' +
+	'<video class="video-js" width="320" height="240" controls>' + 
 		'<source src="' + url + '" type="video/' + ext + '">' +
 	'</video>';
-}
 };
 
 var mediaImg = function(url)
@@ -31878,13 +31871,13 @@ var mediaModalDelete = function(guid, li_guid){
 	var liGuid = "'" + li_guid + "'";
 	return '<div class="modal inmodal" id="media_modal_delete_' + guid + '" tabindex="-1" role="dialog" aria-hidden="true">' +
 			    '<div class="modal-dialog modal-sm">' +
-			        '<div class="modal-content animated bounceInRight">' +
+			        '<div class="modal-content animated bounceInRight">' + 
 			            '<div class="modal-header">' +
 			                '<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>' +
 			                '<h4 class="modal-title">Question</h4>' +
 			            '</div>' +
-			            '<div class="modal-body">' +
-			                '<p>Are you sure you want to delete this file?</p>' +
+			            '<div class="modal-body">' + 
+			                '<p>Are you sure you want to delete this file?</p>' + 
 			            '</div>' +
 			            '<div class="modal-footer">' +
 			                '<button type="button" class="btn btn-white" data-dismiss="modal">Cancel</button>' +
@@ -31929,8 +31922,8 @@ var mediaAddMediaToList = function($list, data, field_name){
 			body = mediaVideoPlayer(row.url, row.extension);
 		}
 
-		var modal =
-		'<div class="modal inmodal" id="' + guid + '" tabindex="-1" role="dialog" aria-hidden="true">' +
+		var modal = 
+		'<div class="modal inmodal" id="' + guid + '" tabindex="-1" role="dialog" aria-hidden="true">' + 
 		    '<div class="modal-dialog">' +
 			    '<div class="modal-content animated bounceInRight">' +
 			        '<div class="modal-header">' +
@@ -31948,7 +31941,7 @@ var mediaAddMediaToList = function($list, data, field_name){
 			        		'</div>' +
 			     			'<div class="col-sm-6">' +
 					            '<button type="button" class="btn btn-white" data-target="#media_modal_delete_' + guid + '" data-toggle="modal" data-dismiss="modal">Delete</button>' +
-					            footerHtml +
+					            footerHtml + 
 			     			'</div>' +
 			        '</div>' +
 		        '</div>' +
@@ -31979,7 +31972,7 @@ var mediaUpload = function(form_data, $list, field_name){
 	$.ajax({
 		url: url,
 		processData: false,
-		contentType: false,
+		contentType: false,			
 		dataType: 'json',
 		data: form_data,
 		type: 'POST',
@@ -32013,7 +32006,7 @@ var mediaUpload = function(form_data, $list, field_name){
 					text: 'Uknown error found.',
 					time: 8000,
 					class_name: 'gritter-danger'
-				});
+				});				
 			}
 	   	},
 	   	success: function(data) {
@@ -32035,7 +32028,7 @@ var mediaUpload = function(form_data, $list, field_name){
 var loadMedia = function($container, field_name){
 	var $list = $('.media-unorderlist', $container);
 	var ids = $container.attr('data-field-value');
-
+	
 	if(ids == ""){
 		return false;
 	}
@@ -32045,13 +32038,13 @@ var loadMedia = function($container, field_name){
 	$.ajax({
 		url: url,
 		processData: false,
-		contentType: false,
+		contentType: false,			
 		dataType: 'json',
 		type: 'GET',
 		error: function(r) {
 			var html = '';
 			if(r.status == 422){
-
+				
 				html = jsonErrorToHtml(r.responseJSON);
 			}else{
 
@@ -32070,7 +32063,7 @@ var loadMedia = function($container, field_name){
 	   	}
 	}).complete(function(){
 
-	});
+	});		
 };
 
 var openField = function(elem) {
@@ -32081,7 +32074,7 @@ var openField = function(elem) {
     } else if (element.fireEvent) {
         elem[0].fireEvent("onmousedown");
     }
-}
+}	
 
 var editSelectField = function(){
 
@@ -32105,11 +32098,11 @@ var mediaDelete = function(li_id){
 
 var offerModalFooter = function(d, li_id){
 	if(d.type === 'image'){
-		return '<button type="button" class="btn btn-primary" data-dismiss="modal" onClick="offerSetThumb(' + d.id + ')">Set as Featured Image</button>';
+		return '<button type="button" class="btn btn-primary" data-dismiss="modal" onClick="offerSetThumb(' + d.id + ')">Set as Featured Image</button>';		
 	}
 
 	return '';
-}
+}		
 
 var offerSetThumb = function(media_id){
 	$('#thumbnail_id').val(media_id);
@@ -32131,7 +32124,7 @@ var mediaAddedTrigger = function(){
 };
 
 $(document).ready(function(){
-
+	
 	mediaField();
 	editSelectField();
 	mediaAddedTrigger();
@@ -37209,6 +37202,14 @@ return hooks;
 //! github.com/moment/moment-timezone
 !function(a,b){"use strict";"function"==typeof define&&define.amd?define(["moment"],b):"object"==typeof module&&module.exports?module.exports=b(require("moment")):b(a.moment)}(this,function(a){"use strict";function b(a){return a>96?a-87:a>64?a-29:a-48}function c(a){var c,d=0,e=a.split("."),f=e[0],g=e[1]||"",h=1,i=0,j=1;for(45===a.charCodeAt(0)&&(d=1,j=-1),d;d<f.length;d++)c=b(f.charCodeAt(d)),i=60*i+c;for(d=0;d<g.length;d++)h/=60,c=b(g.charCodeAt(d)),i+=c*h;return i*j}function d(a){for(var b=0;b<a.length;b++)a[b]=c(a[b])}function e(a,b){for(var c=0;c<b;c++)a[c]=Math.round((a[c-1]||0)+6e4*a[c]);a[b-1]=1/0}function f(a,b){var c,d=[];for(c=0;c<b.length;c++)d[c]=a[b[c]];return d}function g(a){var b=a.split("|"),c=b[2].split(" "),g=b[3].split(""),h=b[4].split(" ");return d(c),d(g),d(h),e(h,g.length),{name:b[0],abbrs:f(b[1].split(" "),g),offsets:f(c,g),untils:h,population:0|b[5]}}function h(a){a&&this._set(g(a))}function i(a){var b=a.toTimeString(),c=b.match(/\([a-z ]+\)/i);c&&c[0]?(c=c[0].match(/[A-Z]/g),c=c?c.join(""):void 0):(c=b.match(/[A-Z]{3,5}/g),c=c?c[0]:void 0),"GMT"===c&&(c=void 0),this.at=+a,this.abbr=c,this.offset=a.getTimezoneOffset()}function j(a){this.zone=a,this.offsetScore=0,this.abbrScore=0}function k(a,b){for(var c,d;d=6e4*((b.at-a.at)/12e4|0);)c=new i(new Date(a.at+d)),c.offset===a.offset?a=c:b=c;return a}function l(){var a,b,c,d=(new Date).getFullYear()-2,e=new i(new Date(d,0,1)),f=[e];for(c=1;c<48;c++)b=new i(new Date(d,c,1)),b.offset!==e.offset&&(a=k(e,b),f.push(a),f.push(new i(new Date(a.at+6e4)))),e=b;for(c=0;c<4;c++)f.push(new i(new Date(d+c,0,1))),f.push(new i(new Date(d+c,6,1)));return f}function m(a,b){return a.offsetScore!==b.offsetScore?a.offsetScore-b.offsetScore:a.abbrScore!==b.abbrScore?a.abbrScore-b.abbrScore:b.zone.population-a.zone.population}function n(a,b){var c,e;for(d(b),c=0;c<b.length;c++)e=b[c],I[e]=I[e]||{},I[e][a]=!0}function o(a){var b,c,d,e=a.length,f={},g=[];for(b=0;b<e;b++){d=I[a[b].offset]||{};for(c in d)d.hasOwnProperty(c)&&(f[c]=!0)}for(b in f)f.hasOwnProperty(b)&&g.push(H[b]);return g}function p(){try{var a=Intl.DateTimeFormat().resolvedOptions().timeZone;if(a){var b=H[r(a)];if(b)return b;z("Moment Timezone found "+a+" from the Intl api, but did not have that data loaded.")}}catch(c){}var d,e,f,g=l(),h=g.length,i=o(g),k=[];for(e=0;e<i.length;e++){for(d=new j(t(i[e]),h),f=0;f<h;f++)d.scoreOffsetAt(g[f]);k.push(d)}return k.sort(m),k.length>0?k[0].zone.name:void 0}function q(a){return D&&!a||(D=p()),D}function r(a){return(a||"").toLowerCase().replace(/\//g,"_")}function s(a){var b,c,d,e;for("string"==typeof a&&(a=[a]),b=0;b<a.length;b++)d=a[b].split("|"),c=d[0],e=r(c),F[e]=a[b],H[e]=c,d[5]&&n(e,d[2].split(" "))}function t(a,b){a=r(a);var c,d=F[a];return d instanceof h?d:"string"==typeof d?(d=new h(d),F[a]=d,d):G[a]&&b!==t&&(c=t(G[a],t))?(d=F[a]=new h,d._set(c),d.name=H[a],d):null}function u(){var a,b=[];for(a in H)H.hasOwnProperty(a)&&(F[a]||F[G[a]])&&H[a]&&b.push(H[a]);return b.sort()}function v(a){var b,c,d,e;for("string"==typeof a&&(a=[a]),b=0;b<a.length;b++)c=a[b].split("|"),d=r(c[0]),e=r(c[1]),G[d]=e,H[d]=c[0],G[e]=d,H[e]=c[1]}function w(a){s(a.zones),v(a.links),A.dataVersion=a.version}function x(a){return x.didShowError||(x.didShowError=!0,z("moment.tz.zoneExists('"+a+"') has been deprecated in favor of !moment.tz.zone('"+a+"')")),!!t(a)}function y(a){return!(!a._a||void 0!==a._tzm)}function z(a){"undefined"!=typeof console&&"function"==typeof console.error&&console.error(a)}function A(b){var c=Array.prototype.slice.call(arguments,0,-1),d=arguments[arguments.length-1],e=t(d),f=a.utc.apply(null,c);return e&&!a.isMoment(b)&&y(f)&&f.add(e.parse(f),"minutes"),f.tz(d),f}function B(a){return function(){return this._z?this._z.abbr(this):a.call(this)}}function C(a){return function(){return this._z=null,a.apply(this,arguments)}}var D,E="0.5.13",F={},G={},H={},I={},J=a.version.split("."),K=+J[0],L=+J[1];(K<2||2===K&&L<6)&&z("Moment Timezone requires Moment.js >= 2.6.0. You are using Moment.js "+a.version+". See momentjs.com"),h.prototype={_set:function(a){this.name=a.name,this.abbrs=a.abbrs,this.untils=a.untils,this.offsets=a.offsets,this.population=a.population},_index:function(a){var b,c=+a,d=this.untils;for(b=0;b<d.length;b++)if(c<d[b])return b},parse:function(a){var b,c,d,e,f=+a,g=this.offsets,h=this.untils,i=h.length-1;for(e=0;e<i;e++)if(b=g[e],c=g[e+1],d=g[e?e-1:e],b<c&&A.moveAmbiguousForward?b=c:b>d&&A.moveInvalidForward&&(b=d),f<h[e]-6e4*b)return g[e];return g[i]},abbr:function(a){return this.abbrs[this._index(a)]},offset:function(a){return this.offsets[this._index(a)]}},j.prototype.scoreOffsetAt=function(a){this.offsetScore+=Math.abs(this.zone.offset(a.at)-a.offset),this.zone.abbr(a.at).replace(/[^A-Z]/g,"")!==a.abbr&&this.abbrScore++},A.version=E,A.dataVersion="",A._zones=F,A._links=G,A._names=H,A.add=s,A.link=v,A.load=w,A.zone=t,A.zoneExists=x,A.guess=q,A.names=u,A.Zone=h,A.unpack=g,A.unpackBase60=c,A.needsOffset=y,A.moveInvalidForward=!0,A.moveAmbiguousForward=!1;var M=a.fn;a.tz=A,a.defaultZone=null,a.updateOffset=function(b,c){var d,e=a.defaultZone;void 0===b._z&&(e&&y(b)&&!b._isUTC&&(b._d=a.utc(b._a)._d,b.utc().add(e.parse(b),"minutes")),b._z=e),b._z&&(d=b._z.offset(b),Math.abs(d)<16&&(d/=60),void 0!==b.utcOffset?b.utcOffset(-d,c):b.zone(d,c))},M.tz=function(b){return b?(this._z=t(b),this._z?a.updateOffset(this):z("Moment Timezone has no data for "+b+". See http://momentjs.com/timezone/docs/#/data-loading/."),this):this._z?this._z.name:void 0},M.zoneName=B(M.zoneName),M.zoneAbbr=B(M.zoneAbbr),M.utc=C(M.utc),a.tz.setDefault=function(b){return(K<2||2===K&&L<9)&&z("Moment Timezone setDefault() requires Moment.js >= 2.9.0. You are using Moment.js "+a.version+"."),a.defaultZone=b?t(b):null,a};var N=a.momentProperties;return"[object Array]"===Object.prototype.toString.call(N)?(N.push("_z"),N.push("_a")):N&&(N._z=null),w({version:"2017b",zones:["Africa/Abidjan|GMT|0|0||48e5","Africa/Khartoum|EAT|-30|0||51e5","Africa/Algiers|CET|-10|0||26e5","Africa/Lagos|WAT|-10|0||17e6","Africa/Maputo|CAT|-20|0||26e5","Africa/Cairo|EET EEST|-20 -30|01010|1M2m0 gL0 e10 mn0|15e6","Africa/Casablanca|WET WEST|0 -10|0101010101010101010101010101010101010101010|1H3C0 wM0 co0 go0 1o00 s00 dA0 vc0 11A0 A00 e00 y00 11A0 uM0 e00 Dc0 11A0 s00 e00 IM0 WM0 mo0 gM0 LA0 WM0 jA0 e00 Rc0 11A0 e00 e00 U00 11A0 8o0 e00 11A0 11A0 5A0 e00 17c0 1fA0 1a00|32e5","Europe/Paris|CET CEST|-10 -20|01010101010101010101010|1GNB0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0|11e6","Africa/Johannesburg|SAST|-20|0||84e5","Africa/Tripoli|EET CET CEST|-20 -10 -20|0120|1IlA0 TA0 1o00|11e5","Africa/Windhoek|WAST WAT|-20 -10|01010101010101010101010|1GQo0 11B0 1qL0 WN0 1qL0 11B0 1nX0 11B0 1nX0 11B0 1nX0 11B0 1nX0 11B0 1qL0 WN0 1qL0 11B0 1nX0 11B0 1nX0 11B0|32e4","America/Adak|HST HDT|a0 90|01010101010101010101010|1GIc0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0|326","America/Anchorage|AKST AKDT|90 80|01010101010101010101010|1GIb0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0|30e4","America/Santo_Domingo|AST|40|0||29e5","America/Araguaina|-03 -02|30 20|010|1IdD0 Lz0|14e4","America/Fortaleza|-03|30|0||34e5","America/Asuncion|-03 -04|30 40|01010101010101010101010|1GTf0 1cN0 17b0 1ip0 17b0 1ip0 17b0 1ip0 19X0 1fB0 19X0 1fB0 19X0 1ip0 17b0 1ip0 17b0 1ip0 19X0 1fB0 19X0 1fB0|28e5","America/Panama|EST|50|0||15e5","America/Bahia|-02 -03|20 30|01|1GCq0|27e5","America/Mexico_City|CST CDT|60 50|01010101010101010101010|1GQw0 1nX0 14p0 1lb0 14p0 1lb0 14p0 1lb0 14p0 1nX0 11B0 1nX0 11B0 1nX0 14p0 1lb0 14p0 1lb0 14p0 1nX0 11B0 1nX0|20e6","America/Managua|CST|60|0||22e5","America/La_Paz|-04|40|0||19e5","America/Lima|-05|50|0||11e6","America/Denver|MST MDT|70 60|01010101010101010101010|1GI90 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0|26e5","America/Campo_Grande|-03 -04|30 40|01010101010101010101010|1GCr0 1zd0 Lz0 1C10 Lz0 1C10 On0 1zd0 On0 1zd0 On0 1zd0 On0 1C10 Lz0 1C10 Lz0 1C10 On0 1zd0 On0 1zd0|77e4","America/Cancun|CST CDT EST|60 50 50|01010102|1GQw0 1nX0 14p0 1lb0 14p0 1lb0 Dd0|63e4","America/Caracas|-0430 -04|4u 40|01|1QMT0|29e5","America/Chicago|CST CDT|60 50|01010101010101010101010|1GI80 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0|92e5","America/Chihuahua|MST MDT|70 60|01010101010101010101010|1GQx0 1nX0 14p0 1lb0 14p0 1lb0 14p0 1lb0 14p0 1nX0 11B0 1nX0 11B0 1nX0 14p0 1lb0 14p0 1lb0 14p0 1nX0 11B0 1nX0|81e4","America/Phoenix|MST|70|0||42e5","America/Los_Angeles|PST PDT|80 70|01010101010101010101010|1GIa0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0|15e6","America/New_York|EST EDT|50 40|01010101010101010101010|1GI70 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0|21e6","America/Rio_Branco|-04 -05|40 50|01|1KLE0|31e4","America/Fort_Nelson|PST PDT MST|80 70 70|01010102|1GIa0 1zb0 Op0 1zb0 Op0 1zb0 Op0|39e2","America/Halifax|AST ADT|40 30|01010101010101010101010|1GI60 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0|39e4","America/Godthab|-03 -02|30 20|01010101010101010101010|1GNB0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0|17e3","America/Grand_Turk|EST EDT AST|50 40 40|010101012|1GI70 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0|37e2","America/Havana|CST CDT|50 40|01010101010101010101010|1GQt0 1qM0 Oo0 1zc0 Oo0 1zc0 Oo0 1zc0 Rc0 1zc0 Oo0 1zc0 Oo0 1zc0 Oo0 1zc0 Oo0 1zc0 Rc0 1zc0 Oo0 1zc0|21e5","America/Metlakatla|PST AKST AKDT|80 90 80|0121212121212121|1PAa0 Rd0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0|14e2","America/Miquelon|-03 -02|30 20|01010101010101010101010|1GI50 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0|61e2","America/Montevideo|-02 -03|20 30|01010101|1GI40 1o10 11z0 1o10 11z0 1o10 11z0|17e5","America/Noronha|-02|20|0||30e2","America/Port-au-Prince|EST EDT|50 40|010101010101010101010|1GI70 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 3iN0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0|23e5","Antarctica/Palmer|-03 -04|30 40|010101010|1H3D0 Op0 1zb0 Rd0 1wn0 Rd0 46n0 Ap0|40","America/Santiago|-03 -04|30 40|010101010101010101010|1H3D0 Op0 1zb0 Rd0 1wn0 Rd0 46n0 Ap0 1Nb0 Ap0 1Nb0 Ap0 1Nb0 Ap0 1Nb0 Ap0 1Nb0 Dd0 1Nb0 Ap0|62e5","America/Sao_Paulo|-02 -03|20 30|01010101010101010101010|1GCq0 1zd0 Lz0 1C10 Lz0 1C10 On0 1zd0 On0 1zd0 On0 1zd0 On0 1C10 Lz0 1C10 Lz0 1C10 On0 1zd0 On0 1zd0|20e6","Atlantic/Azores|-01 +00|10 0|01010101010101010101010|1GNB0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0|25e4","America/St_Johns|NST NDT|3u 2u|01010101010101010101010|1GI5u 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0|11e4","Antarctica/Casey|+11 +08|-b0 -80|010|1GAF0 blz0|10","Antarctica/Davis|+05 +07|-50 -70|01|1GAI0|70","Pacific/Port_Moresby|+10|-a0|0||25e4","Pacific/Guadalcanal|+11|-b0|0||11e4","Asia/Tashkent|+05|-50|0||23e5","Pacific/Auckland|NZDT NZST|-d0 -c0|01010101010101010101010|1GQe0 1cM0 1fA0 1a00 1fA0 1a00 1fA0 1a00 1fA0 1a00 1fA0 1a00 1fA0 1cM0 1fA0 1a00 1fA0 1a00 1fA0 1a00 1fA0 1a00|14e5","Asia/Baghdad|+03|-30|0||66e5","Antarctica/Troll|+00 +02|0 -20|01010101010101010101010|1GNB0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0|40","Asia/Dhaka|+06|-60|0||16e6","Asia/Amman|EET EEST|-20 -30|010101010101010101010|1GPy0 4bX0 Dd0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 11A0 1o00|25e5","Asia/Kamchatka|+12|-c0|0||18e4","Asia/Baku|+04 +05|-40 -50|010101010|1GNA0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00|27e5","Asia/Bangkok|+07|-70|0||15e6","Asia/Barnaul|+07 +06|-70 -60|010|1N7v0 3rd0","Asia/Beirut|EET EEST|-20 -30|01010101010101010101010|1GNy0 1qL0 11B0 1nX0 11B0 1nX0 11B0 1nX0 11B0 1qL0 WN0 1qL0 WN0 1qL0 11B0 1nX0 11B0 1nX0 11B0 1qL0 WN0 1qL0|22e5","Asia/Manila|+08|-80|0||24e6","Asia/Kolkata|IST|-5u|0||15e6","Asia/Chita|+10 +08 +09|-a0 -80 -90|012|1N7s0 3re0|33e4","Asia/Ulaanbaatar|+08 +09|-80 -90|01010|1O8G0 1cJ0 1cP0 1cJ0|12e5","Asia/Shanghai|CST|-80|0||23e6","Asia/Colombo|+0530|-5u|0||22e5","Asia/Damascus|EET EEST|-20 -30|01010101010101010101010|1GPy0 1nX0 11B0 1nX0 11B0 1qL0 WN0 1qL0 WN0 1qL0 11B0 1nX0 11B0 1nX0 11B0 1nX0 11B0 1qL0 WN0 1qL0 WN0 1qL0|26e5","Asia/Dili|+09|-90|0||19e4","Asia/Dubai|+04|-40|0||39e5","Asia/Famagusta|EET EEST +03|-20 -30 -30|01010101012|1GNB0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 15U0","Asia/Gaza|EET EEST|-20 -30|01010101010101010101010|1GPy0 1a00 1fA0 1cL0 1cN0 1nX0 1210 1nz0 1220 1qL0 WN0 1qL0 11B0 1nX0 11B0 1nX0 11B0 1qL0 WN0 1qL0 WN0 1qL0|18e5","Asia/Hong_Kong|HKT|-80|0||73e5","Asia/Hovd|+07 +08|-70 -80|01010|1O8H0 1cJ0 1cP0 1cJ0|81e3","Asia/Irkutsk|+09 +08|-90 -80|01|1N7t0|60e4","Europe/Istanbul|EET EEST +03|-20 -30 -30|01010101012|1GNB0 1qM0 11A0 1o00 1200 1nA0 11A0 1tA0 U00 15w0|13e6","Asia/Jakarta|WIB|-70|0||31e6","Asia/Jayapura|WIT|-90|0||26e4","Asia/Jerusalem|IST IDT|-20 -30|01010101010101010101010|1GPA0 1aL0 1eN0 1oL0 10N0 1oL0 10N0 1oL0 10N0 1rz0 W10 1rz0 W10 1rz0 10N0 1oL0 10N0 1oL0 10N0 1rz0 W10 1rz0|81e4","Asia/Kabul|+0430|-4u|0||46e5","Asia/Karachi|PKT|-50|0||24e6","Asia/Kathmandu|+0545|-5J|0||12e5","Asia/Yakutsk|+10 +09|-a0 -90|01|1N7s0|28e4","Asia/Krasnoyarsk|+08 +07|-80 -70|01|1N7u0|10e5","Asia/Magadan|+12 +10 +11|-c0 -a0 -b0|012|1N7q0 3Cq0|95e3","Asia/Makassar|WITA|-80|0||15e5","Europe/Athens|EET EEST|-20 -30|01010101010101010101010|1GNB0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0|35e5","Asia/Novosibirsk|+07 +06|-70 -60|010|1N7v0 4eN0|15e5","Asia/Omsk|+07 +06|-70 -60|01|1N7v0|12e5","Asia/Pyongyang|KST KST|-90 -8u|01|1P4D0|29e5","Asia/Rangoon|+0630|-6u|0||48e5","Asia/Sakhalin|+11 +10|-b0 -a0|010|1N7r0 3rd0|58e4","Asia/Seoul|KST|-90|0||23e6","Asia/Srednekolymsk|+12 +11|-c0 -b0|01|1N7q0|35e2","Asia/Tehran|+0330 +0430|-3u -4u|01010101010101010101010|1GLUu 1dz0 1cN0 1dz0 1cp0 1dz0 1cp0 1dz0 1cp0 1dz0 1cN0 1dz0 1cp0 1dz0 1cp0 1dz0 1cp0 1dz0 1cN0 1dz0 1cp0 1dz0|14e6","Asia/Tokyo|JST|-90|0||38e6","Asia/Tomsk|+07 +06|-70 -60|010|1N7v0 3Qp0|10e5","Asia/Vladivostok|+11 +10|-b0 -a0|01|1N7r0|60e4","Asia/Yekaterinburg|+06 +05|-60 -50|01|1N7w0|14e5","Europe/Lisbon|WET WEST|0 -10|01010101010101010101010|1GNB0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0|27e5","Atlantic/Cape_Verde|-01|10|0||50e4","Australia/Sydney|AEDT AEST|-b0 -a0|01010101010101010101010|1GQg0 1fA0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1fA0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0|40e5","Australia/Adelaide|ACDT ACST|-au -9u|01010101010101010101010|1GQgu 1fA0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1fA0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0|11e5","Australia/Brisbane|AEST|-a0|0||20e5","Australia/Darwin|ACST|-9u|0||12e4","Australia/Eucla|+0845|-8J|0||368","Australia/Lord_Howe|+11 +1030|-b0 -au|01010101010101010101010|1GQf0 1fAu 1cLu 1cMu 1cLu 1cMu 1cLu 1cMu 1cLu 1cMu 1cLu 1cMu 1cLu 1fAu 1cLu 1cMu 1cLu 1cMu 1cLu 1cMu 1cLu 1cMu|347","Australia/Perth|AWST|-80|0||18e5","Pacific/Easter|-05 -06|50 60|010101010101010101010|1H3D0 Op0 1zb0 Rd0 1wn0 Rd0 46n0 Ap0 1Nb0 Ap0 1Nb0 Ap0 1Nb0 Ap0 1Nb0 Ap0 1Nb0 Dd0 1Nb0 Ap0|30e2","Europe/Dublin|GMT IST|0 -10|01010101010101010101010|1GNB0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0|12e5","Pacific/Tahiti|-10|a0|0||18e4","Pacific/Niue|-11|b0|0||12e2","Etc/GMT+12|-12|c0|0|","Pacific/Galapagos|-06|60|0||25e3","Etc/GMT+7|-07|70|0|","Pacific/Pitcairn|-08|80|0||56","Pacific/Gambier|-09|90|0||125","Etc/GMT-1|+01|-10|0|","Pacific/Fakaofo|+13|-d0|0||483","Pacific/Kiritimati|+14|-e0|0||51e2","Etc/GMT-2|+02|-20|0|","Etc/UCT|UCT|0|0|","Etc/UTC|UTC|0|0|","Europe/Astrakhan|+04 +03|-40 -30|010|1N7y0 3rd0","Europe/London|GMT BST|0 -10|01010101010101010101010|1GNB0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0|10e6","Europe/Chisinau|EET EEST|-20 -30|01010101010101010101010|1GNA0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0|67e4","Europe/Kaliningrad|+03 EET|-30 -20|01|1N7z0|44e4","Europe/Volgograd|+04 +03|-40 -30|01|1N7y0|10e5","Europe/Moscow|MSK MSK|-40 -30|01|1N7y0|16e6","Europe/Saratov|+04 +03|-40 -30|010|1N7y0 5810","Europe/Simferopol|EET EEST MSK MSK|-20 -30 -40 -30|0101023|1GNB0 1qM0 11A0 1o00 11z0 1nW0|33e4","Pacific/Honolulu|HST|a0|0||37e4","MET|MET MEST|-10 -20|01010101010101010101010|1GNB0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0","Pacific/Chatham|+1345 +1245|-dJ -cJ|01010101010101010101010|1GQe0 1cM0 1fA0 1a00 1fA0 1a00 1fA0 1a00 1fA0 1a00 1fA0 1a00 1fA0 1cM0 1fA0 1a00 1fA0 1a00 1fA0 1a00 1fA0 1a00|600","Pacific/Apia|+14 +13|-e0 -d0|01010101010101010101010|1GQe0 1cM0 1fA0 1a00 1fA0 1a00 1fA0 1a00 1fA0 1a00 1fA0 1a00 1fA0 1cM0 1fA0 1a00 1fA0 1a00 1fA0 1a00 1fA0 1a00|37e3","Pacific/Bougainville|+10 +11|-a0 -b0|01|1NwE0|18e4","Pacific/Fiji|+13 +12|-d0 -c0|01010101010101010101010|1Goe0 1Nc0 Ao0 1Q00 xz0 1SN0 uM0 1SM0 uM0 1VA0 s00 1VA0 uM0 1SM0 uM0 1SM0 uM0 1SM0 uM0 1VA0 s00 1VA0|88e4","Pacific/Guam|ChST|-a0|0||17e4","Pacific/Marquesas|-0930|9u|0||86e2","Pacific/Pago_Pago|SST|b0|0||37e2","Pacific/Norfolk|+1130 +11|-bu -b0|01|1PoCu|25e4","Pacific/Tongatapu|+13 +14|-d0 -e0|01010101010101|1S4d0 s00 1VA0 uM0 1SM0 uM0 1SM0 uM0 1SM0 uM0 1VA0 s00 1VA0|75e3"],links:["Africa/Abidjan|Africa/Accra","Africa/Abidjan|Africa/Bamako","Africa/Abidjan|Africa/Banjul","Africa/Abidjan|Africa/Bissau","Africa/Abidjan|Africa/Conakry","Africa/Abidjan|Africa/Dakar","Africa/Abidjan|Africa/Freetown","Africa/Abidjan|Africa/Lome","Africa/Abidjan|Africa/Monrovia","Africa/Abidjan|Africa/Nouakchott","Africa/Abidjan|Africa/Ouagadougou","Africa/Abidjan|Africa/Sao_Tome","Africa/Abidjan|Africa/Timbuktu","Africa/Abidjan|America/Danmarkshavn","Africa/Abidjan|Atlantic/Reykjavik","Africa/Abidjan|Atlantic/St_Helena","Africa/Abidjan|Etc/GMT","Africa/Abidjan|Etc/GMT+0","Africa/Abidjan|Etc/GMT-0","Africa/Abidjan|Etc/GMT0","Africa/Abidjan|Etc/Greenwich","Africa/Abidjan|GMT","Africa/Abidjan|GMT+0","Africa/Abidjan|GMT-0","Africa/Abidjan|GMT0","Africa/Abidjan|Greenwich","Africa/Abidjan|Iceland","Africa/Algiers|Africa/Tunis","Africa/Cairo|Egypt","Africa/Casablanca|Africa/El_Aaiun","Africa/Johannesburg|Africa/Maseru","Africa/Johannesburg|Africa/Mbabane","Africa/Khartoum|Africa/Addis_Ababa","Africa/Khartoum|Africa/Asmara","Africa/Khartoum|Africa/Asmera","Africa/Khartoum|Africa/Dar_es_Salaam","Africa/Khartoum|Africa/Djibouti","Africa/Khartoum|Africa/Juba","Africa/Khartoum|Africa/Kampala","Africa/Khartoum|Africa/Mogadishu","Africa/Khartoum|Africa/Nairobi","Africa/Khartoum|Indian/Antananarivo","Africa/Khartoum|Indian/Comoro","Africa/Khartoum|Indian/Mayotte","Africa/Lagos|Africa/Bangui","Africa/Lagos|Africa/Brazzaville","Africa/Lagos|Africa/Douala","Africa/Lagos|Africa/Kinshasa","Africa/Lagos|Africa/Libreville","Africa/Lagos|Africa/Luanda","Africa/Lagos|Africa/Malabo","Africa/Lagos|Africa/Ndjamena","Africa/Lagos|Africa/Niamey","Africa/Lagos|Africa/Porto-Novo","Africa/Maputo|Africa/Blantyre","Africa/Maputo|Africa/Bujumbura","Africa/Maputo|Africa/Gaborone","Africa/Maputo|Africa/Harare","Africa/Maputo|Africa/Kigali","Africa/Maputo|Africa/Lubumbashi","Africa/Maputo|Africa/Lusaka","Africa/Tripoli|Libya","America/Adak|America/Atka","America/Adak|US/Aleutian","America/Anchorage|America/Juneau","America/Anchorage|America/Nome","America/Anchorage|America/Sitka","America/Anchorage|America/Yakutat","America/Anchorage|US/Alaska","America/Campo_Grande|America/Cuiaba","America/Chicago|America/Indiana/Knox","America/Chicago|America/Indiana/Tell_City","America/Chicago|America/Knox_IN","America/Chicago|America/Matamoros","America/Chicago|America/Menominee","America/Chicago|America/North_Dakota/Beulah","America/Chicago|America/North_Dakota/Center","America/Chicago|America/North_Dakota/New_Salem","America/Chicago|America/Rainy_River","America/Chicago|America/Rankin_Inlet","America/Chicago|America/Resolute","America/Chicago|America/Winnipeg","America/Chicago|CST6CDT","America/Chicago|Canada/Central","America/Chicago|US/Central","America/Chicago|US/Indiana-Starke","America/Chihuahua|America/Mazatlan","America/Chihuahua|Mexico/BajaSur","America/Denver|America/Boise","America/Denver|America/Cambridge_Bay","America/Denver|America/Edmonton","America/Denver|America/Inuvik","America/Denver|America/Ojinaga","America/Denver|America/Shiprock","America/Denver|America/Yellowknife","America/Denver|Canada/Mountain","America/Denver|MST7MDT","America/Denver|Navajo","America/Denver|US/Mountain","America/Fortaleza|America/Argentina/Buenos_Aires","America/Fortaleza|America/Argentina/Catamarca","America/Fortaleza|America/Argentina/ComodRivadavia","America/Fortaleza|America/Argentina/Cordoba","America/Fortaleza|America/Argentina/Jujuy","America/Fortaleza|America/Argentina/La_Rioja","America/Fortaleza|America/Argentina/Mendoza","America/Fortaleza|America/Argentina/Rio_Gallegos","America/Fortaleza|America/Argentina/Salta","America/Fortaleza|America/Argentina/San_Juan","America/Fortaleza|America/Argentina/San_Luis","America/Fortaleza|America/Argentina/Tucuman","America/Fortaleza|America/Argentina/Ushuaia","America/Fortaleza|America/Belem","America/Fortaleza|America/Buenos_Aires","America/Fortaleza|America/Catamarca","America/Fortaleza|America/Cayenne","America/Fortaleza|America/Cordoba","America/Fortaleza|America/Jujuy","America/Fortaleza|America/Maceio","America/Fortaleza|America/Mendoza","America/Fortaleza|America/Paramaribo","America/Fortaleza|America/Recife","America/Fortaleza|America/Rosario","America/Fortaleza|America/Santarem","America/Fortaleza|Antarctica/Rothera","America/Fortaleza|Atlantic/Stanley","America/Fortaleza|Etc/GMT+3","America/Halifax|America/Glace_Bay","America/Halifax|America/Goose_Bay","America/Halifax|America/Moncton","America/Halifax|America/Thule","America/Halifax|Atlantic/Bermuda","America/Halifax|Canada/Atlantic","America/Havana|Cuba","America/La_Paz|America/Boa_Vista","America/La_Paz|America/Guyana","America/La_Paz|America/Manaus","America/La_Paz|America/Porto_Velho","America/La_Paz|Brazil/West","America/La_Paz|Etc/GMT+4","America/Lima|America/Bogota","America/Lima|America/Guayaquil","America/Lima|Etc/GMT+5","America/Los_Angeles|America/Dawson","America/Los_Angeles|America/Ensenada","America/Los_Angeles|America/Santa_Isabel","America/Los_Angeles|America/Tijuana","America/Los_Angeles|America/Vancouver","America/Los_Angeles|America/Whitehorse","America/Los_Angeles|Canada/Pacific","America/Los_Angeles|Canada/Yukon","America/Los_Angeles|Mexico/BajaNorte","America/Los_Angeles|PST8PDT","America/Los_Angeles|US/Pacific","America/Los_Angeles|US/Pacific-New","America/Managua|America/Belize","America/Managua|America/Costa_Rica","America/Managua|America/El_Salvador","America/Managua|America/Guatemala","America/Managua|America/Regina","America/Managua|America/Swift_Current","America/Managua|America/Tegucigalpa","America/Managua|Canada/East-Saskatchewan","America/Managua|Canada/Saskatchewan","America/Mexico_City|America/Bahia_Banderas","America/Mexico_City|America/Merida","America/Mexico_City|America/Monterrey","America/Mexico_City|Mexico/General","America/New_York|America/Detroit","America/New_York|America/Fort_Wayne","America/New_York|America/Indiana/Indianapolis","America/New_York|America/Indiana/Marengo","America/New_York|America/Indiana/Petersburg","America/New_York|America/Indiana/Vevay","America/New_York|America/Indiana/Vincennes","America/New_York|America/Indiana/Winamac","America/New_York|America/Indianapolis","America/New_York|America/Iqaluit","America/New_York|America/Kentucky/Louisville","America/New_York|America/Kentucky/Monticello","America/New_York|America/Louisville","America/New_York|America/Montreal","America/New_York|America/Nassau","America/New_York|America/Nipigon","America/New_York|America/Pangnirtung","America/New_York|America/Thunder_Bay","America/New_York|America/Toronto","America/New_York|Canada/Eastern","America/New_York|EST5EDT","America/New_York|US/East-Indiana","America/New_York|US/Eastern","America/New_York|US/Michigan","America/Noronha|Atlantic/South_Georgia","America/Noronha|Brazil/DeNoronha","America/Noronha|Etc/GMT+2","America/Panama|America/Atikokan","America/Panama|America/Cayman","America/Panama|America/Coral_Harbour","America/Panama|America/Jamaica","America/Panama|EST","America/Panama|Jamaica","America/Phoenix|America/Creston","America/Phoenix|America/Dawson_Creek","America/Phoenix|America/Hermosillo","America/Phoenix|MST","America/Phoenix|US/Arizona","America/Rio_Branco|America/Eirunepe","America/Rio_Branco|America/Porto_Acre","America/Rio_Branco|Brazil/Acre","America/Santiago|Chile/Continental","America/Santo_Domingo|America/Anguilla","America/Santo_Domingo|America/Antigua","America/Santo_Domingo|America/Aruba","America/Santo_Domingo|America/Barbados","America/Santo_Domingo|America/Blanc-Sablon","America/Santo_Domingo|America/Curacao","America/Santo_Domingo|America/Dominica","America/Santo_Domingo|America/Grenada","America/Santo_Domingo|America/Guadeloupe","America/Santo_Domingo|America/Kralendijk","America/Santo_Domingo|America/Lower_Princes","America/Santo_Domingo|America/Marigot","America/Santo_Domingo|America/Martinique","America/Santo_Domingo|America/Montserrat","America/Santo_Domingo|America/Port_of_Spain","America/Santo_Domingo|America/Puerto_Rico","America/Santo_Domingo|America/St_Barthelemy","America/Santo_Domingo|America/St_Kitts","America/Santo_Domingo|America/St_Lucia","America/Santo_Domingo|America/St_Thomas","America/Santo_Domingo|America/St_Vincent","America/Santo_Domingo|America/Tortola","America/Santo_Domingo|America/Virgin","America/Sao_Paulo|Brazil/East","America/St_Johns|Canada/Newfoundland","Antarctica/Palmer|America/Punta_Arenas","Asia/Baghdad|Antarctica/Syowa","Asia/Baghdad|Asia/Aden","Asia/Baghdad|Asia/Bahrain","Asia/Baghdad|Asia/Kuwait","Asia/Baghdad|Asia/Qatar","Asia/Baghdad|Asia/Riyadh","Asia/Baghdad|Etc/GMT-3","Asia/Baghdad|Europe/Minsk","Asia/Bangkok|Asia/Ho_Chi_Minh","Asia/Bangkok|Asia/Novokuznetsk","Asia/Bangkok|Asia/Phnom_Penh","Asia/Bangkok|Asia/Saigon","Asia/Bangkok|Asia/Vientiane","Asia/Bangkok|Etc/GMT-7","Asia/Bangkok|Indian/Christmas","Asia/Dhaka|Antarctica/Vostok","Asia/Dhaka|Asia/Almaty","Asia/Dhaka|Asia/Bishkek","Asia/Dhaka|Asia/Dacca","Asia/Dhaka|Asia/Kashgar","Asia/Dhaka|Asia/Qyzylorda","Asia/Dhaka|Asia/Thimbu","Asia/Dhaka|Asia/Thimphu","Asia/Dhaka|Asia/Urumqi","Asia/Dhaka|Etc/GMT-6","Asia/Dhaka|Indian/Chagos","Asia/Dili|Etc/GMT-9","Asia/Dili|Pacific/Palau","Asia/Dubai|Asia/Muscat","Asia/Dubai|Asia/Tbilisi","Asia/Dubai|Asia/Yerevan","Asia/Dubai|Etc/GMT-4","Asia/Dubai|Europe/Samara","Asia/Dubai|Indian/Mahe","Asia/Dubai|Indian/Mauritius","Asia/Dubai|Indian/Reunion","Asia/Gaza|Asia/Hebron","Asia/Hong_Kong|Hongkong","Asia/Jakarta|Asia/Pontianak","Asia/Jerusalem|Asia/Tel_Aviv","Asia/Jerusalem|Israel","Asia/Kamchatka|Asia/Anadyr","Asia/Kamchatka|Etc/GMT-12","Asia/Kamchatka|Kwajalein","Asia/Kamchatka|Pacific/Funafuti","Asia/Kamchatka|Pacific/Kwajalein","Asia/Kamchatka|Pacific/Majuro","Asia/Kamchatka|Pacific/Nauru","Asia/Kamchatka|Pacific/Tarawa","Asia/Kamchatka|Pacific/Wake","Asia/Kamchatka|Pacific/Wallis","Asia/Kathmandu|Asia/Katmandu","Asia/Kolkata|Asia/Calcutta","Asia/Makassar|Asia/Ujung_Pandang","Asia/Manila|Asia/Brunei","Asia/Manila|Asia/Kuala_Lumpur","Asia/Manila|Asia/Kuching","Asia/Manila|Asia/Singapore","Asia/Manila|Etc/GMT-8","Asia/Manila|Singapore","Asia/Rangoon|Asia/Yangon","Asia/Rangoon|Indian/Cocos","Asia/Seoul|ROK","Asia/Shanghai|Asia/Chongqing","Asia/Shanghai|Asia/Chungking","Asia/Shanghai|Asia/Harbin","Asia/Shanghai|Asia/Macao","Asia/Shanghai|Asia/Macau","Asia/Shanghai|Asia/Taipei","Asia/Shanghai|PRC","Asia/Shanghai|ROC","Asia/Tashkent|Antarctica/Mawson","Asia/Tashkent|Asia/Aqtau","Asia/Tashkent|Asia/Aqtobe","Asia/Tashkent|Asia/Ashgabat","Asia/Tashkent|Asia/Ashkhabad","Asia/Tashkent|Asia/Atyrau","Asia/Tashkent|Asia/Dushanbe","Asia/Tashkent|Asia/Oral","Asia/Tashkent|Asia/Samarkand","Asia/Tashkent|Etc/GMT-5","Asia/Tashkent|Indian/Kerguelen","Asia/Tashkent|Indian/Maldives","Asia/Tehran|Iran","Asia/Tokyo|Japan","Asia/Ulaanbaatar|Asia/Choibalsan","Asia/Ulaanbaatar|Asia/Ulan_Bator","Asia/Vladivostok|Asia/Ust-Nera","Asia/Yakutsk|Asia/Khandyga","Atlantic/Azores|America/Scoresbysund","Atlantic/Cape_Verde|Etc/GMT+1","Australia/Adelaide|Australia/Broken_Hill","Australia/Adelaide|Australia/South","Australia/Adelaide|Australia/Yancowinna","Australia/Brisbane|Australia/Lindeman","Australia/Brisbane|Australia/Queensland","Australia/Darwin|Australia/North","Australia/Lord_Howe|Australia/LHI","Australia/Perth|Australia/West","Australia/Sydney|Australia/ACT","Australia/Sydney|Australia/Canberra","Australia/Sydney|Australia/Currie","Australia/Sydney|Australia/Hobart","Australia/Sydney|Australia/Melbourne","Australia/Sydney|Australia/NSW","Australia/Sydney|Australia/Tasmania","Australia/Sydney|Australia/Victoria","Etc/UCT|UCT","Etc/UTC|Etc/Universal","Etc/UTC|Etc/Zulu","Etc/UTC|UTC","Etc/UTC|Universal","Etc/UTC|Zulu","Europe/Astrakhan|Europe/Ulyanovsk","Europe/Athens|Asia/Nicosia","Europe/Athens|EET","Europe/Athens|Europe/Bucharest","Europe/Athens|Europe/Helsinki","Europe/Athens|Europe/Kiev","Europe/Athens|Europe/Mariehamn","Europe/Athens|Europe/Nicosia","Europe/Athens|Europe/Riga","Europe/Athens|Europe/Sofia","Europe/Athens|Europe/Tallinn","Europe/Athens|Europe/Uzhgorod","Europe/Athens|Europe/Vilnius","Europe/Athens|Europe/Zaporozhye","Europe/Chisinau|Europe/Tiraspol","Europe/Dublin|Eire","Europe/Istanbul|Asia/Istanbul","Europe/Istanbul|Turkey","Europe/Lisbon|Atlantic/Canary","Europe/Lisbon|Atlantic/Faeroe","Europe/Lisbon|Atlantic/Faroe","Europe/Lisbon|Atlantic/Madeira","Europe/Lisbon|Portugal","Europe/Lisbon|WET","Europe/London|Europe/Belfast","Europe/London|Europe/Guernsey","Europe/London|Europe/Isle_of_Man","Europe/London|Europe/Jersey","Europe/London|GB","Europe/London|GB-Eire","Europe/Moscow|W-SU","Europe/Paris|Africa/Ceuta","Europe/Paris|Arctic/Longyearbyen","Europe/Paris|Atlantic/Jan_Mayen","Europe/Paris|CET","Europe/Paris|Europe/Amsterdam","Europe/Paris|Europe/Andorra","Europe/Paris|Europe/Belgrade","Europe/Paris|Europe/Berlin","Europe/Paris|Europe/Bratislava","Europe/Paris|Europe/Brussels","Europe/Paris|Europe/Budapest","Europe/Paris|Europe/Busingen","Europe/Paris|Europe/Copenhagen","Europe/Paris|Europe/Gibraltar","Europe/Paris|Europe/Ljubljana","Europe/Paris|Europe/Luxembourg","Europe/Paris|Europe/Madrid","Europe/Paris|Europe/Malta","Europe/Paris|Europe/Monaco","Europe/Paris|Europe/Oslo","Europe/Paris|Europe/Podgorica","Europe/Paris|Europe/Prague","Europe/Paris|Europe/Rome","Europe/Paris|Europe/San_Marino","Europe/Paris|Europe/Sarajevo","Europe/Paris|Europe/Skopje","Europe/Paris|Europe/Stockholm","Europe/Paris|Europe/Tirane","Europe/Paris|Europe/Vaduz","Europe/Paris|Europe/Vatican","Europe/Paris|Europe/Vienna","Europe/Paris|Europe/Warsaw","Europe/Paris|Europe/Zagreb","Europe/Paris|Europe/Zurich","Europe/Paris|Poland","Europe/Volgograd|Europe/Kirov","Pacific/Auckland|Antarctica/McMurdo","Pacific/Auckland|Antarctica/South_Pole","Pacific/Auckland|NZ","Pacific/Chatham|NZ-CHAT","Pacific/Easter|Chile/EasterIsland","Pacific/Fakaofo|Etc/GMT-13","Pacific/Fakaofo|Pacific/Enderbury","Pacific/Galapagos|Etc/GMT+6","Pacific/Gambier|Etc/GMT+9","Pacific/Guadalcanal|Antarctica/Macquarie","Pacific/Guadalcanal|Etc/GMT-11","Pacific/Guadalcanal|Pacific/Efate","Pacific/Guadalcanal|Pacific/Kosrae","Pacific/Guadalcanal|Pacific/Noumea","Pacific/Guadalcanal|Pacific/Pohnpei","Pacific/Guadalcanal|Pacific/Ponape","Pacific/Guam|Pacific/Saipan","Pacific/Honolulu|HST","Pacific/Honolulu|Pacific/Johnston","Pacific/Honolulu|US/Hawaii","Pacific/Kiritimati|Etc/GMT-14","Pacific/Niue|Etc/GMT+11","Pacific/Pago_Pago|Pacific/Midway","Pacific/Pago_Pago|Pacific/Samoa","Pacific/Pago_Pago|US/Samoa","Pacific/Pitcairn|Etc/GMT+8","Pacific/Port_Moresby|Antarctica/DumontDUrville","Pacific/Port_Moresby|Etc/GMT-10","Pacific/Port_Moresby|Pacific/Chuuk","Pacific/Port_Moresby|Pacific/Truk","Pacific/Port_Moresby|Pacific/Yap","Pacific/Tahiti|Etc/GMT+10","Pacific/Tahiti|Pacific/Rarotonga"]
 }),a});
+/*!
+ * FullCalendar v2.2.0
+ * Docs & License: http://arshaw.com/fullcalendar/
+ * (c) 2013 Adam Shaw
+ */
+(function(t){"function"==typeof define&&define.amd?define(["jquery","moment"],t):t(jQuery,moment)})(function(t,e){function n(t,e){return e.longDateFormat("LT").replace(":mm","(:mm)").replace(/(\Wmm)$/,"($1)").replace(/\s*a$/i,"t")}function i(t,e){var n=e.longDateFormat("L");return n=n.replace(/^Y+[^\w\s]*|[^\w\s]*Y+$/g,""),t.isRTL?n+=" ddd":n="ddd "+n,n}function r(t){s(Fe,t)}function s(e){function n(n,i){t.isPlainObject(i)&&t.isPlainObject(e[n])&&!o(n)?e[n]=s({},e[n],i):void 0!==i&&(e[n]=i)}for(var i=1;arguments.length>i;i++)t.each(arguments[i],n);return e}function o(t){return/(Time|Duration)$/.test(t)}function l(n,i){function r(t){var n=e.localeData||e.langData;return n.call(e,t)||n.call(e,"en")}function o(t){ne?u()&&(p(),f(t)):l()}function l(){ie=K.theme?"ui":"fc",n.addClass("fc"),K.isRTL?n.addClass("fc-rtl"):n.addClass("fc-ltr"),K.theme?n.addClass("ui-widget"):n.addClass("fc-unthemed"),ne=t("<div class='fc-view-container'/>").prependTo(n),te=new a(q,K),ee=te.render(),ee&&n.prepend(ee),h(K.defaultView),K.handleWindowResize&&(oe=_(v,K.windowResizeDelay),t(window).resize(oe))}function d(){re&&re.destroy(),te.destroy(),ne.remove(),n.removeClass("fc fc-ltr fc-rtl fc-unthemed ui-widget"),t(window).unbind("resize",oe)}function u(){return n.is(":visible")}function h(t){f(0,t)}function f(e,n){ue++,re&&n&&re.name!==n&&(te.deactivateButton(re.name),B(),re.start&&re.destroy(),re.el.remove(),re=null),!re&&n&&(re=new Ge[n](q),re.el=t("<div class='fc-view fc-"+n+"-view' />").appendTo(ne),te.activateButton(n)),re&&(e&&(le=re.incrementDate(le,e)),re.start&&!e&&le.isWithin(re.intervalStart,re.intervalEnd)||u()&&(B(),re.start&&re.destroy(),re.render(le),I(),C(),H(),b())),I(),ue--}function g(t){return u()?(t&&m(),ue++,re.updateSize(!0),ue--,!0):void 0}function p(){u()&&m()}function m(){se="number"==typeof K.contentHeight?K.contentHeight:"number"==typeof K.height?K.height-(ee?ee.outerHeight(!0):0):Math.round(ne.width()/Math.max(K.aspectRatio,.5))}function v(t){!ue&&t.target===window&&re.start&&g(!0)&&re.trigger("windowResize",de)}function y(){S(),E()}function w(){u()&&(B(),re.destroyEvents(),re.renderEvents(he),I())}function S(){B(),re.destroyEvents(),I()}function b(){!K.lazyFetching||ae(re.start,re.end)?E():w()}function E(){ce(re.start,re.end)}function D(t){he=t,w()}function T(){w()}function C(){te.updateTitle(re.title)}function H(){var t=q.getNow();t.isWithin(re.intervalStart,re.intervalEnd)?te.disableButton("today"):te.enableButton("today")}function x(t,e){t=q.moment(t),e=e?q.moment(e):t.hasTime()?t.clone().add(q.defaultTimedEventDuration):t.clone().add(q.defaultAllDayEventDuration),re.select(t,e)}function k(){re&&re.unselect()}function R(){f(-1)}function P(){f(1)}function F(){le.add(-1,"years"),f()}function L(){le.add(1,"years"),f()}function G(){le=q.getNow(),f()}function N(t){le=q.moment(t),f()}function A(t){le.add(e.duration(t)),f()}function Y(t,e){var n,i;e&&void 0!==Ge[e]||(e=e||"day",n=te.getViewsWithButtons().join(" "),i=n.match(RegExp("\\w+"+z(e))),i||(i=n.match(/\w+Day/)),e=i?i[0]:"agendaDay"),le=t,h(e)}function V(){return le.clone()}function B(){ne.css({width:"100%",height:ne.height(),overflow:"hidden"})}function I(){ne.css({width:"",height:"",overflow:""})}function Z(){return q}function j(){return re}function X(t,e){return void 0===e?K[t]:(("height"==t||"contentHeight"==t||"aspectRatio"==t)&&(K[t]=e,g(!0)),void 0)}function $(t,e){return K[t]?K[t].apply(e||de,Array.prototype.slice.call(arguments,2)):void 0}var q=this;i=i||{};var U,K=s({},Fe,i);U=K.lang in Le?Le[K.lang]:Le[Fe.lang],U&&(K=s({},Fe,U,i)),K.isRTL&&(K=s({},Fe,ze,U||{},i)),q.options=K,q.render=o,q.destroy=d,q.refetchEvents=y,q.reportEvents=D,q.reportEventChange=T,q.rerenderEvents=w,q.changeView=h,q.select=x,q.unselect=k,q.prev=R,q.next=P,q.prevYear=F,q.nextYear=L,q.today=G,q.gotoDate=N,q.incrementDate=A,q.zoomTo=Y,q.getDate=V,q.getCalendar=Z,q.getView=j,q.option=X,q.trigger=$;var Q=M(r(K.lang));if(K.monthNames&&(Q._months=K.monthNames),K.monthNamesShort&&(Q._monthsShort=K.monthNamesShort),K.dayNames&&(Q._weekdays=K.dayNames),K.dayNamesShort&&(Q._weekdaysShort=K.dayNamesShort),null!=K.firstDay){var J=M(Q._week);J.dow=K.firstDay,Q._week=J}q.defaultAllDayEventDuration=e.duration(K.defaultAllDayEventDuration),q.defaultTimedEventDuration=e.duration(K.defaultTimedEventDuration),q.moment=function(){var t;return"local"===K.timezone?(t=_e.moment.apply(null,arguments),t.hasTime()&&t.local()):t="UTC"===K.timezone?_e.moment.utc.apply(null,arguments):_e.moment.parseZone.apply(null,arguments),"_locale"in t?t._locale=Q:t._lang=Q,t},q.getIsAmbigTimezone=function(){return"local"!==K.timezone&&"UTC"!==K.timezone},q.rezoneDate=function(t){return q.moment(t.toArray())},q.getNow=function(){var t=K.now;return"function"==typeof t&&(t=t()),q.moment(t)},q.calculateWeekNumber=function(t){var e=K.weekNumberCalculation;return"function"==typeof e?e(t):"local"===e?t.week():"ISO"===e.toUpperCase()?t.isoWeek():void 0},q.getEventEnd=function(t){return t.end?t.end.clone():q.getDefaultEventEnd(t.allDay,t.start)},q.getDefaultEventEnd=function(t,e){var n=e.clone();return t?n.stripTime().add(q.defaultAllDayEventDuration):n.add(q.defaultTimedEventDuration),q.getIsAmbigTimezone()&&n.stripZone(),n},q.formatRange=function(t,e,n){return"function"==typeof n&&(n=n.call(q,K,Q)),W(t,e,n,null,K.isRTL)},q.formatDate=function(t,e){return"function"==typeof e&&(e=e.call(q,K,Q)),O(t,e)},c.call(q,K);var te,ee,ne,ie,re,se,oe,le,ae=q.isFetchNeeded,ce=q.fetchEvents,de=n[0],ue=0,he=[];le=null!=K.defaultDate?q.moment(K.defaultDate):q.getNow(),q.getSuggestedViewHeight=function(){return void 0===se&&p(),se},q.isHeightAuto=function(){return"auto"===K.contentHeight||"auto"===K.height}}function a(e,n){function i(){var e=n.header;return f=n.theme?"ui":"fc",e?g=t("<div class='fc-toolbar'/>").append(s("left")).append(s("right")).append(s("center")).append('<div class="fc-clear"/>'):void 0}function r(){g.remove()}function s(i){var r=t('<div class="fc-'+i+'"/>'),s=n.header[i];return s&&t.each(s.split(" "),function(){var i,s=t(),o=!0;t.each(this.split(","),function(i,r){var l,a,c,d,u,h,g,m;"title"==r?(s=s.add(t("<h2>&nbsp;</h2>")),o=!1):(e[r]?l=function(){e[r]()}:Ge[r]&&(l=function(){e.changeView(r)},p.push(r)),l&&(a=T(n.themeButtonIcons,r),c=T(n.buttonIcons,r),d=T(n.defaultButtonText,r),u=T(n.buttonText,r),h=u?F(u):a&&n.theme?"<span class='ui-icon ui-icon-"+a+"'></span>":c&&!n.theme?"<span class='fc-icon fc-icon-"+c+"'></span>":F(d||r),g=["fc-"+r+"-button",f+"-button",f+"-state-default"],m=t('<button type="button" class="'+g.join(" ")+'">'+h+"</button>").click(function(){m.hasClass(f+"-state-disabled")||(l(),(m.hasClass(f+"-state-active")||m.hasClass(f+"-state-disabled"))&&m.removeClass(f+"-state-hover"))}).mousedown(function(){m.not("."+f+"-state-active").not("."+f+"-state-disabled").addClass(f+"-state-down")}).mouseup(function(){m.removeClass(f+"-state-down")}).hover(function(){m.not("."+f+"-state-active").not("."+f+"-state-disabled").addClass(f+"-state-hover")},function(){m.removeClass(f+"-state-hover").removeClass(f+"-state-down")}),s=s.add(m)))}),o&&s.first().addClass(f+"-corner-left").end().last().addClass(f+"-corner-right").end(),s.length>1?(i=t("<div/>"),o&&i.addClass("fc-button-group"),i.append(s),r.append(i)):r.append(s)}),r}function o(t){g.find("h2").text(t)}function l(t){g.find(".fc-"+t+"-button").addClass(f+"-state-active")}function a(t){g.find(".fc-"+t+"-button").removeClass(f+"-state-active")}function c(t){g.find(".fc-"+t+"-button").attr("disabled","disabled").addClass(f+"-state-disabled")}function d(t){g.find(".fc-"+t+"-button").removeAttr("disabled").removeClass(f+"-state-disabled")}function u(){return p}var h=this;h.render=i,h.destroy=r,h.updateTitle=o,h.activateButton=l,h.deactivateButton=a,h.disableButton=c,h.enableButton=d,h.getViewsWithButtons=u;var f,g=t(),p=[]}function c(n){function i(t,e){return!A||t.clone().stripZone()<A.clone().stripZone()||e.clone().stripZone()>Y.clone().stripZone()}function r(t,e){A=t,Y=e,q=[];var n=++j,i=Z.length;X=i;for(var r=0;i>r;r++)s(Z[r],n)}function s(e,n){o(e,function(i){var r,s,o,l=t.isArray(e.events);if(n==j){if(i)for(r=0;i.length>r;r++)s=i[r],o=l?s:S(s,e),o&&q.push.apply(q,E(o));X--,X||B(q)}})}function o(e,i){var r,s,l=_e.sourceFetchers;for(r=0;l.length>r;r++){if(s=l[r].call(N,e,A.clone(),Y.clone(),n.timezone,i),s===!0)return;if("object"==typeof s)return o(s,i),void 0}var a=e.events;if(a)t.isFunction(a)?(y(),a.call(N,A.clone(),Y.clone(),n.timezone,function(t){i(t),w()})):t.isArray(a)?i(a):i();else{var c=e.url;if(c){var d,u=e.success,h=e.error,f=e.complete;d=t.isFunction(e.data)?e.data():e.data;var g=t.extend({},d||{}),p=P(e.startParam,n.startParam),m=P(e.endParam,n.endParam),v=P(e.timezoneParam,n.timezoneParam);p&&(g[p]=A.format()),m&&(g[m]=Y.format()),n.timezone&&"local"!=n.timezone&&(g[v]=n.timezone),y(),t.ajax(t.extend({},Ne,e,{data:g,success:function(e){e=e||[];var n=R(u,this,arguments);t.isArray(n)&&(e=n),i(e)},error:function(){R(h,this,arguments),i()},complete:function(){R(f,this,arguments),w()}}))}else i()}}function l(t){var e=a(t);e&&(Z.push(e),X++,s(e,j))}function a(e){var n,i,r=_e.sourceNormalizers;if(t.isFunction(e)||t.isArray(e)?n={events:e}:"string"==typeof e?n={url:e}:"object"==typeof e&&(n=t.extend({},e)),n){for(n.className?"string"==typeof n.className&&(n.className=n.className.split(/\s+/)):n.className=[],t.isArray(n.events)&&(n.origArray=n.events,n.events=t.map(n.events,function(t){return S(t,n)})),i=0;r.length>i;i++)r[i].call(N,n);return n}}function c(e){Z=t.grep(Z,function(t){return!u(t,e)}),q=t.grep(q,function(t){return!u(t.source,e)}),B(q)}function u(t,e){return t&&e&&h(t)==h(e)}function h(t){return("object"==typeof t?t.origArray||t.url||t.events:null)||t}function f(t){t.start=N.moment(t.start),t.end&&(t.end=N.moment(t.end)),D(t),g(t),B(q)}function g(t){var e,n,i,r;for(e=0;q.length>e;e++)if(n=q[e],n._id==t._id&&n!==t)for(i=0;U.length>i;i++)r=U[i],void 0!==t[r]&&(n[r]=t[r])}function p(t,e){var n,i,r,s=S(t);if(s){for(n=E(s),i=0;n.length>i;i++)r=n[i],r.source||(e&&(W.events.push(r),r.source=W),q.push(r));return B(q),n}return[]}function m(e){var n,i;for(null==e?e=function(){return!0}:t.isFunction(e)||(n=e+"",e=function(t){return t._id==n}),q=t.grep(q,e,!0),i=0;Z.length>i;i++)t.isArray(Z[i].events)&&(Z[i].events=t.grep(Z[i].events,e,!0));B(q)}function v(e){return t.isFunction(e)?t.grep(q,e):null!=e?(e+="",t.grep(q,function(t){return t._id==e})):q}function y(){$++||V("loading",null,!0,O())}function w(){--$||V("loading",null,!1,O())}function S(i,r){var s,o,l,a,c={};if(n.eventDataTransform&&(i=n.eventDataTransform(i)),r&&r.eventDataTransform&&(i=r.eventDataTransform(i)),t.extend(c,i),r&&(c.source=r),c._id=i._id||(void 0===i.id?"_fc"+Ae++:i.id+""),c.className=i.className?"string"==typeof i.className?i.className.split(/\s+/):i.className:[],s=i.start||i.date,o=i.end,k(s)&&(s=e.duration(s)),k(o)&&(o=e.duration(o)),i.dow||e.isDuration(s)||e.isDuration(o))c.start=s?e.duration(s):null,c.end=o?e.duration(o):null,c._recurring=!0;else{if(s&&(s=N.moment(s),!s.isValid()))return!1;if(o&&(o=N.moment(o),!o.isValid()))return!1;l=i.allDay,void 0===l&&(a=P(r?r.allDayDefault:void 0,n.allDayDefault),l=void 0!==a?a:!(s.hasTime()||o&&o.hasTime())),b(s,o,l,c)}return c}function b(t,e,i,r){i?(t.hasTime()&&t.stripTime(),e&&e.hasTime()&&e.stripTime()):(t.hasTime()||(t=N.rezoneDate(t)),e&&!e.hasTime()&&(e=N.rezoneDate(e))),r.allDay=i,r.start=t,r.end=e||null,n.forceEventDuration&&!r.end&&(r.end=I(r)),d(r)}function E(e){var n,i,r,s,o,l,a,c,d,u,h=[],f=A,g=Y;if(f&&g||(n=N.getView(),f=n.start,g=n.end),e)if(e._recurring){if(r=e.dow)for(i={},s=0;r.length>s;s++)i[r[s]]=!0;for(o=f.clone().stripTime();o.isBefore(g);)(!i||i[o.day()])&&(l=e.start,a=e.end,c=o.clone(),d=null,l&&(c=c.time(l)),a&&(d=o.clone().time(a)),u=t.extend({},e),b(c,d,!l&&!a,u),h.push(u)),o.add(1,"days")}else h.push(e);return h}function D(t,e,n){var i,r,s,o,l=t._allDay,a=t._start,c=t._end,d=!1;return e||n||(e=t.start,n=t.end),i=t.allDay!=l?t.allDay:!(e||n).hasTime(),i&&(e&&(e=e.clone().stripTime()),n&&(n=n.clone().stripTime())),e&&(r=i?C(e,a.clone().stripTime()):C(e,a)),i!=l?d=!0:n&&(s=C(n||N.getDefaultEventEnd(i,e||a),e||a).subtract(C(c||N.getDefaultEventEnd(l,a),a))),o=T(v(t._id),d,i,r,s),{dateDelta:r,durationDelta:s,undo:o}}function T(e,i,r,s,o){var l=N.getIsAmbigTimezone(),a=[];return t.each(e,function(t,e){var c=e._allDay,u=e._start,h=e._end,f=null!=r?r:c,g=u.clone(),p=!i&&h?h.clone():null;f?(g.stripTime(),p&&p.stripTime()):(g.hasTime()||(g=N.rezoneDate(g)),p&&!p.hasTime()&&(p=N.rezoneDate(p))),p||!n.forceEventDuration&&!+o||(p=N.getDefaultEventEnd(f,g)),g.add(s),p&&p.add(s).add(o),l&&(+s||+o)&&(g.stripZone(),p&&p.stripZone()),e.allDay=f,e.start=g,e.end=p,d(e),a.push(function(){e.allDay=c,e.start=u,e.end=h,d(e)})}),function(){for(var t=0;a.length>t;t++)a[t]()}}function H(){var e,i=n.businessHours,r={className:"fc-nonbusiness",start:"09:00",end:"17:00",dow:[1,2,3,4,5],rendering:"inverse-background"};return i&&(e="object"==typeof i?t.extend({},r,i):r),e?E(S(e)):[]}function x(t,e,i){var r=t.source||{},s=P(t.constraint,r.constraint,n.eventConstraint),o=P(t.overlap,r.overlap,n.eventOverlap);return L(e,i,s,o,t)}function M(t,e){return L(t,e,n.selectConstraint,n.selectOverlap)}function F(t,e,n){var i;return n&&(i=E(S(n))[0])?x(i,t,e):M(t,e)}function L(t,e,n,i,r){var s,o,l,a,c;if(t=t.clone().stripZone(),e=e.clone().stripZone(),null!=n){for(s=z(n),o=!1,l=0;s.length>l;l++)if(_(s[l],t,e)){o=!0;break}if(!o)return!1}for(l=0;q.length>l;l++)if(a=q[l],(!r||r._id!==a._id)&&G(a,t,e)){if(i===!1)return!1;if("function"==typeof i&&!i(a,r))return!1;if(r){if(c=P(a.overlap,(a.source||{}).overlap),c===!1)return!1;if("function"==typeof c&&!c(r,a))return!1}}return!0}function z(t){return"businessHours"===t?H():"object"==typeof t?E(S(t)):v(t)}function _(t,e,n){var i=t.start.clone().stripZone(),r=N.getEventEnd(t).stripZone();return e>=i&&r>=n}function G(t,e,n){var i=t.start.clone().stripZone(),r=N.getEventEnd(t).stripZone();return r>e&&n>i}var N=this;N.isFetchNeeded=i,N.fetchEvents=r,N.addEventSource=l,N.removeEventSource=c,N.updateEvent=f,N.renderEvent=p,N.removeEvents=m,N.clientEvents=v,N.mutateEvent=D;var A,Y,V=N.trigger,O=N.getView,B=N.reportEvents,I=N.getEventEnd,W={events:[]},Z=[W],j=0,X=0,$=0,q=[];t.each((n.events?[n.events]:[]).concat(n.eventSources||[]),function(t,e){var n=a(e);n&&Z.push(n)});var U=["title","url","allDay","className","editable","color","backgroundColor","borderColor","textColor"];N.getBusinessHoursEvents=H,N.isEventAllowedInRange=x,N.isSelectionAllowedInRange=M,N.isExternalDragAllowedInRange=F}function d(t){t._allDay=t.allDay,t._start=t.start.clone(),t._end=t.end?t.end.clone():null}function u(t,e){e.left&&t.css({"border-left-width":1,"margin-left":e.left-1}),e.right&&t.css({"border-right-width":1,"margin-right":e.right-1})}function h(t){t.css({"margin-left":"","margin-right":"","border-left-width":"","border-right-width":""})}function f(){t("body").addClass("fc-not-allowed")}function g(){t("body").removeClass("fc-not-allowed")}function p(e,n,i){var r=Math.floor(n/e.length),s=Math.floor(n-r*(e.length-1)),o=[],l=[],a=[],c=0;m(e),e.each(function(n,i){var d=n===e.length-1?s:r,u=t(i).outerHeight(!0);d>u?(o.push(i),l.push(u),a.push(t(i).height())):c+=u}),i&&(n-=c,r=Math.floor(n/o.length),s=Math.floor(n-r*(o.length-1))),t(o).each(function(e,n){var i=e===o.length-1?s:r,c=l[e],d=a[e],u=i-(c-d);i>c&&t(n).height(u)})}function m(t){t.height("")}function v(e){var n=0;return e.find("> *").each(function(e,i){var r=t(i).outerWidth();r>n&&(n=r)}),n++,e.width(n),n}function y(t,e){return t.height(e).addClass("fc-scroller"),t[0].scrollHeight-1>t[0].clientHeight?!0:(w(t),!1)}function w(t){t.height("").removeClass("fc-scroller")}function S(e){var n=e.css("position"),i=e.parents().filter(function(){var e=t(this);return/(auto|scroll)/.test(e.css("overflow")+e.css("overflow-y")+e.css("overflow-x"))}).eq(0);return"fixed"!==n&&i.length?i:t(e[0].ownerDocument||document)}function b(t){var e=t.offset().left,n=e+t.width(),i=t.children(),r=i.offset().left,s=r+i.outerWidth();return{left:r-e,right:n-s}}function E(t){return 1==t.which&&!t.ctrlKey}function D(t,e,n,i){var r,s,o,l;return e>n&&i>t?(t>=n?(r=t.clone(),o=!0):(r=n.clone(),o=!1),i>=e?(s=e.clone(),l=!0):(s=i.clone(),l=!1),{start:r,end:s,isStart:o,isEnd:l}):void 0}function T(t,e){if(t=t||{},void 0!==t[e])return t[e];for(var n,i=e.split(/(?=[A-Z])/),r=i.length-1;r>=0;r--)if(n=t[i[r].toLowerCase()],void 0!==n)return n;return t["default"]}function C(t,n){return e.duration({days:t.clone().stripTime().diff(n.clone().stripTime(),"days"),ms:t.time()-n.time()})}function H(t){return"[object Date]"===Object.prototype.toString.call(t)||t instanceof Date}function x(t,e){return t-e}function k(t){return/^\d+\:\d+(?:\:\d+\.?(?:\d{3})?)?$/.test(t)}function M(t){var e=function(){};return e.prototype=t,new e}function R(e,n,i){if(t.isFunction(e)&&(e=[e]),e){var r,s;for(r=0;e.length>r;r++)s=e[r].apply(n,i)||s;return s}}function P(){for(var t=0;arguments.length>t;t++)if(void 0!==arguments[t])return arguments[t]}function F(t){return(t+"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/'/g,"&#039;").replace(/"/g,"&quot;").replace(/\n/g,"<br />")}function L(t){return t.replace(/&.*?;/g,"")}function z(t){return t.charAt(0).toUpperCase()+t.slice(1)}function _(t,e){var n,i,r,s,o=function(){var l=+new Date-s;e>l&&l>0?n=setTimeout(o,e-l):(n=null,t.apply(r,i),n||(r=i=null))};return function(){r=this,i=arguments,s=+new Date,n||(n=setTimeout(o,e))}}function G(n,i,r){var s,o,l,a,c=n[0],d=1==n.length&&"string"==typeof c;return e.isMoment(c)?(a=e.apply(null,n),A(c,a)):H(c)||void 0===c?a=e.apply(null,n):(s=!1,o=!1,d?Ie.test(c)?(c+="-01",n=[c],s=!0,o=!0):(l=We.exec(c))&&(s=!l[5],o=!0):t.isArray(c)&&(o=!0),a=i?e.utc.apply(e,n):e.apply(null,n),s?(a._ambigTime=!0,a._ambigZone=!0):r&&(o?a._ambigZone=!0:d&&a.zone(c))),a._fullCalendar=!0,a}function N(t,e){var n,i=[],r=!1,s=!1;for(n=0;t.length>n;n++)i.push(_e.moment.parseZone(t[n])),r=r||i[n]._ambigTime,s=s||i[n]._ambigZone;for(n=0;i.length>n;n++)r&&!e?i[n].stripTime():s&&i[n].stripZone();return i}function A(t,e){t._ambigTime?e._ambigTime=!0:e._ambigTime&&(e._ambigTime=!1),t._ambigZone?e._ambigZone=!0:e._ambigZone&&(e._ambigZone=!1)}function Y(t,e){t.year(e[0]||0).month(e[1]||0).date(e[2]||0).hours(e[3]||0).minutes(e[4]||0).seconds(e[5]||0).milliseconds(e[6]||0)}function V(t,e){return je.format.call(t,e)}function O(t,e){return B(t,X(e))}function B(t,e){var n,i="";for(n=0;e.length>n;n++)i+=I(t,e[n]);return i}function I(t,e){var n,i;return"string"==typeof e?e:(n=e.token)?Xe[n]?Xe[n](t):V(t,n):e.maybe&&(i=B(t,e.maybe),i.match(/[1-9]/))?i:""}function W(t,e,n,i,r){var s;return t=_e.moment.parseZone(t),e=_e.moment.parseZone(e),s=(t.localeData||t.lang).call(t),n=s.longDateFormat(n)||n,i=i||" - ",Z(t,e,X(n),i,r)}function Z(t,e,n,i,r){var s,o,l,a,c="",d="",u="",h="",f="";for(o=0;n.length>o&&(s=j(t,e,n[o]),s!==!1);o++)c+=s;for(l=n.length-1;l>o&&(s=j(t,e,n[l]),s!==!1);l--)d=s+d;for(a=o;l>=a;a++)u+=I(t,n[a]),h+=I(e,n[a]);return(u||h)&&(f=r?h+i+u:u+i+h),c+f+d}function j(t,e,n){var i,r;return"string"==typeof n?n:(i=n.token)&&(r=$e[i.charAt(0)],r&&t.isSame(e,r))?V(t,i):!1}function X(t){return t in qe?qe[t]:qe[t]=$(t)}function $(t){for(var e,n=[],i=/\[([^\]]*)\]|\(([^\)]*)\)|(LT|(\w)\4*o?)|([^\w\[\(]+)/g;e=i.exec(t);)e[1]?n.push(e[1]):e[2]?n.push({maybe:$(e[2])}):e[3]?n.push({token:e[3]}):e[5]&&n.push(e[5]);return n}function q(t){this.options=t||{}}function U(t){this.grid=t}function K(t){this.coordMaps=t}function Q(t,e){this.coordMap=t,this.options=e||{}}function J(t,e){return t||e?t&&e?t.grid===e.grid&&t.row===e.row&&t.col===e.col:!1:!0}function te(e,n){this.options=n=n||{},this.sourceEl=e,this.parentEl=n.parentEl?t(n.parentEl):e.parent()}function ee(t){this.view=t}function ne(t){ee.call(this,t),this.coordMap=new U(this),this.elsByFill={}}function ie(t){var e=se(t);return"background"===e||"inverse-background"===e}function re(t){return"inverse-background"===se(t)}function se(t){return P((t.source||{}).rendering,t.rendering)}function oe(t){var e,n,i={};for(e=0;t.length>e;e++)n=t[e],(i[n._id]||(i[n._id]=[])).push(n);return i}function le(t,e){return t.eventStartMS-e.eventStartMS}function ae(t,e){return t.eventStartMS-e.eventStartMS||e.eventDurationMS-t.eventDurationMS||e.event.allDay-t.event.allDay||(t.event.title||"").localeCompare(e.event.title)}function ce(t){ne.call(this,t)}function de(t,e){var n,i;for(n=0;e.length>n;n++)if(i=e[n],i.leftCol<=t.rightCol&&i.rightCol>=t.leftCol)return!0;return!1}function ue(t,e){return t.leftCol-e.leftCol}function he(t){ne.call(this,t)}function fe(t){var e,n,i;if(t.sort(ae),e=ge(t),pe(e),n=e[0]){for(i=0;n.length>i;i++)me(n[i]);for(i=0;n.length>i;i++)ve(n[i],0,0)}}function ge(t){var e,n,i,r=[];for(e=0;t.length>e;e++){for(n=t[e],i=0;r.length>i&&ye(n,r[i]).length;i++);n.level=i,(r[i]||(r[i]=[])).push(n)}return r}function pe(t){var e,n,i,r,s;for(e=0;t.length>e;e++)for(n=t[e],i=0;n.length>i;i++)for(r=n[i],r.forwardSegs=[],s=e+1;t.length>s;s++)ye(r,t[s],r.forwardSegs)}function me(t){var e,n,i=t.forwardSegs,r=0;if(void 0===t.forwardPressure){for(e=0;i.length>e;e++)n=i[e],me(n),r=Math.max(r,1+n.forwardPressure);t.forwardPressure=r}}function ve(t,e,n){var i,r=t.forwardSegs;if(void 0===t.forwardCoord)for(r.length?(r.sort(Se),ve(r[0],e+1,n),t.forwardCoord=r[0].backwardCoord):t.forwardCoord=1,t.backwardCoord=t.forwardCoord-(t.forwardCoord-n)/(e+1),i=0;r.length>i;i++)ve(r[i],0,t.forwardCoord)}function ye(t,e,n){n=n||[];for(var i=0;e.length>i;i++)we(t,e[i])&&n.push(e[i]);return n}function we(t,e){return t.bottom>e.top&&t.top<e.bottom}function Se(t,e){return e.forwardPressure-t.forwardPressure||(t.backwardCoord||0)-(e.backwardCoord||0)||ae(t,e)}function be(n){function i(e){var n=x[e];return t.isPlainObject(n)&&!o(e)?T(n,C.name):n}function r(t,e){return n.trigger.apply(n,[t,e||C].concat(Array.prototype.slice.call(arguments,2),[C]))}function s(t){var e=t.source||{};return P(t.startEditable,e.startEditable,i("eventStartEditable"),t.editable,e.editable,i("editable"))}function l(t){var e=t.source||{};return P(t.durationEditable,e.durationEditable,i("eventDurationEditable"),t.editable,e.editable,i("editable"))}function a(t,e,i,s){var o=n.mutateEvent(e,i,null);r("eventDrop",t,e,o.dateDelta,function(){o.undo(),H()},s,{}),H()}function c(t,e,i,s){var o=n.mutateEvent(e,null,i);r("eventResize",t,e,o.durationDelta,function(){o.undo(),H()},s,{}),H()}function d(t){return e.isMoment(t)&&(t=t.day()),F[t]}function u(){return M}function h(t,e,n){var i=t.clone();for(e=e||1;F[(i.day()+(n?e:0)+7)%7];)i.add(e,"days");return i}function f(){var t=g.apply(null,arguments),e=p(t),n=m(e);return n}function g(t,e){var n=C.colCnt,i=_?-1:1,r=_?n-1:0;"object"==typeof t&&(e=t.col,t=t.row);var s=t*n+(e*i+r);return s}function p(t){var e=C.start.day();return t+=L[e],7*Math.floor(t/M)+z[(t%M+M)%M]-e}function m(t){return C.start.clone().add(t,"days")}function v(t){var e=y(t),n=w(e),i=S(n);return i}function y(t){return t.clone().stripTime().diff(C.start,"days")}function w(t){var e=C.start.day();return t+=e,Math.floor(t/7)*M+L[(t%7+7)%7]-L[e]}function S(t){var e=C.colCnt,n=_?-1:1,i=_?e-1:0,r=Math.floor(t/e),s=(t%e+e)%e*n+i;return{row:r,col:s}}function b(t,e){for(var n=C.rowCnt,i=C.colCnt,r=[],s=E(t,e),o=y(s.start),l=y(s.end),a=w(o),c=w(l)-1,d=0;n>d;d++){var u=d*i,h=u+i-1,f=Math.max(a,u),g=Math.min(c,h);if(g>=f){var m=S(f),v=S(g),b=[m.col,v.col].sort(),D=p(f)==o,T=p(g)+1==l;r.push({row:d,leftCol:b[0],rightCol:b[1],isStart:D,isEnd:T})}}return r}function E(t,e){var n,i,r=t.clone().stripTime();return e&&(n=e.clone().stripTime(),i=+e.time(),i&&i>=k&&n.add(1,"days")),(!e||r>=n)&&(n=r.clone().add(1,"days")),{start:r,end:n}}function D(t){var e=E(t.start,t.end);return e.end.diff(e.start,"days")>1}var C=this;C.calendar=n,C.opt=i,C.trigger=r,C.isEventDraggable=s,C.isEventResizable=l,C.eventDrop=a,C.eventResize=c;var H=n.reportEventChange,x=n.options,k=e.duration(x.nextDayThreshold);C.init(),C.getEventTimeText=function(t,e){var r,s;return"object"==typeof t&&"object"==typeof e?(r=t,s=e,e=arguments[2]):(r=t.start,s=t.end),e=e||i("timeFormat"),s&&i("displayEventEnd")?n.formatRange(r,s,e):n.formatDate(r,e)},C.isHiddenDay=d,C.skipHiddenDays=h,C.getCellsPerWeek=u,C.dateToCell=v,C.dateToDayOffset=y,C.dayOffsetToCellOffset=w,C.cellOffsetToCell=S,C.cellToDate=f,C.cellToCellOffset=g,C.cellOffsetToDayOffset=p,C.dayOffsetToDate=m,C.rangeToSegments=b,C.isMultiDayEvent=D;var M,R=i("hiddenDays")||[],F=[],L=[],z=[],_=i("isRTL");(function(){i("weekends")===!1&&R.push(0,6);for(var e=0,n=0;7>e;e++)L[e]=n,F[e]=-1!=t.inArray(e,R),F[e]||(z[n]=e,n++);if(M=n,!M)throw"invalid hiddenDays"})()}function Ee(n){var i,r,s,o,l=_e.dataAttrPrefix;return l&&(l+="-"),i=n.data(l+"event")||null,i&&(i="object"==typeof i?t.extend({},i):{},r=i.start,null==r&&(r=i.time),s=i.duration,o=i.stick,delete i.start,delete i.time,delete i.duration,delete i.stick),null==r&&(r=n.data(l+"start")),null==r&&(r=n.data(l+"time")),null==s&&(s=n.data(l+"duration")),null==o&&(o=n.data(l+"stick")),r=null!=r?e.duration(r):null,s=null!=s?e.duration(s):null,o=Boolean(o),{eventProps:i,startTime:r,duration:s,stick:o}}function De(t){be.call(this,t),this.dayGrid=new ce(this),this.coordMap=this.dayGrid.coordMap}function Te(t){De.call(this,t)}function Ce(t){De.call(this,t)}function He(t){De.call(this,t)}function xe(t,e){return e.longDateFormat("LT").replace(":mm","(:mm)").replace(/(\Wmm)$/,"($1)").replace(/\s*a$/i,"a")}function ke(t,e){return e.longDateFormat("LT").replace(/\s*a$/i,"")}function Me(t){be.call(this,t),this.timeGrid=new he(this),this.opt("allDaySlot")?(this.dayGrid=new ce(this),this.coordMap=new K([this.dayGrid.coordMap,this.timeGrid.coordMap])):this.coordMap=this.timeGrid.coordMap}function Re(t){Me.call(this,t)}function Pe(t){Me.call(this,t)}var Fe={lang:"en",defaultTimedEventDuration:"02:00:00",defaultAllDayEventDuration:{days:1},forceEventDuration:!1,nextDayThreshold:"09:00:00",defaultView:"month",aspectRatio:1.35,header:{left:"title",center:"",right:"today prev,next"},weekends:!0,weekNumbers:!1,weekNumberTitle:"W",weekNumberCalculation:"local",lazyFetching:!0,startParam:"start",endParam:"end",timezoneParam:"timezone",timezone:!1,titleFormat:{month:"MMMM YYYY",week:"ll",day:"LL"},columnFormat:{month:"ddd",week:i,day:"dddd"},timeFormat:{"default":n},displayEventEnd:{month:!1,basicWeek:!1,"default":!0},isRTL:!1,defaultButtonText:{prev:"prev",next:"next",prevYear:"prev year",nextYear:"next year",today:"today",month:"month",week:"week",day:"day"},buttonIcons:{prev:"left-single-arrow",next:"right-single-arrow",prevYear:"left-double-arrow",nextYear:"right-double-arrow"},theme:!1,themeButtonIcons:{prev:"circle-triangle-w",next:"circle-triangle-e",prevYear:"seek-prev",nextYear:"seek-next"},dragOpacity:.75,dragRevertDuration:500,dragScroll:!0,unselectAuto:!0,dropAccept:"*",eventLimit:!1,eventLimitText:"more",eventLimitClick:"popover",dayPopoverFormat:"LL",handleWindowResize:!0,windowResizeDelay:200},Le={en:{columnFormat:{week:"ddd M/D"},dayPopoverFormat:"dddd, MMMM D"}},ze={header:{left:"next,prev today",center:"",right:"title"},buttonIcons:{prev:"right-single-arrow",next:"left-single-arrow",prevYear:"right-double-arrow",nextYear:"left-double-arrow"},themeButtonIcons:{prev:"circle-triangle-e",next:"circle-triangle-w",nextYear:"seek-prev",prevYear:"seek-next"}},_e=t.fullCalendar={version:"2.2.0"},Ge=_e.views={};t.fn.fullCalendar=function(e){var n=Array.prototype.slice.call(arguments,1),i=this;return this.each(function(r,s){var o,a=t(s),c=a.data("fullCalendar");"string"==typeof e?c&&t.isFunction(c[e])&&(o=c[e].apply(c,n),r||(i=o),"destroy"===e&&a.removeData("fullCalendar")):c||(c=new l(a,e),a.data("fullCalendar",c),c.render())}),i},_e.langs=Le,_e.datepickerLang=function(e,n,i){var r=Le[e];r||(r=Le[e]={}),s(r,{isRTL:i.isRTL,weekNumberTitle:i.weekHeader,titleFormat:{month:i.showMonthAfterYear?"YYYY["+i.yearSuffix+"] MMMM":"MMMM YYYY["+i.yearSuffix+"]"},defaultButtonText:{prev:L(i.prevText),next:L(i.nextText),today:L(i.currentText)}}),t.datepicker&&(t.datepicker.regional[n]=t.datepicker.regional[e]=i,t.datepicker.regional.en=t.datepicker.regional[""],t.datepicker.setDefaults(i))},_e.lang=function(t,e){var n;e&&(n=Le[t],n||(n=Le[t]={}),s(n,e||{})),Fe.lang=t},_e.sourceNormalizers=[],_e.sourceFetchers=[];var Ne={dataType:"json",cache:!1},Ae=1,Ye=["sun","mon","tue","wed","thu","fri","sat"];_e.applyAll=R;var Ve,Oe,Be,Ie=/^\s*\d{4}-\d\d$/,We=/^\s*\d{4}-(?:(\d\d-\d\d)|(W\d\d$)|(W\d\d-\d)|(\d\d\d))((T| )(\d\d(:\d\d(:\d\d(\.\d+)?)?)?)?)?$/,Ze=e.fn,je=t.extend({},Ze);_e.moment=function(){return G(arguments)},_e.moment.utc=function(){var t=G(arguments,!0);return t.hasTime()&&t.utc(),t},_e.moment.parseZone=function(){return G(arguments,!0,!0)},Ze.clone=function(){var t=je.clone.apply(this,arguments);return A(this,t),this._fullCalendar&&(t._fullCalendar=!0),t},Ze.time=function(t){if(!this._fullCalendar)return je.time.apply(this,arguments);if(null==t)return e.duration({hours:this.hours(),minutes:this.minutes(),seconds:this.seconds(),milliseconds:this.milliseconds()});this._ambigTime=!1,e.isDuration(t)||e.isMoment(t)||(t=e.duration(t));var n=0;return e.isDuration(t)&&(n=24*Math.floor(t.asDays())),this.hours(n+t.hours()).minutes(t.minutes()).seconds(t.seconds()).milliseconds(t.milliseconds())},Ze.stripTime=function(){var t=this.toArray();return this.utc(),Oe(this,t.slice(0,3)),this._ambigTime=!0,this._ambigZone=!0,this},Ze.hasTime=function(){return!this._ambigTime},Ze.stripZone=function(){var t=this.toArray(),e=this._ambigTime;return this.utc(),Oe(this,t),e&&(this._ambigTime=!0),this._ambigZone=!0,this},Ze.hasZone=function(){return!this._ambigZone},Ze.zone=function(t){return null!=t&&(this._ambigTime=!1,this._ambigZone=!1),je.zone.apply(this,arguments)},Ze.local=function(){var t=this.toArray(),e=this._ambigZone;return je.local.apply(this,arguments),e&&Be(this,t),this},Ze.format=function(){return this._fullCalendar&&arguments[0]?O(this,arguments[0]):this._ambigTime?V(this,"YYYY-MM-DD"):this._ambigZone?V(this,"YYYY-MM-DD[T]HH:mm:ss"):je.format.apply(this,arguments)},Ze.toISOString=function(){return this._ambigTime?V(this,"YYYY-MM-DD"):this._ambigZone?V(this,"YYYY-MM-DD[T]HH:mm:ss"):je.toISOString.apply(this,arguments)},Ze.isWithin=function(t,e){var n=N([this,t,e]);return n[0]>=n[1]&&n[0]<n[2]},Ze.isSame=function(t,e){var n;return this._fullCalendar?e?(n=N([this,t],!0),je.isSame.call(n[0],n[1],e)):(t=_e.moment.parseZone(t),je.isSame.call(this,t)&&Boolean(this._ambigTime)===Boolean(t._ambigTime)&&Boolean(this._ambigZone)===Boolean(t._ambigZone)):je.isSame.apply(this,arguments)},t.each(["isBefore","isAfter"],function(t,e){Ze[e]=function(t,n){var i;return this._fullCalendar?(i=N([this,t]),je[e].call(i[0],i[1],n)):je[e].apply(this,arguments)}}),Ve="_d"in e()&&"updateOffset"in e,Oe=Ve?function(t,n){t._d.setTime(Date.UTC.apply(Date,n)),e.updateOffset(t,!1)}:Y,Be=Ve?function(t,n){t._d.setTime(+new Date(n[0]||0,n[1]||0,n[2]||0,n[3]||0,n[4]||0,n[5]||0,n[6]||0)),e.updateOffset(t,!1)}:Y;var Xe={t:function(t){return V(t,"a").charAt(0)},T:function(t){return V(t,"A").charAt(0)}};_e.formatRange=W;var $e={Y:"year",M:"month",D:"day",d:"day",A:"second",a:"second",T:"second",t:"second",H:"second",h:"second",m:"second",s:"second"},qe={};q.prototype={isHidden:!0,options:null,el:null,documentMousedownProxy:null,margin:10,show:function(){this.isHidden&&(this.el||this.render(),this.el.show(),this.position(),this.isHidden=!1,this.trigger("show"))},hide:function(){this.isHidden||(this.el.hide(),this.isHidden=!0,this.trigger("hide"))},render:function(){var e=this,n=this.options;this.el=t('<div class="fc-popover"/>').addClass(n.className||"").css({top:0,left:0}).append(n.content).appendTo(n.parentEl),this.el.on("click",".fc-close",function(){e.hide()}),n.autoHide&&t(document).on("mousedown",this.documentMousedownProxy=t.proxy(this,"documentMousedown"))},documentMousedown:function(e){this.el&&!t(e.target).closest(this.el).length&&this.hide()},destroy:function(){this.hide(),this.el&&(this.el.remove(),this.el=null),t(document).off("mousedown",this.documentMousedownProxy)
+},position:function(){var e,n,i,r,s,o=this.options,l=this.el.offsetParent().offset(),a=this.el.outerWidth(),c=this.el.outerHeight(),d=t(window),u=S(this.el);r=o.top||0,s=void 0!==o.left?o.left:void 0!==o.right?o.right-a:0,u.is(window)||u.is(document)?(u=d,e=0,n=0):(i=u.offset(),e=i.top,n=i.left),e+=d.scrollTop(),n+=d.scrollLeft(),o.viewportConstrain!==!1&&(r=Math.min(r,e+u.outerHeight()-c-this.margin),r=Math.max(r,e+this.margin),s=Math.min(s,n+u.outerWidth()-a-this.margin),s=Math.max(s,n+this.margin)),this.el.css({top:r-l.top,left:s-l.left})},trigger:function(t){this.options[t]&&this.options[t].apply(this,Array.prototype.slice.call(arguments,1))}},U.prototype={grid:null,rows:null,cols:null,containerEl:null,minX:null,maxX:null,minY:null,maxY:null,build:function(){this.grid.buildCoords(this.rows=[],this.cols=[]),this.computeBounds()},getCell:function(t,e){var n,i=null,r=this.rows,s=this.cols,o=-1,l=-1;if(this.inBounds(t,e)){for(n=0;r.length>n;n++)if(e>=r[n][0]&&r[n][1]>e){o=n;break}for(n=0;s.length>n;n++)if(t>=s[n][0]&&s[n][1]>t){l=n;break}o>=0&&l>=0&&(i={row:o,col:l},i.grid=this.grid,i.date=this.grid.getCellDate(i))}return i},computeBounds:function(){var t;this.containerEl&&(t=this.containerEl.offset(),this.minX=t.left,this.maxX=t.left+this.containerEl.outerWidth(),this.minY=t.top,this.maxY=t.top+this.containerEl.outerHeight())},inBounds:function(t,e){return this.containerEl?t>=this.minX&&this.maxX>t&&e>=this.minY&&this.maxY>e:!0}},K.prototype={coordMaps:null,build:function(){var t,e=this.coordMaps;for(t=0;e.length>t;t++)e[t].build()},getCell:function(t,e){var n,i=this.coordMaps,r=null;for(n=0;i.length>n&&!r;n++)r=i[n].getCell(t,e);return r}},Q.prototype={coordMap:null,options:null,isListening:!1,isDragging:!1,origCell:null,origDate:null,cell:null,date:null,mouseX0:null,mouseY0:null,mousemoveProxy:null,mouseupProxy:null,scrollEl:null,scrollBounds:null,scrollTopVel:null,scrollLeftVel:null,scrollIntervalId:null,scrollHandlerProxy:null,scrollSensitivity:30,scrollSpeed:200,scrollIntervalMs:50,mousedown:function(t){E(t)&&(t.preventDefault(),this.startListening(t),this.options.distance||this.startDrag(t))},startListening:function(e){var n,i;this.isListening||(e&&this.options.scroll&&(n=S(t(e.target)),n.is(window)||n.is(document)||(this.scrollEl=n,this.scrollHandlerProxy=_(t.proxy(this,"scrollHandler"),100),this.scrollEl.on("scroll",this.scrollHandlerProxy))),this.computeCoords(),e&&(i=this.getCell(e),this.origCell=i,this.origDate=i?i.date:null,this.mouseX0=e.pageX,this.mouseY0=e.pageY),t(document).on("mousemove",this.mousemoveProxy=t.proxy(this,"mousemove")).on("mouseup",this.mouseupProxy=t.proxy(this,"mouseup")).on("selectstart",this.preventDefault),this.isListening=!0,this.trigger("listenStart",e))},computeCoords:function(){this.coordMap.build(),this.computeScrollBounds()},mousemove:function(t){var e,n;this.isDragging||(e=this.options.distance||1,n=Math.pow(t.pageX-this.mouseX0,2)+Math.pow(t.pageY-this.mouseY0,2),n>=e*e&&this.startDrag(t)),this.isDragging&&this.drag(t)},startDrag:function(t){var e;this.isListening||this.startListening(),this.isDragging||(this.isDragging=!0,this.trigger("dragStart",t),e=this.getCell(t),e&&this.cellOver(e,!0))},drag:function(t){var e;this.isDragging&&(e=this.getCell(t),J(e,this.cell)||(this.cell&&this.cellOut(),e&&this.cellOver(e)),this.dragScroll(t))},cellOver:function(t){this.cell=t,this.date=t.date,this.trigger("cellOver",t,t.date)},cellOut:function(){this.cell&&(this.trigger("cellOut",this.cell),this.cell=null,this.date=null)},mouseup:function(t){this.stopDrag(t),this.stopListening(t)},stopDrag:function(t){this.isDragging&&(this.stopScrolling(),this.trigger("dragStop",t),this.isDragging=!1)},stopListening:function(e){this.isListening&&(this.scrollEl&&(this.scrollEl.off("scroll",this.scrollHandlerProxy),this.scrollHandlerProxy=null),t(document).off("mousemove",this.mousemoveProxy).off("mouseup",this.mouseupProxy).off("selectstart",this.preventDefault),this.mousemoveProxy=null,this.mouseupProxy=null,this.isListening=!1,this.trigger("listenStop",e),this.origCell=this.cell=null,this.origDate=this.date=null)},getCell:function(t){return this.coordMap.getCell(t.pageX,t.pageY)},trigger:function(t){this.options[t]&&this.options[t].apply(this,Array.prototype.slice.call(arguments,1))},preventDefault:function(t){t.preventDefault()},computeScrollBounds:function(){var t,e=this.scrollEl;e&&(t=e.offset(),this.scrollBounds={top:t.top,left:t.left,bottom:t.top+e.outerHeight(),right:t.left+e.outerWidth()})},dragScroll:function(t){var e,n,i,r,s=this.scrollSensitivity,o=this.scrollBounds,l=0,a=0;o&&(e=(s-(t.pageY-o.top))/s,n=(s-(o.bottom-t.pageY))/s,i=(s-(t.pageX-o.left))/s,r=(s-(o.right-t.pageX))/s,e>=0&&1>=e?l=-1*e*this.scrollSpeed:n>=0&&1>=n&&(l=n*this.scrollSpeed),i>=0&&1>=i?a=-1*i*this.scrollSpeed:r>=0&&1>=r&&(a=r*this.scrollSpeed)),this.setScrollVel(l,a)},setScrollVel:function(e,n){this.scrollTopVel=e,this.scrollLeftVel=n,this.constrainScrollVel(),!this.scrollTopVel&&!this.scrollLeftVel||this.scrollIntervalId||(this.scrollIntervalId=setInterval(t.proxy(this,"scrollIntervalFunc"),this.scrollIntervalMs))},constrainScrollVel:function(){var t=this.scrollEl;0>this.scrollTopVel?0>=t.scrollTop()&&(this.scrollTopVel=0):this.scrollTopVel>0&&t.scrollTop()+t[0].clientHeight>=t[0].scrollHeight&&(this.scrollTopVel=0),0>this.scrollLeftVel?0>=t.scrollLeft()&&(this.scrollLeftVel=0):this.scrollLeftVel>0&&t.scrollLeft()+t[0].clientWidth>=t[0].scrollWidth&&(this.scrollLeftVel=0)},scrollIntervalFunc:function(){var t=this.scrollEl,e=this.scrollIntervalMs/1e3;this.scrollTopVel&&t.scrollTop(t.scrollTop()+this.scrollTopVel*e),this.scrollLeftVel&&t.scrollLeft(t.scrollLeft()+this.scrollLeftVel*e),this.constrainScrollVel(),this.scrollTopVel||this.scrollLeftVel||this.stopScrolling()},stopScrolling:function(){this.scrollIntervalId&&(clearInterval(this.scrollIntervalId),this.scrollIntervalId=null,this.computeCoords())},scrollHandler:function(){this.scrollIntervalId||this.computeCoords()}},te.prototype={options:null,sourceEl:null,el:null,parentEl:null,top0:null,left0:null,mouseY0:null,mouseX0:null,topDelta:null,leftDelta:null,mousemoveProxy:null,isFollowing:!1,isHidden:!1,isAnimating:!1,start:function(e){this.isFollowing||(this.isFollowing=!0,this.mouseY0=e.pageY,this.mouseX0=e.pageX,this.topDelta=0,this.leftDelta=0,this.isHidden||this.updatePosition(),t(document).on("mousemove",this.mousemoveProxy=t.proxy(this,"mousemove")))},stop:function(e,n){function i(){this.isAnimating=!1,r.destroyEl(),this.top0=this.left0=null,n&&n()}var r=this,s=this.options.revertDuration;this.isFollowing&&!this.isAnimating&&(this.isFollowing=!1,t(document).off("mousemove",this.mousemoveProxy),e&&s&&!this.isHidden?(this.isAnimating=!0,this.el.animate({top:this.top0,left:this.left0},{duration:s,complete:i})):i())},getEl:function(){var t=this.el;return t||(this.sourceEl.width(),t=this.el=this.sourceEl.clone().css({position:"absolute",visibility:"",display:this.isHidden?"none":"",margin:0,right:"auto",bottom:"auto",width:this.sourceEl.width(),height:this.sourceEl.height(),opacity:this.options.opacity||"",zIndex:this.options.zIndex}).appendTo(this.parentEl)),t},destroyEl:function(){this.el&&(this.el.remove(),this.el=null)},updatePosition:function(){var t,e;this.getEl(),null===this.top0&&(this.sourceEl.width(),t=this.sourceEl.offset(),e=this.el.offsetParent().offset(),this.top0=t.top-e.top,this.left0=t.left-e.left),this.el.css({top:this.top0+this.topDelta,left:this.left0+this.leftDelta})},mousemove:function(t){this.topDelta=t.pageY-this.mouseY0,this.leftDelta=t.pageX-this.mouseX0,this.isHidden||this.updatePosition()},hide:function(){this.isHidden||(this.isHidden=!0,this.el&&this.el.hide())},show:function(){this.isHidden&&(this.isHidden=!1,this.updatePosition(),this.getEl().show())}},ee.prototype={view:null,cellHtml:"<td/>",rowHtml:function(t,e){var n,i,r=this.view,s=this.getHtmlRenderer("cell",t),o="";for(e=e||0,n=0;r.colCnt>n;n++)i=r.cellToDate(e,n),o+=s(e,n,i);return o=this.bookendCells(o,t,e),"<tr>"+o+"</tr>"},bookendCells:function(t,e,n){var i=this.view,r=this.getHtmlRenderer("intro",e)(n||0),s=this.getHtmlRenderer("outro",e)(n||0),o=i.opt("isRTL"),l=o?s:r,a=o?r:s;return"string"==typeof t?l+t+a:t.prepend(l).append(a)},getHtmlRenderer:function(t,e){var n,i,r,s,o=this.view;return n=t+"Html",e&&(i=e+z(t)+"Html"),i&&(s=o[i])?r=o:i&&(s=this[i])?r=this:(s=o[n])?r=o:(s=this[n])&&(r=this),"function"==typeof s?function(){return s.apply(r,arguments)||""}:function(){return s||""}}},ne.prototype=M(ee.prototype),t.extend(ne.prototype,{el:null,coordMap:null,cellDuration:null,elsByFill:null,render:function(){this.bindHandlers()},destroy:function(){},buildCoords:function(){},getCellDate:function(){},getCellDayEl:function(){},rangeToSegs:function(){},bindHandlers:function(){var e=this;this.el.on("mousedown",function(n){t(n.target).is(".fc-event-container *, .fc-more")||t(n.target).closest(".fc-popover").length||e.dayMousedown(n)}),this.bindSegHandlers()},dayMousedown:function(t){var e,n,i,r=this,s=this.view,o=s.calendar,l=s.opt("selectable"),a=null,c=new Q(this.coordMap,{scroll:s.opt("dragScroll"),dragStart:function(){s.unselect()},cellOver:function(t,s){c.origDate&&(i=r.getCellDayEl(t),a=[s,c.origDate].sort(x),e=a[0],n=a[1].clone().add(r.cellDuration),l&&(o.isSelectionAllowedInRange(e,n)?r.renderSelection(e,n):(a=null,f())))},cellOut:function(){a=null,r.destroySelection(),g()},listenStop:function(t){a&&(a[0].isSame(a[1])&&s.trigger("dayClick",i[0],e,t),l&&s.reportSelection(e,n,t)),g()}});c.mousedown(t)},renderDrag:function(){},destroyDrag:function(){},renderResize:function(){},destroyResize:function(){},renderRangeHelper:function(t,e,n){var i,r=this.view;!e&&r.opt("forceEventDuration")&&(e=r.calendar.getDefaultEventEnd(!t.hasTime(),t)),i=n?M(n.event):{},i.start=t,i.end=e,i.allDay=!(t.hasTime()||e&&e.hasTime()),i.className=(i.className||[]).concat("fc-helper"),n||(i.editable=!1),this.renderHelper(i,n)},renderHelper:function(){},destroyHelper:function(){},renderSelection:function(t,e){this.renderHighlight(t,e)},destroySelection:function(){this.destroyHighlight()},renderHighlight:function(t,e){this.renderFill("highlight",this.rangeToSegs(t,e))},destroyHighlight:function(){this.destroyFill("highlight")},highlightSegClasses:function(){return["fc-highlight"]},renderFill:function(){},destroyFill:function(t){var e=this.elsByFill[t];e&&(e.remove(),delete this.elsByFill[t])},renderFillSegEls:function(e,n){var i,r=this,s=this[e+"SegEl"],o="",l=[];if(n.length){for(i=0;n.length>i;i++)o+=this.fillSegHtml(e,n[i]);t(o).each(function(e,i){var o=n[e],a=t(i);s&&(a=s.call(r,o,a)),a&&(a=t(a),a.is(r.fillSegTag)&&(o.el=a,l.push(o)))})}return l},fillSegTag:"div",fillSegHtml:function(t,e){var n=this[t+"SegClasses"],i=this[t+"SegStyles"],r=n?n.call(this,e):[],s=i?i.call(this,e):"";return"<"+this.fillSegTag+(r.length?' class="'+r.join(" ")+'"':"")+(s?' style="'+s+'"':"")+" />"},headHtml:function(){return'<div class="fc-row '+this.view.widgetHeaderClass+'">'+"<table>"+"<thead>"+this.rowHtml("head")+"</thead>"+"</table>"+"</div>"},headCellHtml:function(t,e,n){var i=this.view,r=i.calendar,s=i.opt("columnFormat");return'<th class="fc-day-header '+i.widgetHeaderClass+" fc-"+Ye[n.day()]+'">'+F(r.formatDate(n,s))+"</th>"},bgCellHtml:function(t,e,n){var i=this.view,r=this.getDayClasses(n);return r.unshift("fc-day",i.widgetContentClass),'<td class="'+r.join(" ")+'" data-date="'+n.format()+'"></td>'},getDayClasses:function(t){var e=this.view,n=e.calendar.getNow().stripTime(),i=["fc-"+Ye[t.day()]];return"month"===e.name&&t.month()!=e.intervalStart.month()&&i.push("fc-other-month"),t.isSame(n,"day")?i.push("fc-today",e.highlightStateClass):n>t?i.push("fc-past"):i.push("fc-future"),i}}),t.extend(ne.prototype,{mousedOverSeg:null,isDraggingSeg:!1,isResizingSeg:!1,segs:null,renderEvents:function(t){var e,n,i=this.eventsToSegs(t),r=[],s=[];for(e=0;i.length>e;e++)n=i[e],ie(n.event)?r.push(n):s.push(n);r=this.renderBgSegs(r)||r,s=this.renderFgSegs(s)||s,this.segs=r.concat(s)},destroyEvents:function(){this.triggerSegMouseout(),this.destroyFgSegs(),this.destroyBgSegs(),this.segs=null},getSegs:function(){return this.segs||[]},renderFgSegs:function(){},destroyFgSegs:function(){},renderFgSegEls:function(e,n){var i,r=this.view,s="",o=[];if(e.length){for(i=0;e.length>i;i++)s+=this.fgSegHtml(e[i],n);t(s).each(function(n,i){var s=e[n],l=r.resolveEventEl(s.event,t(i));l&&(l.data("fc-seg",s),s.el=l,o.push(s))})}return o},fgSegHtml:function(){},renderBgSegs:function(t){return this.renderFill("bgEvent",t)},destroyBgSegs:function(){this.destroyFill("bgEvent")},bgEventSegEl:function(t,e){return this.view.resolveEventEl(t.event,e)},bgEventSegClasses:function(t){var e=t.event,n=e.source||{};return["fc-bgevent"].concat(e.className,n.className||[])},bgEventSegStyles:function(t){var e=this.view,n=t.event,i=n.source||{},r=n.color,s=i.color,o=e.opt("eventColor"),l=n.backgroundColor||r||i.backgroundColor||s||e.opt("eventBackgroundColor")||o;return l?"background-color:"+l:""},businessHoursSegClasses:function(){return["fc-nonbusiness","fc-bgevent"]},bindSegHandlers:function(){var e=this,n=this.view;t.each({mouseenter:function(t,n){e.triggerSegMouseover(t,n)},mouseleave:function(t,n){e.triggerSegMouseout(t,n)},click:function(t,e){return n.trigger("eventClick",this,t.event,e)},mousedown:function(i,r){t(r.target).is(".fc-resizer")&&n.isEventResizable(i.event)?e.segResizeMousedown(i,r):n.isEventDraggable(i.event)&&e.segDragMousedown(i,r)}},function(n,i){e.el.on(n,".fc-event-container > *",function(n){var r=t(this).data("fc-seg");return!r||e.isDraggingSeg||e.isResizingSeg?void 0:i.call(this,r,n)})})},triggerSegMouseover:function(t,e){this.mousedOverSeg||(this.mousedOverSeg=t,this.view.trigger("eventMouseover",t.el[0],t.event,e))},triggerSegMouseout:function(t,e){e=e||{},this.mousedOverSeg&&(t=t||this.mousedOverSeg,this.mousedOverSeg=null,this.view.trigger("eventMouseout",t.el[0],t.event,e))},segDragMousedown:function(t,e){var n,i,r=this,s=this.view,o=s.calendar,l=t.el,a=t.event,c=new te(t.el,{parentEl:s.el,opacity:s.opt("dragOpacity"),revertDuration:s.opt("dragRevertDuration"),zIndex:2}),d=new Q(s.coordMap,{distance:5,scroll:s.opt("dragScroll"),listenStart:function(t){c.hide(),c.start(t)},dragStart:function(e){r.triggerSegMouseout(t,e),r.isDraggingSeg=!0,s.hideEvent(a),s.trigger("eventDragStart",l[0],a,e,{})},cellOver:function(e,l){var u=t.cellDate||d.origDate,h=r.computeDraggedEventDates(t,u,l);n=h.start,i=h.end,o.isEventAllowedInRange(a,n,h.visibleEnd)?s.renderDrag(n,i,t)?c.hide():c.show():(n=null,c.show(),f())},cellOut:function(){n=null,s.destroyDrag(),c.show(),g()},dragStop:function(t){var e=n&&!n.isSame(a.start);c.stop(!e,function(){r.isDraggingSeg=!1,s.destroyDrag(),s.showEvent(a),s.trigger("eventDragStop",l[0],a,t,{}),e&&s.eventDrop(l[0],a,n,t)}),g()},listenStop:function(){c.stop()}});d.mousedown(e)},computeDraggedEventDates:function(t,e,n){var i,r,s,o,l,a=this.view,c=t.event,d=c.start,u=a.calendar.getEventEnd(c);return n.hasTime()===e.hasTime()?(i=C(n,e),r=d.clone().add(i),s=null===c.end?null:u.clone().add(i),o=c.allDay):(r=n,s=null,o=!n.hasTime()),l=s||a.calendar.getDefaultEventEnd(o,r),{start:r,end:s,visibleEnd:l}},segResizeMousedown:function(t,e){function n(){r.destroyResize(),s.showEvent(a)}var i,r=this,s=this.view,o=s.calendar,l=t.el,a=t.event,c=a.start,d=s.calendar.getEventEnd(a),u=null;i=new Q(this.coordMap,{distance:5,scroll:s.opt("dragScroll"),dragStart:function(e){r.triggerSegMouseout(t,e),r.isResizingSeg=!0,s.trigger("eventResizeStart",l[0],a,e,{})},cellOver:function(e,i){i.isBefore(c)&&(i=c),u=i.clone().add(r.cellDuration),o.isEventAllowedInRange(a,c,u)?u.isSame(d)?(u=null,n()):(r.renderResize(c,u,t),s.hideEvent(a)):(u=null,n(),f())},cellOut:function(){u=null,n(),g()},dragStop:function(t){r.isResizingSeg=!1,n(),g(),s.trigger("eventResizeStop",l[0],a,t,{}),u&&s.eventResize(l[0],a,u,t)}}),i.mousedown(e)},getSegClasses:function(t,e,n){var i=t.event,r=["fc-event",t.isStart?"fc-start":"fc-not-start",t.isEnd?"fc-end":"fc-not-end"].concat(i.className,i.source?i.source.className:[]);return e&&r.push("fc-draggable"),n&&r.push("fc-resizable"),r},getEventSkinCss:function(t){var e=this.view,n=t.source||{},i=t.color,r=n.color,s=e.opt("eventColor"),o=t.backgroundColor||i||n.backgroundColor||r||e.opt("eventBackgroundColor")||s,l=t.borderColor||i||n.borderColor||r||e.opt("eventBorderColor")||s,a=t.textColor||n.textColor||e.opt("eventTextColor"),c=[];return o&&c.push("background-color:"+o),l&&c.push("border-color:"+l),a&&c.push("color:"+a),c.join(";")},eventsToSegs:function(t,e){var n,i=this.eventsToRanges(t),r=[];for(n=0;i.length>n;n++)r.push.apply(r,this.eventRangeToSegs(i[n],e));return r},eventsToRanges:function(e){var n=this,i=oe(e),r=[];return t.each(i,function(t,e){e.length&&r.push.apply(r,re(e[0])?n.eventsToInverseRanges(e):n.eventsToNormalRanges(e))}),r},eventsToNormalRanges:function(t){var e,n,i,r,s=this.view.calendar,o=[];for(e=0;t.length>e;e++)n=t[e],i=n.start.clone().stripZone(),r=s.getEventEnd(n).stripZone(),o.push({event:n,start:i,end:r,eventStartMS:+i,eventDurationMS:r-i});return o},eventsToInverseRanges:function(t){var e,n,i=this.view,r=i.start.clone().stripZone(),s=i.end.clone().stripZone(),o=this.eventsToNormalRanges(t),l=[],a=t[0],c=r;for(o.sort(le),e=0;o.length>e;e++)n=o[e],n.start>c&&l.push({event:a,start:c,end:n.start}),c=n.end;return s>c&&l.push({event:a,start:c,end:s}),l},eventRangeToSegs:function(t,e){var n,i,r;for(n=e?e(t.start,t.end):this.rangeToSegs(t.start,t.end),i=0;n.length>i;i++)r=n[i],r.event=t.event,r.eventStartMS=t.eventStartMS,r.eventDurationMS=t.eventDurationMS;return n}}),ce.prototype=M(ne.prototype),t.extend(ce.prototype,{numbersVisible:!1,cellDuration:e.duration({days:1}),bottomCoordPadding:0,rowEls:null,dayEls:null,helperEls:null,render:function(e){var n,i=this.view,r="";for(n=0;i.rowCnt>n;n++)r+=this.dayRowHtml(n,e);this.el.html(r),this.rowEls=this.el.find(".fc-row"),this.dayEls=this.el.find(".fc-day"),this.dayEls.each(function(e,n){var r=i.cellToDate(Math.floor(e/i.colCnt),e%i.colCnt);i.trigger("dayRender",null,r,t(n))}),ne.prototype.render.call(this)},destroy:function(){this.destroySegPopover()},dayRowHtml:function(t,e){var n=this.view,i=["fc-row","fc-week",n.widgetContentClass];return e&&i.push("fc-rigid"),'<div class="'+i.join(" ")+'">'+'<div class="fc-bg">'+"<table>"+this.rowHtml("day",t)+"</table>"+"</div>"+'<div class="fc-content-skeleton">'+"<table>"+(this.numbersVisible?"<thead>"+this.rowHtml("number",t)+"</thead>":"")+"</table>"+"</div>"+"</div>"},dayCellHtml:function(t,e,n){return this.bgCellHtml(t,e,n)},buildCoords:function(e,n){var i,r,s,o=this.view.colCnt;this.dayEls.slice(0,o).each(function(e,o){i=t(o),r=i.offset().left,e&&(s[1]=r),s=[r],n[e]=s}),s[1]=r+i.outerWidth(),this.rowEls.each(function(n,o){i=t(o),r=i.offset().top,n&&(s[1]=r),s=[r],e[n]=s}),s[1]=r+i.outerHeight()+this.bottomCoordPadding},getCellDate:function(t){return this.view.cellToDate(t)},getCellDayEl:function(t){return this.dayEls.eq(t.row*this.view.colCnt+t.col)},rangeToSegs:function(t,e){return this.view.rangeToSegments(t,e)},renderDrag:function(t,e,n){var i;return this.renderHighlight(t,e||this.view.calendar.getDefaultEventEnd(!0,t)),n&&!n.el.closest(this.el).length?(this.renderRangeHelper(t,e,n),i=this.view.opt("dragOpacity"),void 0!==i&&this.helperEls.css("opacity",i),!0):void 0},destroyDrag:function(){this.destroyHighlight(),this.destroyHelper()},renderResize:function(t,e,n){this.renderHighlight(t,e),this.renderRangeHelper(t,e,n)},destroyResize:function(){this.destroyHighlight(),this.destroyHelper()},renderHelper:function(e,n){var i,r=[],s=this.eventsToSegs([e]);s=this.renderFgSegEls(s),i=this.renderSegRows(s),this.rowEls.each(function(e,s){var o,l=t(s),a=t('<div class="fc-helper-skeleton"><table/></div>');o=n&&n.row===e?n.el.position().top:l.find(".fc-content-skeleton tbody").position().top,a.css("top",o).find("table").append(i[e].tbodyEl),l.append(a),r.push(a[0])}),this.helperEls=t(r)},destroyHelper:function(){this.helperEls&&(this.helperEls.remove(),this.helperEls=null)},fillSegTag:"td",renderFill:function(e,n){var i,r,s,o=[];for(n=this.renderFillSegEls(e,n),i=0;n.length>i;i++)r=n[i],s=this.renderFillRow(e,r),this.rowEls.eq(r.row).append(s),o.push(s[0]);return this.elsByFill[e]=t(o),n},renderFillRow:function(e,n){var i,r,s=this.view.colCnt,o=n.leftCol,l=n.rightCol+1;return i=t('<div class="fc-'+e.toLowerCase()+'-skeleton">'+"<table><tr/></table>"+"</div>"),r=i.find("tr"),o>0&&r.append('<td colspan="'+o+'"/>'),r.append(n.el.attr("colspan",l-o)),s>l&&r.append('<td colspan="'+(s-l)+'"/>'),this.bookendCells(r,e),i}}),t.extend(ce.prototype,{rowStructs:null,destroyEvents:function(){this.destroySegPopover(),ne.prototype.destroyEvents.apply(this,arguments)},getSegs:function(){return ne.prototype.getSegs.call(this).concat(this.popoverSegs||[])},renderBgSegs:function(e){var n=t.grep(e,function(t){return t.event.allDay});return ne.prototype.renderBgSegs.call(this,n)},renderFgSegs:function(e){var n;return e=this.renderFgSegEls(e),n=this.rowStructs=this.renderSegRows(e),this.rowEls.each(function(e,i){t(i).find(".fc-content-skeleton > table").append(n[e].tbodyEl)}),e},destroyFgSegs:function(){for(var t,e=this.rowStructs||[];t=e.pop();)t.tbodyEl.remove();this.rowStructs=null},renderSegRows:function(t){var e,n,i=[];for(e=this.groupSegRows(t),n=0;e.length>n;n++)i.push(this.renderSegRow(n,e[n]));return i},fgSegHtml:function(t,e){var n,i=this.view,r=i.opt("isRTL"),s=t.event,o=i.isEventDraggable(s),l=!e&&s.allDay&&t.isEnd&&i.isEventResizable(s),a=this.getSegClasses(t,o,l),c=this.getEventSkinCss(s),d="";return a.unshift("fc-day-grid-event"),!s.allDay&&t.isStart&&(d='<span class="fc-time">'+F(i.getEventTimeText(s))+"</span>"),n='<span class="fc-title">'+(F(s.title||"")||"&nbsp;")+"</span>",'<a class="'+a.join(" ")+'"'+(s.url?' href="'+F(s.url)+'"':"")+(c?' style="'+c+'"':"")+">"+'<div class="fc-content">'+(r?n+" "+d:d+" "+n)+"</div>"+(l?'<div class="fc-resizer"/>':"")+"</a>"},renderSegRow:function(e,n){function i(e){for(;e>o;)d=(y[r-1]||[])[o],d?d.attr("rowspan",parseInt(d.attr("rowspan")||1,10)+1):(d=t("<td/>"),l.append(d)),v[r][o]=d,y[r][o]=d,o++}var r,s,o,l,a,c,d,u=this.view,h=u.colCnt,f=this.buildSegLevels(n),g=Math.max(1,f.length),p=t("<tbody/>"),m=[],v=[],y=[];for(r=0;g>r;r++){if(s=f[r],o=0,l=t("<tr/>"),m.push([]),v.push([]),y.push([]),s)for(a=0;s.length>a;a++){for(c=s[a],i(c.leftCol),d=t('<td class="fc-event-container"/>').append(c.el),c.leftCol!=c.rightCol?d.attr("colspan",c.rightCol-c.leftCol+1):y[r][o]=d;c.rightCol>=o;)v[r][o]=d,m[r][o]=c,o++;l.append(d)}i(h),this.bookendCells(l,"eventSkeleton"),p.append(l)}return{row:e,tbodyEl:p,cellMatrix:v,segMatrix:m,segLevels:f,segs:n}},buildSegLevels:function(t){var e,n,i,r=[];for(t.sort(ae),e=0;t.length>e;e++){for(n=t[e],i=0;r.length>i&&de(n,r[i]);i++);n.level=i,(r[i]||(r[i]=[])).push(n)}for(i=0;r.length>i;i++)r[i].sort(ue);return r},groupSegRows:function(t){var e,n=this.view,i=[];for(e=0;n.rowCnt>e;e++)i.push([]);for(e=0;t.length>e;e++)i[t[e].row].push(t[e]);return i}}),t.extend(ce.prototype,{segPopover:null,popoverSegs:null,destroySegPopover:function(){this.segPopover&&this.segPopover.hide()},limitRows:function(t){var e,n,i=this.rowStructs||[];for(e=0;i.length>e;e++)this.unlimitRow(e),n=t?"number"==typeof t?t:this.computeRowLevelLimit(e):!1,n!==!1&&this.limitRow(e,n)},computeRowLevelLimit:function(t){var e,n,i=this.rowEls.eq(t),r=i.height(),s=this.rowStructs[t].tbodyEl.children();for(e=0;s.length>e;e++)if(n=s.eq(e).removeClass("fc-limited"),n.position().top+n.outerHeight()>r)return e;return!1},limitRow:function(e,n){function i(i){for(;i>T;)r={row:e,col:T},d=S.getCellSegs(r,n),d.length&&(f=o[n-1][T],w=S.renderMoreLink(r,d),y=t("<div/>").append(w),f.append(y),D.push(y[0])),T++}var r,s,o,l,a,c,d,u,h,f,g,p,m,v,y,w,S=this,b=this.view,E=this.rowStructs[e],D=[],T=0;if(n&&E.segLevels.length>n){for(s=E.segLevels[n-1],o=E.cellMatrix,l=E.tbodyEl.children().slice(n).addClass("fc-limited").get(),a=0;s.length>a;a++){for(c=s[a],i(c.leftCol),h=[],u=0;c.rightCol>=T;)r={row:e,col:T},d=this.getCellSegs(r,n),h.push(d),u+=d.length,T++;if(u){for(f=o[n-1][c.leftCol],g=f.attr("rowspan")||1,p=[],m=0;h.length>m;m++)v=t('<td class="fc-more-cell"/>').attr("rowspan",g),d=h[m],r={row:e,col:c.leftCol+m},w=this.renderMoreLink(r,[c].concat(d)),y=t("<div/>").append(w),v.append(y),p.push(v[0]),D.push(v[0]);f.addClass("fc-limited").after(t(p)),l.push(f[0])}}i(b.colCnt),E.moreEls=t(D),E.limitedEls=t(l)}},unlimitRow:function(t){var e=this.rowStructs[t];e.moreEls&&(e.moreEls.remove(),e.moreEls=null),e.limitedEls&&(e.limitedEls.removeClass("fc-limited"),e.limitedEls=null)},renderMoreLink:function(e,n){var i=this,r=this.view;return t('<a class="fc-more"/>').text(this.getMoreLinkText(n.length)).on("click",function(s){var o=r.opt("eventLimitClick"),l=r.cellToDate(e),a=t(this),c=i.getCellDayEl(e),d=i.getCellSegs(e),u=i.resliceDaySegs(d,l),h=i.resliceDaySegs(n,l);"function"==typeof o&&(o=r.trigger("eventLimitClick",null,{date:l,dayEl:c,moreEl:a,segs:u,hiddenSegs:h},s)),"popover"===o?i.showSegPopover(l,e,a,u):"string"==typeof o&&r.calendar.zoomTo(l,o)})},showSegPopover:function(t,e,n,i){var r,s,o=this,l=this.view,a=n.parent();r=1==l.rowCnt?this.view.el:this.rowEls.eq(e.row),s={className:"fc-more-popover",content:this.renderSegPopoverContent(t,i),parentEl:this.el,top:r.offset().top,autoHide:!0,viewportConstrain:l.opt("popoverViewportConstrain"),hide:function(){o.segPopover.destroy(),o.segPopover=null,o.popoverSegs=null}},l.opt("isRTL")?s.right=a.offset().left+a.outerWidth()+1:s.left=a.offset().left-1,this.segPopover=new q(s),this.segPopover.show()},renderSegPopoverContent:function(e,n){var i,r=this.view,s=r.opt("theme"),o=e.format(r.opt("dayPopoverFormat")),l=t('<div class="fc-header '+r.widgetHeaderClass+'">'+'<span class="fc-close '+(s?"ui-icon ui-icon-closethick":"fc-icon fc-icon-x")+'"></span>'+'<span class="fc-title">'+F(o)+"</span>"+'<div class="fc-clear"/>'+"</div>"+'<div class="fc-body '+r.widgetContentClass+'">'+'<div class="fc-event-container"></div>'+"</div>"),a=l.find(".fc-event-container");for(n=this.renderFgSegEls(n,!0),this.popoverSegs=n,i=0;n.length>i;i++)n[i].cellDate=e,a.append(n[i].el);return l},resliceDaySegs:function(e,n){var i=t.map(e,function(t){return t.event}),r=n.clone().stripTime(),s=r.clone().add(1,"days");return this.eventsToSegs(i,function(t,e){var n=D(t,e,r,s);return n?[n]:[]})},getMoreLinkText:function(t){var e=this.view,n=e.opt("eventLimitText");return"function"==typeof n?n(t):"+"+t+" "+n},getCellSegs:function(t,e){for(var n,i=this.rowStructs[t.row].segMatrix,r=e||0,s=[];i.length>r;)n=i[r][t.col],n&&s.push(n),r++;return s}}),he.prototype=M(ne.prototype),t.extend(he.prototype,{slotDuration:null,snapDuration:null,minTime:null,maxTime:null,dayEls:null,slatEls:null,slatTops:null,helperEl:null,businessHourSegs:null,render:function(){this.processOptions(),this.el.html(this.renderHtml()),this.dayEls=this.el.find(".fc-day"),this.slatEls=this.el.find(".fc-slats tr"),this.computeSlatTops(),this.renderBusinessHours(),ne.prototype.render.call(this)},renderBusinessHours:function(){var t=this.view.calendar.getBusinessHoursEvents();this.businessHourSegs=this.renderFill("businessHours",this.eventsToSegs(t),"bgevent")},renderHtml:function(){return'<div class="fc-bg"><table>'+this.rowHtml("slotBg")+"</table>"+"</div>"+'<div class="fc-slats">'+"<table>"+this.slatRowHtml()+"</table>"+"</div>"},slotBgCellHtml:function(t,e,n){return this.bgCellHtml(t,e,n)},slatRowHtml:function(){for(var t,n,i,r=this.view,s=r.calendar,o=r.opt("isRTL"),l="",a=0===this.slotDuration.asMinutes()%15,c=e.duration(+this.minTime);this.maxTime>c;)t=r.start.clone().time(c),n=t.minutes(),i='<td class="fc-axis fc-time '+r.widgetContentClass+'" '+r.axisStyleAttr()+">"+(a&&n?"":"<span>"+F(s.formatDate(t,r.opt("axisFormat")))+"</span>")+"</td>",l+="<tr "+(n?'class="fc-minor"':"")+">"+(o?"":i)+'<td class="'+r.widgetContentClass+'"/>'+(o?i:"")+"</tr>",c.add(this.slotDuration);return l},processOptions:function(){var t=this.view,n=t.opt("slotDuration"),i=t.opt("snapDuration");n=e.duration(n),i=i?e.duration(i):n,this.slotDuration=n,this.snapDuration=i,this.cellDuration=i,this.minTime=e.duration(t.opt("minTime")),this.maxTime=e.duration(t.opt("maxTime"))},rangeToSegs:function(t,e){var n,i,r,s,o,l=this.view,a=[];for(t=t.clone().stripZone(),e=e.clone().stripZone(),i=0;l.colCnt>i;i++)r=l.cellToDate(0,i),s=r.clone().time(this.minTime),o=r.clone().time(this.maxTime),n=D(t,e,s,o),n&&(n.col=i,a.push(n));return a},resize:function(){this.computeSlatTops(),this.updateSegVerticals()},buildCoords:function(n,i){var r,s,o=this.view.colCnt,l=this.el.offset().top,a=e.duration(+this.minTime),c=null;for(this.dayEls.slice(0,o).each(function(e,n){r=t(n),s=r.offset().left,c&&(c[1]=s),c=[s],i[e]=c}),c[1]=s+r.outerWidth(),c=null;this.maxTime>a;)s=l+this.computeTimeTop(a),c&&(c[1]=s),c=[s],n.push(c),a.add(this.snapDuration);c[1]=l+this.computeTimeTop(a)},getCellDate:function(t){var e=this.view,n=e.calendar;return n.rezoneDate(e.cellToDate(0,t.col).time(this.minTime+this.snapDuration*t.row))},getCellDayEl:function(t){return this.dayEls.eq(t.col)},computeDateTop:function(t,n){return this.computeTimeTop(e.duration(t.clone().stripZone()-n.clone().stripTime()))},computeTimeTop:function(t){var e,n,i,r,s=(t-this.minTime)/this.slotDuration;return s=Math.max(0,s),s=Math.min(this.slatEls.length,s),e=Math.floor(s),n=s-e,i=this.slatTops[e],n?(r=this.slatTops[e+1],i+(r-i)*n):i},computeSlatTops:function(){var e,n=[];this.slatEls.each(function(i,r){e=t(r).position().top,n.push(e)}),n.push(e+this.slatEls.last().outerHeight()),this.slatTops=n},renderDrag:function(t,e,n){var i;return n?(this.renderRangeHelper(t,e,n),i=this.view.opt("dragOpacity"),void 0!==i&&this.helperEl.css("opacity",i),!0):(this.renderHighlight(t,e||this.view.calendar.getDefaultEventEnd(!1,t)),void 0)},destroyDrag:function(){this.destroyHelper(),this.destroyHighlight()},renderResize:function(t,e,n){this.renderRangeHelper(t,e,n)},destroyResize:function(){this.destroyHelper()},renderHelper:function(e,n){var i,r,s,o,l=this.eventsToSegs([e]);for(l=this.renderFgSegEls(l),i=this.renderSegTable(l),r=0;l.length>r;r++)s=l[r],n&&n.col===s.col&&(o=n.el,s.el.css({left:o.css("left"),right:o.css("right"),"margin-left":o.css("margin-left"),"margin-right":o.css("margin-right")}));this.helperEl=t('<div class="fc-helper-skeleton"/>').append(i).appendTo(this.el)},destroyHelper:function(){this.helperEl&&(this.helperEl.remove(),this.helperEl=null)},renderSelection:function(t,e){this.view.opt("selectHelper")?this.renderRangeHelper(t,e):this.renderHighlight(t,e)},destroySelection:function(){this.destroyHelper(),this.destroyHighlight()},renderFill:function(e,n,i){var r,s,o,l,a,c,d,u,h,f,g=this.view;if(n.length){for(n=this.renderFillSegEls(e,n),r=this.groupSegCols(n),i=i||e.toLowerCase(),s=t('<div class="fc-'+i+'-skeleton">'+"<table><tr/></table>"+"</div>"),o=s.find("tr"),l=0;r.length>l;l++)if(a=r[l],c=t("<td/>").appendTo(o),a.length)for(d=t('<div class="fc-'+i+'-container"/>').appendTo(c),u=g.cellToDate(0,l),h=0;a.length>h;h++)f=a[h],d.append(f.el.css({top:this.computeDateTop(f.start,u),bottom:-this.computeDateTop(f.end,u)}));this.bookendCells(o,e),this.el.append(s),this.elsByFill[e]=s}return n}}),t.extend(he.prototype,{eventSkeletonEl:null,renderFgSegs:function(e){return e=this.renderFgSegEls(e),this.el.append(this.eventSkeletonEl=t('<div class="fc-content-skeleton"/>').append(this.renderSegTable(e))),e},destroyFgSegs:function(){this.eventSkeletonEl&&(this.eventSkeletonEl.remove(),this.eventSkeletonEl=null)},renderSegTable:function(e){var n,i,r,s,o,l,a=t("<table><tr/></table>"),c=a.find("tr");for(n=this.groupSegCols(e),this.computeSegVerticals(e),s=0;n.length>s;s++){for(o=n[s],fe(o),l=t('<div class="fc-event-container"/>'),i=0;o.length>i;i++)r=o[i],r.el.css(this.generateSegPositionCss(r)),30>r.bottom-r.top&&r.el.addClass("fc-short"),l.append(r.el);c.append(t("<td/>").append(l))}return this.bookendCells(c,"eventSkeleton"),a
+},updateSegVerticals:function(){var t,e=(this.segs||[]).concat(this.businessHourSegs||[]);for(this.computeSegVerticals(e),t=0;e.length>t;t++)e[t].el.css(this.generateSegVerticalCss(e[t]))},computeSegVerticals:function(t){var e,n;for(e=0;t.length>e;e++)n=t[e],n.top=this.computeDateTop(n.start,n.start),n.bottom=this.computeDateTop(n.end,n.start)},fgSegHtml:function(t,e){var n,i,r,s=this.view,o=t.event,l=s.isEventDraggable(o),a=!e&&t.isEnd&&s.isEventResizable(o),c=this.getSegClasses(t,l,a),d=this.getEventSkinCss(o);return c.unshift("fc-time-grid-event"),s.isMultiDayEvent(o)?(t.isStart||t.isEnd)&&(n=s.getEventTimeText(t.start,t.end),i=s.getEventTimeText(t.start,t.end,"LT"),r=s.getEventTimeText(t.start,null)):(n=s.getEventTimeText(o),i=s.getEventTimeText(o,"LT"),r=s.getEventTimeText(o.start,null)),'<a class="'+c.join(" ")+'"'+(o.url?' href="'+F(o.url)+'"':"")+(d?' style="'+d+'"':"")+">"+'<div class="fc-content">'+(n?'<div class="fc-time" data-start="'+F(r)+'"'+' data-full="'+F(i)+'"'+">"+"<span>"+F(n)+"</span>"+"</div>":"")+(o.title?'<div class="fc-title">'+F(o.title)+"</div>":"")+"</div>"+'<div class="fc-bg"/>'+(a?'<div class="fc-resizer"/>':"")+"</a>"},generateSegPositionCss:function(t){var e,n,i=this.view,r=i.opt("isRTL"),s=i.opt("slotEventOverlap"),o=t.backwardCoord,l=t.forwardCoord,a=this.generateSegVerticalCss(t);return s&&(l=Math.min(1,o+2*(l-o))),r?(e=1-l,n=o):(e=o,n=1-l),a.zIndex=t.level+1,a.left=100*e+"%",a.right=100*n+"%",s&&t.forwardPressure&&(a[r?"marginLeft":"marginRight"]=20),a},generateSegVerticalCss:function(t){return{top:t.top,bottom:-t.bottom}},groupSegCols:function(t){var e,n=this.view,i=[];for(e=0;n.colCnt>e;e++)i.push([]);for(e=0;t.length>e;e++)i[t[e].col].push(t[e]);return i}}),be.prototype={calendar:null,coordMap:null,el:null,start:null,end:null,intervalStart:null,intervalEnd:null,rowCnt:null,colCnt:null,isSelected:!1,scrollerEl:null,scrollTop:null,widgetHeaderClass:null,widgetContentClass:null,highlightStateClass:null,documentMousedownProxy:null,documentDragStartProxy:null,init:function(){var e=this.opt("theme")?"ui":"fc";this.widgetHeaderClass=e+"-widget-header",this.widgetContentClass=e+"-widget-content",this.highlightStateClass=e+"-state-highlight",this.documentMousedownProxy=t.proxy(this,"documentMousedown"),this.documentDragStartProxy=t.proxy(this,"documentDragStart")},render:function(){this.updateSize(),this.trigger("viewRender",this,this,this.el),t(document).on("mousedown",this.documentMousedownProxy).on("dragstart",this.documentDragStartProxy)},destroy:function(){this.unselect(),this.trigger("viewDestroy",this,this,this.el),this.destroyEvents(),this.el.empty(),t(document).off("mousedown",this.documentMousedownProxy).off("dragstart",this.documentDragStartProxy)},incrementDate:function(){},updateSize:function(t){t&&this.recordScroll(),this.updateHeight(),this.updateWidth()},updateWidth:function(){},updateHeight:function(){var t=this.calendar;this.setHeight(t.getSuggestedViewHeight(),t.isHeightAuto())},setHeight:function(){},computeScrollerHeight:function(t){var e,n=this.el.add(this.scrollerEl);return n.css({position:"relative",left:-1}),e=this.el.outerHeight()-this.scrollerEl.height(),n.css({position:"",left:""}),t-e},recordScroll:function(){this.scrollerEl&&(this.scrollTop=this.scrollerEl.scrollTop())},restoreScroll:function(){null!==this.scrollTop&&this.scrollerEl.scrollTop(this.scrollTop)},renderEvents:function(){this.segEach(function(t){this.trigger("eventAfterRender",t.event,t.event,t.el)}),this.trigger("eventAfterAllRender")},destroyEvents:function(){this.segEach(function(t){this.trigger("eventDestroy",t.event,t.event,t.el)})},resolveEventEl:function(e,n){var i=this.trigger("eventRender",e,e,n);return i===!1?n=null:i&&i!==!0&&(n=t(i)),n},showEvent:function(t){this.segEach(function(t){t.el.css("visibility","")},t)},hideEvent:function(t){this.segEach(function(t){t.el.css("visibility","hidden")},t)},segEach:function(t,e){var n,i=this.getSegs();for(n=0;i.length>n;n++)e&&i[n].event._id!==e._id||t.call(this,i[n])},getSegs:function(){},renderDrag:function(){},destroyDrag:function(){},documentDragStart:function(e){var n,i,r,s,o,l=this,a=this.calendar,c=null,d=null,u=null;this.opt("droppable")&&(n=t(e.target),i=this.opt("dropAccept"),(t.isFunction(i)?i.call(n[0],n):n.is(i))&&(r=Ee(n),s=r.eventProps,o=new Q(this.coordMap,{cellOver:function(e,n){c=n,d=r.duration?c.clone().add(r.duration):null,u=d||a.getDefaultEventEnd(!c.hasTime(),c),s&&t.extend(s,{start:c,end:d}),a.isExternalDragAllowedInRange(c,u,s)?l.renderDrag(c,u):(c=null,f())},cellOut:function(){c=null,l.destroyDrag(),g()}}),t(document).one("dragstop",function(t,e){var i;l.destroyDrag(),g(),c&&(r.startTime&&!c.hasTime()&&c.time(r.startTime),l.trigger("drop",n[0],c,t,e),s&&(i=a.renderEvent(s,r.stick),l.trigger("eventReceive",null,i[0])))}),o.startDrag(e)))},select:function(t,e,n){this.unselect(n),this.renderSelection(t,e),this.reportSelection(t,e,n)},renderSelection:function(){},reportSelection:function(t,e,n){this.isSelected=!0,this.trigger("select",null,t,e,n)},unselect:function(t){this.isSelected&&(this.isSelected=!1,this.destroySelection(),this.trigger("unselect",null,t))},destroySelection:function(){},documentMousedown:function(e){var n;this.isSelected&&this.opt("unselectAuto")&&E(e)&&(n=this.opt("unselectCancel"),n&&t(e.target).closest(n).length||this.unselect(e))}},_e.dataAttrPrefix="",De.prototype=M(be.prototype),t.extend(De.prototype,{dayGrid:null,dayNumbersVisible:!1,weekNumbersVisible:!1,weekNumberWidth:null,headRowEl:null,render:function(t,e,n){this.rowCnt=t,this.colCnt=e,this.dayNumbersVisible=n,this.weekNumbersVisible=this.opt("weekNumbers"),this.dayGrid.numbersVisible=this.dayNumbersVisible||this.weekNumbersVisible,this.el.addClass("fc-basic-view").html(this.renderHtml()),this.headRowEl=this.el.find("thead .fc-row"),this.scrollerEl=this.el.find(".fc-day-grid-container"),this.dayGrid.coordMap.containerEl=this.scrollerEl,this.dayGrid.el=this.el.find(".fc-day-grid"),this.dayGrid.render(this.hasRigidRows()),be.prototype.render.call(this)},destroy:function(){this.dayGrid.destroy(),be.prototype.destroy.call(this)},renderHtml:function(){return'<table><thead><tr><td class="'+this.widgetHeaderClass+'">'+this.dayGrid.headHtml()+"</td>"+"</tr>"+"</thead>"+"<tbody>"+"<tr>"+'<td class="'+this.widgetContentClass+'">'+'<div class="fc-day-grid-container">'+'<div class="fc-day-grid"/>'+"</div>"+"</td>"+"</tr>"+"</tbody>"+"</table>"},headIntroHtml:function(){return this.weekNumbersVisible?'<th class="fc-week-number '+this.widgetHeaderClass+'" '+this.weekNumberStyleAttr()+">"+"<span>"+F(this.opt("weekNumberTitle"))+"</span>"+"</th>":void 0},numberIntroHtml:function(t){return this.weekNumbersVisible?'<td class="fc-week-number" '+this.weekNumberStyleAttr()+">"+"<span>"+this.calendar.calculateWeekNumber(this.cellToDate(t,0))+"</span>"+"</td>":void 0},dayIntroHtml:function(){return this.weekNumbersVisible?'<td class="fc-week-number '+this.widgetContentClass+'" '+this.weekNumberStyleAttr()+"></td>":void 0},introHtml:function(){return this.weekNumbersVisible?'<td class="fc-week-number" '+this.weekNumberStyleAttr()+"></td>":void 0},numberCellHtml:function(t,e,n){var i;return this.dayNumbersVisible?(i=this.dayGrid.getDayClasses(n),i.unshift("fc-day-number"),'<td class="'+i.join(" ")+'" data-date="'+n.format()+'">'+n.date()+"</td>"):"<td/>"},weekNumberStyleAttr:function(){return null!==this.weekNumberWidth?'style="width:'+this.weekNumberWidth+'px"':""},hasRigidRows:function(){var t=this.opt("eventLimit");return t&&"number"!=typeof t},updateWidth:function(){this.weekNumbersVisible&&(this.weekNumberWidth=v(this.el.find(".fc-week-number")))},setHeight:function(t,e){var n,i=this.opt("eventLimit");w(this.scrollerEl),h(this.headRowEl),this.dayGrid.destroySegPopover(),i&&"number"==typeof i&&this.dayGrid.limitRows(i),n=this.computeScrollerHeight(t),this.setGridHeight(n,e),i&&"number"!=typeof i&&this.dayGrid.limitRows(i),!e&&y(this.scrollerEl,n)&&(u(this.headRowEl,b(this.scrollerEl)),n=this.computeScrollerHeight(t),this.scrollerEl.height(n),this.restoreScroll())},setGridHeight:function(t,e){e?m(this.dayGrid.rowEls):p(this.dayGrid.rowEls,t,!0)},renderEvents:function(t){this.dayGrid.renderEvents(t),this.updateHeight(),be.prototype.renderEvents.call(this,t)},getSegs:function(){return this.dayGrid.getSegs()},destroyEvents:function(){be.prototype.destroyEvents.call(this),this.recordScroll(),this.dayGrid.destroyEvents()},renderDrag:function(t,e,n){return this.dayGrid.renderDrag(t,e,n)},destroyDrag:function(){this.dayGrid.destroyDrag()},renderSelection:function(t,e){this.dayGrid.renderSelection(t,e)},destroySelection:function(){this.dayGrid.destroySelection()}}),r({fixedWeekCount:!0}),Ge.month=Te,Te.prototype=M(De.prototype),t.extend(Te.prototype,{name:"month",incrementDate:function(t,e){return t.clone().stripTime().add(e,"months").startOf("month")},render:function(t){var e;this.intervalStart=t.clone().stripTime().startOf("month"),this.intervalEnd=this.intervalStart.clone().add(1,"months"),this.start=this.intervalStart.clone(),this.start=this.skipHiddenDays(this.start),this.start.startOf("week"),this.start=this.skipHiddenDays(this.start),this.end=this.intervalEnd.clone(),this.end=this.skipHiddenDays(this.end,-1,!0),this.end.add((7-this.end.weekday())%7,"days"),this.end=this.skipHiddenDays(this.end,-1,!0),e=Math.ceil(this.end.diff(this.start,"weeks",!0)),this.isFixedWeeks()&&(this.end.add(6-e,"weeks"),e=6),this.title=this.calendar.formatDate(this.intervalStart,this.opt("titleFormat")),De.prototype.render.call(this,e,this.getCellsPerWeek(),!0)},setGridHeight:function(t,e){e=e||"variable"===this.opt("weekMode"),e&&(t*=this.rowCnt/6),p(this.dayGrid.rowEls,t,!e)},isFixedWeeks:function(){var t=this.opt("weekMode");return t?"fixed"===t:this.opt("fixedWeekCount")}}),Ge.basicWeek=Ce,Ce.prototype=M(De.prototype),t.extend(Ce.prototype,{name:"basicWeek",incrementDate:function(t,e){return t.clone().stripTime().add(e,"weeks").startOf("week")},render:function(t){this.intervalStart=t.clone().stripTime().startOf("week"),this.intervalEnd=this.intervalStart.clone().add(1,"weeks"),this.start=this.skipHiddenDays(this.intervalStart),this.end=this.skipHiddenDays(this.intervalEnd,-1,!0),this.title=this.calendar.formatRange(this.start,this.end.clone().subtract(1),this.opt("titleFormat")," — "),De.prototype.render.call(this,1,this.getCellsPerWeek(),!1)}}),Ge.basicDay=He,He.prototype=M(De.prototype),t.extend(He.prototype,{name:"basicDay",incrementDate:function(t,e){var n=t.clone().stripTime().add(e,"days");return n=this.skipHiddenDays(n,0>e?-1:1)},render:function(t){this.start=this.intervalStart=t.clone().stripTime(),this.end=this.intervalEnd=this.start.clone().add(1,"days"),this.title=this.calendar.formatDate(this.start,this.opt("titleFormat")),De.prototype.render.call(this,1,1,!1)}}),r({allDaySlot:!0,allDayText:"all-day",scrollTime:"06:00:00",slotDuration:"00:30:00",axisFormat:xe,timeFormat:{agenda:ke},minTime:"00:00:00",maxTime:"24:00:00",slotEventOverlap:!0});var Ue=5;Me.prototype=M(be.prototype),t.extend(Me.prototype,{timeGrid:null,dayGrid:null,axisWidth:null,noScrollRowEls:null,bottomRuleEl:null,bottomRuleHeight:null,render:function(e){this.rowCnt=1,this.colCnt=e,this.el.addClass("fc-agenda-view").html(this.renderHtml()),this.scrollerEl=this.el.find(".fc-time-grid-container"),this.timeGrid.coordMap.containerEl=this.scrollerEl,this.timeGrid.el=this.el.find(".fc-time-grid"),this.timeGrid.render(),this.bottomRuleEl=t('<hr class="'+this.widgetHeaderClass+'"/>').appendTo(this.timeGrid.el),this.dayGrid&&(this.dayGrid.el=this.el.find(".fc-day-grid"),this.dayGrid.render(),this.dayGrid.bottomCoordPadding=this.dayGrid.el.next("hr").outerHeight()),this.noScrollRowEls=this.el.find(".fc-row:not(.fc-scroller *)"),be.prototype.render.call(this),this.resetScroll()},destroy:function(){this.timeGrid.destroy(),this.dayGrid&&this.dayGrid.destroy(),be.prototype.destroy.call(this)},renderHtml:function(){return'<table><thead><tr><td class="'+this.widgetHeaderClass+'">'+this.timeGrid.headHtml()+"</td>"+"</tr>"+"</thead>"+"<tbody>"+"<tr>"+'<td class="'+this.widgetContentClass+'">'+(this.dayGrid?'<div class="fc-day-grid"/><hr class="'+this.widgetHeaderClass+'"/>':"")+'<div class="fc-time-grid-container">'+'<div class="fc-time-grid"/>'+"</div>"+"</td>"+"</tr>"+"</tbody>"+"</table>"},headIntroHtml:function(){var t,e,n,i;return this.opt("weekNumbers")?(t=this.cellToDate(0,0),e=this.calendar.calculateWeekNumber(t),n=this.opt("weekNumberTitle"),i=this.opt("isRTL")?e+n:n+e,'<th class="fc-axis fc-week-number '+this.widgetHeaderClass+'" '+this.axisStyleAttr()+">"+"<span>"+F(i)+"</span>"+"</th>"):'<th class="fc-axis '+this.widgetHeaderClass+'" '+this.axisStyleAttr()+"></th>"},dayIntroHtml:function(){return'<td class="fc-axis '+this.widgetContentClass+'" '+this.axisStyleAttr()+">"+"<span>"+(this.opt("allDayHtml")||F(this.opt("allDayText")))+"</span>"+"</td>"},slotBgIntroHtml:function(){return'<td class="fc-axis '+this.widgetContentClass+'" '+this.axisStyleAttr()+"></td>"},introHtml:function(){return'<td class="fc-axis" '+this.axisStyleAttr()+"></td>"},axisStyleAttr:function(){return null!==this.axisWidth?'style="width:'+this.axisWidth+'px"':""},updateSize:function(t){t&&this.timeGrid.resize(),be.prototype.updateSize.call(this,t)},updateWidth:function(){this.axisWidth=v(this.el.find(".fc-axis"))},setHeight:function(t,e){var n,i;null===this.bottomRuleHeight&&(this.bottomRuleHeight=this.bottomRuleEl.outerHeight()),this.bottomRuleEl.hide(),this.scrollerEl.css("overflow",""),w(this.scrollerEl),h(this.noScrollRowEls),this.dayGrid&&(this.dayGrid.destroySegPopover(),n=this.opt("eventLimit"),n&&"number"!=typeof n&&(n=Ue),n&&this.dayGrid.limitRows(n)),e||(i=this.computeScrollerHeight(t),y(this.scrollerEl,i)?(u(this.noScrollRowEls,b(this.scrollerEl)),i=this.computeScrollerHeight(t),this.scrollerEl.height(i),this.restoreScroll()):(this.scrollerEl.height(i).css("overflow","hidden"),this.bottomRuleEl.show()))},resetScroll:function(){function t(){n.scrollerEl.scrollTop(r)}var n=this,i=e.duration(this.opt("scrollTime")),r=this.timeGrid.computeTimeTop(i);r=Math.ceil(r),r&&r++,t(),setTimeout(t,0)},renderEvents:function(t){var e,n,i=[],r=[],s=[];for(n=0;t.length>n;n++)t[n].allDay?i.push(t[n]):r.push(t[n]);e=this.timeGrid.renderEvents(r),this.dayGrid&&(s=this.dayGrid.renderEvents(i)),this.updateHeight(),be.prototype.renderEvents.call(this,t)},getSegs:function(){return this.timeGrid.getSegs().concat(this.dayGrid?this.dayGrid.getSegs():[])},destroyEvents:function(){be.prototype.destroyEvents.call(this),this.recordScroll(),this.timeGrid.destroyEvents(),this.dayGrid&&this.dayGrid.destroyEvents()},renderDrag:function(t,e,n){return t.hasTime()?this.timeGrid.renderDrag(t,e,n):this.dayGrid?this.dayGrid.renderDrag(t,e,n):void 0},destroyDrag:function(){this.timeGrid.destroyDrag(),this.dayGrid&&this.dayGrid.destroyDrag()},renderSelection:function(t,e){t.hasTime()||e.hasTime()?this.timeGrid.renderSelection(t,e):this.dayGrid&&this.dayGrid.renderSelection(t,e)},destroySelection:function(){this.timeGrid.destroySelection(),this.dayGrid&&this.dayGrid.destroySelection()}}),Ge.agendaWeek=Re,Re.prototype=M(Me.prototype),t.extend(Re.prototype,{name:"agendaWeek",incrementDate:function(t,e){return t.clone().stripTime().add(e,"weeks").startOf("week")},render:function(t){this.intervalStart=t.clone().stripTime().startOf("week"),this.intervalEnd=this.intervalStart.clone().add(1,"weeks"),this.start=this.skipHiddenDays(this.intervalStart),this.end=this.skipHiddenDays(this.intervalEnd,-1,!0),this.title=this.calendar.formatRange(this.start,this.end.clone().subtract(1),this.opt("titleFormat")," — "),Me.prototype.render.call(this,this.getCellsPerWeek())}}),Ge.agendaDay=Pe,Pe.prototype=M(Me.prototype),t.extend(Pe.prototype,{name:"agendaDay",incrementDate:function(t,e){var n=t.clone().stripTime().add(e,"days");return n=this.skipHiddenDays(n,0>e?-1:1)},render:function(t){this.start=this.intervalStart=t.clone().stripTime(),this.end=this.intervalEnd=this.start.clone().add(1,"days"),this.title=this.calendar.formatDate(this.start,this.opt("titleFormat")),Me.prototype.render.call(this,1)}})});
 var iCheckfield = function()
 {
     $('.i-checks').iCheck({
@@ -38120,6 +38121,5 @@ $(document).ready(function () {
 	sideMenuDropTrigger();
 	formValidationSubmit();
 	//brandAssignment();
-
 });
 //# sourceMappingURL=app.js.map

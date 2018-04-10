@@ -14,7 +14,7 @@ class SalesRepCrud
 	{
 		$table  = new TableCollection();
 		$all    = ($model ? $model->all() : [] );
-		$info   = array(  
+		$info   = array(
 		  'box_title'     => (isset($opt['box_title']) ? $opt['box_title'] : 'Brand Associates' ),
 		  'box_body_class' => 'no-padding',
 		  'column_size'   => 12);
@@ -67,15 +67,15 @@ class SalesRepCrud
 		  	->toActionShow(false);
 
 		$box = new Box($info);
-		$box->setTable($table);    
+		$box->setTable($table);
 
-		return $box;  		
+		return $box;
 	}
 
 	public static function editForm($opts)
 	{
 		$apiRequest   = new LocalApiRequest();
-		$access_token = $apiRequest->getToken();		
+		$access_token = $apiRequest->getToken();
 		$user         = $opts['view_args']['user'];
 		$salesrep     = $user->salesRep;
 		$fields       = new CrudForm('put');
@@ -111,7 +111,7 @@ class SalesRepCrud
 			'value'      => ($salesrep->local_agreed_at ? $salesrep->local_agreed_at->format('m/d/Y \a\t h:i a') : ''),
 			'field-attr' => [ 'disabled' => 'disabled' ],
 			'col-class'  => 'col-md-6 col-xs-12',
-			'clear_all'  => true));	
+			'clear_all'  => true));
 
 		$fields->addField(array(
 			'name'       => 'firstname',
@@ -171,18 +171,18 @@ class SalesRepCrud
 		$fields->addField(array(
 			'label'      => 'Prospects should be shown:',
 			'type'       => 'App\Storage\Crud\CustomFields@h2Field',
-			'col-class'  => 'col-md-12'));			
+			'col-class'  => 'col-md-12'));
 		$fields->addField(array(
 			'name'      => 'show_fields',
 			'type'      => 'App\Storage\User\ProfileCrud@showField',
 			'col-class' => 'col-md-6',
 			'list'		=> ['show_cellphone' => 'Cell Phone', 'show_officephone' => 'Office Phone', 'show_email' => 'Email'],
 			'value'		=> ['show_cellphone' => $salesrep->show_cellphone, 'show_officephone' => $salesrep->show_officephone, 'show_email' => $salesrep->show_email],
-			'clear_all' => true));	
+			'clear_all' => true));
 		$fields->addField(array(
 			'label'      => 'Social Accounts',
 			'type'       => 'App\Storage\Crud\CustomFields@h2Field',
-			'col-class'  => 'col-md-12'));		
+			'col-class'  => 'col-md-12'));
 		$fields->addField(array(
 			'name'       => 'facebook',
 			'label'      => 'Facebook',
@@ -224,14 +224,89 @@ class SalesRepCrud
 		$fields->showDefaultSubmit(false)->addSubmitBtn('update', 'Update Profile');
 
 		$info = array(
-			'box_title' 	=> 'Profile', 
+			'box_title' 	=> 'Profile',
 			'column_size' 	=> 12,
 			'column_class' 	=> 'col-sm-12 col-xs-12');
 
 		$box = new Box($info);
 		$box->setForm($fields);
 
-		return $box;  		
+		return $box;
+	}
+
+	public static function cronofySetting($opts)
+	{
+		$apiRequest   = new LocalApiRequest();
+		$access_token = $apiRequest->getToken();
+		$user         = $opts['view_args']['user'];
+		$salesrep     = $user->salesRep;
+		$cronofy 	  = $user->salesrep->cronofy;
+		// dd($cronofy);
+		$fields       = new CrudForm('put');
+
+		$showModal    = \Request::session()->get('show_salesrep_agree_modal', false);
+
+		$fields->setRoute('admin.settings.salesrep.cronofy');
+		$fields->setModel($salesrep);
+		$fields->setModelId($salesrep->id);
+
+
+		$client_id='';
+		$client_secret='';
+		$token='';
+		$calendar_name='';
+		$calendar_id='';
+
+		if($cronofy!=null){
+			$client_id=$cronofy->client_id;
+			$client_secret=$cronofy->client_secret;
+			$token=$cronofy->token;
+			$calendar_name=$cronofy->calendar_name;
+			$calendar_id=$cronofy->calendar_id;
+		}
+
+		$fields->addField(array(
+			'name'       => 'client_id',
+			'label'      => 'Client ID',
+			'type'       => 'text',
+			'value'		 => $client_id,
+			'col-class'  => 'col-md-6'));
+		$fields->addField(array(
+			'name'       => 'client_secret',
+			'label'      => 'Client Secret',
+			'type'       => 'text',
+			'value'		 => $client_secret,
+			'col-class'  => 'col-md-6'));
+		$fields->addField(array(
+			'name'       => 'token',
+			'label'      => 'Token',
+			'type'       => 'text',
+			'value'		 => $token,
+			'col-class'  => 'col-md-12'));
+		$fields->addField(array(
+			'name'       => 'calendar_name',
+			'label'      => 'Calendar Name',
+			'type'       => 'text',
+			'value'		 => $calendar_name,
+			'col-class'  => 'col-md-6'));
+			$fields->addField(array(
+			'name'       => 'calendar_id',
+			'label'      => 'Calendar ID',
+			'type'       => 'text',
+			'value'		 => $calendar_id,
+			'col-class'  => 'col-md-6'));
+
+		$fields->showDefaultSubmit(false)->addSubmitBtn('update', 'Update Cronofy Details');
+
+		$info = array(
+			'box_title' 	=> 'Cronofy Details',
+			'column_size' 	=> 12,
+			'column_class' 	=> 'col-sm-12 col-xs-12');
+
+		$box = new Box($info);
+		$box->setForm($fields);
+
+		return $box;
 	}
 
 }

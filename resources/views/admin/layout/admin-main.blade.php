@@ -11,7 +11,7 @@
         @include('admin.partials.nav-vertical')
 
         <div id="page-wrapper" class="gray-bg dashbard-1">
-            
+
             @include('admin.partials.nav-horizontal')
 
             @include('admin.partials.nav-title')
@@ -32,6 +32,7 @@
     @yield('footer')
 
     @include('admin.partials.scripts')
+    @yield('after-script')
 
     @if(Session::has('message'))
         <script type="text/javascript">
@@ -40,7 +41,7 @@
                 text: "{{ Session::get('message') }}",
                 time: 8000,
                 class_name: 'gritter-success'
-            });        
+            });
         </script>
     @endif
 
@@ -51,7 +52,7 @@
                 text: "{{ Session::get('warning') }}",
                 time: 8000,
                 class_name: 'gritter-warning'
-            });        
+            });
         </script>
     @endif
 

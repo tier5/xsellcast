@@ -366,6 +366,15 @@ Route::group(array('prefix' => 'admin', 'middleware' => array('auth', 'admin-pag
             'uses' => 'NotificationController@save',
             'as' => 'admin.settings.notifications.save' ));
 
+        Route::get('cronofy', array(
+            'uses' => 'SalesRepCronofyController@index',
+            'as' => 'admin.settings.salesrep.cronofysettings',
+            'middleware' => ['role-only:sales-rep']));
+        Route::put('cronofy', array(
+            'uses' => 'SalesRepCronofyController@update',
+            'as' => 'admin.settings.salesrep.cronofy',
+            'middleware' => ['role-only:sales-rep']));
+
     });
 
     Route::group(array('prefix' => 'api', 'namespace' => 'Api'), function()
