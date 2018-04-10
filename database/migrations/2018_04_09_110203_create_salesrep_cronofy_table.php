@@ -13,6 +13,7 @@ class CreateSalesrepCronofyTable extends Migration
     public function up()
     {
         Schema::create('salesrep_cronofy', function($t) {
+            $t->increments('id');
             $t->integer('salesrep_id')->unsigned()->index();
             $t->foreign('salesrep_id')->references('id')->on('user_salesreps')->onDelete('cascade');
             $t->string('client_id')->nullable();

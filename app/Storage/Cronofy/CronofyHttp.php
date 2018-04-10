@@ -193,7 +193,7 @@ class CronofyHttp
             'code' => $params['code'],
             'redirect_uri' => $params['redirect_uri']
         );
-        
+
         $tokens = $this->http_post("/oauth/token", $postfields);
 
         if (!empty($tokens["access_token"])) {
@@ -639,7 +639,7 @@ class PagedResultIterator
     curl_setopt($curl, CURLOPT_URL, $url.$url_params);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($curl, CURLOPT_HTTPHEADER, $this->auth_headers);
-    curl_setopt($curl, CURLOPT_USERAGENT, Cronofy::USERAGENT);
+    // curl_setopt($curl, CURLOPT_USERAGENT, Cronofy::USERAGENT);
     $result = curl_exec($curl);
     if (curl_errno($curl) > 0) {
       throw new CronofyException(curl_error($curl), 2);

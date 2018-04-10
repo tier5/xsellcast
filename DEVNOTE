@@ -204,3 +204,8 @@ Appointment v0.1 #stable
 	b) Created Repository for Appointment
 Appointment v0.2 #stable
 	a) Created cronofy settings
+
+Appointment v1.0 #stable
+	a) Modified cronofy settings
+	b) Created Appointment calender UI
+	c) Implemented cronofy API to fetch appointment.

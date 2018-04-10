@@ -614,6 +614,10 @@ Route::group(array('prefix' => 'admin', 'middleware' => array('auth', 'admin-pag
             'as' => 'admin.appointment',
             'uses' => 'AppointmentController@index'));
 
+          Route::get('calendar', array(
+            'as' => 'admin.appointment.calendar',
+            'uses' => 'AppointmentController@calendar'));
+
     });
 
 });
