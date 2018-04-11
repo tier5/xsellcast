@@ -22,6 +22,7 @@ class DealerTransformer extends TransformerAbstract
     {
         return [
             'id'         => (int) $model->id,
+            'wpid'       => (int) $model->wpid,
 
             /* place your other model properties here */
             'name'          => $model->name,
