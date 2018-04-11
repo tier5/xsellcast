@@ -396,4 +396,32 @@ class MessageRepositoryEloquent extends BaseRepository implements MessageReposit
 
         return $this;
     }
+
+     public function listUnAppointed($user, $type)
+    {
+        $messages = $this->model->allMessages()
+            ->unappointed($user->id)
+            ->allMessagesForUser($user->id)
+            ->forType($type)
+            ->where('user_id', '!=', $user->id)
+            ->get();
+
+        foreach($messages as $k => $message)
+        {
+            if($message->user && $message->user->is_customer && $user->is_salesrep)
+            {
+
+                $hasPending = $message->user->customer->salesRepsPivot()->where('salesrep_id', $user->salesrep->id)->withPending()->count();
+
+                if($hasPending > 0)
+                {
+                    //Remove a prospect message to BA when match is still pending.
+                    $messages->forget($k);
+                }
+            }
+
+        }
+
+        return $messages;
+    }
 }

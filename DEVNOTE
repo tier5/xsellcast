@@ -209,3 +209,11 @@ Appointment v1.0 #stable
 	a) Modified cronofy settings
 	b) Created Appointment calender UI
 	c) Implemented cronofy API to fetch appointment.
+	d) Created appointment migration
+	e) Implemented event in full calender .
+
+
+Dealer v3.0 #stable
+	a) Implemented new fields in All dealer API
+	b) Implemented new fields in Prospect : My Dealers list API
+	c) Implemented new fields in Prospect: Nearest Dealers API

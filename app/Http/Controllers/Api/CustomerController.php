@@ -1201,7 +1201,12 @@ class CustomerController extends Controller
     {
         try {
 
-            $customer = $this->customer->skipPresenter()->find($request->get('customer_id'));
+
+
+            $wp_customer_id=$request->get('wp_customer_id');
+            $wp=new WpConvetor();
+            $customer_id=$wp->getId('customer',$wp_customer_id);
+            $customer = $this->customer->skipPresenter()->find($customer_id);
             // $user= $customer->user;
             // $offer = $this->offer->skipPresenter()->find($request->offer_id);
              $per_page=$request->get('per_page') !='' ?$request->get('per_page'):20;

@@ -161,14 +161,14 @@ class Message extends Model implements Transformable
         return $this->hasMany('App\Storage\Messenger\Read', 'message_id', 'id');
     }
 
-    // public function scopeUnReadForUser($query, $user_id)
-    // {
+    public function scopeUnReadForUser($query, $user_id)
+    {
 
-    //     return $query->whereHas('messageRead', function($query) use($user_id){
+        return $query->whereHas('messageRead', function($query) use($user_id){
 
-    //         $query->where('user_id', $user_id);
-    //     }, '<', 1);
-    // }
+            $query->where('user_id', $user_id);
+        }, '<', 1);
+    }
 
     public function scopeForType($query, $type, $closure = null)
     {
@@ -180,6 +180,12 @@ class Message extends Model implements Transformable
             }
         });
     }
+
+    public function messageAppointment()
+    {
+        return $this->hasMany('App\Storage\Messenger\Appointment', 'message_id', 'id');
+    }
+
 
     /**
      * Get all messages except:
@@ -216,6 +222,15 @@ class Message extends Model implements Transformable
         }
 
         return $query->where('user_id', $user_id);
+    }
+
+    public function scopeUnAppointed($query, $user_id)
+    {
+
+        return $query->whereHas('messageAppointment', function($query) use($user_id){
+
+            $query->where('user_id', $user_id);
+        }, '<', 1);
     }
     /**
      * End of class Message

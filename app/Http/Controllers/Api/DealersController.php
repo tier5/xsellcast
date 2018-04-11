@@ -49,42 +49,61 @@ class DealersController extends Controller
 	 */
     public function index(DealersGetRequest $request)
     {
-        $zip        = $request->get('zip');
-        $limit      = $request->get('limit');
-        $categoryId = $request->get('category', null);
-        $dealers    = $this->dealer;
-        $where      = null;
+         try{
+            $zip        = $request->get('zip');
+            $limit      = $request->get('limit');
+            $categoryId = $request->get('category', null);
+            $per_page = $request->get('per_page', 20);
+            $dealers    = $this->dealer;
+            $where      = null;
 
-        if($zip){
-            $z = ZipCodeApi::getNearest($zip);
-            $zips    = $z->getFoundZips();
+            if($zip){
+                $z = ZipCodeApi::getNearest($zip);
+                $zips    = $z->getFoundZips();
 
-            if(!$zips)
-            {
-                return response(['data' => []]);
+                if(!$zips)
+                {
+                    return response(['data' => []]);
+                }
+
+                $zips    = (!$zips ? [$zip] : $zips);
+                $dealers = $dealers->whereInZips($zips);
             }
 
-            $zips    = (!$zips ? [$zip] : $zips);
-            $dealers = $dealers->whereInZips($zips);
+            if($categoryId){
+                $dealers = $dealers->withCategoryId($categoryId);
+            }
+
+            if($where){
+                $dealers = $dealers->filter($where);
+            }
+
+            if($limit < 0){
+
+                $dealers = $dealers->all();
+            }else{
+                $dealers = $dealers->paginate($per_page);
+            }
+            $data=[
+                    'status'=>true,
+                    'code'=>config('responses.success.status_code'),
+                    'message'=>config('responses.success.status_message'),
+                ];
+                $data=array_merge($data,$dealers);
+
+             return response()->json($data, config('responses.success.status_code'));
         }
-
-        if($categoryId){
-            $dealers = $dealers->withCategoryId($categoryId);
+        catch (\Exception $e) {
+            // dd($e->getMessage());
+            return response()->json([
+                'status'=>false,
+                'code'=>config('responses.bad_request.status_code'),
+                'data'=>null,
+                'message'=>$e->getMessage()
+            ],
+                config('responses.bad_request.status_code')
+            );
         }
-
-        if($where){
-            $dealers = $dealers->filter($where);
-        }
-
-        if($limit < 0){
-
-            $dealers = $dealers->all();
-        }else{
-            $dealers = $dealers->paginate(20);
-        }
-
-		return response()
-			->json($dealers);
     }
 
     /**

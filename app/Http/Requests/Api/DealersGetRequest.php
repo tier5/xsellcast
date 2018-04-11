@@ -28,9 +28,9 @@ class DealersGetRequest extends Request
         return [
             'access_token' => 'required',
             'page'         => 'integer',
-            'zip'          => '',
+            'zip'          => 'integer',
             'pre_page'     => 'integer',
-            'wp_category_id'     => 'integer|categories,wp',
+            'wp_category_id'     => 'integer|exists:categories,wp_category_id',
             'sort'         => 'in:desc,asc',
             'page'         => 'integer'
         ];

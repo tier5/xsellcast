@@ -30,7 +30,7 @@ class CustomerMyDealerRequest extends Request
     {
         return [
             'access_token' => 'required',
-            'customer_id'  => 'required|integer|exists:user_customer,id',
+            'wp_customer_id'  => 'required|integer|exists:user_customer,wp_userid',
             'per_page' => 'integer',
             'page' => 'integer',
 

@@ -26,24 +26,24 @@ class HomeController extends Controller
         $urlParam      = [];
         $showAction    = false;
 
-        // if($search)
-        // {
-        //     $urlParam['s'] = urlencode($search);
-        // }
+        if($search)
+        {
+            $urlParam['s'] = urlencode($search);
+        }
 
-        // $url = route('admin.api.messages', $urlParam);
-        // $tbl = MessageCrud::ajaxTable($url);
+        $url = route('admin.api.messages', $urlParam);
+        $tbl = MessageCrud::ajaxTable($url);
 
-        // if($user->hasRole('csr'))
-        // {
-            // $layoutColumns->addItem('admin.home.csr', ['show_box' => false]);
-        // }else{
+        if($user->hasRole('csr'))
+        {
+            $layoutColumns->addItem('admin.home.csr', ['show_box' => false]);
+        }else{
 
-            // $layoutColumns->addItem('admin.home.ba', ['show_box' => false]);
-        // }
+            $layoutColumns->addItem('admin.home.ba', ['show_box' => false]);
+        }
 
-        // $layoutColumns->addItem('admin.messages.list',
-            // ['show_box' => false, 'view_args' => compact('thread_count', 'tbl', 'showAction'), 'column_size' => 12]);
+        $layoutColumns->addItem('admin.messages.list',
+            ['show_box' => false, 'view_args' => compact('thread_count', 'tbl', 'showAction'), 'column_size' => 12]);
 
 		return $this->crud->pageView($layoutColumns);
     }

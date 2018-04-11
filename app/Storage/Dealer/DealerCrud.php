@@ -20,15 +20,15 @@ class DealerCrud
             'col-class'     => 'col-lg-6 col-md-12 col-sm-12 col-xs-12',
             'clear_all'     => true));
 
-        $fields->addField(array(
-            'name'          => 'logo',
-            'label'         => 'Logo',
-            'accepts'       => 'image/*|video/*',
-            'is_single'     => true,
-            'type'          => 'App\Storage\Media\MediaFieldCustomFields@mediaUpload',
-            'col-class'     => 'col-lg-8 col-md-12 col-sm-12 col-xs-12',
-            'btn_txt'       => 'Change Photo',
-            'clear_all'     => true));
+        // $fields->addField(array(
+        //     'name'          => 'logo',
+        //     'label'         => 'Logo',
+        //     'accepts'       => 'image/*|video/*',
+        //     'is_single'     => true,
+        //     'type'          => 'App\Storage\Media\MediaFieldCustomFields@mediaUpload',
+        //     'col-class'     => 'col-lg-8 col-md-12 col-sm-12 col-xs-12',
+        //     'btn_txt'       => 'Change Photo',
+        //     'clear_all'     => true));
 
         $fields->addField(array(
             'name'          => 'desc',
@@ -181,16 +181,16 @@ class DealerCrud
             'col-class'     => 'col-lg-6 col-md-12 col-sm-12 col-xs-12',
             'clear_all'     => true));
 
-        $fields->addField(array(
-            'name'          => 'logo',
-            'label'         => 'Logo',
-            'accepts'       => 'image/*|video/*',
-            'is_single'     => true,
-            'type'          => 'App\Storage\Media\MediaFieldCustomFields@mediaUpload',
-            'col-class'     => 'col-lg-8 col-md-12 col-sm-12 col-xs-12',
-            'btn_txt'       => 'Change Photo',
-            'value'         => $dealer->logo_media_id,
-            'clear_all'     => true));
+        // $fields->addField(array(
+        //     'name'          => 'logo',
+        //     'label'         => 'Logo',
+        //     'accepts'       => 'image/*|video/*',
+        //     'is_single'     => true,
+        //     'type'          => 'App\Storage\Media\MediaFieldCustomFields@mediaUpload',
+        //     'col-class'     => 'col-lg-8 col-md-12 col-sm-12 col-xs-12',
+        //     'btn_txt'       => 'Change Photo',
+        //     'value'         => $dealer->logo_media_id,
+        //     'clear_all'     => true));
 
         $fields->addField(array(
             'name'          => 'description',
