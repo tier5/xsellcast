@@ -55,14 +55,14 @@ class WpApiController extends Controller
       $fields->noRedirectField();
 
       $info = array(
-        'box_title' => 'Create Offer', 
+        'box_title' => 'Create Offer',
         'column_size' => 12,
         'column_class' => 'col-sm-12 col-xs-12');
 
       $box = $this->crud->box($info);
       $box->setForm($fields);
 
-      return $box;    	
+      return $box;
     }
 
     protected function postForm()
@@ -85,7 +85,7 @@ class WpApiController extends Controller
       $fields->noRedirectField();
 
       $info = array(
-        'box_title' => 'Create Post Blog', 
+        'box_title' => 'Create Post Blog',
         'column_size' => 12,
         'column_class' => 'col-sm-12 col-xs-12');
 
@@ -93,7 +93,7 @@ class WpApiController extends Controller
       $box->setForm($fields);
 
       return $box;
-    }    
+    }
 
     public function postStore(Request $request)
     {
@@ -106,15 +106,15 @@ class WpApiController extends Controller
 
 		\Session::flash('message', 'Blog post has been added.');
 
-		return redirect()->route('debug.wp.api');	    	
+		return redirect()->route('debug.wp.api');
     }
 
     protected function postTable($collect)
     {
 		$table = new TableCollection();
 		$all = $collect;
-		$info = array(  'box_title' => 'Blog Posts', 
-			'column_size' => 12, 
+		$info = array(  'box_title' => 'Blog Posts',
+			'column_size' => 12,
 			'column_class' => 'col-sm-12 col-xs-12',
 			'box_float' => 'left');
 
@@ -135,17 +135,17 @@ class WpApiController extends Controller
 			->sortable(array('title'));
 
 		$box = $this->crud->box($info);
-		$box->setTable($table);    
+		$box->setTable($table);
 
-		return $box;     	
+		return $box;
     }
 
     protected function offerTable($collect)
     {
 		$table = new TableCollection();
 		$all = $collect;
-		$info = array(  'box_title' => 'Offers', 
-			'column_size' => 12, 
+		$info = array(  'box_title' => 'Offers',
+			'column_size' => 12,
 			'column_class' => 'col-sm-12 col-xs-12',
 			'box_float' => 'left');
 
@@ -161,8 +161,8 @@ class WpApiController extends Controller
 			->sortable(array('title'));
 
 		$box = $this->crud->box($info);
-		$box->setTable($table);    
+		$box->setTable($table);
 
-		return $box;     	
-    }    
+		return $box;
+    }
 }

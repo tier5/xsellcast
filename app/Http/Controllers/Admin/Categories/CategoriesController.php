@@ -7,15 +7,19 @@ use App\Http\Requests\Admin\CategoryPutRequest;
 use App\Http\Requests\Admin\CategoryDestroyRequest;
 use Illuminate\Http\Request;
 use App\Storage\Category\CategoryRepository;
+use App\Storage\LbtWp\LbtWp;
+
 
 class CategoriesController extends Controller
 {
     protected $category;
+    protected $lbt_wp;
 
 	public function __construct(CategoryRepository $category)
     {
     	$this->crud = new Crud();
         $this->category = $category;
+        $this->lbt_wp = new LbtWp();
     }
 
     public function index(Request $request)
@@ -77,12 +81,19 @@ class CategoriesController extends Controller
     public function store(CategoryStoreRequest $request)
     {
         try{
-            $this->category->create([
+            $category=  $this->category->create([
                 'name' => $request->get('name'),
                 'opid' => $request->get('opid'),
                 'slug' => $request->get('slug')
             ]);
+          // dd($category);
+           //  $arr = [
+           //      'name' => $category->name,
+           //      'slug' => $category->slug,
+           //  ];
 
+           // $data= $this->lbt_wp->categories()->save($arr);
+           // dd($data);
             $request->session()->flash('message', 'The category was successfully added!');
             return redirect()->route('admin.categories');
 

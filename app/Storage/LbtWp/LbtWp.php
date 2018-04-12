@@ -24,9 +24,9 @@ class LbtWp
 	public function client()
 	{
 		$client = new WpClient(new GuzzleAdapter(new Client()), $this->wp_site);
-		$client->setCredentials(new WpBasicAuth($this->wp_user, $this->wp_pass));	
+		$client->setCredentials(new WpBasicAuth($this->wp_user, $this->wp_pass));
 
-		return $client;	
+		return $client;
 	}
 
 	public function posts()
@@ -38,6 +38,10 @@ class LbtWp
 	{
 
 		return $this->client()->offers();
+	}
+	public function categories() {
+		return $this->client()->categories();
+
 	}
 }
 

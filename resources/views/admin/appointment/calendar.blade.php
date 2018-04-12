@@ -27,16 +27,18 @@
                     <div id='external-events'>
                         <p>Drag a event and drop into calendar.</p>
                         @foreach($messages as $message)
-                        <pre>
-                        {{print_r($messages->threads)}}
-                        </pre>
+                        {{-- <pre>
+                        {{print_r($messages)}}
+                        </pre> --}}
+                            @if($message->body!='')
+                                <div class='external-event navy-bg' data-message-id="{{$message->id}}">{{$message->body}}</div>
+                            @endif
                         @endforeach
-
-                        <div class='external-event navy-bg'>Go to shop and buy some products.</div>
+                        {{-- <div class='external-event navy-bg'>Go to shop and buy some products.</div>
                         <div class='external-event navy-bg'>Check the new CI from Corporation.</div>
                         <div class='external-event navy-bg'>Send documents to John.</div>
                         <div class='external-event navy-bg'>Phone to Sandra.</div>
-                        <div class='external-event navy-bg'>Chat with Michael.</div>
+                        <div class='external-event navy-bg'>Chat with Michael.</div> --}}
                        {{--  <p class="m-t">
                             <input type='checkbox' id='drop-remove' class="i-checks" checked /> <label for='drop-remove'>remove after drop</label>
                         </p> --}}
@@ -45,6 +47,7 @@
             </div>
         </div>
         <div class="col-lg-9">
+
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>Striped Table </h5>
@@ -84,6 +87,7 @@
         var d = date.getDate();
         var m = date.getMonth();
         var y = date.getFullYear();
+        timezone=Intl.DateTimeFormat().resolvedOptions().timeZone;
         var calendar=function(data){
             console.log(data);
             $('#calendar').fullCalendar({
@@ -99,7 +103,10 @@
                     // if ($('#drop-remove').is(':checked')) {
                         // if so, remove the element from the "Draggable Events" list
                         $(this).remove();
-                         alert("Dropped on " + date.format());
+                        message_id=$(this).data('message-id');
+
+                        updateEvent(1,message_id,date.format(),null,);
+                         // alert("Dropped on " + date.format());
                     // }
                 },
                 events:  data
@@ -151,7 +158,8 @@
                  // editable: true,
                   eventResize: function(event, delta, revertFunc) {
 
-                    alert(event.title + " end is now " + event.end.format());
+                    // alert(event.title + " end is now " + event.end.format());
+                    alert("start" + event.start.format() + " end " + event.end.format());
 
                     // if (!confirm("is this okay?")) {
                       // revertFunc();
@@ -168,16 +176,14 @@
 
                   }
 
-                  // drop: function(date) {
-                  //   alert("Dropped on " + date.format());
-                  // }
+
             });
         }
 
         var getCalander= function(){
 
             var url="{{route('admin.appointment.calendar')}}";
-            timezone=Intl.DateTimeFormat().resolvedOptions().timeZone;
+            // timezone=Intl.DateTimeFormat().resolvedOptions().timeZone;
             frm_data={form:'2018-04-01',to:'2018-04-30',timezone:timezone};
             // simpleAjaxRq(url, frm_data, true, , ['data'], 'GET', []);
             method='GET';
@@ -222,13 +228,20 @@
 
         };
 
-        var updateEvent= function(){
+        var updateEvent= function(type,message_id,start,end=null){
 
             var url="{{route('admin.appointment.calendar')}}";
-            timezone=Intl.DateTimeFormat().resolvedOptions().timeZone;
-            frm_data={form:'2018-04-01',to:'2018-04-30',timezone:timezone};
+
+            frm_data=   {
+                    message_id:message_id,
+                    type:type,
+                    from:start,
+                    to:end,
+                    timezone:timezone,
+
+                };
             // simpleAjaxRq(url, frm_data, true, , ['data'], 'GET', []);
-            method='GET';
+            method='POST';
             addBodyProcessing();
 
             $.ajax({
@@ -261,7 +274,7 @@
                     //         time: 3000
                     //     });
                     // }
-                    calendar(response.data);
+                    // calendar(response.data);
 
                 }
             }).complete(function(){

@@ -161,14 +161,14 @@ class Message extends Model implements Transformable
         return $this->hasMany('App\Storage\Messenger\Read', 'message_id', 'id');
     }
 
-    // public function scopeUnReadForUser($query, $user_id)
-    // {
+    public function scopeUnReadForUser($query, $user_id)
+    {
 
-    //     return $query->whereHas('messageRead', function($query) use($user_id){
+        return $query->whereHas('messageRead', function($query) use($user_id){
 
-    //         $query->where('user_id', $user_id);
-    //     }, '<', 1);
-    // }
+            $query->where('user_id', $user_id);
+        }, '<', 1);
+    }
 
     public function scopeForType($query, $type, $closure = null)
     {
@@ -186,6 +186,28 @@ class Message extends Model implements Transformable
         return $this->hasMany('App\Storage\Messenger\Appointment', 'message_id', 'id');
     }
 
+    /**
+     * Mark a thread as Appointed for a user.
+     *
+     * @param int $userId
+     */
+    public function markAsAppointed($user_id)
+    {
+        try {
+
+            $read = $this->messageAppointment()->where('user_id', $user_id);
+
+            if(!$read->first()){
+                $read->create([
+                    'message_id' => $this->id,
+                    'user_id' => $user_id]);
+            }
+            return $read;
+
+        } catch (ModelNotFoundException $e) { // @codeCoverageIgnore
+            // do nothing
+        }
+    }
 
     /**
      * Get all messages except:

@@ -224,3 +224,6 @@ Dealer v3.1 #stable
 
 Dealer v3.2 #stable
 	a) Added wp_id in dealer
+
+Appointment v2.0 #stable
+	a) Implemented Add appointment in Google calender

@@ -30,7 +30,7 @@ return [
 	/**
 	 * Ontraport Customer object
 	 */
-	'ontraport_cust_object_id' => env('ONTRAPORT_CUSTOMER_OBJECT_ID', 0),	
+	'ontraport_cust_object_id' => env('ONTRAPORT_CUSTOMER_OBJECT_ID', 0),
 
 	/**
 	 * Ontraport contact id key
@@ -64,7 +64,8 @@ return [
 	/**
 	 * LBT WP Site credentials
 	 */
-	'wp_site' => env('LBT_URL', 'https://luxurybuystoday.com/'),
+	// 'wp_site' => env('LBT_URL', 'https://luxurybuystoday.com/'),
+	'wp_site' => env('LBT_URL', 'https://v2.luxurybuystoday.com/'),
 
 	'wp_user' => env('LBT_USERNAME'),
 
@@ -84,27 +85,27 @@ return [
 
 	'user_action_types' => [
 		'offer_request_appt'  => [
-			'key'    => 'offer_request_appt', 
+			'key'    => 'offer_request_appt',
 			'icon'   => 'fa-calendar bg-warning',
 			'op_key' => 'REQ_APPT'],
 		'offer_request_price' => [
-			'key'    => 'offer_request_price', 
+			'key'    => 'offer_request_price',
 			'icon'   => 'fa-dollar bg-danger',
 			'op_key' => 'REQ_PRICE'],
 		'offer_request_info'  => [
-			'key'    => 'offer_request_info', 
+			'key'    => 'offer_request_info',
 			'icon'   => 'fa-info bg-success',
 			'op_key' => 'REQ_INFO'],
 		'offer_request_contact_me'  => [
-			'key'    => 'offer_request_contact_me', 
+			'key'    => 'offer_request_contact_me',
 			'icon'   => 'fa-phone bg-navy',
-			'op_key' => 'REQ_CALL'],			
+			'op_key' => 'REQ_CALL'],
 		'direct_message' => [
 			'key'    => 'direct_message',
 			'icon'   => 'fa-comment bg-navy',
 			'op_key' => 'REQ_MESSAGE'],
 		'added_offer' => [
-			'key'  => 'added_offer', 
+			'key'  => 'added_offer',
 			'icon' => 'fa-circle'],
 	],
 
@@ -116,54 +117,54 @@ return [
 	'message_types' => [
 		'message' 	=> [
 			'simple'             => 'Direct',
-			'name'               => 'Direct Message', 
-			'head_name'          => 'Direct Messages', 
+			'name'               => 'Direct Message',
+			'head_name'          => 'Direct Messages',
 			'head_name_singular' => 'Direct Message',
-			'badge'              => 'navy'], 
+			'badge'              => 'navy'],
 		'note' 		=> [
-			'name'  => 'Note', 
-			'badge' => 'blank'], 
+			'name'  => 'Note',
+			'badge' => 'blank'],
 		'appt' 		=> [
 			'simple'             => 'Appointment',
-			'name'               => 'Appt Request', 
-			'head_name'          => 'Appointment Requests', 
+			'name'               => 'Appt Request',
+			'head_name'          => 'Appointment Requests',
 			'head_name_singular' => 'Appointment Request',
-			'badge'              => 'warning'], 
+			'badge'              => 'warning'],
 		'price' 	=> [
 			'simple'             => 'Price',
-			'name'               => 'Pricing Request', 
-			'head_name'          => 'Price Requests', 
+			'name'               => 'Pricing Request',
+			'head_name'          => 'Price Requests',
 			'head_name_singular' => 'Price Request',
-			'badge'              => 'danger'], 
+			'badge'              => 'danger'],
 		'info' 		=> [
 			'simple'             => 'Information',
-			'name'               => 'Info Request', 
-			'head_name'          => 'Information Requests', 
+			'name'               => 'Info Request',
+			'head_name'          => 'Information Requests',
 			'head_name_singular' => 'Appointment Request',
 			'badge'              => 'blue'],
 		'contact_me' 		=> [
 			'simple'             => 'Contact',
-			'name'               => 'Contact Request', 
-			'head_name'          => 'Contact Requests', 
+			'name'               => 'Contact Request',
+			'head_name'          => 'Contact Requests',
 			'head_name_singular' => 'Contact Request',
-			'badge'              => 'navy'],			
+			'badge'              => 'navy'],
 		'new_lead'	=> [
-			'name'               => 'New Lead', 
-			'head_name'          => 'New Leads', 
-			'head_name_singular' => 'New Lead',			
+			'name'               => 'New Lead',
+			'head_name'          => 'New Leads',
+			'head_name_singular' => 'New Lead',
 			'badge'              => 'warning'],
 		'lead_reassign'	=> [
 			'simple'             => 'Prospect Reassignment',
-			'name'               => 'Lead Reassignment', 
-			'head_name'          => 'Lead Reassignments', 
-			'head_name_singular' => 'Lead Reassignment',			
+			'name'               => 'Lead Reassignment',
+			'head_name'          => 'Lead Reassignments',
+			'head_name_singular' => 'Lead Reassignment',
 			'badge'              => 'warning'],
 		'system'	=> [
 			'simple'             => '',
-			'name'               => '', 
-			'head_name'          => '', 
-			'head_name_singular' => '',			
-			'badge'              => 'default']			
+			'name'               => '',
+			'head_name'          => '',
+			'head_name_singular' => '',
+			'badge'              => 'default']
 	],
 
 	/**
@@ -177,10 +178,10 @@ return [
 		 * JIRA: LBT-304
 		 */
 		'enable_dealer_offers' => false,
-		
+
 		'author_type' => [
-			'custom' => [ 'label' => 'Custom Offer', 'badge' => 'danger' ], 
-			'brand' => [ 'label' => 'Brand Offer', 'badge' => 'warning' ], 
-			'dealer' => [ 'label' => 'Dealer Offer', 'badge' => 'blue' ]]		
+			'custom' => [ 'label' => 'Custom Offer', 'badge' => 'danger' ],
+			'brand' => [ 'label' => 'Brand Offer', 'badge' => 'warning' ],
+			'dealer' => [ 'label' => 'Dealer Offer', 'badge' => 'blue' ]]
 	]
 ];

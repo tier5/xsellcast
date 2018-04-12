@@ -610,13 +610,16 @@ Route::group(array('prefix' => 'admin', 'middleware' => array('auth', 'admin-pag
     // Appointment
     Route::group(array('prefix' => 'appointment','namespace'=>'Appointment'), function()
     {
-         Route::get('', array(
+        Route::get('', array(
             'as' => 'admin.appointment',
             'uses' => 'AppointmentController@index'));
 
-          Route::get('calendar', array(
+        Route::get('calendar', array(
             'as' => 'admin.appointment.calendar',
             'uses' => 'AppointmentController@calendar'));
+        Route::post('calendar', array(
+            'as' => 'admin.appointment.calendar.store',
+            'uses' => 'AppointmentController@store'));
 
     });
 
