@@ -161,14 +161,14 @@ class Message extends Model implements Transformable
         return $this->hasMany('App\Storage\Messenger\Read', 'message_id', 'id');
     }
 
-    public function scopeUnReadForUser($query, $user_id)
-    {
+    // public function scopeUnReadForUser($query, $user_id)
+    // {
 
-        return $query->whereHas('messageRead', function($query) use($user_id){
+    //     return $query->whereHas('messageRead', function($query) use($user_id){
 
-            $query->where('user_id', $user_id);
-        }, '<', 1);
-    }
+    //         $query->where('user_id', $user_id);
+    //     }, '<', 1);
+    // }
 
     public function scopeForType($query, $type, $closure = null)
     {
