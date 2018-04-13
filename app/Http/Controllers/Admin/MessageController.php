@@ -18,7 +18,7 @@ use Auth;
 
 class MessageController extends Controller
 {
-    
+
 	protected $crud;
 
 	protected $thread;
@@ -37,16 +37,17 @@ class MessageController extends Controller
 
 	public function index(Request $request, $type = null)
 	{
+
 		$user          = \Auth::user();
 		$layoutColumns = $this->crud->layoutColumn();
 		$search        = $request->get('s');
 		$thread_count  = $this->message->allMessages($search, $user->id, $type)->skipPresenter()->all()->count();
 		$urlParam      = ['type' => $type];
-		
+
 		///
 	//	$this->thread->createSystemMessage($user->id, 'messages.system.ba-welcome', 'Welcome!');
 		///
-    	
+
     	if($search)
     	{
     		$urlParam['s'] = urlencode($search);
@@ -59,7 +60,7 @@ class MessageController extends Controller
 		$layoutColumns->addItem('admin.messages.list', ['show_box' => false, 'view_args' => compact('thread_count', 'tbl'), 'column_size' => 12]);
 		$layoutColumns->addItem('admin.messages.bottom_box', ['show_box' => false, 'column_class' => 'm-b-sm']);
 
-		return $this->crud->pageView($layoutColumns, compact('type'));  
+		return $this->crud->pageView($layoutColumns, compact('type'));
 	}
 
 	public function sent(Request $request)
@@ -79,14 +80,14 @@ class MessageController extends Controller
 		$tbl          = MessageCrud::ajaxTable(route('admin.api.messages.sent', $urlParam));
 		$boxTitle     = 'Sent';
 
-    	$layoutColumns->addItem('admin.messages.actions', 
+    	$layoutColumns->addItem('admin.messages.actions',
     		['show_box' => false, 'column_class' => 'm-b-md', 'column_size' => 12]);
-		$layoutColumns->addItem('admin.messages.list', 
+		$layoutColumns->addItem('admin.messages.list',
 			['show_box' => false, 'view_args' => compact('thread_count', 'tbl', 'boxTitle'), 'column_size' => 12]);
-		$layoutColumns->addItem('admin.messages.bottom_box', 
+		$layoutColumns->addItem('admin.messages.bottom_box',
 			['show_box' => false, 'column_class' => 'm-b-sm']);
 
-		return $this->crud->pageView($layoutColumns);  
+		return $this->crud->pageView($layoutColumns);
 	}
 
 	public function draft(Request $request)
@@ -109,7 +110,7 @@ class MessageController extends Controller
 		$layoutColumns->addItem('admin.messages.list', ['show_box' => false, 'view_args' => compact('thread_count', 'tbl', 'boxTitle'), 'column_size' => 12]);
 		$layoutColumns->addItem('admin.messages.bottom_box', ['show_box' => false, 'column_class' => 'm-b-sm']);
 
-		return $this->crud->pageView($layoutColumns);  		
+		return $this->crud->pageView($layoutColumns);
 	}
 
 	public function show(MessageShowGetRequest $request, $thread_id, $message_id = null)
@@ -127,7 +128,7 @@ class MessageController extends Controller
 		$newLeadParentType = null;
 		$isRejected		   = false;
 		$isFromMe		   = ($messages->first()->user_id == $user->id);
-		
+
 
 		foreach($messages as $message)
 		{
@@ -163,7 +164,7 @@ class MessageController extends Controller
 		}else
 		{
 			$this->crud->setExtra('sidemenu_active', 'admin_messages');
-		}		
+		}
 
 		/**
 		 * @var        App\Storage\User\User $talking_to
@@ -172,8 +173,8 @@ class MessageController extends Controller
 		$talking_to = ($talkinToParticipant ? $talkinToParticipant->user()->first() : null );
 		$showAcceptButton = true;
 		$thread->markAsRead($user->id);
-		$layoutColumns->addItem($showView, [	
-			'show_box' => false, 'column_class' => 'm-b-sm', 
+		$layoutColumns->addItem($showView, [
+			'show_box' => false, 'column_class' => 'm-b-sm',
 			'view_args' => compact('offer', 'brand', 'type', 'thread', 'messages', 'talking_to', 'offer_thumb', 'user', 'isRejected', 'isApproved', 'isPending', 'newLeadParentType', 'isFromMe', 'message_id', 'showAcceptButton')]);
 
 		return $this->crud->pageView($layoutColumns, compact('isFromMe'));
@@ -207,7 +208,7 @@ class MessageController extends Controller
 		$thread->delete();
 
         $request->session()->flash('message', 'Messsage has been deleted.');
-		return redirect()->route('admin.messages');			
+		return redirect()->route('admin.messages');
 	}
 
 	public function deleteMulti(Request $request, $thread_ids)
@@ -243,6 +244,6 @@ class MessageController extends Controller
 		}
 
         $request->session()->flash('message', 'Messsage has been sent.');
-		return redirect($request->get('redirect_to'));			
+		return redirect($request->get('redirect_to'));
 	}
 }

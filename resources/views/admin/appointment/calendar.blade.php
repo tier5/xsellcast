@@ -4,11 +4,11 @@
         <div class="col-lg-3">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Draggable Events</h5>
+                    <h5>Appointment</h5>
                     <div class="ibox-tools">
-                        <a class="collapse-link">
+                        {{-- <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
-                        </a>
+                        </a> --}}
                         {{-- <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             <i class="fa fa-wrench"></i>
                         </a> --}}
@@ -26,13 +26,28 @@
                 <div class="ibox-content">
                     <div id='external-events'>
                         <p>Drag a event and drop into calendar.</p>
-                        @foreach($messages as $message)
-                        {{-- <pre>
-                        {{print_r($messages)}}
-                        </pre> --}}
-                            @if($message->body!='')
-                                <div class='external-event navy-bg' data-message-id="{{$message->id}}">{{$message->body}}</div>
-                            @endif
+                        @foreach($messages['data'] as $message)
+
+                         @php
+                            $sender_name=$message['last_message']['sender_name'];
+                            $message_id=$message['last_message']['id'];
+                            $message_body=$message['last_message']['body'];
+                            $created=$message['last_message']['created_at_human'];
+                            $offer_name=$message['offer']['title'];
+
+                         @endphp
+
+                            <div class='external-event navy-bg' data-message-id="{{$message_id}}">
+                                {{-- <strong>Prospect Name:</strong>{{$sender_name}}<br>
+                                <strong>Offer Name:</strong>{{$offer_name}}<br>
+                                <strong>Message:</strong>{{$message_body}}<br>
+                                <span class="pull-right">{{$created}}</span> --}}
+                                 Prospect Name:{{$sender_name}},
+                                Offer Name:{{$offer_name}},
+                                Message:{{$message_body}},
+                                {{$created}}
+
+                            </div>
                         @endforeach
                         {{-- <div class='external-event navy-bg'>Go to shop and buy some products.</div>
                         <div class='external-event navy-bg'>Check the new CI from Corporation.</div>
@@ -50,12 +65,12 @@
 
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Striped Table </h5>
+                    <h5>Appointment Table </h5>
                     <div class="ibox-tools">
-                        <a class="collapse-link">
+                        {{-- <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
-                        </a>
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        </a> --}}
+                   {{--      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             <i class="fa fa-wrench"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
@@ -63,10 +78,10 @@
                             </li>
                             <li><a href="#">Config option 2</a>
                             </li>
-                        </ul>
-                        <a class="close-link">
+                        </ul> --}}
+                       {{--  <a class="close-link">
                             <i class="fa fa-times"></i>
-                        </a>
+                        </a> --}}
                     </div>
                 </div>
                 <div class="ibox-content">
@@ -104,8 +119,9 @@
                         // if so, remove the element from the "Draggable Events" list
                         $(this).remove();
                         message_id=$(this).data('message-id');
+                        text=$(this).html();
 
-                        updateEvent(1,message_id,date.format(),null,);
+                        updateEvent(1,message_id,date.format(),null,null,text);
                          // alert("Dropped on " + date.format());
                     // }
                 },
@@ -159,8 +175,8 @@
                   eventResize: function(event, delta, revertFunc) {
 
                     // alert(event.title + " end is now " + event.end.format());
-                    alert("start" + event.start.format() + " end " + event.end.format());
-
+                    // alert("start" + event.start.format() + " end " + event.end.format());
+                    updateEvent(2,event.id,event.start.format(),event.end.format(),event,event.title);
                     // if (!confirm("is this okay?")) {
                       // revertFunc();
                     // }
@@ -168,13 +184,14 @@
                   },
                    eventDrop: function(event, delta, revertFunc) {
 
-                    alert(event.title + " was dropped on " + event.start.format());
+                    // alert(event.title + " was dropped on " + event.start.format());
 
-                    if (!confirm("Are you sure about this change?")) {
-                      revertFunc();
-                    }
+                    // if (!confirm("Are you sure about this change?")) {
+                    //   revertFunc();
+                    // }
+                    updateEvent(3,event.id,event.start.format(),event.end.format(),event,event.title);
 
-                  }
+                     }
 
 
             });
@@ -228,16 +245,25 @@
 
         };
 
-        var updateEvent= function(type,message_id,start,end=null){
+        var updateEvent= function(req_type,message_id,start,end=null,cal_event=null,summary){
 
             var url="{{route('admin.appointment.calendar')}}";
+            // var summary='';
+            var event_id="";
+            if(req_type==1){
 
+            }else{
+                // summary=cal_event.title;
+                event_id=cal_event.event_id;
+            }
             frm_data=   {
                     message_id:message_id,
-                    type:type,
+                    type:req_type,
                     from:start,
                     to:end,
                     timezone:timezone,
+                    summary:summary,
+                    event_id:event_id,
 
                 };
             // simpleAjaxRq(url, frm_data, true, , ['data'], 'GET', []);
@@ -275,6 +301,7 @@
                     //     });
                     // }
                     // calendar(response.data);
+                    getCalander();
 
                 }
             }).complete(function(){

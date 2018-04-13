@@ -397,31 +397,93 @@ class MessageRepositoryEloquent extends BaseRepository implements MessageReposit
         return $this;
     }
 
+     public function unappointed($user_id)
+    {
+        // $this->model = $this->model->whereHas('thread', function($q) use($search, $user_id){
+
+        //     $q->whereHas('participants', function($q) use($user_id,$message_id){
+        //         $q->where('user_id', $user_id);
+        //         $q->where('thread_id', $message_id);
+        //     });
+        // })
+        // ->where('user_id', '=', $user_id);
+
+        // return $this;
+
+         $this->model = $this->model->whereHas('messageAppointment', function($query) use($user_id){
+
+            $query->where('user_id', $user_id);
+        }, '<', 1);
+           return $this;
+    }
+
      public function listUnAppointed($user, $type)
     {
-        $messages = $this->model->allMessages()
-            ->unappointed($user->id)
-            ->allMessagesForUser($user->id)
-            ->forType($type)
-            ->where('user_id', '!=', $user->id)
-            ->get();
+        // $messages = $this->model->allMessages()
+        //     ->unappointed($user->id)
+        //     ->allMessagesForUser($user->id)
+        //     ->forType($type)
+        //     ->where('user_id', '!=', $user->id)
+        //     ->get();
 
-        foreach($messages as $k => $message)
+        // foreach($messages as $k => $message)
+        // {
+        //     if($message->user && $message->user->is_customer && $user->is_salesrep)
+        //     {
+
+        //         $hasPending = $message->user->customer->salesRepsPivot()->where('salesrep_id', $user->salesrep->id)->withPending()->count();
+
+        //         if($hasPending > 0)
+        //         {
+        //             //Remove a prospect message to BA when match is still pending.
+        //             $messages->forget($k);
+        //         }
+        //     }
+
+        // }
+
+        // return $messages;
+        $search=null;
+        $messagesModel = $this->skipPresenter()
+        ->useThreadAjaxPresenter()
+        ->allMessages($search, $user->id, $type)
+        ->unappointed($user->id)
+        ->all();
+// dd($messagesModel);
+
+        foreach($messagesModel as $k => $message)
         {
             if($message->user && $message->user->is_customer && $user->is_salesrep)
             {
-
+                /**
+                 * Get all rejected and pending.
+                 *
+                 * @var        boolean
+                 */
                 $hasPending = $message->user->customer->salesRepsPivot()->where('salesrep_id', $user->salesrep->id)->withPending()->count();
 
-                if($hasPending > 0)
+                /**
+                 * Don't exclude lead_reassign type even a prospect is not assign.
+                 */
+                if($hasPending > 0 && $message->thread->type != 'lead_reassign')
                 {
-                    //Remove a prospect message to BA when match is still pending.
-                    $messages->forget($k);
+                    //Remove a prospect message to BA when match is still pending or rejected.
+                    $messagesModel->forget($k);
                 }
             }
-
         }
 
+        $messagesIds = $messagesModel->lists('id')->toArray();
+        $messages    = $this->useThreadAjaxPresenter()
+            ->allMessages($search, $user->id, $type)
+            ->orderBy('created_at', 'desc')
+            ->skipPresenter(false)
+            ->scopeQuery(function($query) use($messagesIds){
+
+                return $query->whereIn('id', $messagesIds);
+            });
+
         return $messages;
+
     }
 }

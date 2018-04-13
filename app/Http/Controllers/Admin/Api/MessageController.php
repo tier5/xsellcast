@@ -28,14 +28,14 @@ class MessageController extends Controller
 		$search        = $request->get('s');
 		$messages = $this->message->baseGetAll($user, $search, $type)->paginate(20);
 
-    	return response()->json($messages);		
+    	return response()->json($messages);
 	}
 
 	public function newLeads(Request $request)
 	{
 		$user        = Auth::user();
 
-		return response()->json($this->thread->newLeadsList($user)->skipPresenter(false)->paginate(20));	
+		return response()->json($this->thread->newLeadsList($user)->skipPresenter(false)->paginate(20));
 		//$threads->skipPresenter(false)->paginate(20)
 	}
 
@@ -44,9 +44,9 @@ class MessageController extends Controller
 		$user     = Auth::user();
 		$search   = $request->get('s');
 		$messages = $this->message->useIsReadThreadAjaxPresenter()->allMessages($search, $user->id, null, true)->orderBy('created_at', 'desc')->paginate(20);
-		
-    	return response()->json($messages);		
-	}	
+
+    	return response()->json($messages);
+	}
 
 	public function draft(Request $request)
 	{
@@ -55,6 +55,6 @@ class MessageController extends Controller
 
 		$messages = $this->message->useIsReadThreadAjaxPresenter()->allMessages($search, $user->id, null, false, true)->orderBy('created_at', 'desc')->paginate(20);
 
-    	return response()->json($messages);		
-	}		
+    	return response()->json($messages);
+	}
 }
