@@ -91,10 +91,10 @@ $messages['data'][$key]['offer']=$this->offer->skipPresenter()->find($offer_id);
                  // echo '<pre>';print_r($cronofyobj->first_page['events']);
                 $data=[];
                 foreach ($cronofyobj->first_page['events'] as $event) {
-                    // dd($event);
+
                    $data[] =  [
                         'id'=> $event['event_uid'],
-                        'event_id'=> $event['event_id'],
+                        'event_id'=> isset($event['event_id'])?$event['event_id']:0,
                         'title'=> $event['summary'],
                         'start'=>  $event['start'],
                         'end'=> $event['end'],
