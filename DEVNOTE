@@ -234,3 +234,6 @@ Appointment v3.1 #stable
 	a) Fixed message issue
 Appointment v3.2 #stable
 	a) Fixed appointment calender issue
+
+LBT OAuth  v1.0 #stable
+	a) Created oAuth token system to access lbt APIs

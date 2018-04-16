@@ -11,6 +11,15 @@ return [
 	 * XSellCast secret ID
 	 */
 	'api_secret_id' => '4c7f6f8fa93d59c45502c0ae8c4a95b',
+	/**
+	 * XSellCast client ID
+	 */
+	'wp_api_client_id' => 'rRXeQSMR8a65IA7a0uMdwwAqMjL5SAgNsoUcK3Va',
+
+	/**
+	 * XSellCast secret ID
+	 */
+	'wp_api_secret_id' => '18AfMk8StGPoKNzDo1TylfeTmVMINsjy1wZadtaj',
 
 	/**
 	 * Ontraport API key
@@ -66,6 +75,8 @@ return [
 	 */
 	// 'wp_site' => env('LBT_URL', 'https://luxurybuystoday.com/'),
 	'wp_site' => env('LBT_URL', 'https://v2.luxurybuystoday.com/'),
+
+	'wp_api_site' => env('LBT_API_URL', 'https://v2.luxurybuystoday.com/wp-json/wpr-datahub-api/v1/'),
 
 	'wp_user' => env('LBT_USERNAME'),
 

@@ -81,19 +81,23 @@ class CategoriesController extends Controller
     public function store(CategoryStoreRequest $request)
     {
         try{
-            $category=  $this->category->create([
-                'name' => $request->get('name'),
-                'opid' => $request->get('opid'),
-                'slug' => $request->get('slug')
-            ]);
+            // $category=  $this->category->create([
+            //     'name' => $request->get('name'),
+            //     'opid' => $request->get('opid'),
+            //     'slug' => $request->get('slug')
+            // ]);
           // dd($category);
-           //  $arr = [
-           //      'name' => $category->name,
-           //      'slug' => $category->slug,
-           //  ];
+            // $arr = [
+            //     'name' => $category->name,
+            //     'slug' => $category->slug,
+            // ];
+            $arr = [
+                'name' => $request->get('name'),
+                'slug' => $request->get('slug')
+            ];
 
-           // $data= $this->lbt_wp->categories()->save($arr);
-           // dd($data);
+           $data= $this->lbt_wp->storeCategory($arr);//client()->categories()->save($arr);
+           dd($data);
             $request->session()->flash('message', 'The category was successfully added!');
             return redirect()->route('admin.categories');
 
