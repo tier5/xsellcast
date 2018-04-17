@@ -81,23 +81,30 @@ class CategoriesController extends Controller
     public function store(CategoryStoreRequest $request)
     {
         try{
-            // $category=  $this->category->create([
-            //     'name' => $request->get('name'),
-            //     'opid' => $request->get('opid'),
-            //     'slug' => $request->get('slug')
-            // ]);
-          // dd($category);
-            // $arr = [
-            //     'name' => $category->name,
-            //     'slug' => $category->slug,
-            // ];
-            $arr = [
+            $category=  $this->category->create([
                 'name' => $request->get('name'),
+                'opid' => $request->get('opid'),
                 'slug' => $request->get('slug')
+            ]);
+
+            $arr = [
+                'name' => $category->name,
+                'slug' => $category->slug,
             ];
 
-           $data= $this->lbt_wp->storeCategory($arr);//client()->categories()->save($arr);
-           dd($data);
+            try{
+                //insert wp site database
+              $response= $this->lbt_wp->storeCategory($arr);//client()->categories()->save($arr);
+              if($response['code']==200){
+                    $category->wp_category_id=$response['data']['wp_brand_id'];
+                    $category->save();
+              }else{
+                    $request->session()->flash('message', 'Something went wrong !');
+              }
+            }catch(\Exception $e){
+                dd($e);
+            }
+           // dd($response);
             $request->session()->flash('message', 'The category was successfully added!');
             return redirect()->route('admin.categories');
 
@@ -116,6 +123,14 @@ class CategoriesController extends Controller
             $category->opid = $request->get('opid');
             $category->slug = $request->get('slug');
             $category->save();
+             $arr = [
+                'name' => $category->name,
+                'slug' => $category->slug,
+            ];
+            if($category->wp_category_id!=''){
+                //update wp site database
+                $response= $this->lbt_wp->updateCategory($arr,$category->wp_category_id);
+            }
 
             $request->session()->flash('message', 'The category was successfully updated!');
             return redirect()->route('admin.categories');
@@ -131,9 +146,13 @@ class CategoriesController extends Controller
         try{
             $category = $request->get('category', null);
 
+          if($category->wp_category_id!=''){
+            $arr = [
+                'wp_id' =>$category->wp_category_id
+                ];
+            $response= $this->lbt_wp->deleteCategory($arr);
+          }
             $category->delete();
-
-
             $request->session()->flash('message', 'The category was successfully deleted!');
             return redirect()->route('admin.categories');
          }

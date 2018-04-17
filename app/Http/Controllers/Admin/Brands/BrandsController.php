@@ -7,15 +7,18 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Admin\BrandStoreRequest;
 use App\Http\Requests\Admin\BrandPutRequest;
 use App\Storage\Category\Category;
-
+use App\Storage\LbtWp\LbtWp;
 class BrandsController extends Controller
 {
     protected $brand;
+    protected $lbt_wp;
 
 	public function __construct(BrandRepository $brand)
     {
         $this->brand = $brand;
         $this->crud  = new Crud();
+        $this->lbt_wp = new LbtWp();
+
     }
 
     public function index(Request $request)
@@ -70,12 +73,12 @@ class BrandsController extends Controller
     {
         try{
 
-            $this->brand->createOne([
+         $brand=   $this->brand->createOne([
                 'name'          => $request->get('name'),
-                'media_logo_id' => $request->get('logo'),
+                // 'media_logo_id' => $request->get('logo'),
                 'description'   => $request->get('desc'),
                 'catalog_url'   => $request->get('catalog_url'),
-                'media_ids'     => $request->get('images'),
+                // 'media_ids'     => $request->get('images'),
                 'category'      => $request->get('category'),
                 'opid'          => $request->get('opid'),
                 'slug'          => $request->get('slug'),
@@ -85,8 +88,48 @@ class BrandsController extends Controller
 
 
             ]);
+        $wp_category_id='';
+         foreach ($brand->categories as $category) {
+            $wp_category_id=isset($category->wp_category_id)?$category->wp_category_id:"";
+            break;
+         }
 
-            $request->session()->flash('message', 'The new brand was successfully added!');
+         $meta=[];
+         if($request->get('catalog_url')!=''){
+            $meta['wpr_brand_catalog']     = $request->get('catalog_url');
+         }
+         if($request->get('image_url')!=''){
+            $meta['wpr_brand_image_url']     = $request->get('image_url');
+         }
+
+         if($request->get('image_link')!=''){
+            $meta['wpr_brand_image_link']     = $request->get('image_link');
+         }
+
+         if($request->get('image_text')!=''){
+            $meta['wpr_brand_link_text']     = $request->get('image_text');
+         }
+
+
+            $arr = [
+                'name'          => $brand->name,
+                'slug'          => $brand->slug,
+                'description'   => $brand->description,
+                'parent_category' => $wp_category_id ,
+                'meta'           => json_encode($meta)
+            ];
+
+                //insert wp site database
+             $response= $this->lbt_wp->storeCategory($arr);//client()->categories()->save($arr);
+             if($response['code']==200){
+
+                    $this->brand->updateWpid($response['data']['wp_brand_id'],$brand->id);
+                    $request->session()->flash('message', 'The new brand was successfully added!');
+              }else{
+                dd($response);
+                $brand->delete();
+                    $request->session()->flash('error', 'Something went wrong !');
+              }
             return redirect()->route('admin.brands');
          }
         catch (\Exception $e) {

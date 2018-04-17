@@ -237,3 +237,7 @@ Appointment v3.2 #stable
 
 LBT OAuth  v1.0 #stable
 	a) Created oAuth token system to access lbt APIs
+
+LBT API Integration v1.0 #stable
+	a)Implemented LBT API in category insert, edit and delete.
+	b)Implemented LBT API in brand insert and edit .

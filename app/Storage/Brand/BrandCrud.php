@@ -169,15 +169,15 @@ class BrandCrud
             'col-class'     => 'col-lg-6 col-md-12 col-sm-12 col-xs-12',
             'clear_all'     => true));
 
-        $fields->addField(array(
-            'name'          => 'logo',
-            'label'         => 'Logo',
-            'accepts'       => 'image/*|video/*',
-            'is_single'     => true,
-            'type'          => 'App\Storage\Media\MediaFieldCustomFields@mediaUpload',
-            'col-class'     => 'col-lg-8 col-md-12 col-sm-12 col-xs-12',
-            'btn_txt'       => 'Upload Logo',
-            'clear_all'     => true));
+        // $fields->addField(array(
+        //     'name'          => 'logo',
+        //     'label'         => 'Logo',
+        //     'accepts'       => 'image/*|video/*',
+        //     'is_single'     => true,
+        //     'type'          => 'App\Storage\Media\MediaFieldCustomFields@mediaUpload',
+        //     'col-class'     => 'col-lg-8 col-md-12 col-sm-12 col-xs-12',
+        //     'btn_txt'       => 'Upload Logo',
+        //     'clear_all'     => true));
 
         $fields->addField(array(
             'name'          => 'desc',
@@ -193,15 +193,15 @@ class BrandCrud
             'col-class'     => 'col-lg-8 col-md-12 col-sm-12 col-xs-12',
             'clear_all'     => true));
 
-        $fields->addField(array(
-            'name'          => 'images',
-            'label'         => 'Default Images',
-            'accepts'       => 'image/*|video/*',
-            'is_single'     => false,
-            'type'          => 'App\Storage\Media\MediaFieldCustomFields@mediaUpload',
-            'col-class'     => 'col-lg-8 col-md-12 col-sm-12 col-xs-12',
-            'btn_txt'       => 'Add Media',
-            'clear_all'     => true));
+        // $fields->addField(array(
+        //     'name'          => 'images',
+        //     'label'         => 'Default Images',
+        //     'accepts'       => 'image/*|video/*',
+        //     'is_single'     => false,
+        //     'type'          => 'App\Storage\Media\MediaFieldCustomFields@mediaUpload',
+        //     'col-class'     => 'col-lg-8 col-md-12 col-sm-12 col-xs-12',
+        //     'btn_txt'       => 'Add Media',
+        //     'clear_all'     => true));
 
         $fields->addField(array(
             'name'          => 'category',

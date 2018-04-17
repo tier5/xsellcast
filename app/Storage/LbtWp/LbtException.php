@@ -11,7 +11,8 @@ class LbtException extends Exception
     {
         $this->error_details = $error_details;
 
-        parent::__construct($message, $code, null);
+        // parent::__construct($message, $code, null);
+        parent::__construct($message, $code, $this->error_details);
     }
 
     public function error_details()

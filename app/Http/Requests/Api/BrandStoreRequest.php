@@ -28,7 +28,7 @@ class BrandStoreRequest extends Request
         return [
 
             'name'        => 'required',
-            'logo'        => 'required|image',
+            // 'logo'        => 'required|image',
             'wp_category_id' => 'required|integer|exists:categories,wp_category_id',
             'catalog_url' => 'url|active_url',
             'opid'        => 'required',

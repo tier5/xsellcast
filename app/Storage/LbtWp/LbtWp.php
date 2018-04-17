@@ -90,13 +90,14 @@ class LbtWp
 
     public function handle_response($result, $status_code)
     {
-        if ($status_code >= 200 && $status_code < 300) {
+        if ($status_code >= 200 && $status_code < 401) {
 
             return $this->parsed_response($result);
         }
         else{
-        	dd($result);
+        	// dd($result);
         }
+dd($result);
 
         throw new LbtException($this->http_codes[$status_code], $status_code, $this->parsed_response($result));
     }
@@ -156,7 +157,8 @@ class LbtWp
       506 => 'Variant Also Negotiates',
       507 => 'Insufficient Storage',
       509 => 'Bandwidth Limit Exceeded',
-      510 => 'Not Extended'
+      510 => 'Not Extended',
+      'rest_no_route' => 'Not Found'
     );
 
 
@@ -187,7 +189,6 @@ class LbtWp
 	private function http_post($path, array $params = array())
     {
         $url = $this->api_url($path);
-
 		$url_params=$this->url_params($params);
 
         if (filter_var($url, FILTER_VALIDATE_URL)===false) {
@@ -254,12 +255,20 @@ class LbtWp
 	public function storeCategory(array $params=array()){
 
 		$params['access_token']=$this->access_token;
-
 		$result=$this->http_post('add_new_brand',$params);
-		if($result['code']==200){
 		return $result;
-		}
+	}
+	public function updateCategory(array $params=array(),$wp_id){
 
+		$params['access_token']=$this->access_token;
+		$result=$this->http_post('edit_the_brand/'.$wp_id,$params);
+		return $result;
+	}
+	public function deleteCategory(array $params=array()){
+
+		$params['access_token']=$this->access_token;
+		$result=$this->http_post('delete_the_brand/',$params);
+		return $result;
 	}
 }
 		// $result=$this->http_post('wp-json/wpr-datahub-api/v1/fetch_token',$auth);

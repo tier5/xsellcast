@@ -174,4 +174,13 @@ class BrandRepositoryEloquent extends BaseRepository implements BrandRepository
 
         return $brand;
     }
+    public function updateWpid($wp_brand_id,$brand_id){
+
+        $brand=$this->model->find($brand_id);
+        $brand->wp_brand_id=$wp_brand_id;
+        $brand->save();
+
+        return $brand;
+    }
+
 }
