@@ -29,9 +29,12 @@ class DealerStoreRequest extends Request
             'phone'              => 'required|regex:/^\([0-9]{3}\) [0-9]{3}-[0-9]{4}$/',
             'city'               => 'required',
             'state'              => 'required',
-            'zip'                => 'required',
+            'zip'                => 'required|digits:5|integer',
+            'brand'              => 'required|integer|exists:brands,id',
             'address_1'          => 'required',
-            'hours_of_operation' => 'valid_hoo'];
+            'hours_of_operation' => 'valid_hoo'
+
+        ];
     }
 
     public function messages()
@@ -45,5 +48,5 @@ class DealerStoreRequest extends Request
     public function forbiddenResponse()
     {
         return response()->view('errors.403');
-    }  
+    }
 }

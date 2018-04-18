@@ -241,3 +241,8 @@ LBT OAuth  v1.0 #stable
 LBT API Integration v1.0 #stable
 	a)Implemented LBT API in category insert, edit and delete.
 	b)Implemented LBT API in brand insert and edit .
+
+LBT API Integration v1.1 #stable
+	a) Implemented LBT API in brand insert, edit and delete .
+	b) Fixed validation message in nearest dealer.
+	c) Fixed issue in dealer option.

@@ -126,9 +126,9 @@ class BrandsController extends Controller
                     $this->brand->updateWpid($response['data']['wp_brand_id'],$brand->id);
                     $request->session()->flash('message', 'The new brand was successfully added!');
               }else{
-                dd($response);
-                $brand->delete();
-                    $request->session()->flash('error', 'Something went wrong !');
+                  $brand->delete();
+                return redirect()->back()->withErrors($response['errors'])->withInput($request->input());
+
               }
             return redirect()->route('admin.brands');
          }
@@ -193,14 +193,55 @@ class BrandsController extends Controller
             $brand->image_text = $request->get('image_text');
 
             $brand->categories()->detach();
-            $brand->save();
+            // $brand->save();
 
-            if($category)
-            {
-                $brand->categories()->save($category);
+            $wp_category_id='';
+
+            $wp_category_id=isset($category->wp_category_id)?$category->wp_category_id:"";
+
+             $meta=[];
+             if($brand->catalog_url!=''){
+                $meta['wpr_brand_catalog']     = $brand->catalog_url;
+             }
+             if($brand->image_url!=''){
+                $meta['wpr_brand_image_url']     = $brand->image_url;
+             }
+
+             if($brand->image_link!=''){
+                $meta['wpr_brand_image_link']     = $brand->image_link;
+             }
+
+             if($brand->image_text!=''){
+                $meta['wpr_brand_link_text']     = $brand->image_text;
+             }
+
+
+            $arr = [
+                'name'          => $brand->name,
+                'slug'          => $brand->slug,
+                'description'   => $brand->description,
+                'parent_category' => $wp_category_id ,
+                'meta'           => json_encode($meta)
+            ];
+
+            if($brand->wp_brand_id!=''){
+                //update wp site database
+                $response= $this->lbt_wp->updateCategory($arr,$brand->wp_brand_id);
+                if($response['code']==200){
+                $brand->categories()->detach();
+                $brand->save();
+                if($category)
+                    {
+                        $brand->categories()->save($category);
+                    }
+                    $request->session()->flash('message', 'The brand was successfully updated!');
+                }else{
+                      return redirect()->back()->withErrors($response['errors'])->withInput($request->input());
+                }
+            }else{
+                    // $request->session()->flash('message', 'The wp brand  id  not found !');
+                     return redirect()->back()->withErrors(['wp_brand_id'=>'The wp brand  id  not found !'])->withInput($request->input());
             }
-
-            $request->session()->flash('message', 'The brand was successfully updated!');
             return redirect()->route('admin.brands');
 
         }
@@ -219,11 +260,24 @@ class BrandsController extends Controller
                 abort(402, "Brand don't exist.");
             }
 
-            $brand->categories()->detach();
-            $brand->save();
-            $brand->delete();
+            if($brand->wp_brand_id != ''){
+                $arr = [
+                    'wp_id' =>$brand->wp_brand_id
+                    ];
+                $response= $this->lbt_wp->deleteCategory($arr);
+                if($response['code']==200){
+                    $brand->categories()->detach();
+                    $brand->save();
+                    $brand->delete();
+                    $request->session()->flash('message', 'The brand was successfully deleted!');
 
-            $request->session()->flash('message', 'The brand was successfully deleted!');
+                }else{
+                     return redirect()->back()->withErrors($response['errors'])->withInput($request->input());
+                }
+            }else{
+                    // $request->session()->flash('message', 'The wp brand  id  not found !');
+                     return redirect()->back()->withErrors(['wp_brand_id'=>'The wp brand  id  not found !'])->withInput($request->input());
+            }
             return redirect()->route('admin.brands');
          }
         catch (\Exception $e) {

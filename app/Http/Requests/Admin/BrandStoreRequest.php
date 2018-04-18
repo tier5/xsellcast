@@ -29,12 +29,12 @@ class BrandStoreRequest extends Request
             // 'logo'        => 'required',
             'slug'        =>  'slug|unique:brands,slug',
             'category'    => 'required',
-            'catalog_url' => 'url|active_url',
+            'catalog_url' => 'required|url|active_url',
             'opid' => 'required',
 
-            'image_url'   => 'url|active_url',
-            'image_link'  => 'url|active_url',
-            'image_text'  => '',
+            'image_url'   => 'required|url|active_url',
+            'image_link'  => 'required|url|active_url',
+            'image_text'  => 'required|url|active_url',
         ];
     }
 
