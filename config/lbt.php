@@ -182,6 +182,7 @@ return [
 	 * ZIP code API key: https://www.zipcodeapi.com/API
 	 */
 	'zipcodeapi_key' => env('ZIPCODEAPI_KEY', 'LtZSwmSuylcHGvgohmPLYP5Q8zGD1CHN6HGC3y7CUkjBQA07WPSVEXLMwspy57mc'),
+	'ziptogeo_key' => env('ZIPTOGEOAPI_KEY', 'uP2n8nMXdrv18tqqUWkY3rGQvqvDWTW8ekqlS71tUI9Gcw7YZind2Br5fX2wxiYV'),
 
 	'offer' => [
 		/**

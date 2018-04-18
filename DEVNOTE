@@ -246,3 +246,8 @@ LBT API Integration v1.1 #stable
 	a) Implemented LBT API in brand insert, edit and delete .
 	b) Fixed validation message in nearest dealer.
 	c) Fixed issue in dealer option.
+
+Prospect registration v2.0 #stable
+	a) Implemented avatar_link in add prospect and add prospect by social media APIs.
+	b) Removed geo_long,geo_lat form add prospect and add prospect by social media APIs.
+	c) Implemented fetch geo location details by zip in add prospect and add prospect by social media APIs.

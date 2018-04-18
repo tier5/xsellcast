@@ -30,7 +30,7 @@ class CustomerPostRequest extends Request
             'wp_userid'    => 'required|unique:user_customer,wp_userid',
             'address1'     => 'required',
             'address2'     => '',
-            'zip'          => 'required',
+            'zip'          => 'required|digits:5|integer',
             'city'         => 'required',
             'state'        => 'required',
             'geo_long'     => '',
@@ -41,7 +41,9 @@ class CustomerPostRequest extends Request
             'homephone'    => '',
             'cellphone'    => '',
             'officephone'  => '',
-            'password'        => 'required|min:6'
+            'password'     => 'required|min:6',
+            'avatar_link'  => 'url|active_url',
+
 
         ];
     }

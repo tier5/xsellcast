@@ -12,6 +12,7 @@ use App\Storage\User\User;
 use App\Storage\Role\Role;
 use App\Storage\CustomerOffer\CustomerOffer;
 use App\Storage\Ontraport\CustomerObj;
+use App\Storage\ZipCodeApi\ZipCodeApi;
 
 /**
  * Class CustomerRepositoryEloquent
@@ -280,6 +281,7 @@ class CustomerRepositoryEloquent extends BaseRepository implements CustomerRepos
         'country'         => $data['country'],
         'geo_long'        => $data['geo_long'],
         'geo_lat'         => $data['geo_lat'],
+        'avatar_link'     => $data['avatar_link'],
 
         'user_id'         => $user->id,
         'wp_userid'       => (isset($data['wp_userid']) ? $data['wp_userid'] : null)

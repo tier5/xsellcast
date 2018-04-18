@@ -27,9 +27,8 @@ class CustomerTransformer extends TransformerAbstract
 
         return [
             'id'           => (int) $model->id,
+            'wp_userid'    => $model->wp_userid,
             'name'         => $name,
-            'created_at'   => $model->created_at,
-            'updated_at'   => $model->updated_at,
             'firstname'    => $user->firstname,
             'lastname'     => $user->lastname,
             'email'        => $user->email,
@@ -45,7 +44,9 @@ class CustomerTransformer extends TransformerAbstract
             'homephone'    => $model->homephone,
             'officephone'  => $model->officephone,
             'cellphone'    => $model->cellphone,
-            'wp_userid'    => $model->wp_userid
+            'avatar_link'    => $model->avatar_link,
+            'created_at'   => $model->created_at,
+            'updated_at'   => $model->updated_at,
         ];
     }
 }

@@ -4,6 +4,8 @@ class ZipCodeApi
 {
 	protected $foundZips = null;
 	protected $zipcode = null;
+	protected $lat = null;
+	protected $long = null;
 
 	protected $error = null;
 
@@ -22,6 +24,28 @@ class ZipCodeApi
 	public function setZipCode($zip)
 	{
 		$this->zipcode = $zip;
+
+		return $this;
+	}
+	public function getFoundLat()
+	{
+		return $this->lat;
+	}
+
+	public function setLat($lat)
+	{
+		$this->lat = $lat;
+
+		return $this;
+	}
+	public function getFoundLong()
+	{
+		return $this->long;
+	}
+
+	public function setLong($long)
+	{
+		$this->long = $long;
 
 		return $this;
 	}
@@ -79,6 +103,8 @@ class ZipCodeApi
 
 		return $z;
 	}
+
+
 
 	public static function getZipByIP($ip)
 	{
@@ -154,5 +180,44 @@ class ZipCodeApi
 		return $z;
 	}
 
+	public static function getGeoByzip($zip,$distance=200)
+	{
+		$apiKey = config('lbt.ziptogeo_key');
+		$z = new ZipCodeApi();
 
+		/**
+		 * Distance must count as miles
+		 *
+		 * @var        string
+		 */
+		// $distance = '50';
+		// $url = "https://www.zipcodeapi.com/rest/" . $apiKey . "/radius.json/" . $zip . "/" . $distance . "/miles?minimal";
+		$url="https://www.zipcodeapi.com/rest/" . $apiKey . "/info.json/" . $zip . "/degrees";
+		/**
+		 * Do curl request to fetch zip list.
+		 */
+		$curl = curl_init();
+		curl_setopt_array($curl, array(
+		    CURLOPT_RETURNTRANSFER => 1,
+		    CURLOPT_URL => $url
+		));
+
+		$result = json_decode(curl_exec($curl));
+
+		if(isset($result->lat)){
+
+			$z->setLat($result->lat);
+		}
+		if(isset($result->lng)){
+
+			$z->setLong($result->lng);
+		}
+
+		if(isset($result->error_code) && $result->error_code == 401){
+
+			$z->setError($result->error_msg);
+		}
+
+		return $z;
+	}
 }

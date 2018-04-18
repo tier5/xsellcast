@@ -361,15 +361,40 @@ class CustomerController extends Controller
             $data['cellphone']= (isset($data['cellphone']) ? $data['cellphone'] : '');
             $data['officephone']= (isset($data['officephone']) ? $data['officephone'] : '');
 
+
+            $zip=new ZipCodeApi();
+            $geo=$zip->getGeoByzip($data['zip']);
+
+            if($geo->getFoundLat() == null || $geo->getFoundLong() == null){
+
+                return response()->json([
+                    'status'   =>false,
+                    'code'     =>400,
+                    'data'     =>null,
+                    'errors'   =>['zip'=>['The Zip code is invalid'] ],
+                    'message'  =>"Bad request"
+                ],
+                    config('responses.bad_request.status_code')
+                );
+
+            }else{
+
+                $data['geo_lat']  = $geo->getFoundLat();
+                $data['geo_long'] = $geo->getFoundLong();
+            }
+
+
+
             $customer         = $this->customer->createOne($data);
 
             // return response() ->json($this->customer->find($customer->id));
-            return response()->json([
+            $response=[
                     'status'=>true,
                     'code'=>config('responses.success.status_code'),
-                    'data'=>$this->customer->find($customer->id),
                     'message'=>config('responses.success.status_message'),
-                ], config('responses.success.status_code'));
+                ];
+                $response=array_merge($response,$this->customer->find($customer->id));
+            return response()->json($response, config('responses.success.status_code'));
             }
         catch (\Exception $e) {
             // dd($e->getMessage());
@@ -408,16 +433,40 @@ class CustomerController extends Controller
             $data['homephone']= (isset($data['homephone']) ? $data['homephone'] : '');
             $data['cellphone']= (isset($data['cellphone']) ? $data['cellphone'] : '');
             $data['officephone']= (isset($data['officephone']) ? $data['officephone'] : '');
+            $data['avatar_link']= (isset($data['avatar_link']) ? $data['avatar_link'] : '');
+
+            $zip=new ZipCodeApi();
+            $geo=$zip->getGeoByzip($data['zip']);
+
+            if($geo->getFoundLat() == null || $geo->getFoundLong() == null){
+
+                return response()->json([
+                    'status'   =>false,
+                    'code'     =>400,
+                    'data'     =>null,
+                    'errors'   =>['zip'=>['The Zip code is invalid'] ],
+                    'message'  =>"Bad request"
+                ],
+                    config('responses.bad_request.status_code')
+                );
+
+            }else{
+
+                $data['geo_lat']  = $geo->getFoundLat();
+                $data['geo_long'] = $geo->getFoundLong();
+            }
+
 
             $customer               = $this->customer->createOne($data);
 
             // return response() ->json($this->customer->find($customer->id));
-            return response()->json([
+            $response=[
                     'status'=>true,
                     'code'=>config('responses.success.status_code'),
-                    'data'=>$this->customer->find($customer->id),
                     'message'=>config('responses.success.status_message'),
-                ], config('responses.success.status_code'));
+                ];
+                $response=array_merge($response,$this->customer->find($customer->id));
+            return response()->json($response, config('responses.success.status_code'));
             }
         catch (\Exception $e) {
             // dd($e->getMessage());
