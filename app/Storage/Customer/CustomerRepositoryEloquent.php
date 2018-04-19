@@ -281,7 +281,7 @@ class CustomerRepositoryEloquent extends BaseRepository implements CustomerRepos
         'country'         => $data['country'],
         'geo_long'        => $data['geo_long'],
         'geo_lat'         => $data['geo_lat'],
-        'avatar_link'     => $data['avatar_link'],
+        'avatar_url'     => $data['avatar_url'],
 
         'user_id'         => $user->id,
         'wp_userid'       => (isset($data['wp_userid']) ? $data['wp_userid'] : null)

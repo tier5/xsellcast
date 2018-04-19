@@ -14,7 +14,7 @@ class AlterCustomer extends Migration
     {
        Schema::table('user_customer', function($t) {
 
-            $t->string('avatar_link')->nullable();
+            $t->string('avatar_url')->nullable();
 
         });
     }

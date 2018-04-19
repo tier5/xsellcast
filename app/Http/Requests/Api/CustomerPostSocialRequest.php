@@ -43,7 +43,7 @@ class CustomerPostSocialRequest extends Request
             'officephone'       => '',
             'provider'          => 'required',
             'provider_token'    => 'required|unique:users,provider_token',
-            'avatar_link'       => 'url|active_url',
+            'avatar_url'       => 'url|active_url',
 
 
         ];

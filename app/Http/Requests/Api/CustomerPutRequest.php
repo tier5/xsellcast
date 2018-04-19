@@ -40,22 +40,24 @@ class CustomerPutRequest extends Request
    //     $this->attributes->add(['customer' => $customer]);
 
         return [
-            'access_token' => 'required',
-            'wp_customer_id'  => 'required|integer|exists:user_customer,wp_userid',
-            // 'wp_userid'    => $wpIdRules,
-            'address1'     => isset($this->address1)?'required':'',
-            'address2'     => '',
-            'zip'          => isset($this->zip)?'required':'',
-            'city'         => isset($this->city)?'required':'',
-            'state'        => isset($this->state)?'required':'',
-            'geo_long'     => '',
-            'geo_lat'      => '',
-            'email'        => isset($this->email)?'required|'.$emailRules:'',
-            'firstname'    => isset($this->firstname)?'required':'',
-            'lastname'     => isset($this->lastname)?'required':'',
-            'cellphone'    => '',
-            'officephone'  => '',
-            'homephone'    => ''
+            'access_token'      => 'required',
+            'wp_customer_id'    => 'required|integer|exists:user_customer,wp_userid',
+            // 'wp_userid'      => $wpIdRules,
+            'address1'          => isset($this->address1)?'required':'',
+            'address2'          => '',
+            'zip'               => isset($this->zip)?'required|digits:5|integer':'',
+            'city'              => isset($this->city)?'required':'',
+            'state'             => isset($this->state)?'required':'',
+            'geo_long'          => '',
+            'geo_lat'           => '',
+            'email'             => isset($this->email)?'required|email|'.$emailRules:'',
+            'firstname'         => isset($this->firstname)?'required':'',
+            'lastname'          => isset($this->lastname)?'required':'',
+            'cellphone'         => '',
+            'officephone'       => '',
+            'homephone'         => '',
+            'avatar_url'       => 'url|active_url',
+
 
         ];
     }

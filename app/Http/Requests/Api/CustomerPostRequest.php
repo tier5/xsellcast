@@ -42,7 +42,7 @@ class CustomerPostRequest extends Request
             'cellphone'    => '',
             'officephone'  => '',
             'password'     => 'required|min:6',
-            'avatar_link'  => 'url|active_url',
+            'avatar_url'  => 'url|active_url',
 
 
         ];

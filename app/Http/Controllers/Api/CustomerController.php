@@ -433,7 +433,7 @@ class CustomerController extends Controller
             $data['homephone']= (isset($data['homephone']) ? $data['homephone'] : '');
             $data['cellphone']= (isset($data['cellphone']) ? $data['cellphone'] : '');
             $data['officephone']= (isset($data['officephone']) ? $data['officephone'] : '');
-            $data['avatar_link']= (isset($data['avatar_link']) ? $data['avatar_link'] : '');
+            $data['avatar_url']= (isset($data['avatar_url']) ? $data['avatar_url'] : '');
 
             $zip=new ZipCodeApi();
             $geo=$zip->getGeoByzip($data['zip']);
@@ -500,18 +500,38 @@ class CustomerController extends Controller
             $wp=new WpConvetor();
             $customer_id=$wp->getId('customer',$wp_customer_id);
 
+            if(isset($data['zip'])){
+                $zip=new ZipCodeApi();
+                $geo=$zip->getGeoByzip($data['zip']);
+
+                if($geo->getFoundLat() == null || $geo->getFoundLong() == null){
+
+                    return response()->json([
+                        'status'   =>false,
+                        'code'     =>400,
+                        'data'     =>null,
+                        'errors'   =>['zip'=>['The Zip code is invalid'] ],
+                        'message'  =>"Bad request"
+                    ],
+                        config('responses.bad_request.status_code')
+                    );
+
+                }else{
+
+                    $data['geo_lat']  = $geo->getFoundLat();
+                    $data['geo_long'] = $geo->getFoundLong();
+                }
+            }
+
             $customer = $this->customer->skipPresenter()->find($customer_id);
             $this->customer->updateOne($customer, $data);
 
-            // $$this->customer->skipPresenter(false)->find($customer->id)
-            // return response()
-            //     ->json();
-                 return response()->json([
-                    'status'=>true,
-                    'code'=>config('responses.success.status_code'),
-                    'data'=>$customer,
-                    'message'=>config('responses.success.status_message'),
-                ], config('responses.success.status_code'));
+            return response()->json([
+                'status'=>true,
+                'code'=>config('responses.success.status_code'),
+                'data'=>$customer,
+                'message'=>config('responses.success.status_message'),
+            ], config('responses.success.status_code'));
         }
         catch (\Exception $e) {
             // dd($e->getMessage());
@@ -1022,20 +1042,34 @@ class CustomerController extends Controller
     {
         try {
             $data     = $request->all();
-            $customer = $this->customer->skipPresenter()->find($request->get('customer_id'));
-            $user= $customer->user;
 
-            if(!empty($user)){
+            $wp_customer_id=$request->get('wp_customer_id');
+            $avatar_url=$request->get('avatar_url');
+            $wp=new WpConvetor();
+            $customer_id=$wp->getId('customer',$wp_customer_id);
 
-               $user->setMeta('avatar_media_id', $request->get('avatar_id'));
-               $user->save();
-               return response()->json([
+            $customer = $this->customer->skipPresenter()->find($customer_id);
+            // $user= $customer->user;
+            $customer->avatar_url=$avatar_url;
+            if($customer->save()){
+                return response()->json([
                     'status'=>true,
                     'code'=>config('responses.success.status_code'),
-                    'data'=>$user->avatar(),
+                    'data'=>$customer->avatar_url,
                     'message'=>'Your Avatar was succesfully updated',
                     ], config('responses.success.status_code'));
             }
+            // if(!empty($user)){
+
+            //    $user->setMeta('avatar_media_id', $request->get('avatar_id'));
+            //    $user->save();
+            //    return response()->json([
+            //         'status'=>true,
+            //         'code'=>config('responses.success.status_code'),
+            //         'data'=>$user->avatar(),
+            //         'message'=>'Your Avatar was succesfully updated',
+            //         ], config('responses.success.status_code'));
+            // }
             return response()->json([
                'status'=>false,
                 'code'=>config('responses.bad_request.status_code'),

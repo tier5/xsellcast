@@ -10,7 +10,7 @@ class Customer extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $fillable = ['zip', 'address1', 'address2', 'city', 'state', 'country', 'geo_long', 'geo_lat', 'wp_userid', 'homephone', 'cellphone', 'officephone', 'opid','avatar_link'];
+    protected $fillable = ['zip', 'address1', 'address2', 'city', 'state', 'country', 'geo_long', 'geo_lat', 'wp_userid', 'homephone', 'cellphone', 'officephone', 'opid','avatar_url'];
 
     protected $available_phone;
 

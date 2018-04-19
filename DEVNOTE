@@ -248,6 +248,13 @@ LBT API Integration v1.1 #stable
 	c) Fixed issue in dealer option.
 
 Prospect registration v2.0 #stable
-	a) Implemented avatar_link in add prospect and add prospect by social media APIs.
+	a) Implemented avatar_url in add prospect and add prospect by social media APIs.
 	b) Removed geo_long,geo_lat form add prospect and add prospect by social media APIs.
 	c) Implemented fetch geo location details by zip in add prospect and add prospect by social media APIs.
+
+Prospect registration v2.1 #stable
+
+	a) Implemented avatar_link in Edit prospect api.
+	b) Removed geo_long,geo_lat form
+	c) Implemented fetch geo location details by zip in Edit prospect api.
+	d) Modified update avatar api.

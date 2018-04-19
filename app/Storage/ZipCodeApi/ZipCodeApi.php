@@ -191,8 +191,7 @@ class ZipCodeApi
 		 * @var        string
 		 */
 		// $distance = '50';
-		// $url = "https://www.zipcodeapi.com/rest/" . $apiKey . "/radius.json/" . $zip . "/" . $distance . "/miles?minimal";
-		$url="https://www.zipcodeapi.com/rest/" . $apiKey . "/info.json/" . $zip . "/degrees";
+	 	$url="https://www.zipcodeapi.com/rest/" . $apiKey . "/info.json/" . $zip . "/degrees";
 		/**
 		 * Do curl request to fetch zip list.
 		 */

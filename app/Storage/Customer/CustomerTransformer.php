@@ -44,7 +44,7 @@ class CustomerTransformer extends TransformerAbstract
             'homephone'    => $model->homephone,
             'officephone'  => $model->officephone,
             'cellphone'    => $model->cellphone,
-            'avatar_link'    => $model->avatar_link,
+            'avatar_url'    => $model->avatar_url,
             'created_at'   => $model->created_at,
             'updated_at'   => $model->updated_at,
         ];
