@@ -4,6 +4,7 @@ namespace App\Http\Requests\Api;
 
 use App\Http\Requests\Request;
 use App\Storage\Customer\Customer;
+use App\Storage\LbtWp\WpConvetor;
 
 class CustomerPutRequest extends Request
 {
@@ -26,8 +27,11 @@ class CustomerPutRequest extends Request
      */
     public function rules()
     {
-        $customerId = $this->get('customer_id');
-        $customer   = Customer::find($customerId);
+        $wp_customer_id=$this->get('wp_customer_id');
+        $wp=new WpConvetor();
+        $customer_id=$wp->getId('customer',$wp_customer_id);
+        // $customerId = $this->get('customer_id');
+        $customer   = Customer::find($customer_id);
         $wpIdRules  = 'unique:user_customer,wp_userid';
         $emailRules = 'unique:users,email';
 
@@ -53,10 +57,10 @@ class CustomerPutRequest extends Request
             'email'             => isset($this->email)?'required|email|'.$emailRules:'',
             'firstname'         => isset($this->firstname)?'required':'',
             'lastname'          => isset($this->lastname)?'required':'',
-            'cellphone'         => '',
-            'officephone'       => '',
-            'homephone'         => '',
-            'avatar_url'       => 'url|active_url',
+            'cellphone'         => 'numeric',
+            'officephone'       => 'numeric',
+            'homephone'         => 'numeric',
+            'avatar_url'        => 'url|active_url',
 
 
         ];

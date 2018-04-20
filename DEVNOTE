@@ -258,3 +258,6 @@ Prospect registration v2.1 #stable
 	b) Removed geo_long,geo_lat form
 	c) Implemented fetch geo location details by zip in Edit prospect api.
 	d) Modified update avatar api.
+
+Prospect registration v2.2 #stable
+	a) Fixed validation issue in prospect insert and edit API

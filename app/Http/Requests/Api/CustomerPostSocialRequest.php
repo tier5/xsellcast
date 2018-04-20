@@ -27,7 +27,7 @@ class CustomerPostSocialRequest extends Request
     {
         return [
             'access_token'      => 'required',
-            'wp_userid'         => 'required|unique:user_customer,wp_userid',
+            'wp_userid'         => 'required|integer|unique:user_customer,wp_userid',
             'address1'          => 'required',
             'address2'          => '',
             'zip'               => 'required|digits:5|integer',
@@ -35,17 +35,15 @@ class CustomerPostSocialRequest extends Request
             'state'             => 'required',
             'geo_long'          => '',
             'geo_lat'           => '',
-            'email'             => 'required|unique:users,email',
+            'email'             => 'required|email|unique:users,email',
             'firstname'         => 'required',
             'lastname'          => 'required',
-            'homephone'         => '',
-            'cellphone'         => '',
-            'officephone'       => '',
+            'homephone'         => 'numeric',
+            'cellphone'         => 'numeric',
+            'officephone'       => 'numeric',
             'provider'          => 'required',
             'provider_token'    => 'required|unique:users,provider_token',
-            'avatar_url'       => 'url|active_url',
-
-
+            'avatar_url'        => 'url|active_url',
         ];
     }
 
