@@ -269,3 +269,5 @@ ABC linkedin login v1.0 #stable
 ABC linkedin login v1.1 #stable
 	a) Fixed image upload issue
 	b) Implemented update ABC detail by linkedin
+ABC linkedin login v1.2 #stable
+	a) Fixed validation issue

@@ -106,6 +106,10 @@ class SocialController extends Controller
 			Auth::guard($this->getGuard())->login($user);
 
 			$salesRep = $user->salesRep()->first();
+			if($salesRep){
+			// dd('update');
+			//TODO: update missing info like cell phone, avatar, physical address, professional title and business affiliation.
+			//
 			if($salesRep->linkedin==''){
 			$salesRep->linkedin=$userInfo['publicProfileUrl'];
 			}
@@ -118,9 +122,8 @@ class SocialController extends Controller
 
 
 			$salesRep->save();
+			}
 
-			// dd('update');
-			//TODO: update missing info like cell phone, avatar, physical address, professional title and business affiliation.
 		}else
 		{
 			// dd('create new');
