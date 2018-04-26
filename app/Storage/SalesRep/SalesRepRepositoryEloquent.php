@@ -215,10 +215,10 @@ class SalesRepRepositoryEloquent extends BaseRepository implements SalesRepRepos
         $user->roles()->save($role);
         $user->salesRep()->save($salesrep);
 
-        if($ontraport){
-            $sro = new SalesRepObj();
-            $sro->upsert($salesrep);
-        }
+        // if($ontraport){
+        //     $sro = new SalesRepObj();
+        //     $sro->upsert($salesrep);
+        // }
 
         return $salesrep;
     }
@@ -265,7 +265,7 @@ class SalesRepRepositoryEloquent extends BaseRepository implements SalesRepRepos
         $sr->save();
 
         $sro = new SalesRepObj();
-        $sro->upsert($sr);
+        //$sro->upsert($sr);
 
         return $sr;
     }
