@@ -207,7 +207,7 @@ registerscreen
                             <span><i class="fa fa-linkedin"></i></span>
                         </div>
                         <div class="col-xs-10">
-                            <input type="text" class="form-control" placeholder="URL" name="linkedin" id="linkedin" />
+                            <input type="text" class="form-control" placeholder="URL" name="linkedin" id="linkedin" value="{{ old('linkedin', (isset($sales_rep->linkedin) ? $sales_rep->linkedin : '' ) ) }}"/>
                         </div>
                     </div>
                 </div>

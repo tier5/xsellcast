@@ -54,7 +54,7 @@ class SocialController extends Controller
 
 		// $fields = ['name', 'email', 'gender', 'verified', 'link', 'first_name', 'last_name'];
 		$token    = $request->get('code');
-// dd($request->all());
+		// dd($request->all());
 		try {
 
 			$user   = Socialite::driver($provider)
@@ -65,15 +65,17 @@ class SocialController extends Controller
 				 return view('auth.linkedin_demo')->with('user',$user);
 			}
 
-// dd($user);
+		// dd($user);
 		}catch(\Exception $e){
 
 			return redirect()->route('home');
 		}
 
 		$userInfo = $user->user;
+		if($user->avatar_original!=null){
+				$media    = $this->media->uploadImgFrmFb($user->avatar_original);
+		}
 
-		$media    = $this->media->uploadImgFrmFb($user->avatar_original);
 
 		$userData = array(
 			'meta' => array(
@@ -87,6 +89,7 @@ class SocialController extends Controller
 				'in_profile_url'   => $userInfo['publicProfileUrl'],
 				'avatar_media_id'  => $media->id ),
 			'linkedin'  => $userInfo['publicProfileUrl'],
+			'job_title'  => $userInfo['industry'],
 			'email'     => $user->email,
 			'firstname' => $userInfo['firstName'],
 			'lastname'  => $userInfo['lastName'],
@@ -99,16 +102,37 @@ class SocialController extends Controller
 		if($foundUser)
 		{
 			$user = $foundUser;
-			  Auth::guard($this->getGuard())->login($user);
+
+			Auth::guard($this->getGuard())->login($user);
+
+			$salesRep = $user->salesRep()->first();
+			if($salesRep->linkedin==''){
+			$salesRep->linkedin=$userInfo['publicProfileUrl'];
+			}
+			if($salesRep->job_title==''){
+			$salesRep->job_title=$userInfo['industry'];
+			}
+			// if($salesRep->email_work==''){
+			// $salesRep->email_work=$user->email;
+			// }
+
+
+			$salesRep->save();
+
 			// dd('update');
 			//TODO: update missing info like cell phone, avatar, physical address, professional title and business affiliation.
 		}else
 		{
 			// dd('create new');
 			$user = $this->user->createSalesRep($userData);
-			  Auth::guard($this->getGuard())->login($user);
+
+			Auth::guard($this->getGuard())->login($user);
+
 			$salesRep = $user->salesRep()->first();
-			 return redirect()->route('register', ['id' => $salesRep->id]);
+			$salesRep->linkedin=$userInfo['publicProfileUrl'];
+			$salesRep->save();
+
+			return redirect()->route('register', ['id' => $salesRep->id]);
 		}
 
 

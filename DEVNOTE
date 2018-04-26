@@ -265,3 +265,7 @@ Prospect registration v2.2 #stable
 ABC linkedin login v1.0 #stable
 	a) Implemented Linkedin login and registration
 	b) Created view to display linkedin data in BA login
+
+ABC linkedin login v1.1 #stable
+	a) Fixed image upload issue
+	b) Implemented update ABC detail by linkedin
