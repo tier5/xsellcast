@@ -43,7 +43,7 @@ class SalesRepRepositoryEloquent extends BaseRepository implements SalesRepRepos
 
     public function presenter()
     {
-        
+
         return SalesRepPresenter::class;
     }
 
@@ -94,14 +94,14 @@ class SalesRepRepositoryEloquent extends BaseRepository implements SalesRepRepos
                     $query->where(function($q) use($show_approved, $show_rejected){
                         $q->where('approved', $show_approved);
                         $q->where('rejected', $show_rejected);
-                    });                    
+                    });
                 }
             });
 
         $this->model = $model;
 
         return $this;
-    }    
+    }
 
     public function filter($where)
     {
@@ -109,8 +109,8 @@ class SalesRepRepositoryEloquent extends BaseRepository implements SalesRepRepos
         $this->model = $this->model->where($where);
 
         return $this;
-    }      
-    
+    }
+
     /**
      *
      * @param      integer|null  $salesrep_id  The salesrep identifier
@@ -131,7 +131,7 @@ class SalesRepRepositoryEloquent extends BaseRepository implements SalesRepRepos
             $salesRep = $this->skipPresenter()->find($salesrep_id);
 
             if($user->id != $salesRep->user_id)
-            { 
+            {
                 return null;
             }
 
@@ -139,33 +139,33 @@ class SalesRepRepositoryEloquent extends BaseRepository implements SalesRepRepos
 
             $salesRep = $this->skipPresenter()
                 ->filter(['user_id' => $user->id])
-                ->first();              
+                ->first();
         }
- 
-            
-        return $salesRep;     
-    }   
+
+
+        return $salesRep;
+    }
 
     /**
      * -1 = completed
      *  0 = Create Account
      *  1 = Company info
      *  2 = Social profile
-     * 
+     *
      *
      * @param      SalesRep   $sales_rep  The sales rep
      *
      * @return     Array
      */
     public function registrationLevel($sales_rep)
-    {   
+    {
         if(!$sales_rep){
 
             return array();
         }
 
         $user = $sales_rep->user()->first();
-        
+
         if($user->firstname == '')
         {
             return array(0);
@@ -182,7 +182,7 @@ class SalesRepRepositoryEloquent extends BaseRepository implements SalesRepRepos
         if(empty($sales_rep->facebook) && empty($sales_rep->twitter) && empty($sales_rep->linkedin)){
 
             return array(0, 1, 2);
-        }       
+        }
 
         return array(-1, 0, 1, 2);
     }
@@ -202,7 +202,7 @@ class SalesRepRepositoryEloquent extends BaseRepository implements SalesRepRepos
             'firstname' => $data['firstname'],
             'lastname'  => $data['lastname'],
             'password'  => bcrypt($data['password']),
-            'email'     => $data['email'] ]);      
+            'email'     => $data['email'] ]);
 
         $salesrep = $this->model->create([
             'user_id' => $user->id]);
@@ -219,7 +219,7 @@ class SalesRepRepositoryEloquent extends BaseRepository implements SalesRepRepos
             $sro = new SalesRepObj();
             $sro->upsert($salesrep);
         }
-        
+
         return $salesrep;
     }
 
@@ -255,11 +255,11 @@ class SalesRepRepositoryEloquent extends BaseRepository implements SalesRepRepos
             {
                 continue;
             }
-            
+
             if(isset($data[$field]))
             {
                 $sr->{$field} = $data[$field];
-            }            
+            }
         }
 
         $sr->save();
@@ -271,7 +271,7 @@ class SalesRepRepositoryEloquent extends BaseRepository implements SalesRepRepos
     }
 
     public function orderByName($order = 'desc')
-    {   
+    {
         $this->joinToUsers();
         $this->model = $this->model->orderBy('users.lastname', $order);
 
@@ -279,12 +279,12 @@ class SalesRepRepositoryEloquent extends BaseRepository implements SalesRepRepos
     }
 
     public function orderByEmail($order = 'desc')
-    {   
+    {
         $this->joinToUsers();
         $this->model = $this->model->orderBy('users.email', $order);
 
         return $this;
-    }  
+    }
 
     public function joinToUsers()
     {
@@ -292,7 +292,7 @@ class SalesRepRepositoryEloquent extends BaseRepository implements SalesRepRepos
         ->select('user_salesreps.*');
 
         return $this;
-    }  
+    }
 
     public function orderByAgreement($order = 'desc')
     {

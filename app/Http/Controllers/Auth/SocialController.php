@@ -89,7 +89,7 @@ class SocialController extends Controller
 				'in_profile_url'   => $userInfo['publicProfileUrl'],
 				'avatar_media_id'  => $media->id ),
 			'linkedin'  => $userInfo['publicProfileUrl'],
-			'job_title'  => $userInfo['industry'],
+			'job_title' => $userInfo['industry'],
 			'email'     => $user->email,
 			'firstname' => $userInfo['firstName'],
 			'lastname'  => $userInfo['lastName'],
@@ -133,6 +133,8 @@ class SocialController extends Controller
 
 			$salesRep = $user->salesRep()->first();
 			$salesRep->linkedin=$userInfo['publicProfileUrl'];
+			$salesRep->job_title=$userInfo['industry'];
+
 			$salesRep->save();
 
 			return redirect()->route('register', ['id' => $salesRep->id]);
