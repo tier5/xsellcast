@@ -77,11 +77,24 @@ Route::group(array('prefix' => 'auth'), function(){
     Route::get('fb', array(
         'uses' => 'Auth\FbSocialController@redirectToProvider',
         'as' => 'auth.social.fb' ));
-
     Route::get('fb/callback', array(
         'uses' => 'Auth\FbSocialController@handleProviderCallback',
         'as' => 'auth.social.fb.callback' ));
 
+    Route::get('social/{provider}', array(
+        'uses' => 'Auth\SocialController@redirectToProvider',
+        'as' => 'auth.social' ));
+
+    Route::get('social/{provider}/callback', array(
+        'uses' => 'Auth\SocialController@handleProviderCallback',
+        'as' => 'auth.social.callback' ));
+
+    Route::get('social/linkedin/demo', array(
+        'uses' => 'Auth\SocialController@redirectToProviderDemo',
+        'as' => 'auth.social.demo' ));
+    // Route::get('social/linkedin/data', array(
+    //     'uses' => 'Auth\SocialController@redirectToProviderDemoData',
+    //     'as' => 'auth.social.demo' ));
     /**
      * Cronofy
      */

@@ -261,3 +261,7 @@ Prospect registration v2.1 #stable
 
 Prospect registration v2.2 #stable
 	a) Fixed validation issue in prospect insert and edit API
+
+ABC linkedin login v1.0 #stable
+	a) Implemented Linkedin login and registration
+	b) Created view to display linkedin data in BA login

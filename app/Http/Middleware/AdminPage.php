@@ -282,6 +282,15 @@ class AdminPage
           $menu->add('LOG OUT',  ['route' => 'auth.logout'])
             ->data('icon_class', 'fa fa-sign-out');
 
+
+          /**
+           * Linkedin Demo
+           */
+          $menu->add('Linkedin Data', ['route' => 'auth.social.demo'])
+            ->data('icon_class', 'fa fa-in')
+            ->forRoleOnly('sales-rep')
+            ->nickname('admin_linkedin');
+
         });
 
         return $next($request);

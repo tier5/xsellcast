@@ -9,7 +9,7 @@ registerscreen
 @endsection
 
 @section('content')
-    
+
     <div class="stepwizard">
 
         <div class="stepwizard-row setup-panel m-b">
@@ -40,7 +40,11 @@ registerscreen
                         <i class="fa fa-facebook"> </i> Continue with Facebook
                     </a>
                 </div>
-
+                <div class="form-group text-center">
+                    <a href="{{ route('auth.social','linkedin') }}" class="btn btn-success btn-linkedin btn-outline btn-block">
+                        <i class="fa fa-linkedin"> </i> Sign in with linkedin
+                    </a>
+                </div>
                 <div class="form-group">
                      <p class="text-muted text-center breakline-through"><small>Or</small></p>
                 </div>
@@ -100,7 +104,7 @@ registerscreen
 
                     <div class="col-xs-6 col-sm-6 col-md-offset-3 col-sm-offset-3 col-xs-offset-3">
                         <a href="{!! route('register.cancel') !!}" class="btn btn-white btn-block btn-flat">Cancel</a>
-                    </div><!-- /.col -->                    
+                    </div><!-- /.col -->
                 </div>
             </form>
         </div>
@@ -113,7 +117,7 @@ registerscreen
                 <i class="fa fa-user-circle register-icon"></i>
 
                 <h2 class="m-b">Company Info</h2>
-                
+
                 <p class="text-muted text-center"><small>Find my company: </small></p>
                 <div class="row">
                     <div class="col-md-6">
@@ -164,7 +168,7 @@ registerscreen
 
                     <div class="col-xs-6 col-sm-6 col-md-offset-3 col-sm-offset-3 col-xs-offset-3">
                         <a href="{!! route('register.cancel') !!}" class="btn btn-white btn-block btn-flat">Cancel</a>
-                    </div><!-- /.col -->                      
+                    </div><!-- /.col -->
                 </div>
             </form>
 
@@ -172,8 +176,8 @@ registerscreen
 
         <div class="register-page register-social setup-content" id="step-3">
 
-            <h2 class="m-b">Link Social Profiles</h2>        
-            
+            <h2 class="m-b">Link Social Profiles</h2>
+
             <form action="{{ route('register.salesrep.store_socialprofile') }}" method="post">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
@@ -214,8 +218,8 @@ registerscreen
 
                     <div class="col-xs-6 col-sm-6 col-md-offset-3 col-sm-offset-3 col-xs-offset-3">
                         <a href="{!! route('register.cancel') !!}" class="btn btn-white btn-block btn-flat">Cancel</a>
-                    </div><!-- /.col -->  
-                </div>                
+                    </div><!-- /.col -->
+                </div>
             </form>
         </div>
 

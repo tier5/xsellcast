@@ -9,7 +9,7 @@
         <div>
             <div>
 
-                LOGO
+                {{-- LOGO --}}
 
             </div>
 
@@ -17,7 +17,7 @@
                 <br/>
                 <br/>
                 <div class="alert alert-danger">
-                 
+
                     @if(is_string($errors))
                         <p>{!! $errors !!}</p>
                     @else
@@ -25,7 +25,7 @@
                             <p>{!! $error !!}</p>
                         @endforeach
                     @endif
-               
+
                 </div>
             @endif
 
@@ -33,7 +33,7 @@
                 <div class="alert alert-success">
                     {{ session('status') }}
                 </div>
-            @endif            
+            @endif
 
             @yield('content')
 

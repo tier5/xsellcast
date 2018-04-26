@@ -41,6 +41,13 @@ return [
         'redirect' => env('FB_CALLBACK_URL'),
     ],
 
+    'linkedin' => [
+        'client_id' => env('IN_CLIENT_ID'),
+        'client_secret' => env('IN_SECRET'),
+        'redirect' => env('IN_CALLBACK_URL'),
+    ],
+
+
     /*
     | Acacha Llum services...
     |

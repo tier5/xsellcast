@@ -27,6 +27,11 @@ loginscreen
                 <i class="fa fa-facebook"> </i> Sign in with Facebook
             </a>
         </div>
+        <div class="form-group text-center">
+            <a href="{{ route('auth.social','linkedin') }}" class="btn btn-success btn-linkedin btn-outline btn-block">
+                <i class="fa fa-linkedin"> </i> Sign in with linkedin
+            </a>
+        </div>
         <p class="text-muted text-center"><small>Don't have an account yet?</small></p>
         <a class="btn btn-white btn-block" href="{{ route('register') }}">Sign Up</a>
     </form>
