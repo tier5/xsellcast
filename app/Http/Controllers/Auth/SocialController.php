@@ -72,8 +72,9 @@ class SocialController extends Controller
 		}
 
 		$userInfo = $user->user;
+		$media_id=null;
 		if($user->avatar_original!=null){
-				$media    = $this->media->uploadImgFrmFb($user->avatar_original);
+				$media_id    = $this->media->uploadImgFrmFb($user->avatar_original);
 		}
 
 
@@ -87,7 +88,7 @@ class SocialController extends Controller
 				'profile_img'      => $user->avatar_original,
 				'in_id'            => $user->id,
 				'in_profile_url'   => $userInfo['publicProfileUrl'],
-				'avatar_media_id'  => $media->id ),
+				'avatar_media_id'  => $media_id ),
 			'linkedin'  => $userInfo['publicProfileUrl'],
 			'job_title' => $userInfo['industry'],
 			'email'     => $user->email,
