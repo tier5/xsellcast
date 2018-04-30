@@ -355,11 +355,15 @@ class CustomerController extends Controller
             $data['country']  = 'US';
             $data['provider']  = (isset($data['provider']) ? $data['provider'] : '');
             $data['provider_token']  = (isset($data['provider_token']) ? $data['provider_token'] : '');
+
             $data['address1']= (isset($data['address1']) ? $data['address1'] : '');
+            $data['city']= (isset($data['city']) ? $data['city'] : '');
+            $data['state']= (isset($data['state']) ? $data['state'] : '');
             $data['address2']= (isset($data['address2']) ? $data['address2'] : '');
             $data['homephone']= (isset($data['homephone']) ? $data['homephone'] : '');
             $data['cellphone']= (isset($data['cellphone']) ? $data['cellphone'] : '');
             $data['officephone']= (isset($data['officephone']) ? $data['officephone'] : '');
+            $data['avatar_url']= (isset($data['avatar_url']) ? $data['avatar_url'] : '');
 
 
             $zip=new ZipCodeApi();
@@ -429,6 +433,8 @@ class CustomerController extends Controller
             $data['provider_token'] = (isset($data['provider_token']) ? $data['provider_token'] : '');
 
             $data['address1']= (isset($data['address1']) ? $data['address1'] : '');
+            $data['city']= (isset($data['city']) ? $data['city'] : '');
+            $data['state']= (isset($data['state']) ? $data['state'] : '');
             $data['address2']= (isset($data['address2']) ? $data['address2'] : '');
             $data['homephone']= (isset($data['homephone']) ? $data['homephone'] : '');
             $data['cellphone']= (isset($data['cellphone']) ? $data['cellphone'] : '');

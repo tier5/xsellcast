@@ -28,11 +28,11 @@ class CustomerPostSocialRequest extends Request
         return [
             'access_token'      => 'required',
             'wp_userid'         => 'required|integer|unique:user_customer,wp_userid',
-            'address1'          => 'required',
+            'address1'          => '',//required
             'address2'          => '',
             'zip'               => 'required|digits:5|integer',
-            'city'              => 'required',
-            'state'             => 'required',
+            'city'              => '',//required
+            'state'             => '',//required
             'geo_long'          => '',
             'geo_lat'           => '',
             'email'             => 'required|email|unique:users,email',

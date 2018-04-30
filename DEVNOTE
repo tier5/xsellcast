@@ -273,3 +273,7 @@ ABC linkedin login v1.2 #stable
 	a) Fixed validation issue
 ABC linkedin login v1.3 #stable
 	a) Modified ABC registration functionality
+
+Prospect registration v2.3 #stable
+	a) Fixed avatar url issue
+	b) Implemented validation rule sent by LBT developers.

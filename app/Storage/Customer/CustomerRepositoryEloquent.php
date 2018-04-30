@@ -269,22 +269,22 @@ class CustomerRepositoryEloquent extends BaseRepository implements CustomerRepos
       $user->roles()->save($customerRole);
 
       $customer = $this->model->create([
-       'address1'         => $data['address1'],
-       'address2'         => $data['address2'],
-       'homephone'         => $data['homephone'],
-       'cellphone'         => $data['cellphone'],
-       'officephone'         => $data['officephone'],
+       'address1'           => $data['address1'],
+       'address2'           => $data['address2'],
+       'homephone'          => $data['homephone'],
+       'cellphone'          => $data['cellphone'],
+       'officephone'        => $data['officephone'],
 
-        'zip'             => $data['zip'],
-        'city'            => $data['city'],
-        'state'           => $data['state'],
-        'country'         => $data['country'],
-        'geo_long'        => $data['geo_long'],
-        'geo_lat'         => $data['geo_lat'],
-        'avatar_url'     => $data['avatar_url'],
+        'zip'               => $data['zip'],
+        'city'              => $data['city'],
+        'state'             => $data['state'],
+        'country'           => $data['country'],
+        'geo_long'          => $data['geo_long'],
+        'geo_lat'           => $data['geo_lat'],
+        'avatar_url'        => (isset($data['avatar_url']) ? $data['avatar_url'] : null),
 
-        'user_id'         => $user->id,
-        'wp_userid'       => (isset($data['wp_userid']) ? $data['wp_userid'] : null)
+        'user_id'           => $user->id,
+        'wp_userid'         => (isset($data['wp_userid']) ? $data['wp_userid'] : null)
       ]);
 
       $user->customer()->save($customer);
