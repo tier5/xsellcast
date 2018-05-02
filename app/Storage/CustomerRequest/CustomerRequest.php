@@ -49,14 +49,16 @@ class CustomerRequest
     {
         $cust_user_id     = $customer->user->id;
         $salesRep         = $this->customer->findNereastBAOfOffer($offer, $customer);
+
         $salesrep_user_id = ($salesRep ? $salesRep->user->id : null);
+
         $offer_id         = $offer->id;
         $hasAssign        = null;
-        
+
         if(!$salesRep)
         {
             //Send notification to csr.
-            $this->csr->sendUnmatchLeadNotify();
+            // $this->csr->sendUnmatchLeadNotify();
 
             /**
              * Assign offer to customer. Since there is no BA match found
@@ -74,7 +76,7 @@ class CustomerRequest
          */
         if($salesRep)
         {
-            $hasAssign = $this->thread->assignCustToSalesRep($cust_user_id, $salesrep_user_id, $offer_id, $type, $approved);            
+            $hasAssign = $this->thread->assignCustToSalesRep($cust_user_id, $salesrep_user_id, $offer_id, $type, $approved);
         }
 
         /**
@@ -89,8 +91,8 @@ class CustomerRequest
         }
 
         $customer->updatedAtNow();
-        
+
         return $thread;
-    }        
+    }
 
 }

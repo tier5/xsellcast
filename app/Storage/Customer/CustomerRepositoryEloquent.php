@@ -222,10 +222,17 @@ class CustomerRepositoryEloquent extends BaseRepository implements CustomerRepos
                 $nearestDealer = $dealer;
             }
         }
+        if($nearestDealer){
 
-        $salesrep = $nearestDealer->salesReps->shuffle()->first();
+          $salesrep = $nearestDealer->salesReps->shuffle()->first();
+          return $salesrep;
 
-        return $salesrep;
+        }else{
+
+          return false;
+
+        }
+
     }
 
     public function distance($lat1, $lon1, $lat2, $lon2, $unit = 'K')

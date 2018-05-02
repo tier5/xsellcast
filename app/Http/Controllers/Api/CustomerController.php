@@ -389,7 +389,7 @@ class CustomerController extends Controller
 
 
 
-            $customer         = $this->customer->createOne($data);
+            $customer         = $this->customer->createOne($data,true);
 
             // return response() ->json($this->customer->find($customer->id));
             $response=[
@@ -463,7 +463,7 @@ class CustomerController extends Controller
             }
 
 
-            $customer               = $this->customer->createOne($data);
+            $customer               = $this->customer->createOne($data,true);
 
             // return response() ->json($this->customer->find($customer->id));
             $response=[

@@ -32,13 +32,17 @@ class WpConvetor
 				if(!empty($customer)){
 				$id=$customer->id;
 				}
-
-
 				break;
 			case 'dealer':
 				$dealer=\App\Storage\Dealer\Dealer::where('wpid',$wp_id)->first();
 				$id=$dealer->id;
 
+				break;
+			case 'offer':
+				$offer=\App\Storage\Offer\Offer::where('wpid',$wp_id)->first();
+				if(!empty($offer)){
+				$id=$offer->id;
+				}
 				break;
 
 			default:

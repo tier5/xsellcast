@@ -33,7 +33,7 @@ class CustomerTransformer extends TransformerAbstract
             'lastname'     => $user->lastname,
             'email'        => $user->email,
             'user_id'      => $user->id,
-            'ontraport_id' => $model->ontraport_id,
+            'ontraport_id' => $model->opid,
             'address1'     => $model->address1,
             'address2'     => $model->address2,
             'zip'          => $model->zip,

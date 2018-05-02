@@ -982,6 +982,21 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Api'), function()
                     'uses'  => 'RequestContactController@store',
                     'as'    => 'admin.api.messages.request.contact_me.store' ));
             });
+
+            Route::group(array('prefix' => 'request'), function()
+            {
+                Route::get('', array(
+                    'uses'  => 'CTARequestController@index',
+                    'as'    => 'admin.api.messages.request' ));
+
+                // Route::get('{id}', array(
+                //     'uses'  => 'RequestPriceController@show',
+                //     'as'    => 'admin.api.messages.request.price.show' ));
+
+                Route::post('store', array(
+                    'uses'  => 'CTARequestController@store',
+                    'as'    => 'admin.api.messages.request.store' ));
+            });
         });
     });
 });
