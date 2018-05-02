@@ -27,10 +27,13 @@ class CustomerPutRequest extends Request
      */
     public function rules()
     {
+
         $wp_customer_id=$this->get('wp_customer_id');
         $wp=new WpConvetor();
+
         $customer_id=$wp->getId('customer',$wp_customer_id);
         // $customerId = $this->get('customer_id');
+
         $customer   = Customer::find($customer_id);
         $wpIdRules  = 'unique:user_customer,wp_userid';
         $emailRules = 'unique:users,email';
@@ -39,13 +42,19 @@ class CustomerPutRequest extends Request
         {
             $wpIdRules .= ',' . $customer->id;
             $emailRules .= ',' . $customer->user->id;
+        }else{
+            return [
+            'access_token'      => 'required',
+            'wp_customer_id'    => 'bail|required|integer|exists:user_customer,wp_userid'
+            ];
         }
+
 
    //     $this->attributes->add(['customer' => $customer]);
 
         return [
             'access_token'      => 'required',
-            'wp_customer_id'    => 'required|integer|exists:user_customer,wp_userid',
+            'wp_customer_id'    => 'bail|required|integer|exists:user_customer,wp_userid',
             // 'wp_userid'      => $wpIdRules,
             // 'address1'          => isset($this->address1)?'required':'',
             'address2'          => '',

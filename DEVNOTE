@@ -280,3 +280,6 @@ Prospect registration v2.3 #stable
 
 ABC linkedin login v1.4 #stable
 	a) Modified ABC login method
+
+Prospect registration v2.4 #stable
+	a) Fixed validation issue in update prospect API

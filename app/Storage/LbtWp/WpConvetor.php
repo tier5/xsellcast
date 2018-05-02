@@ -29,7 +29,10 @@ class WpConvetor
 				break;
 			case 'customer':
 				$customer=\App\Storage\Customer\Customer::where('wp_userid',$wp_id)->first();
+				if(!empty($customer)){
 				$id=$customer->id;
+				}
+
 
 				break;
 			case 'dealer':
