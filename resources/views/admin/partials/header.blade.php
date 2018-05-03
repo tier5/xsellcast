@@ -17,4 +17,6 @@
     <!-- Theme style -->
     <link href="{{ asset('/css/fullcalendar.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('/css/admin-style.css') }}" rel="stylesheet" type="text/css" />
+
+    @yield('head_script')
 </head>

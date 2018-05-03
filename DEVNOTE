@@ -292,3 +292,6 @@ CTA Request v2.0 #stable
 
 CTA Request v3.0 #stable
 	a) Implemented direct message in CTA store request API
+
+OneAll integration v0.1 #stable
+	a) Implemented oneall api in login .
