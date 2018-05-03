@@ -288,4 +288,7 @@ CTA Request v1.0 #stable
 	a) Create Api to store CTA request
 
 CTA Request v2.0 #stable
-	a) Implemented appointment,info,price,contact CTA request
+	a) Implemented appointment,info,price and contact in CTA store request API
+
+CTA Request v3.0 #stable
+	a) Implemented direct message in CTA store request API

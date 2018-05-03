@@ -137,7 +137,7 @@ class CTARequestController extends Controller
 	public function store(CTARequestPostRequest $request)
 	{
 
-		// try{
+		try{
 
 			$wp_customer_id=$request->get('wp_customer_id');
             $wp=new WpConvetor();
@@ -174,31 +174,40 @@ class CTARequestController extends Controller
 					$thread= $this->storeContact($data);
 					break;
 				case 5:
-				$type=['name'=>'direct_message','label'=>'Direct message','email_template'=>''];
-				break;
+					$thread =$this->storeDirectMessage($data);
+					break;
 				default:
 				$thread=null;
 				break;
 			}
 
+			 if($thread!=null){
+				return response()->json([
+	                    'status'=>true,
+	                    'code'=>config('responses.success.status_code'),
+	                    'data'=>$thread,
+	                    'message'=>config('responses.success.status_message'),
+	                ], config('responses.success.status_code'));
+
+			 } else{
+				return response()->json([
+					'status'=>false,
+	                'code'=>config('responses.bad_request.status_code'),
+	                'data'=>null,
+	                'message'=>'Something went wrong'
+				]);
+			}
+
+		}catch(\Exception $e){
 
 			return response()->json([
-                    'status'=>true,
-                    'code'=>config('responses.success.status_code'),
-                    'data'=>$thread,
-                    'message'=>config('responses.success.status_message'),
-                ], config('responses.success.status_code'));
+				'status'=>false,
+                'code'=>config('responses.bad_request.status_code'),
+                'data'=>null,
+                'message'=>$e->getMessage()
+			]);
 
-		// }catch(\Exception $e){
-
-		// 	return response()->json([
-		// 		'status'=>false,
-  //               'code'=>config('responses.bad_request.status_code'),
-  //               'data'=>null,
-  //               'message'=>$e->getMessage()
-		// 	]);
-
-		// }
+		}
 	}
 
 	// public function getType($type_id){
@@ -322,23 +331,28 @@ class CTARequestController extends Controller
 
 		return $thread;
 	}
-	// public function storeDirectMessage($data){
 
-	// 	$customer=$data['customer'];
-	// 	$offer=$data['offer'];
+	public function storeDirectMessage($data){
 
-	// 	$body=$data['body'];
-	// 	$subject  = str_limit($body, 30, '');
+		$customer=$data['customer'];
+		$offer=$data['offer'];
 
-	// 	$phoneNumber=$data['phoneNumber'];
+		$body=$data['body'];
+		$subject  = str_limit($body, 30, '');
 
-	// 	$salesrep_id=$data['salesrep_id'];
-	// 	$salesrep = $this->salesrep->skipPresenter()->find($salesrep_id);
+		$phoneNumber=$data['phoneNumber'];
 
-	// 	$pivot    = $salesrep->customersPivot()->where('customer_id', $customer->id)->first();
-	// 	$thread   = $this->thread->createMessage($customer->user->id, $salesrep->user->id, $body, 'message', $subject);
+		// $salesrep_id=$data['salesrep_id'];
+		// $salesrep = $this->salesrep->skipPresenter()->find($salesrep_id);
+		$salesrep=$this->customer->findNereastBAOfOffer($offer,$customer);
+		// dd($salesrep);
+		if($salesrep){
+			$pivot    = $salesrep->customersPivot()->where('customer_id', $customer->id)->first();
+			$thread   = $this->thread->createMessage($customer->user->id, $salesrep->user->id, $body, 'message', $subject);
+			return $thread;
+		}else {
+			return false;
+		}
 
-
-	// 	return $thread;
-	// }
+	}
 }
