@@ -26,11 +26,12 @@ class CTARequestPostRequest extends Request
     public function rules()
     {
         return [
-            'access_token' => 'required',
-            'type' => 'required|integer|in:1,2,3,4,5',
-            'wp_customer_id'  => 'required|integer|exists:user_customer,wp_userid',
-            'wp_offer_id'     => 'required|integer|exists:offers,wpid',
-            'body'         => 'required'
+            'access_token'      => 'required',
+            'type'              => 'required|integer|in:1,2,3,4,5',
+            'wp_customer_id'    => 'required|integer|exists:user_customer,wp_userid',
+            'wp_offer_id'       => 'required|integer|exists:offers,wpid',
+            'body'              => 'required',
+            'phone_number'      => 'required_if:type,==,4|numeric',
         ];
     }
 

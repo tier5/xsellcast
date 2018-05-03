@@ -94,6 +94,7 @@ class RequestContactController extends Controller
 		$offer       = $this->offer->skipPresenter()->find($request->get('offer_id'));
 		$body        = $request->get('body');
 		$phoneNumber = $request->get('phone_number');
+
 		$thread      = $this->customer_request->sendContactRequest($customer, $offer, $body, $phoneNumber);
 
 		return response()->json($thread);
