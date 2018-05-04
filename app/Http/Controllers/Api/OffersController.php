@@ -315,13 +315,17 @@ class OffersController extends Controller
     public function update(OffersPutRequest $request)
     {
     	 try{
-
+	        	$data=$request->all();
 				$wp_offer_id=$request->get('wp_offer_id');
+				$wp_brand_id=$request->get('wp_brand_id');
+
 		        $wp=new WpConvetor();
 
 	        	$offer_id=$wp->getId('offer',$wp_offer_id);
 	        	$offer=$this->offer->skipPresenter()->find($offer_id);
-	        	$data=$request->all();
+
+	        	$brand_id=$wp->getId('brand',$wp_brand_id);
+            	$data['brand_id']=$brand_id;
 
 	        	if(isset($data['media'])){
 					$data['media_link']=$data['media'];

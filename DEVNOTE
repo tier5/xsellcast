@@ -300,3 +300,6 @@ Offer v2.0 #stable
 	a) Modified create offer API.
 	b) Created  edit offer API.
 	c) Updated create and update prospect details APIs
+
+Offer v2.1 #stable
+	a) Implemented brand in offer edit API.

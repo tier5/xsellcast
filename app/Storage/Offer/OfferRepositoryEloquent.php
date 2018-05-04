@@ -395,8 +395,14 @@ class OfferRepositoryEloquent extends BaseRepository implements OfferRepository
         }
 
         $offer->save();
+        $offer->brands()->detach();
 
-        return $offer;
+        $brand = Brand::find($data['brand_id']);
+
+        $offer->brands()->save($brand);
+
+        return $this->skipPresenter(false)->find($offer->id);
+
     }
 
 
