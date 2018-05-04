@@ -295,3 +295,8 @@ CTA Request v3.0 #stable
 
 OneAll integration v0.1 #stable
 	a) Implemented oneall api in login .
+
+Offer v2.0 #stable
+	a) Modified create offer API.
+	b) Created  edit offer API.
+	c) Updated create and update prospect details APIs

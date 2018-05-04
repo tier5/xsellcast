@@ -29,16 +29,18 @@ class OffersStorePostRequest extends Request
     public function rules()
     {
         return [
-            'access_token'  => 'required',
-            'wpid'          => 'integer|unique:offers,wpid',
-            'title'         => 'required',
-            'contents'      => 'required',
-            'thumbnail'     => 'image',
-            'media'         => 'image',
-            'status'        => 'required|in:publish,draft,pending',
-            'wp_brand_id'   => 'required|integer|exists:brands,wp_brand_id',
-            'auther_type'   =>'required|in:brand,dealer,custom',
-            'wp_dealer_id'  =>'required_if:auther_type,dealer|exists:dealers,wpid'
+            'access_token'  	=> 'required',
+            'wp_offer_id'       => 'required|integer|unique:offers,wpid',
+            'title'         	=> 'required',
+            'wp_brand_id'   	=> 'required|integer|exists:brands,wp_brand_id',
+            'contents'      	=> 'required',
+            //'thumbnail'     => 'image',
+            'media'         	=> 'required|url',
+            'wp_offer_link'     => 'required|url',
+            'status'        	=> 'required|in:publish,draft,pending',
+
+            //'auther_type'   	=>'required|in:brand,dealer,custom',
+            //'wp_dealer_id'  =>'required_if:auther_type,dealer|exists:dealers,wpid'
         ];
     }
     /**

@@ -29,9 +29,9 @@ class CustomerChangeAvatarRequest extends Request
     public function rules()
     {
         return [
-            'access_token' => 'required',
-            'wp_customer_id'  => 'required|integer|exists:user_customer,wp_userid',
-            'avatar_url'       => 'required|url|active_url',
+            'access_token'      => 'required',
+            'wp_customer_id'    => 'required|integer|exists:user_customer,wp_userid',
+            'avatar_url'        => 'required|url|active_url',
 
         ];
 

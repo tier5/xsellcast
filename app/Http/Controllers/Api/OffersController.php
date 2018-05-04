@@ -22,10 +22,6 @@ use App\Http\Requests\Api\SimpleListGetRequest;
 use App\Storage\LbtWp\WpConvetor;
 use App\Storage\ZipCodeApi\ZipCodeApi;
 
-
-
-
-
 /**
  * @resource Offer
  *
@@ -203,55 +199,62 @@ class OffersController extends Controller
             $data = $request->all();
             $brand_id='';
             $delear_id='';
-            if(!isset($data['wpid']))
+
+            // if(!isset($data['wpid']))
+            // {
+            //     $data['wpid'] = $data['wp_offer_id'];
+            // }
+            if(!isset($data['auther_type']))
             {
-                $data['wpid'] = null;
+                $data['auther_type'] = 'brand';
             }
+
             $wp_brand_id=$request->wp_brand_id;
             $wp=new WpConvetor();
             $brand_id=$wp->getId('brand',$wp_brand_id);
             $data['brand_id']=$brand_id;
+
             //1 Convert wp_dealer_id
-            if($data['auther_type']=='dealer'){
-            $wp_dealer_id=$request->wp_dealer_id;
-            $wp=new WpConvetor();
-            $dealer_id=$wp->getId('dealer',$wp_dealer_id);
-            $data['dealer_id']=$dealer_id;
-            }
+            // if($data['auther_type']=='dealer'){
+            // $wp_dealer_id=$request->wp_dealer_id;
+            // $wp=new WpConvetor();
+            // $dealer_id=$wp->getId('dealer',$wp_dealer_id);
+            // $data['dealer_id']=$dealer_id;
+            // }
             //2 upload image for thumb
-            if(!empty($data['thumbnail'])){
+            // if(!empty($data['thumbnail'])){
 
-                $file=$data['thumbnail'];
+            //     $file=$data['thumbnail'];
 
-                $type = explode('/', $file->getClientMimeType());
-                $ext = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
-                $baseName = basename($file->getClientOriginalName(), '.' . $ext);
-                $fileName = $this->media->setUploadPath()->generateFilename($baseName, $ext);
+            //     $type = explode('/', $file->getClientMimeType());
+            //     $ext = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
+            //     $baseName = basename($file->getClientOriginalName(), '.' . $ext);
+            //     $fileName = $this->media->setUploadPath()->generateFilename($baseName, $ext);
 
-                try {
-                    $targetFile = $file->move($this->media->getUploadPath(), $fileName);
-                    $thumb = $this->media->skipPresenter()->uploadImg($targetFile->getPathname(),[[150, 100]], false);
-                    $data['thumbnail_id']=$thumb->id;
-                    $data['media']=[$thumb->id];
+            //     try {
+            //         $targetFile = $file->move($this->media->getUploadPath(), $fileName);
+            //         $thumb = $this->media->skipPresenter()->uploadImg($targetFile->getPathname(),[[150, 100]], false);
+            //         $data['thumbnail_id']=$thumb->id;
+            //         $data['media']=[$thumb->id];
 
-                }
-                catch (\Exception $e) {
+            //     }
+            //     catch (\Exception $e) {
 
-                    $erroMsg = $this->media->errorMessage($file->getClientOriginalName());
-                    $error = [
-                        'title' => $erroMsg[0],
-                        'body'  => $erroMsg[1]
-                    ];
-                    return response()->json([
-                        'status'=>false,
-                        'code'=>config('responses.bad_request.status_code'),
-                        'data'=>$error,
-                        'message'=> $erroMsg ,
-                        ], config('responses.bad_request.status_code'));
+            //         $erroMsg = $this->media->errorMessage($file->getClientOriginalName());
+            //         $error = [
+            //             'title' => $erroMsg[0],
+            //             'body'  => $erroMsg[1]
+            //         ];
+            //         return response()->json([
+            //             'status'=>false,
+            //             'code'=>config('responses.bad_request.status_code'),
+            //             'data'=>$error,
+            //             'message'=> $erroMsg ,
+            //             ], config('responses.bad_request.status_code'));
 
 
-                }
-            }
+            //     }
+            // }
 
 
 
@@ -288,6 +291,7 @@ class OffersController extends Controller
      */
     public function destroy(OffersDeleteRequest $request)
     {
+
         $offer = $this->offer->skipPresenter()->find($request->get('offer_id'));
         $offer->customers()->detach();
         $offer->brands()->detach();
@@ -310,9 +314,39 @@ class OffersController extends Controller
      */
     public function update(OffersPutRequest $request)
     {
-        $offer = $request->get('offer');
-        $ret = $this->offer->update($request->except('offer_id'), $offer->id);
+    	 try{
 
-        return response()->json(['data' => $ret]);
+				$wp_offer_id=$request->get('wp_offer_id');
+		        $wp=new WpConvetor();
+
+	        	$offer_id=$wp->getId('offer',$wp_offer_id);
+	        	$offer=$this->offer->skipPresenter()->find($offer_id);
+	        	$data=$request->all();
+
+	        	if(isset($data['media'])){
+					$data['media_link']=$data['media'];
+	        	}
+
+
+		        $return = $this->offer->updateOne($offer, $data);
+
+                return response()->json([
+                    'status'=>true,
+                    'code'=>config('responses.success.status_code'),
+                    'offers'=>$return,
+                    'message'=>config('responses.success.status_message'),
+                ], config('responses.success.status_code'));
+
+	        }
+	        catch (\Exception $e) {
+	            return response()->json([
+	                'status'=>false,
+	                'code'=>config('responses.bad_request.status_code'),
+	                'data'=>null,
+	                'message'=>$e->getMessage()
+	            ],
+	                config('responses.bad_request.status_code')
+	            );
+	        }
     }
 }

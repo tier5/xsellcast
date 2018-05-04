@@ -741,6 +741,9 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Api'), function()
         Route::put('offer', array(
             'as'           => 'api.v1.offers.update',
             'uses'         => 'OffersController@update'));
+        // Route::post('offer/edit', array(
+        //     'as'           => 'api.v1.offers.update',
+        //     'uses'         => 'OffersController@update'));
         //End Offer
 
         /**

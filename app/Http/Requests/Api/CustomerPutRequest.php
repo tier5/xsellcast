@@ -63,7 +63,7 @@ class CustomerPutRequest extends Request
             // 'state'             => isset($this->state)?'required':'',
             'geo_long'          => '',
             'geo_lat'           => '',
-            'email'             => isset($this->email)?'required|email|'.$emailRules:'',
+            'email'             => isset($this->email)?'required|email|regex:/^[_a-zA-Z0-9-+]+(\.[_a-z0-9-+]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z0-9]{2,3})$/|'.$emailRules:'',
             'firstname'         => isset($this->firstname)?'required':'',
             'lastname'          => isset($this->lastname)?'required':'',
             'cellphone'         => 'numeric',

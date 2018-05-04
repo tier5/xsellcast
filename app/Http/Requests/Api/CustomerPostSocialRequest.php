@@ -35,7 +35,7 @@ class CustomerPostSocialRequest extends Request
             'state'             => '',//required
             'geo_long'          => '',
             'geo_lat'           => '',
-            'email'             => 'required|email|unique:users,email',
+            'email'             => 'required|email|unique:users,email|regex:/^[_a-zA-Z0-9-+]+(\.[_a-z0-9-+]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z0-9]{2,3})$/',
             'firstname'         => 'required',
             'lastname'          => 'required',
             'homephone'         => 'numeric',

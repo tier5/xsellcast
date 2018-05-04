@@ -189,13 +189,21 @@ class OfferRepositoryEloquent extends BaseRepository implements OfferRepository
             abort(422, 'Invalid brand ID.');
         }
 
+        $data['wp_offer_id']    = (isset($data['wp_offer_id'])?$data['wp_offer_id']:null);
+        $data['wp_offer_link']  = (isset($data['wp_offer_link'])?$data['wp_offer_link']:null);
+        $data['title']          = (isset($data['title'])?$data['title']:null);
+        $data['media_link']     = (isset($data['media'])?$data['media']:null);
+        $data['contents']       = (isset($data['contents'])?$data['contents']:null);
+        $data['status']         = (isset($data['status'])?$data['status']:null);
         //created Brand Offer
         $offer = $this->skipPresenter()->create([
+            'wpid'          => $data['wp_offer_id'],
+            'wp_offer_link' => $data['wp_offer_link'],
+            'title'         => $data['title'],
+            'author_type'   => $author_type,
+            'media_link'    => $data['media'],
             'contents'      => $data['contents'],
             'status'        => $data['status'],
-            'title'         => $data['title'],
-            'wpid'          => $data['wpid'],
-            'author_type'   => $author_type
         ]);
         //attach an offer
         // if($data['auther_type']=='brand'){
@@ -203,19 +211,19 @@ class OfferRepositoryEloquent extends BaseRepository implements OfferRepository
                 $offer->brands()->save($brand);
         // }
 
-        if(isset($data['thumbnail_id'])){
+        // if(isset($data['thumbnail_id'])){
 
-            if(!isset($data['media']) || !is_array($data['media']) ){
-            $data['media'] = array(0);
-            }
-            // if(!isset($data['thumbnail_id']) || $data['thumbnail_id'] == ''){
+        //     if(!isset($data['media']) || !is_array($data['media']) ){
+        //     $data['media'] = array(0);
+        //     }
+        //     // if(!isset($data['thumbnail_id']) || $data['thumbnail_id'] == ''){
 
-            //    $data['thumbnail_id'] = Media::whereIn('id', $data['media'])->where('type', 'image')->first()->id;
-            // }
+        //     //    $data['thumbnail_id'] = Media::whereIn('id', $data['media'])->where('type', 'image')->first()->id;
+        //     // }
 
-            //created Offer medias
-            $this->createOfferMedia($offer, $data['media'], $data['thumbnail_id']);
-        }
+        //     //created Offer medias
+        //     $this->createOfferMedia($offer, $data['media'], $data['thumbnail_id']);
+        // }
 
         return $this->skipPresenter(false)->find($offer->id);
     }
@@ -367,6 +375,29 @@ class OfferRepositoryEloquent extends BaseRepository implements OfferRepository
         return $this;
     }
 
+    public function updateOne(Offer $offer, $data = [])
+    {
+
+        $offerFields = \Schema::getColumnListing($offer->getTable());
+        // $srFields   = \Schema::getColumnListing($offer->getTable());
+      // dd( $srFields);
+        foreach($offerFields as $field)
+        {
+            if($field == 'id' || $field == 'wpid')
+            {
+                continue;
+            }
+
+            if(isset($data[$field]))
+            {
+                $offer->{$field} = $data[$field];
+            }
+        }
+
+        $offer->save();
+
+        return $offer;
+    }
 
 
 }

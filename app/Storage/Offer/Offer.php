@@ -13,7 +13,7 @@ class Offer extends Model implements Transformable
 {
     use TransformableTrait, Metable;
 
-    protected $fillable = ['contents', 'title', 'wpid', 'status', ' author_type', 'original_source_url'];
+    protected $fillable = ['contents', 'title', 'wpid', 'status', ' author_type', 'original_source_url','wp_offer_link','media_link'];
 
     protected $table = 'offers';
 

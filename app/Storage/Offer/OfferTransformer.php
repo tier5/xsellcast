@@ -23,20 +23,24 @@ class OfferTransformer extends TransformerAbstract
         $media = $model->getThumbnail();
 
         return [
-            'id'               => (int) $model->id,
-            /* place your other model properties here */
-            'contents'          => $model->contents,
-            'title'             => $model->title,
-            'created_at'        => $model->created_at,
-            'updated_at'        => $model->updated_at,
-            'brand'             => $brand,
-            'thumbnail'         => ($media ? $media->getSize('150x100') : null ),
-            'updated_at_human'  => $model->updated_at->format('l \a\t h:i:s A'),
-            'status_human'      => $model->humanStatus(),
-            'status'            => $model->status,
-            'author_type_human' => config('lbt.offer.author_type.' . $model->author_type . '.label'),
-            'badge'             => config('lbt.offer.author_type.' . $model->author_type . '.badge'),
-            'wpid'              => $model->wpid,
+                'id'                => (int) $model->id,
+                'wpid'              => $model->wpid,
+                'title'             => $model->title,
+                'contents'          => $model->contents,
+                'wp_offer_link'     => $model->wp_offer_link,
+                'media_link'        => $model->media_link,
+                'status_human'      => $model->humanStatus(),
+                'status'            => $model->status,
+                'updated_at_human'  => $model->updated_at->format('l \a\t h:i:s A'),
+                'created_at'        => $model->created_at,
+                'updated_at'        => $model->updated_at,
+
+                /* place your other model properties here */
+
+                'brand'             => $brand,
+                'thumbnail'         => ($media ? $media->getSize('150x100') : null ),
+                'author_type_human' => config('lbt.offer.author_type.' . $model->author_type . '.label'),
+                'badge'             => config('lbt.offer.author_type.' . $model->author_type . '.badge'),
         ];
     }
 }
