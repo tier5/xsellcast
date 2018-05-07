@@ -105,6 +105,9 @@ Route::group(array('prefix' => 'auth'), function(){
     Route::get('cronofy/request-token', array(
         'uses' => 'Auth\CronofyController@callback',
         'as' => 'auth.cronofy.request.token' ));
+    Route::post('callback_uri', array(
+        'uses' => 'Auth\RegisterSalesRepController@callbackUri',
+        'as' => 'register' ));
 });
 
 /**

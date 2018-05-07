@@ -61,23 +61,23 @@ loginscreen
          <script type="text/javascript">
 
             /* Replace #your_callback_uri# with the url to your own callback script */
-            var your_callback_script = '{{ route('register') }}';
+            // var your_callback_script = '{{ route('register') }}';
 
             /* Embeds the buttons into the container oa_social_login_container */
-            // var _oneall = _oneall || [];
-            // _oneall.push(['social_login', 'set_providers', ['linkedin']]);
-            // _oneall.push(['social_login', 'set_callback_uri', your_callback_script]);
-            // _oneall.push(['social_login', 'do_render_ui', 'oa_social_login']);
+            var _oneall = _oneall || [];
+            _oneall.push(['social_login', 'set_providers', ['linkedin']]);
+            _oneall.push(['social_login', 'set_callback_uri', 'http://xsellcast.test/auth/callback_uri']);
+            _oneall.push(['social_login', 'do_render_ui', 'oa_social_login']);
 
         //      _oneall.api.plugins.social_login.build("oneall_social_login_providers", {
         //     "providers": ['linkedin','facebook', 'google', 'steam', 'twitter', 'youtube'],
         //     "callback_uri": 'http://elliteinformatica.esy.es/forum/index.php?action=oasl_callback;oasl_source=registration'
         // });
-      var _oneall = _oneall || [];
-_oneall.push(['social_login', 'set_providers', ['linkedin','google','instagram','twitter']]);
-_oneall.push(['social_login', 'set_callback_uri', (window.location.href + ((window.location.href.split('?')[1] ? '&': '?') + "oa_social_login_source=widget"))]);
-// _oneall.push(['social_login', 'set_custom_css_uri', 'http://public.oneallcdn.com/css/api/socialize/themes/wordpress/default.css']);
-_oneall.push(['social_login', 'do_render_ui', 'oa_social_login'])
+//       var _oneall = _oneall || [];
+// _oneall.push(['social_login', 'set_providers', ['linkedin','google','instagram','twitter']]);
+// _oneall.push(['social_login', 'set_callback_uri', (window.location.href + ((window.location.href.split('?')[1] ? '&': '?') + "oa_social_login_source=widget"))]);
+// // _oneall.push(['social_login', 'set_custom_css_uri', 'http://public.oneallcdn.com/css/api/socialize/themes/wordpress/default.css']);
+// _oneall.push(['social_login', 'do_render_ui', 'oa_social_login'])
 
       </script>
 

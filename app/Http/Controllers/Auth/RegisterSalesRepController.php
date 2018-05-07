@@ -124,7 +124,7 @@ class RegisterSalesRepController extends Controller
          *
          */
         $salesRep = $this->salesrep->currentUser();
-        
+
         /**
          * Add dealer & salesrep relation
          */
@@ -133,8 +133,8 @@ class RegisterSalesRepController extends Controller
             ->find($request->get('dealer_id'))
             ->salesReps()
             ->save($salesRep);
-        // $res->getBody();  	
-        
+        // $res->getBody();
+
         return response()
             ->json($salesRep);
     }
@@ -155,30 +155,34 @@ class RegisterSalesRepController extends Controller
     public function confirmAccount(Request $request, $token)
     {
         $user = $this->user->getByActivation($token);
-    
+
         if(!$user)
         {
             return redirect()->route('auth.login')->withErrors(["Token don't exist or user has been already activated."]);
         }
 
         $fromStatus = $user->status;
-        $deleted = $this->user_activation->deleteActivation($token); 
-        
+        $deleted = $this->user_activation->deleteActivation($token);
+
         if($deleted)
         {
             $user->saveAsActivated();
 
             Auth::logout();
-            Auth::login($user);            
+            Auth::login($user);
         }
 
         if($fromStatus == 'invited_unconfirmed')
         {
-            $request->session()->flash('message', 'Email confirmed!');   
+            $request->session()->flash('message', 'Email confirmed!');
             return redirect()->route('admin.settings.profile');
         }else{
 
             return view('auth.confirmation', compact('deleted'));
         }
+    }
+
+    public function callbackUri(Request $request) {
+        dd($request->all());
     }
 }

@@ -303,3 +303,6 @@ Offer v2.0 #stable
 
 Offer v2.1 #stable
 	a) Implemented brand in offer edit API.
+
+OneAll integration v0.2 #stable
+	a) Implemented oneall callback url .
