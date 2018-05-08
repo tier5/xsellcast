@@ -30,7 +30,7 @@ class CTARequestPostRequest extends Request
             'type'              => 'required|integer|in:1,2,3,4,5',
             'wp_customer_id'    => 'required|integer|exists:user_customer,wp_userid',
             'wp_offer_id'       => 'required|integer|exists:offers,wpid',
-            'body'              => 'required',
+            'body'              => 'required_if:type,==,5',
             'phone_number'      => 'required_if:type,==,4|numeric',
         ];
     }

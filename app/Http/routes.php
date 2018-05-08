@@ -105,6 +105,7 @@ Route::group(array('prefix' => 'auth'), function(){
     Route::get('cronofy/request-token', array(
         'uses' => 'Auth\CronofyController@callback',
         'as' => 'auth.cronofy.request.token' ));
+
     Route::post('callback_uri', array(
         'uses' => 'Auth\RegisterSalesRepController@callbackUri',
         'as' => 'register' ));
@@ -343,6 +344,11 @@ Route::group(array('prefix' => 'admin', 'middleware' => array('auth', 'admin-pag
         Route::get('/{thread_id}/delete-multi', array(
             'uses' => 'MessageController@deleteMulti',
             'as' => 'admin.messages.delete.multi' ));
+
+
+        Route::get('cta/request', array(
+            'uses' => 'MessageController@CTAindex',
+            'as' => 'admin.cta' ));
 
     });
 

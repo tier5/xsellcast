@@ -21,6 +21,8 @@ use App\Storage\LocalApiRequest\LocalApiRequest;
 use App\Storage\User\UserRepository;
 use App\Storage\Category\Category;
 
+use App\Storage\OneAll\oneall_curly;
+
 class RegisterSalesRepController extends Controller
 {
 
@@ -183,6 +185,43 @@ class RegisterSalesRepController extends Controller
     }
 
     public function callbackUri(Request $request) {
-        dd($request->all());
+        // dd($request->all());
+        $oa_action=$request->oa_action;
+        $oa_social_login_token=$request->oa_social_login_token;//" => "c17a2353-3afc-4377-9c09-7f65ce357a98"
+        $connection_token=$request->connection_token;//" => "c17a2353-3afc-4377-9c09-7f65ce357a98"
+
+        //Setup new connection
+        $oneall_curly = new oneall_curly ();
+        $oneall_curly->set_option ('USERPWD', env('ONEALL_PUBLIC_KEY') . ':' . env('ONEALL_PRIVATE_KEY'));
+
+        //Change to 1 to display the CURL output
+        $oneall_curly->set_option ('VERBOSE', 0);
+        //Get connection_token
+        // $connection_token = $_POST['connection_token'];
+        $connection_token=$request->connection_token;
+
+
+        //Make Request
+        if ($oneall_curly->get (env('ONEALL_DOMAIN') . "/connections/".$connection_token.".json"))
+        {
+            $result = $oneall_curly->get_result ();
+
+            $json = $result->body;
+            $json_decoded = json_decode($result->body);
+
+            // //The identity <identity_token> has been linked to the user <user_token>
+            // $data = $json_decoded->response->result->data;
+            // $user_token = $data->user->user_token;
+            // $identity_token = $data->user->identity->identity_token;
+            // dd($result->body);
+            dd($json_decoded);
+        }
+        //Error
+        else
+        {
+            $result = $oneall_curly->get_result ();
+            echo "Error: " . $result->http_info . "\n";
+        }
+
     }
 }

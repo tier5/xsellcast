@@ -93,49 +93,49 @@ class AdminPage
           /**
            * Messages
            */
-        /*  $menu->add('MESSAGES', [])
-            ->data('icon_class', 'fa fa-envelope-o')
-            ->data('labelcolor', 'warning')
-            ->restricSalesRep()
-            ->setCountRoute('admin.api.sidebar.counter.messages.all-over')
-            ->nickname('admin_messages');
+           // $menu->add('MESSAGES', [])
+           //  ->data('icon_class', 'fa fa-envelope-o')
+           //  ->data('labelcolor', 'warning')
+           //  ->restricSalesRep()
+           //  ->setCountRoute('admin.api.sidebar.counter.messages.all-over')
+           //  ->nickname('admin_messages');
 
-            $menu->admin_messages->add('All Messages', ['route' => 'admin.messages'])
-              ->data('icon_class', 'fa fa-envelope-o')
-              ->setCountRoute('admin.api.sidebar.counter.messages.all')
-              ->forRoleOnly('sales-rep');
+           //  $menu->admin_messages->add('All Messages', ['route' => 'admin.messages'])
+           //    ->data('icon_class', 'fa fa-envelope-o')
+           //    ->setCountRoute('admin.api.sidebar.counter.messages.all')
+           //    ->forRoleOnly('sales-rep');
 
-            $menu->admin_messages->add('Appt Requests', ['url' => route('admin.messages', ['type' => 'appt'])])
-              ->data('icon_class', 'fa fa-clock-o')
-              ->setCountRoute('admin.api.sidebar.counter.messages.appt')
-              ->forRoleOnly('sales-rep');
+           //  $menu->admin_messages->add('Appt Requests', ['url' => route('admin.messages', ['type' => 'appt'])])
+           //    ->data('icon_class', 'fa fa-clock-o')
+           //    ->setCountRoute('admin.api.sidebar.counter.messages.appt')
+           //    ->forRoleOnly('sales-rep');
 
-            $menu->admin_messages->add('Price Requests', ['url' => route('admin.messages', ['type' => 'price'])])
-              ->data('icon_class', 'fa fa-dollar')
-              ->setCountRoute('admin.api.sidebar.counter.messages.price')
-              ->forRoleOnly('sales-rep');
+           //  $menu->admin_messages->add('Price Requests', ['url' => route('admin.messages', ['type' => 'price'])])
+           //    ->data('icon_class', 'fa fa-dollar')
+           //    ->setCountRoute('admin.api.sidebar.counter.messages.price')
+           //    ->forRoleOnly('sales-rep');
 
-            $menu->admin_messages->add('Info Requests', ['url' => route('admin.messages', ['type' => 'info'])])
-              ->data('icon_class', 'fa fa-info-circle')
-              ->setCountRoute('admin.api.sidebar.counter.messages.info')
-              ->forRoleOnly('sales-rep');
+           //  $menu->admin_messages->add('Info Requests', ['url' => route('admin.messages', ['type' => 'info'])])
+           //    ->data('icon_class', 'fa fa-info-circle')
+           //    ->setCountRoute('admin.api.sidebar.counter.messages.info')
+           //    ->forRoleOnly('sales-rep');
 
-            $menu->admin_messages->add('Contact Requests', ['url' => route('admin.messages', ['type' => 'contact_me'])])
-              ->data('icon_class', 'fa fa-phone')
-              ->setCountRoute('admin.api.sidebar.counter.messages.contact_me')
-              ->forRoleOnly('sales-rep');
+           //  $menu->admin_messages->add('Contact Requests', ['url' => route('admin.messages', ['type' => 'contact_me'])])
+           //    ->data('icon_class', 'fa fa-phone')
+           //    ->setCountRoute('admin.api.sidebar.counter.messages.contact_me')
+           //    ->forRoleOnly('sales-rep');
 
-            $menu->admin_messages->add('Direct Messages', ['url' => route('admin.messages', ['type' => 'message'])])
-              ->data('icon_class', 'fa fa-comment-o')
-              ->setCountRoute('admin.api.sidebar.counter.messages.direct');
+           //  $menu->admin_messages->add('Direct Messages', ['url' => route('admin.messages', ['type' => 'message'])])
+           //    ->data('icon_class', 'fa fa-comment-o')
+           //    ->setCountRoute('admin.api.sidebar.counter.messages.direct');
 
-            $menu->admin_messages->add('Sent Messages', ['route' => 'admin.messages.sent'])
-              ->data('icon_class', 'fa fa-mail-reply');
-            $menu->admin_messages->add('Drafts', ['route' => 'admin.messages.draft'])
-              ->data('icon_class', 'fa fa-eraser');
+           //  $menu->admin_messages->add('Sent Messages', ['route' => 'admin.messages.sent'])
+           //    ->data('icon_class', 'fa fa-mail-reply');
+           //  $menu->admin_messages->add('Drafts', ['route' => 'admin.messages.draft'])
+           //    ->data('icon_class', 'fa fa-eraser');
 
           // End messages
-          */
+
           /**
            * BA
            */
@@ -154,19 +154,24 @@ class AdminPage
           /**
            * Prospects
            */
-          // $menu->add('PROSPECTS', ['route' => 'admin.prospects'])
-          //   ->data('icon_class', 'fa fa-bullseye')
-          //   ->nickname('admin_prospects')
-          //   ->restricSalesRep()
-          //   ->setCountRoute('admin.api.sidebar.counter.prospect');
+          $menu->add('PROSPECTS', ['route' => 'admin.prospects'])
+            ->data('icon_class', 'fa fa-bullseye')
+            ->nickname('admin_prospects')
+            ->restricSalesRep()
+            ->setCountRoute('admin.api.sidebar.counter.prospect');
 
-          //   $menu->admin_prospects->add('New Prospects', ['route' => 'admin.prospects.leads'])
-          //     ->forRoleOnly('sales-rep')
-          //     ->setCountRoute('admin.api.sidebar.counter.new.prospect');
-          //   $menu->admin_prospects->add('Unmatched Leads', ['route' => 'admin.prospects.unmatched.lead'])
-          //     ->forRoleOnly('csr');
-          //   $menu->admin_prospects->add('All Prospects', ['route' => 'admin.prospects']);
+            $menu->admin_prospects->add('New Prospects', ['route' => 'admin.prospects.leads'])
+              ->forRoleOnly('sales-rep')
+              ->setCountRoute('admin.api.sidebar.counter.new.prospect');
+            $menu->admin_prospects->add('Unmatched Leads', ['route' => 'admin.prospects.unmatched.lead'])
+              ->forRoleOnly('csr');
+            $menu->admin_prospects->add('All Prospects', ['route' => 'admin.prospects']);
           //End Prospect
+
+            $menu->add('CTA Requests', ['route' => 'admin.cta'])
+            ->data('icon_class', 'fa fa-bars')
+            ->forRoleOnly('csr')
+            ->nickname('admin_cta');
 
           /**
            * Prospect Activity
@@ -204,20 +209,20 @@ class AdminPage
           /**
            * Offers
            */
-          // $menu->add('OFFERS')
-          //   ->data('icon_class', 'fa fa-tag')
-          //   ->restricSalesRep()
-          //   ->nickname('admin_offers');
+          $menu->add('OFFERS')
+            ->data('icon_class', 'fa fa-tag')
+            ->restricSalesRep()
+            ->nickname('admin_offers');
 
-          //   $menu->admin_offers->add('All Offers', ['route' => 'admin.offers']);
-          //   $menu->admin_offers->add( ($user->hasRole('csr') ? 'BA Offers' : 'Custom Offers'), ['url' => route('admin.offers', ['author_type' => 'custom'])]);
+            $menu->admin_offers->add('All Offers', ['route' => 'admin.offers']);
+            $menu->admin_offers->add( ($user->hasRole('csr') ? 'BA Offers' : 'Custom Offers'), ['url' => route('admin.offers', ['author_type' => 'custom'])]);
 
-          //   if(config('lbt.offer.enable_dealer_offers'))
-          //   {
-          //     $menu->admin_offers->add('Dealer Offers', ['url' => route('admin.offers', ['author_type' => 'dealer'])]);
-          //   }
+            if(config('lbt.offer.enable_dealer_offers'))
+            {
+              $menu->admin_offers->add('Dealer Offers', ['url' => route('admin.offers', ['author_type' => 'dealer'])]);
+            }
 
-          //   $menu->admin_offers->add('Brand Offers', ['url' => route('admin.offers', ['author_type' => 'brand'])]);
+            $menu->admin_offers->add('Brand Offers', ['url' => route('admin.offers', ['author_type' => 'brand'])]);
           // End offer
 
           /**

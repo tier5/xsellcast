@@ -306,3 +306,6 @@ Offer v2.1 #stable
 
 OneAll integration v0.2 #stable
 	a) Implemented oneall callback url .
+
+OneAll integration v1 #stable
+	a) Implemented OneAll social registration using Facebook and LinkedIn

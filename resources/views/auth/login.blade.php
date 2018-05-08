@@ -65,7 +65,7 @@ loginscreen
 
             /* Embeds the buttons into the container oa_social_login_container */
             var _oneall = _oneall || [];
-            _oneall.push(['social_login', 'set_providers', ['linkedin']]);
+            _oneall.push(['social_login', 'set_providers', ['linkedin','facebook']]);
             _oneall.push(['social_login', 'set_callback_uri', 'http://xsellcast.test/auth/callback_uri']);
             _oneall.push(['social_login', 'do_render_ui', 'oa_social_login']);
 

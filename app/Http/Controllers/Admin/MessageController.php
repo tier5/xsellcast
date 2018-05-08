@@ -246,4 +246,30 @@ class MessageController extends Controller
         $request->session()->flash('message', 'Messsage has been sent.');
 		return redirect($request->get('redirect_to'));
 	}
+
+	public function CTAindex(){
+			$user          = \Auth::user();
+		$layoutColumns = $this->crud->layoutColumn();
+		// $search        = $request->get('s');
+		$thread_count  = $this->message->allMessages()->skipPresenter()->all()->count();
+		$urlParam      = ['type' => $type];
+
+		///
+	//	$this->thread->createSystemMessage($user->id, 'messages.system.ba-welcome', 'Welcome!');
+		///
+
+    	if($search)
+    	{
+    		$urlParam['s'] = urlencode($search);
+    	}
+
+    	$url = ($type ? route('admin.api.messages', $urlParam) : route('admin.api.messages', $urlParam));
+    	$tbl = MessageCrud::ajaxTable($url);
+
+    	$layoutColumns->addItem('admin.messages.actions', ['show_box' => false, 'column_class' => 'm-b-md', 'column_size' => 12]);
+		$layoutColumns->addItem('admin.messages.list', ['show_box' => false, 'view_args' => compact('thread_count', 'tbl'), 'column_size' => 12]);
+		$layoutColumns->addItem('admin.messages.bottom_box', ['show_box' => false, 'column_class' => 'm-b-sm']);
+
+		return $this->crud->pageView($layoutColumns, compact('type'));
+	}
 }
