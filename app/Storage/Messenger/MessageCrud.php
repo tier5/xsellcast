@@ -66,7 +66,7 @@ class MessageCrud
 	      ->useDefaultTblClass(false)
 	      ->addAttribute('class', 'table-hover table-mail table')
 	      ->addAttribute('id', 'messages-ajax-tbl')
-	      ->addExtra('js-callback', 'messageTblTd');
+	      ->addExtra('js-callback', 'ctaTblTd');
 	      // ->addExtra('after-append', 'messageAfterAppend');
 
 	    $box = new Box($info);

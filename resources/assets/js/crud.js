@@ -24,7 +24,7 @@ var tblAjaxLoad = function(elem, success_callback, no_url_callback)
 	var after_append_callback = $this.attr('data-after-append');
 
 	$loadBtn.text('LOADING...');
-	$loadBtn.attr('disabled', 'disabled'); 
+	$loadBtn.attr('disabled', 'disabled');
 
 	if(!url || $this.hasClass('all-loaded')){
 		if (typeof no_url_callback === "function") {
@@ -52,7 +52,7 @@ var tblAjaxLoad = function(elem, success_callback, no_url_callback)
 		error: function(r) {
 			var html = '';
 			if(r.status == 422){
-				
+
 				html = jsonErrorToHtml(r.responseJSON);
 			}else{
 
@@ -96,8 +96,8 @@ var tblAjaxLoad = function(elem, success_callback, no_url_callback)
 	   		}
 
 	   		if(data.meta.pagination.total_pages > data.meta.pagination.current_page){
-		   		
-		   		$this.attr('data-url', data.meta.pagination.links.next);		   			
+
+		   		$this.attr('data-url', data.meta.pagination.links.next);
 	   		}else{
 	   			$this.attr('data-url', null);
 	   			$loadBtn.hide();
@@ -105,14 +105,14 @@ var tblAjaxLoad = function(elem, success_callback, no_url_callback)
 	   		}
 
 	   		if (typeof success_callback === "function") {
-				success_callback();			
+				success_callback();
 	   		}
 	   	}
 	}).complete(function(){
 		rmLoadingTbl();
 		Waypoint.refreshAll();
 		$loadBtn.text('LOAD MORE');
-		$loadBtn.removeAttr('disabled'); 		
+		$loadBtn.removeAttr('disabled');
 	});
 };
 
@@ -128,7 +128,7 @@ var waypointInit = function() {
 		tblAjaxLoad($(this));
 	});
 
-	
+
 };
 
 var tblLoadMore = function() {
@@ -156,11 +156,11 @@ var ajaxTblLetterBtn = function($btn) {
 	        scrollTop: $td.offset().top
 	    }, 500, function(){
 	    	$td.addClass('blink-warning');
-	    	
+
 	    	setTimeout(function(){
 	    		$td.removeClass('blink-warning');
 	    	}, 2000);
-	    });			
+	    });
 	}else{
 
 		if($cont.hasClass('all-loaded')){
@@ -187,8 +187,8 @@ var ajaxTblLetterBtn = function($btn) {
 			}, function(){
 
 				ajaxTblLetterBtn($btn);
-			});		    	
-		});	
+			});
+		});
 
 	}
 };
@@ -233,7 +233,7 @@ var messageTblTd = function(k, row) {
 	}else if(k === 'content'){
 		attr = {class: 'mail-subject'};
 	 	html = '<a href="' + showUrl + '">' + row.last_message.body_excerpt + '</a>';
-		
+
 	}else if(k === 'time'){
 		html = row.last_message.created_at_human;
 		attr = {class: 'text-right mail-date'};
@@ -276,7 +276,7 @@ var fieldAutoComplete = function()
 					},
 					success: function( data ) {
 						response( data );
-					}	      
+					}
 			    });
 		  	},
 			messages: {
@@ -312,7 +312,7 @@ var dealerModalFindSelectPopulateCat = function(){
 	   		});
 
 	   	}
-	});		
+	});
 };
 
 var dealerModalFindSelect = function(field_name, dealer_id, dealer_name){
@@ -357,7 +357,7 @@ var dealerModalShowSubmit = function()
 				text: 'Zip field is required.',
 				time: 8000,
 				class_name: 'gritter-danger'
-			});			
+			});
 
 			return false;
 		}
@@ -369,10 +369,10 @@ var dealerModalShowSubmit = function()
 				text: 'Category field is required.',
 				time: 8000,
 				class_name: 'gritter-danger'
-			});			
+			});
 
 			return false;
-		}		
+		}
 
 		$.ajax({
 			url: url,
@@ -382,7 +382,7 @@ var dealerModalShowSubmit = function()
 			error: function(r) {
 				var html = '';
 				if(r.status == 422){
-					
+
 					html = jsonErrorToHtml(r.responseJSON);
 				}else{
 
@@ -425,7 +425,7 @@ var dealerModalShowSubmit = function()
 		   	}
 		}).complete(function(){
 
-		});	
+		});
 
 	});
 };
@@ -439,7 +439,7 @@ var officeHoursFieldSetCheck = function(elem)
 		$('select', $hours).prop('disabled', true);
 	}else{
 		$('select', $hours).prop('disabled', false);
-	}	
+	}
 }
 
 var officeHoursField = function()
@@ -454,8 +454,45 @@ var officeHoursField = function()
 
 	$('.field-hours-of-operations input[type="checkbox"]').on('ifUnchecked', function(){
 		officeHoursFieldSetCheck(this);
-	});	
+	});
 };
+
+var ctaTblTd = function(k, row) {
+// console.log(row);
+	var html = '';
+	var attr = {};
+	var showUrl = laroute.route('admin.messages.cta.show', {thread_id: row.id, message_id: row.last_message.id});
+
+	// if(row.thread_status == 'draft')
+	// {
+	// 	showUrl = laroute.route('admin.messages.draft.continue', {thread_id: row.id, message_id: row.last_message.id});
+	// }
+
+	if(k === 'checkbox'){
+		html = '<input type="checkbox" class="i-checks" name="msg-id[]" value="' + row.id + '" />';
+		attr = {class: 'check-mail'};
+
+	}else if(k === 'content'){
+		attr = {class: 'mail-subject'};
+	 	html = '<a href="' + showUrl + '">' + row.last_message.body_excerpt + '</a>';
+
+	}else if(k === 'time'){
+		html = row.last_message.created_at_human;
+		attr = {class: 'text-right mail-date'};
+
+	}else if(k === 'sender'){
+		attr = {class: 'mail-ontact'};
+		html = '<a href="' + showUrl + '">' + row.last_message.sender_name + '<span class="label label-' + row.type.badge + ' pull-right">' + row.type.name + '</span></a>';
+	}
+
+	if(row.is_unread){
+		attr.class = attr.class + ' unread';
+	}
+
+	return {html: html, attr: attr};
+
+};
+
 
 $(document).ready(function(){
 	waypointInit();

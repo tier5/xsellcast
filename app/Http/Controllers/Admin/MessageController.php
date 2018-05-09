@@ -115,6 +115,7 @@ class MessageController extends Controller
 
 	public function show(MessageShowGetRequest $request, $thread_id, $message_id = null)
 	{
+
 		$user              = \Auth::user();
 		$thread            = $request->get('thread');
 		$layoutColumns     = $this->crud->layoutColumn();
@@ -271,9 +272,80 @@ class MessageController extends Controller
 
 
     	// $layoutColumns->addItem('admin.messages.actions', ['show_box' => false, 'column_class' => 'm-b-md', 'column_size' => 12]);
-		$layoutColumns->addItem('admin.messages.list', ['show_box' => false, 'view_args' => compact('thread_count', 'tbl'), 'column_size' => 12]);
+		$layoutColumns->addItem('admin.messages.cta_list', ['show_box' => false, 'view_args' => compact('thread_count', 'tbl'), 'column_size' => 12]);
 		// $layoutColumns->addItem('admin.messages.bottom_box', ['show_box' => false, 'column_class' => 'm-b-sm']);
 
 		return $this->crud->pageView($layoutColumns, compact('type'));
 	}
+
+	public function showCTA(Request $request, $thread_id, $message_id = null)
+	{
+		// dd($request->all());
+		$user              = \Auth::user();
+		// $thread            = $request->get('thread');
+		$thread 			= Thread::find($thread_id);
+		$layoutColumns     = $this->crud->layoutColumn();
+		$showView          = 'admin.messages.show.' . $thread->type;
+		$offer             = $thread->offer();
+		$offer_thumb       = ($offer ? $offer->getThumbnail() : null);
+		$type              = config('lbt.message_types')[$thread->type];
+		$messages          = ($message_id ? $thread->messages()->whereIn('id', [$message_id])->get() : $thread->messages()->get() );
+		$brand             = ($offer ? $offer->brands()->first() : null );
+		$isApproved        = false;
+		$newLeadParentType = null;
+		$isRejected		   = false;
+		$isFromMe		   = ($messages->first()->user_id == $user->id);
+
+
+		// foreach($messages as $message)
+		// {
+		// 	$message->markAsRead($user->id);
+		// }
+
+		// if($thread->type == 'new_lead')
+		// {
+		// 	/**
+		// 	 * Get all related customer to BA to message
+		// 	 *
+		// 	 */
+		// 	$customer    = $thread->users()->where('user_id', '!=', $user->id)->first()->customer;
+		// 	$salesrep    = $user->salesRep()->first();
+		// 	$custBaPivot = $customer->salesRepsPivot()->where('salesrep_id', $salesrep->id)->first();
+		// 	/**
+		// 	 * Get approve customer to salesrep relation.
+		// 	 *
+		// 	 * @var        boolean
+		// 	 */
+		// 	if(!isset($custBaPivot->approved)){
+
+		// 		abort('402', 'Prospect is not assigned to BA');
+		// 	}
+
+		// 	$isApproved        = ($custBaPivot->approved);
+		// 	$isRejected        = ($custBaPivot->rejected);
+		// 	$isPending		   = ($custBaPivot->isPending);
+		// 	$t                 = $thread->getMeta('parent_thread_type');
+		// 	$newLeadParentType = (isset(config('lbt.message_types')[$t]) ? config('lbt.message_types')[$t] : null);
+
+		// 	$this->crud->setExtra('sidemenu_active', 'admin_prospects');
+		// }else
+		// {
+			$this->crud->setExtra('sidemenu_active', 'admin_messages');
+		// }
+
+		/**
+		 * @var        App\Storage\User\User $talking_to
+		 */
+		$talkinToParticipant = $thread->participants()->whereNotIn('user_id', [$user->id])->first();
+		$talking_to = ($talkinToParticipant ? $talkinToParticipant->user()->first() : null );
+		// $talking_to = null;
+		$showAcceptButton = true;
+		$thread->markAsRead($user->id);
+		$layoutColumns->addItem($showView, [
+			'show_box' => false, 'column_class' => 'm-b-sm',
+			'view_args' => compact('offer', 'brand', 'type', 'thread', 'messages', 'talking_to', 'offer_thumb', 'user', 'isRejected', 'isApproved', 'isPending', 'newLeadParentType', 'isFromMe', 'message_id', 'showAcceptButton')]);
+
+		return $this->crud->pageView($layoutColumns, compact('isFromMe'));
+	}
+
 }

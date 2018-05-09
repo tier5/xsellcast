@@ -350,6 +350,10 @@ Route::group(array('prefix' => 'admin', 'middleware' => array('auth', 'admin-pag
             'uses' => 'MessageController@CTAindex',
             'as' => 'admin.cta' ));
 
+         Route::get('cta/show/{thread_id}/{message_id}', array(
+            'uses' => 'MessageController@showCTA',
+            'as' => 'admin.messages.cta.show' ));
+
     });
 
     Route::group(array('prefix' => 'settings', 'namespace' => 'Settings'), function()

@@ -11,7 +11,7 @@
     @if(isset($offer) && $offer)
     @include('admin.messages.show.parts.offer-info')
     @endif
-    
+
     @include('admin.messages.show.parts.messages')
 
     <div class="mail-body text-right tooltip-demo">
