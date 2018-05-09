@@ -486,4 +486,23 @@ class MessageRepositoryEloquent extends BaseRepository implements MessageReposit
         return $messages;
 
     }
+
+    public function allCTARequest($search)
+    {
+      $this->model = $this->model->where(function($query) use($search){
+
+            $query->allMessages(function($query) use($search){
+
+                if($search)
+                {
+                    $query->forSearch($search);
+                }
+            });
+
+        });
+
+        return $this;
+    }
+
+
 }

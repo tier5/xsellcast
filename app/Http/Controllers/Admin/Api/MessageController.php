@@ -57,4 +57,16 @@ class MessageController extends Controller
 
     	return response()->json($messages);
 	}
+	public function allCTARequests(Request $request)
+	{
+		// $user    = Auth::user();
+		$search  = $request->get('s');
+
+		// $messages = $this->message->useIsReadThreadAjaxPresenter()->allMessages($search, $user->id, null, false, true)->orderBy('created_at', 'desc')->paginate(20);
+		$messages = $this->message->useIsReadThreadAjaxPresenter()->allCTARequest($search)->orderBy('created_at', 'desc')->paginate(20);
+
+    	return response()->json($messages);
+	}
+
+
 }

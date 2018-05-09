@@ -27,8 +27,8 @@ class CustomerChangePasswordRequest extends Request
     {
         return [
             'access_token'  => 'required',
-            'email'         => 'required|integer|email',
-            'password'      => 'required|integer|min:6',
+            'email'         => 'required|email',
+            'password'      => 'required|min:6',
         ];
     }
 

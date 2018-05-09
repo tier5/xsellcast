@@ -435,6 +435,10 @@ Route::group(array('prefix' => 'admin', 'middleware' => array('auth', 'admin-pag
                 'uses' => 'MesssageCreateValidationController@index',
                 'as' => 'admin.api.messages.create.validation' ));
 
+            Route::get('/cta/request', array(
+                'uses' => 'MessageController@allCTARequests',
+                'as' => 'admin.api.messages.cta.request' ));
+
         });
 
         Route::group(['prefix' => 'offers'], function()
