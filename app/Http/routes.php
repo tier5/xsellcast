@@ -293,6 +293,10 @@ Route::group(array('prefix' => 'admin', 'middleware' => array('auth', 'admin-pag
         Route::get('/delete/{offer_id}', array(
             'uses' => 'OfferController@destroy',
             'as' => 'admin.offers.destroy' ));
+
+        Route::get('/show/{offer_id}', array(
+            'uses' => 'OfferController@show',
+            'as' => 'admin.offers.show' ));
     });
 
     Route::group(array('prefix' => 'messages', 'middleware' => 'salesrep-agreed'), function()

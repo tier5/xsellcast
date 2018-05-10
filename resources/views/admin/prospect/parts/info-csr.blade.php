@@ -19,7 +19,7 @@
                 <label>Job title</label>
                 <input class="form-control" type="text" value="" />
             </div>
-        </div>                
+        </div>
         @endif
 
         @if(isset($customer['company']) && $customer['company'] != '')
@@ -44,7 +44,7 @@
 
         <div class="col-md-6">
             {!! Form::admin_text('homephone', 'Home Phone', $customer['homephone']); !!}
-        </div>   
+        </div>
 
         <div class="col-md-6">
             {!! Form::admin_text('officephone', 'Office Phone', $customer['officephone']); !!}
@@ -52,35 +52,35 @@
 
         <div class="col-md-12">
             {!! Form::admin_text('address1', 'Address 1', $customer['address1']); !!}
-        </div>   
+        </div>
 
         <div class="col-md-12">
             {!! Form::admin_text('address2', 'Address 2', $customer['address2']); !!}
-        </div> 
+        </div>
 
         <div class="col-md-6">
             {!! Form::admin_text('city', 'City', $customer['city']); !!}
-        </div>  
+        </div>
 
         <div class="col-md-6">
             {!! Form::states('state', 'State', $customer['state']); !!}
-        </div>   
+        </div>
 
         <div class="col-md-6">
             {!! Form::admin_text('zip', 'Zip', $customer['zip']); !!}
-        </div>   
+        </div>
 
     </div>
 
-    <div class="row hidden">   
+    <div class="row hidden">
 
         <div class="col-md-6">
             {!! Form::admin_text('geo_lat', 'Latitude', $customer['geo_lat']); !!}
-        </div>    
+        </div>
 
         <div class="col-md-6">
             {!! Form::admin_text('geo_long', 'Longtitude', $customer['geo_long']); !!}
-        </div>                                                    
+        </div>
 
     </div>
 

@@ -19,11 +19,11 @@
 
         <div class="widget-text-box">
 
-            @if($iscsr)
+           {{--  @if($iscsr)
                 @include('admin.prospect.parts.info-csr')
-            @else
+            @else --}}
                 @include('admin.prospect.parts.info-ba')
-            @endif
+            {{-- @endif --}}
 
         </div>
 
@@ -45,7 +45,7 @@
                         <div class="col-md-4">Location: </div>
                         <div class="col-md-8">{!! $fc->viewLocation() !!}</div>
                     </div>
-                </div>   
+                </div>
                 @endif
 
                 @if($fc->getGender())
@@ -55,7 +55,7 @@
                         <div class="col-md-8">{!! $fc->getGender() !!}</div>
                     </div>
                 </div>
-                @endif           
+                @endif
 
                 @if($fc->viewOrgs())
                 <div class="faq-item">
@@ -64,7 +64,7 @@
                         <div class="col-md-8">{!! $fc->viewOrgs() !!}</div>
                     </div>
                 </div>
-                @endif     
+                @endif
 
                 @if($fc->viewWebsites())
                 <div class="faq-item">
@@ -73,8 +73,8 @@
                         <div class="col-md-8">{!! $fc->viewWebsites() !!}</div>
                     </div>
                 </div>
-                @endif     
-                       
+                @endif
+
                 @if($fc->viewPhotos())
                 <div class="faq-item">
                     <div class="row">
@@ -82,9 +82,9 @@
                         <div class="col-md-8">{!! $fc->viewPhotos() !!}</div>
                     </div>
                 </div>
-                @endif   
+                @endif
 
-            </div>            
+            </div>
         @endif
 
         @if(isset($customer['has_social_profile']) && $customer['has_social_profile'])
@@ -160,8 +160,8 @@
                             <small class="text-muted">{!! $note->created_at->format('m/d/Y') !!} by {!! $note->user->firstname !!} {!! $note->user->lastname !!}</small><br/>
                             {!! $note->body !!}
                         </div>
-                    </div> 
-                @endforeach              
+                    </div>
+                @endforeach
             </div>
         </div>
         @endif

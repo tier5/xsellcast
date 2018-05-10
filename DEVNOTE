@@ -316,3 +316,9 @@ CTA Request v4.0 #stable
 
 CTA Request v4.1 #stable
 	a) Created view details page for all type of CTA in CSR dashboard
+
+Offer v2.2 #stable
+	a) Modified offer list in CSR Dashboard
+	b) Created single offer view page in CSR Dashboard
+	c) Modified prospect list in CSR Dashboard
+	d) Modified single prospect view page in CSR Dashboard

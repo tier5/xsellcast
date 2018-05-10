@@ -89,7 +89,7 @@ class ProspectsController extends Controller
          * Create table
          */
         $query = ['sort' => $sort, 'field' => 'lastname', 'limit' => 50];
-    
+
         if($salesRep){
             $query['id'] = $salesRep->id;
         }
@@ -106,10 +106,10 @@ class ProspectsController extends Controller
 
             $url = LocalApiRequest::requestUrl('api.v1.customers', $query);
         }
-        
+
         $table = CustomerCrud::ajaxUserTable(null, $url);
         $layoutColumns->addItemTable($table, null, ['view_args' => ['url' => $url]]);
-    
+
         /**
          * Create modal
          */
@@ -123,7 +123,7 @@ class ProspectsController extends Controller
      *
      * @param      ProspectRequest       $request      The request
      * @param      Integer 					 $customer_id  The customer identifier
-     * 
+     *
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function show(ProspectRequest $request, $customer_id)
@@ -142,15 +142,15 @@ class ProspectsController extends Controller
         $customer['firstname'] = ($request->get('firstname') ? $request->get('firstname') :  $customer['firstname']);
         $customer['lastname']  = ($request->get('lastname') ? $request->get('lastname') :  $customer['lastname']);
         $customer['email']     = ($request->get('email') ? $request->get('email') :  $customer['email']);
-        $args                  = array( 
-            'box_title'   => 'Basic Info', 
-            'show_box'    => false, 
-            'column_size' => 12, 
+        $args                  = array(
+            'box_title'   => 'Basic Info',
+            'show_box'    => false,
+            'column_size' => 12,
             'view_args'   => compact('customer', 'notes', 'iscsr', 'brands', 'fc', 'user'));
         $modalMsg = 'Are you sure you would like to permanently delete this prospect?';
 
         $layoutColumns->addItem('admin.prospect.parts.message-assign-now', ['show_box' => false]);
-        $layoutColumns->addItem('admin.partials.table-top-delete', ['view_args' => compact('deleteUrl', 'modalMsg'), 'show_box' => false, 'column_class' => 'm-b-md text-right']);
+        // $layoutColumns->addItem('admin.partials.table-top-delete', ['view_args' => compact('deleteUrl', 'modalMsg'), 'show_box' => false, 'column_class' => 'm-b-md text-right']);
         $layoutColumns->addItem('admin.prospect.show', $args);
         $this->crud->setExtra('sidemenu_active', 'admin_prospects');
 
@@ -199,7 +199,7 @@ class ProspectsController extends Controller
         $layoutColumns->addItem('admin.customer.lookbook_bottom', ['show_box' => false, 'view_args' => [ 'customer' => $customer ]]);
         $layoutColumns->addItemTable('App\Storage\Customer\CustomerCrud@lookbookTable', $model, ['box_title' => 'Lookbook Offers']);
 
-        return $this->crud->pageView($layoutColumns, $customer);           
+        return $this->crud->pageView($layoutColumns, $customer);
     }
 
     /**
@@ -224,7 +224,7 @@ class ProspectsController extends Controller
         ]));
 
         $request->session()->flash('message', "Prospect information has been updated!");
-        return redirect()->route('admin.prospects.show', ['customer_id' => $customer_id]);        
+        return redirect()->route('admin.prospects.show', ['customer_id' => $customer_id]);
     }
 
     /**
@@ -247,6 +247,6 @@ class ProspectsController extends Controller
         $user->delete();
 
         $request->session()->flash('message', "Prospect has been deleted!");
-        return redirect()->route('admin.prospects');             
+        return redirect()->route('admin.prospects');
     }
 }

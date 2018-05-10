@@ -34,7 +34,7 @@ class OfferController extends Controller
 	}
 
 	public function index(Request $request, $author_type = null)
-	{ 
+	{
         $layoutColumns = $this->crud->layoutColumn();
         $user          = $request->user();
         $orderBy       = $request->get('field', 'created_at');
@@ -57,9 +57,9 @@ class OfferController extends Controller
         $model = $model->skipPresenter()->paginate(20);
 
         $layoutColumns->addItem('admin.offer.listing_bottom', ['show_box' => false, 'column_class' => 'm-b-sm']);
-    	$layoutColumns->addItemTable('App\Storage\Offer\OfferCrud@table', $model, compact('user'));		
+    	$layoutColumns->addItemTable('App\Storage\Offer\OfferCrud@table', $model, compact('user'));
 
-		return $this->crud->pageView($layoutColumns, compact('author_type', 'user'));    	
+		return $this->crud->pageView($layoutColumns, compact('author_type', 'user'));
 	}
 
     public function create(Request $request)
@@ -90,8 +90,8 @@ class OfferController extends Controller
     	}
 
     	$param = [
-    		'media' => $request->get('media'), 
-    		'contents' => $request->get('contents'), 
+    		'media' => $request->get('media'),
+    		'contents' => $request->get('contents'),
     		'title' => $request->get('title'),
             'thumbnail_id' => $request->get('thumbnail_id'),
     		'status' => $status];
@@ -102,7 +102,7 @@ class OfferController extends Controller
         }else{
             $offer = $this->offer->createForCsr($param);
         }
-    	
+
         /**
          * Save brand
          */
@@ -112,7 +112,7 @@ class OfferController extends Controller
         $this->offertag->createUpdateToOffer($offer, $request->get('tags'));
 
         $request->session()->flash('message', $msg);
-		return redirect()->route('admin.offers');		    	
+		return redirect()->route('admin.offers');
     }
 
     public function edit(Request $request, $offer_id)
@@ -123,14 +123,14 @@ class OfferController extends Controller
 
         $layoutColumns->addItemForm('App\Storage\Offer\OfferCrud@editForm', ['model' => $offer, 'user' => $user]);
 
-        return $this->crud->pageView($layoutColumns);        
+        return $this->crud->pageView($layoutColumns);
     }
 
     public function update(OfferPostRequest $request, $offer_id)
     {
         $save = $request->get('save');
         $publish = $request->get('publish');
-        $status = $request->get('status'); 
+        $status = $request->get('status');
         $brand = $this->brand->skipPresenter()->find($request->get('brand'));
 
         if($publish){
@@ -138,8 +138,8 @@ class OfferController extends Controller
         }
 
         $args = [
-            'status' => $status, 
-            'title' => $request->get('title'), 
+            'status' => $status,
+            'title' => $request->get('title'),
             'contents' => $request->get('contents')];
 
         $offer = $this->offer->skipPresenter()->update($args, $offer_id);
@@ -160,7 +160,7 @@ class OfferController extends Controller
 
         $request->session()->flash('message', $msg);
 
-        return redirect()->route('admin.offers');           
+        return redirect()->route('admin.offers');
     }
 
     public function destroy(Request $request, $offer_id)
@@ -169,5 +169,16 @@ class OfferController extends Controller
         $msg = "Offer has been deleted!";
         $request->session()->flash('message', $msg);
         return redirect()->route('admin.offers');
+    }
+
+    public function show(Request $request, $offer_id)
+    {
+        $offer         = $this->offer->skipPresenter()->find($offer_id);
+        $user          = Auth::user();
+        $layoutColumns = $this->crud->layoutColumn();
+
+        $layoutColumns->addItemForm('App\Storage\Offer\OfferCrud@showForm', ['model' => $offer, 'user' => $user]);
+
+        return $this->crud->pageView($layoutColumns);
     }
 }
