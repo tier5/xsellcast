@@ -29,9 +29,9 @@ class CustomerOfferPostRequest extends Request
     public function rules()
     {
         return [
-            'access_token' => 'required',
-            'customer_id'  => 'required|integer|exists:user_customer,id',
-            'offer_id'     => 'required|integer|exists:offers,id'
+            'access_token'      => 'required',
+            'wp_customer_id'    => 'required|integer|exists:user_customer,wp_userid',
+            'wp_offer_id'       => 'required|integer|exists:offers,wpid'
         ];
     }
 

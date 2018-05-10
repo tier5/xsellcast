@@ -252,15 +252,20 @@ class CustomerController extends Controller
     {
         try{
 
-            $customerId = $request->get('customer_id');
-            $offerId    = $request->get('offer_id');
-            $customer   = $this->customer->skipPresenter()->find($customerId);
+
+            $wp_offer_id    =   $request->get('wp_offer_id');
+            $wp_customer_id =   $request->get('wp_customer_id');
+            $wp=new WpConvetor();
+            $customerId     =   $wp->getId('customer',$wp_customer_id);
+            $offerId        =   $wp->getId('offer',$wp_offer_id);
+
+            $customer       =   $this->customer->skipPresenter()->find($customerId);
             $this->customer->setOfferToCustomer($offerId, $customer);
 
-            $offer=$this->offer->skipPresenter()->find($offerId);
-            $ba=$this->customer->findNereastBAOfOffer($offer,$customer);
+            $offer          =   $this->offer->skipPresenter()->find($offerId);
+            $ba             =   $this->customer->findNereastBAOfOffer($offer,$customer);
 
-            $user=$ba->user;
+            $user           =   $ba->user;
 
              // $beautymail = app()->make(Beautymail::class);
              //        $beautymail->send('emails.api.ba-addoffer', compact('user','offer','customer'), function($message) use($user)
