@@ -216,15 +216,18 @@ class CustomerController extends Controller
     {
 
         try{
-        $customer_id = $request->get('customer_id');
+
+        $wp_customer_id =   $request->get('wp_customer_id');
+        $wp=new WpConvetor();
+        $customer_id     =   $wp->getId('customer',$wp_customer_id);
         $offers = $this->offer->getByCustomer($customer_id)->paginate();
 
-        return response()->json([
-                    'status'=>true,
-                    'code'=>config('responses.success.status_code'),
-                    'data'=>$offers,
-                    'message'=>config('responses.success.status_message'),
-                ], config('responses.success.status_code'));
+        $data=[ 'status'=>true,
+                'code'=>config('responses.success.status_code'),
+                'message'=>config('responses.success.status_message')];
+        $data=array_merge($data,$offers);
+        return response()->json($data, config('responses.success.status_code'));
+
             }
         catch (\Exception $e) {
             // dd($e->getMessage());
@@ -313,8 +316,13 @@ class CustomerController extends Controller
     public function deleteOffer(CustomerOfferDeleteRequest $request)
     {
         try{
-            $customer_id = $request->get('customer_id');
-            $offer_id    = $request->get('offer_id');
+
+            $wp_offer_id    =   $request->get('wp_offer_id');
+            $wp_customer_id =   $request->get('wp_customer_id');
+            $wp=new WpConvetor();
+            $customer_id     =   $wp->getId('customer',$wp_customer_id);
+            $offer_id        =   $wp->getId('offer',$wp_offer_id);
+
             $offer      = $this->customer->skipPresenter()
                 ->find($customer_id)
                 ->pivotOffers()->where('offer_id', $offer_id)->first(); //->delete();
@@ -324,7 +332,7 @@ class CustomerController extends Controller
              return response()->json([
                     'status'=>true,
                     'code'=>config('responses.success.status_code'),
-                    'data'=>$offer,
+                    'data'=>'Offer removed succesfully',
                     'message'=>config('responses.success.status_message'),
                 ], config('responses.success.status_code'));
             }

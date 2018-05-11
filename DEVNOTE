@@ -325,3 +325,7 @@ Offer v2.2 #stable
 
 Prospect lookbook v0.1 #stable
 	a) Implemented wp_customer_id and wp_offer_id in add offer in lookbook API.
+
+Prospect lookbook v0.2 #stable
+	a) Implemented wp_customer_id and wp_offer_id in remove offer in lookbook API.
+	b) Implemented wp_customer_id  in view lookbook API.

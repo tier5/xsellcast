@@ -4,6 +4,8 @@ namespace App\Http\Requests\Api;
 
 use App\Http\Requests\Request;
 use App\Storage\Customer\Customer;
+use App\Storage\LbtWp\WpConvetor;
+
 
 /**
  * Use for simple API request with access token for a post.
@@ -29,8 +31,19 @@ class CustomerOfferDeleteRequest extends Request
      */
     public function rules()
     {
-        $customer=Customer::find($this->customer_id);
-        $offer_id= $this->offer_id;
+
+        // $this->customer_id
+        // $offer_id= $this->offer_id
+
+            $wp_offer_id        =   $this->wp_offer_id;
+            $wp_customer_id     =   $this->wp_customer_id;
+            $wp=new WpConvetor();
+            $customer_id        =   $wp->getId('customer',$wp_customer_id);
+            $offer_id           =   $wp->getId('offer',$wp_offer_id);
+
+        $customer=Customer::find($customer_id);
+
+
         $pivotFound = false;
 
         if($customer)
@@ -44,9 +57,9 @@ class CustomerOfferDeleteRequest extends Request
         }
         return [
             'access_token' => 'required',
-            // '_method'      => 'required|in:DELETE',
-             'customer_id'  => 'required|integer|exists:user_customer,id|is_pivot_assign:' . $pivotFound,
-            'offer_id'     => 'required|integer|exists:offers,id'
+            '_method'      => 'required|in:DELETE,delete',
+            'wp_customer_id'  => 'required|integer|exists:user_customer,wp_userid|is_pivot_assign:' . $pivotFound,
+            'wp_offer_id'     => 'required|integer|exists:offers,wpid'
         ];
     }
 
@@ -54,7 +67,7 @@ class CustomerOfferDeleteRequest extends Request
     {
 
         return [
-            'customer_id.is_pivot_assign' => 'Prospect has not added offer in lookbook.'
+            'wp_customer_id.is_pivot_assign' => 'Prospect has not added offer in lookbook.'
         ];
     }
 

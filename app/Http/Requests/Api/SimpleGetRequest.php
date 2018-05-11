@@ -10,7 +10,7 @@ use App\Http\Requests\Request;
 class SimpleGetRequest extends Request
 {
     protected $redirectRoute = 'api.errors';
-    
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -29,7 +29,28 @@ class SimpleGetRequest extends Request
     public function rules()
     {
         return [
-            'access_token' => 'required'
+            'access_token' => 'required',
+            'wp_customer_id'  => 'required|integer|exists:user_customer,wp_userid'
         ];
     }
+    /**
+     * Response error message as json
+     *
+     * @param array $errors
+     * @return mixed
+     */
+    public function response(array $errors){
+
+        return response()->json([
+                    'status'=>false,
+                    'code'=>config('responses.bad_request.status_code'),
+                    'data'=>null,
+                    'errors'=>$errors,
+                    'message'=>config('responses.bad_request.status_message'),
+                ],
+                config('responses.bad_request.status_code')
+            );
+        // return Response::json($errors, config('responses.bad_request.status_code'));
+    }
 }
+
