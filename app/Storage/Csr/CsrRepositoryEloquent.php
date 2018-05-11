@@ -45,18 +45,18 @@ class CsrRepositoryEloquent extends BaseRepository implements CsrRepository
             {
                 continue;
             }
-            
-            $beautymail = app()->make(Beautymail::class);
-            $user = $csr->user;
 
-            $beautymail->send($view_body, [], function($message) use($user, $subject)
-            {
+            // $beautymail = app()->make(Beautymail::class);
+            // $user = $csr->user;
 
-              $message
-                    ->from('admin@xsellcast.com')
-                    ->to($user->email, $user->firstname . ' ' . $user->lastname)
-                    ->subject($subject);
-            });   
+            // $beautymail->send($view_body, [], function($message) use($user, $subject)
+            // {
+
+            //   $message
+            //         ->from('admin@xsellcast.com')
+            //         ->to($user->email, $user->firstname . ' ' . $user->lastname)
+            //         ->subject($subject);
+            // });
         }
     }
 
@@ -73,10 +73,10 @@ class CsrRepositoryEloquent extends BaseRepository implements CsrRepository
             'firstname' => $data['firstname'],
             'lastname'  => $data['lastname'],
             'password'  => bcrypt($data['password']),
-            'email'     => $data['email'] ]);    
+            'email'     => $data['email'] ]);
 
         $user->roles()->save($role);
-        
-        return $user->csr;       
+
+        return $user->csr;
     }
 }

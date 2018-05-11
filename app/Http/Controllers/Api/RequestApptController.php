@@ -146,27 +146,27 @@ class RequestApptController extends Controller
 			$thread = $this->customer_request->sendRequest($customer, $offer, 'appt', $body);
 
 			//send mail to BA
-            $ba=$this->customer->findNereastBAOfOffer($offer,$customer);
+            // $ba=$this->customer->findNereastBAOfOffer($offer,$customer);
 
-            $beautymail = app()->make(Beautymail::class);
-            $beautymail->send('emails.api.ba-addappt', compact('ba','offer','customer'), function($message) use($ba)
-            {
-                $message
-                    ->from(env('NO_REPLY'))
-                    // ->from(env('MAIL_USERNAME'))
-                    ->to($ba->user->email, $ba->user->firstname . ' ' . $ba->user->lastname)
-                    ->subject('New Appointment');
-            });
+            // $beautymail = app()->make(Beautymail::class);
+            // $beautymail->send('emails.api.ba-addappt', compact('ba','offer','customer'), function($message) use($ba)
+            // {
+            //     $message
+            //         ->from(env('NO_REPLY'))
+            //         // ->from(env('MAIL_USERNAME'))
+            //         ->to($ba->user->email, $ba->user->firstname . ' ' . $ba->user->lastname)
+            //         ->subject('New Appointment');
+            // });
             //send mail to prospect
-            $prospectMail = app()->make(Beautymail::class);
-            $prospectMail->send('emails.api.prospect-newappt', compact('ba','offer','customer'), function($message) use($customer)
-            {
-                $message
-                    ->from(env('NO_REPLY'))
-                    // ->from(env('MAIL_USERNAME'))
-                    ->to($customer->user->email, $customer->user->firstname . ' ' . $customer->user->lastname)
-                    ->subject('New Appointment');
-            });
+            // $prospectMail = app()->make(Beautymail::class);
+            // $prospectMail->send('emails.api.prospect-newappt', compact('ba','offer','customer'), function($message) use($customer)
+            // {
+            //     $message
+            //         ->from(env('NO_REPLY'))
+            //         // ->from(env('MAIL_USERNAME'))
+            //         ->to($customer->user->email, $customer->user->firstname . ' ' . $customer->user->lastname)
+            //         ->subject('New Appointment');
+            // });
 
 			return response()->json([
                     'status'=>true,

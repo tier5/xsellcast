@@ -43,7 +43,7 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
 
     public function presenter()
     {
-        
+
         return UserPresenter::class;
     }
 
@@ -73,7 +73,7 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
     //    $userData = array(
     //        'firstname' => (isset($data['firstname']) ? $data['firstname'] : ''),
     //        'lastname' => (isset($data['lastname']) ? $data['lastname'] : ''),
-    //    );     
+    //    );
 
     //    if(isset($data['email'])){
     //        $userData['email'] = $data['email'];
@@ -81,13 +81,13 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
 
     //    if(isset($data['password'])){
     //        $userData['password'] = bcrypt($data['password']);
-    //    }  
+    //    }
 
         /**
          * Create user data.
          */
     //    $user = $this->skipPresenter()->create($userData);
-        
+
         if(isset($data['meta'])){
             $user->setMeta($data['meta']);
             $user->save();
@@ -98,12 +98,12 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
             'cellphone'        => (isset($data['cellphone']) ? $data['cellphone'] : ''),
             'officephone'      => (isset($data['officephone']) ? $data['officephone'] : ''),
             'show_cellphone'   => (isset($data['show_cellphone']) ? $data['show_cellphone'] : 0),
-            'show_email'       => (isset($data['show_email']) ? $data['show_email'] : 0),            
+            'show_email'       => (isset($data['show_email']) ? $data['show_email'] : 0),
             'show_officephone' => (isset($data['show_officephone']) ? $data['show_officephone'] : 0),
             'facebook'         => (isset($data['facebook']) ? $data['facebook'] : ''),
             'twitter'          => (isset($data['twitter']) ? $data['twitter'] : ''),
             'linkedin'         => (isset($data['linkedin']) ? $data['linkedin'] : ''),
-            'job_title'        => (isset($data['jobtitle']) ? $data['jobtitle'] : ''), 
+            'job_title'        => (isset($data['jobtitle']) ? $data['jobtitle'] : ''),
         );
 
         $salesrepRepo->updateOne($salesrep, $salesRepData);
@@ -137,13 +137,13 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
         }
         return $this->regenerateToken($user);
 
-    }    
+    }
 
     public function getActivation($user)
     {
         $model = new UserActivations();
         return $model->where('user_id', $user->id)->first();
-    }    
+    }
 
     private function createToken($user)
     {
@@ -171,7 +171,7 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
     protected function getToken()
     {
         return hash_hmac('sha256', str_random(40), config('app.key'));
-    }    
+    }
 
     /**
      * Send mail for after account created.
@@ -181,16 +181,16 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
         $user       = $sales_rep->user()->first();
         $activation = $user->accountActivation()->first();
         $token      = ($activation ? $activation->token : $this->createActivation($user));
-        $beautymail = app()->make(Beautymail::class);
+        // $beautymail = app()->make(Beautymail::class);
 
-        $beautymail->send('emails.salesrep.welcome', compact('sales_rep', 'user', 'token'), function($message) use($sales_rep, $user)
-        {
+        // $beautymail->send('emails.salesrep.welcome', compact('sales_rep', 'user', 'token'), function($message) use($sales_rep, $user)
+        // {
 
-            $message
-                ->from('admin@xsellcast.com')
-                ->to($user->email, $user->firstname . ' ' . $user->lastname)
-                ->subject('Welcome Brand Associate!');
-        });
+        //     $message
+        //         ->from('admin@xsellcast.com')
+        //         ->to($user->email, $user->firstname . ' ' . $user->lastname)
+        //         ->subject('Welcome Brand Associate!');
+        // });
     }
 
     /**
@@ -200,15 +200,15 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
     {
         $user = $sales_rep->user()->first();
         $token = $user->accountActivation()->first()->token;
-        $beautymail = app()->make(Beautymail::class);
-        $beautymail->send('emails.salesrep.invitation', compact('sales_rep', 'user', 'token', 'password'), function($message) use($user)
-        {
+        // $beautymail = app()->make(Beautymail::class);
+        // $beautymail->send('emails.salesrep.invitation', compact('sales_rep', 'user', 'token', 'password'), function($message) use($user)
+        // {
 
-            $message
-                ->from('admin@xsellcast.com')
-                ->to($user->email, $user->firstname . ' ' . $user->lastname)
-                ->subject('Your Xsellcast Invitation');
-        });        
+        //     $message
+        //         ->from('admin@xsellcast.com')
+        //         ->to($user->email, $user->firstname . ' ' . $user->lastname)
+        //         ->subject('Your Xsellcast Invitation');
+        // });
     }
 
     /**
@@ -223,10 +223,10 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
                 $query->where('user_salesreps.id', $salesrep->id);
             });
         });
-        
+
         $this->model = $model;
 
-        return $this;     
+        return $this;
     }
 
     /**
@@ -242,13 +242,13 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
 
         $this->model = $model;
 
-        return $this;                     
+        return $this;
     }
 
     public function csrContactList($except_user_id)
     {
         $this->model = $this->model->forCsrContact()->where('id', '!=', $except_user_id);
-    
+
         return $this;
     }
 
@@ -273,14 +273,14 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
                 });
             })->where('id', '!=', $excerptId);
         });
-    
-        return $this;        
+
+        return $this;
     }
 
     public function search($search)
     {
         $this->model = $this->model->where(function($query) use($search){
-            $query->where('firstname', 'like', '%' . $search . '%')->orWhere('lastname', 'like', '%' . $search . '%')->orWhere('email', 'like', '%' . $search . '%');  
+            $query->where('firstname', 'like', '%' . $search . '%')->orWhere('lastname', 'like', '%' . $search . '%')->orWhere('email', 'like', '%' . $search . '%');
         });
 
         return $this;

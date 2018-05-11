@@ -30,7 +30,7 @@ class OntraPortMailController extends Controller
 		    );
 
     	$mandrill = new \Mandrill(config('lbt.mandrill_key'));
-    	$send = $mandrill->messages->send($message);
+    	// $send = $mandrill->messages->send($message);
     	dd($send);
 		//Mail::send('emails.ontraport.test', [], function ($m) {
 		//    $m->from('hello@app.com', 'Foo Bar Your Application');
@@ -42,6 +42,6 @@ class OntraPortMailController extends Controller
 		//	$swiftMessage = $m->getSwiftMessage();
 		//	$headers = $swiftMessage->getHeaders();
 		//	$headers->addTextHeader('Disposition-Notification-To', '"Caffeine Interactive" <info@caffeineinteractive.com>');
-		//}); 	
+		//});
     }
 }
