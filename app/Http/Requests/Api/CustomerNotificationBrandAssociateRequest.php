@@ -33,7 +33,7 @@ class CustomerNotificationBrandAssociateRequest extends Request
 
         $rules= [
             'access_token' => 'required',
-            'customer_id'  => 'required|integer|exists:user_customer,id',
+            'wp_customer_id'  => 'required|integer|exists:user_customer,wp_userid',
             'ba_ids' => 'required|exists:user_salesreps,id',
 
         ];

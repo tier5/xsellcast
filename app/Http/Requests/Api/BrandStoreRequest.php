@@ -31,7 +31,7 @@ class BrandStoreRequest extends Request
             // 'logo'        => 'required|image',
             'wp_category_id' => 'required|integer|exists:categories,wp_category_id',
             'catalog_url' => 'url|active_url',
-            'opid'        => 'required',
+            // 'opid'        => 'required',
             'wp_brand_id' => 'required|unique:brands,wp_brand_id'
             // 'slug'        =>  '',
             // 'image_url'   => 'url|active_url',

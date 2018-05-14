@@ -165,8 +165,16 @@ class CustomerNotificationSettingController extends Controller
 
       try
         {
-           $data=$request->all();
-           $customer = $this->customer->skipPresenter()->find($request->get('customer_id'));
+            $data=$request->all();
+
+
+            $wp_customer_id=$request->get('wp_customer_id');
+            $wp=new WpConvetor();
+            $customer_id=$wp->getId('customer',$wp_customer_id);
+            $data['customer_id']=$customer_id;
+
+           $customer = $this->customer->skipPresenter()->find($customer_id);
+
            $salesreps              = (isset($data['ba_ids']) ? $data['ba_ids'] : []);
 
            foreach($customer->pivotNotificationBrandAssociates()->get() as $pivot)

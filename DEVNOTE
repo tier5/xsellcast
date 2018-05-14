@@ -332,3 +332,6 @@ Prospect lookbook v0.2 #stable
 
 Email functionality v1.0 #stable
 	a) Removed email functionality from all module, accept password reset.
+
+Prospect registration v2.5 #stable
+	a) Implemented avatar_url in prospect details page

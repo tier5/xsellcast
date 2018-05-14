@@ -134,6 +134,7 @@ class BrandsController extends Controller
 
             $data     = $request->all();
             $media_id='';
+            if(isset($data['logo'])){
             $file=$data['logo'];
             $type = explode('/', $file->getClientMimeType());
             $ext = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
@@ -165,6 +166,7 @@ class BrandsController extends Controller
                 $media_id=$media->id;
 
 
+            }
             }
             //Convert wp_category_id to category_id
             $wp_category_id=$request->get('wp_category_id');

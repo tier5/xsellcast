@@ -10,8 +10,8 @@
                 @endif
             </h2>
             </div>
-            @if(isset($customer['avatar_orig_url']) && $customer['avatar_orig_url'])
-                <img src="{!! $customer['avatar_orig_url'] !!}" width="140" height="140" class="img-circle circle-border m-b-md" alt="profile">
+            @if(isset($customer['avatar_url']) && $customer['avatar_url'])
+                <img src="{!! $customer['avatar_url'] !!}" width="140" height="140" class="img-circle circle-border m-b-md" alt="profile">
             @else
                 <img src="{{ asset('img/blank-avatar.jpg') }}" width="140" height="140" class="img-circle circle-border m-b-md" alt="profile">
             @endif
