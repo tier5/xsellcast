@@ -335,3 +335,10 @@ Email functionality v1.0 #stable
 
 Prospect registration v2.5 #stable
 	a) Implemented avatar_url in prospect details page
+
+Prospect registration v2.6 #stable
+
+	a) Implemented  wp_customer_id in "Prospect Notification Settings:  add Brand Associate" Api
+	b) Implemented  wp_customer_id in Prospect : Share Offer api
+	c) Implemented  wp_customer_id in Prospect : My Offers
+	d) Implemented  wp_customer_id in Prospect : My Dealers list
