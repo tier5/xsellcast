@@ -2,71 +2,64 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Storage\Brand\BrandRepository;
-use App\Storage\Media\MediaRepository;
-
+use App\Http\Requests;
+use App\Http\Requests\Api\BrandDeleteRequest;
+use App\Http\Requests\Api\BrandEditRequest;
 use App\Http\Requests\Api\BrandsRequest;
 use App\Http\Requests\Api\BrandsShowRequest;
 use App\Http\Requests\Api\BrandStoreRequest;
-use App\Http\Requests\Api\BrandEditRequest;
-use App\Http\Requests\Api\BrandDeleteRequest;
-
+use App\Storage\Brand\BrandRepository;
 use App\Storage\LbtWp\WpConvetor;
+use App\Storage\Media\MediaRepository;
+use Illuminate\Http\Request;
 
 /**
  * @resource Brand
  *
  * Brand resource.
  */
-class BrandsController extends Controller
-{
-	protected $brand;
+class BrandsController extends Controller {
+    protected $brand;
     protected $media;
 
-	public function __construct(BrandRepository $brand,MediaRepository $media)
-	{
-		$this->brand = $brand;
-        $this->media=$media;
-	}
+    public function __construct(BrandRepository $brand, MediaRepository $media) {
+        $this->brand = $brand;
+        $this->media = $media;
+    }
 
-	/**
-	 * All
-	 *
-	 * Get a list of brands.
-	 *
-	 * @param      \App\Http\Requests\Api\BrandsRequest  $request  The request
-	 *
-	 * @return     Response
-	 */
-    public function index(BrandsRequest $request)
-    {
-        try{
+    /**
+     * All
+     *
+     * Get a list of brands.
+     *
+     * @param      \App\Http\Requests\Api\BrandsRequest  $request  The request
+     *
+     * @return     Response
+     */
+    public function index(BrandsRequest $request) {
+        try {
 
-            $per_page=$request->get('per_page') !='' ?$request->get('per_page'):20;
+            $per_page = $request->get('per_page') != '' ? $request->get('per_page') : 20;
 
             $brands = $this->brand->paginate($per_page);
 
-            $data=[
-                    'status'=>true,
-                    'code'=>config('responses.success.status_code'),
-                    'message'=>config('responses.success.status_message'),
-                    ];
-            $data=array_merge($data,$brands);
+            $data = [
+                'status'  => true,
+                'code'    => config('responses.success.status_code'),
+                'message' => config('responses.success.status_message'),
+            ];
+            $data = array_merge($data, $brands);
 
             return response()->json($data, config('responses.success.status_code'));
 
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             // dd($e->getMessage());
             return response()->json([
-                'status'=>false,
-                'code'=>config('responses.bad_request.status_code'),
-                'data'=>null,
-                'message'=>$e->getMessage()
+                'status'  => false,
+                'code'    => config('responses.bad_request.status_code'),
+                'data'    => null,
+                'message' => $e->getMessage(),
             ],
                 config('responses.bad_request.status_code')
             );
@@ -84,33 +77,31 @@ class BrandsController extends Controller
      *
      * @return     Response
      */
-    public function show(BrandsShowRequest $request)
-    {
+    public function show(BrandsShowRequest $request) {
 
-         try{
+        try {
 
-                $wp_brand_id=$request->get('wp_brand_id');
-                $wp=new WpConvetor();
-                $brand_id=$wp->getId('brand',$wp_brand_id);
-                $brand = $this->brand->find($brand_id);
+            $wp_brand_id = $request->get('wp_brand_id');
+            $wp          = new WpConvetor();
+            $brand_id    = $wp->getId('brand', $wp_brand_id);
+            $brand       = $this->brand->find($brand_id);
 
-                $data=[
-                    'status'=>true,
-                    'code'=>config('responses.success.status_code'),
-                    'message'=>config('responses.success.status_message'),
-                    ];
-                $data=array_merge($data,$brand);
+            $data = [
+                'status'  => true,
+                'code'    => config('responses.success.status_code'),
+                'message' => config('responses.success.status_message'),
+            ];
+            $data = array_merge($data, $brand);
 
-                return response()->json($data, config('responses.success.status_code'));
+            return response()->json($data, config('responses.success.status_code'));
 
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             // dd($e->getMessage());
             return response()->json([
-                'status'=>false,
-                'code'=>config('responses.bad_request.status_code'),
-                'data'=>null,
-                'message'=>$e->getMessage()
+                'status'  => false,
+                'code'    => config('responses.bad_request.status_code'),
+                'data'    => null,
+                'message' => $e->getMessage(),
             ],
                 config('responses.bad_request.status_code')
             );
@@ -127,83 +118,78 @@ class BrandsController extends Controller
      *
      * @return     Response
      */
-    public function store(BrandStoreRequest $request)
-    {
+    public function store(BrandStoreRequest $request) {
 
-         try{
+        try {
 
             $data     = $request->all();
-            $media_id='';
-            if(isset($data['logo'])){
-            $file=$data['logo'];
-            $type = explode('/', $file->getClientMimeType());
-            $ext = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
-            $baseName = basename($file->getClientOriginalName(), '.' . $ext);
-            $fileName = $this->media->setUploadPath()->generateFilename($baseName, $ext);
+            $media_id = '';
+            if (isset($data['logo'])) {
+                $file     = $data['logo'];
+                $type     = explode('/', $file->getClientMimeType());
+                $ext      = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
+                $baseName = basename($file->getClientOriginalName(), '.' . $ext);
+                $fileName = $this->media->setUploadPath()->generateFilename($baseName, $ext);
 
                 try {
                     $targetFile = $file->move($this->media->getUploadPath(), $fileName);
-                }
-                catch (\Exception $e) {
+                } catch (\Exception $e) {
 
                     $erroMsg = $this->media->errorMessage($file->getClientOriginalName());
-                    $error = [
+                    $error   = [
                         'title' => $erroMsg[0],
-                        'body'  => $erroMsg[1]
+                        'body'  => $erroMsg[1],
                     ];
                     return response()->json([
-                        'status'=>false,
-                        'code'=>config('responses.bad_request.status_code'),
-                        'data'=>$error,
-                        'message'=> $erroMsg ,
-                        ], config('responses.bad_request.status_code'));
+                        'status'  => false,
+                        'code'    => config('responses.bad_request.status_code'),
+                        'data'    => $error,
+                        'message' => $erroMsg,
+                    ], config('responses.bad_request.status_code'));
                 }
 
-            if($type[0]== 'image')
-            {
-                $media = $this->media->skipPresenter()->uploadImg($targetFile->getPathname(),[[150, 100]], false);
+                if ($type[0] == 'image') {
+                    $media = $this->media->skipPresenter()->uploadImg($targetFile->getPathname(), [[150, 100]], false);
 
-                $media_id=$media->id;
+                    $media_id = $media->id;
 
-
-            }
+                }
             }
             //Convert wp_category_id to category_id
-            $wp_category_id=$request->get('wp_category_id');
-            $wp=new WpConvetor();
-            $category_id=$wp->getId('category',$wp_category_id);
+            $wp_category_id = $request->get('wp_category_id');
+            $wp             = new WpConvetor();
+            $category_id    = $wp->getId('category', $wp_category_id);
+            $data           = [
+                'name'        => $request->get('name'),
 
-            $brand= $this->brand->createOne([
-                'name'          => $request->get('name'),
-                'media_logo_id' => $media_id,
-                'description'   => $request->get('desc'),
-                'catalog_url'   => $request->get('catalog_url'),
-                'media_ids'     => $request->get('images'),
-                'category'      => $category_id,
-                'opid'          => $request->get('opid'),
-                'wp_brand_id'          => $request->get('wp_brand_id')
-            ]);
+                'description' => $request->get('desc'),
+                'catalog_url' => $request->get('catalog_url'),
+                'media_ids'   => $request->get('images'),
+                'category'    => $category_id,
+                'opid'        => $request->get('opid'),
+                'wp_brand_id' => $request->get('wp_brand_id'),
+            ];
+            if ($media_id != '') {
+                $data['media_logo_id'] = $media_id;
+            }
+            $brand = $this->brand->createOne($data);
 
-
-
-            $data=[
-                    'status'=>true,
-                    'code'=>config('responses.success.status_code'),
-                    'message'=>config('responses.success.status_message'),
-                    'data'=>$brand
-                    ];
-
+            $data = [
+                'status'  => true,
+                'code'    => config('responses.success.status_code'),
+                'message' => config('responses.success.status_message'),
+                'data'    => $brand,
+            ];
 
             return response()->json($data, config('responses.success.status_code'));
 
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             // dd($e->getMessage());
             return response()->json([
-                'status'=>false,
-                'code'=>config('responses.bad_request.status_code'),
-                'data'=>null,
-                'message'=>$e->getMessage()
+                'status'  => false,
+                'code'    => config('responses.bad_request.status_code'),
+                'data'    => null,
+                'message' => $e->getMessage(),
             ],
                 config('responses.bad_request.status_code')
             );
@@ -219,102 +205,97 @@ class BrandsController extends Controller
      *
      * @return     Response
      */
-    public function edit(BrandEditRequest $request)
-    {
+    public function edit(BrandEditRequest $request) {
 
-         try{
+        try {
 
-            $data     = $request->all();
-            $wp_brand_id=$request->get('wp_brand_id');
-            $wp=new WpConvetor();
-            $brand_id=$wp->getId('brand',$wp_brand_id);
+            $data        = $request->all();
+            $wp_brand_id = $request->get('wp_brand_id');
+            $wp          = new WpConvetor();
+            $brand_id    = $wp->getId('brand', $wp_brand_id);
             // $brand = $this->brand->find($brand_id);
-            $media_id='';
-            if(isset($data['logo'])){
+            $media_id = '';
+            if (isset($data['logo'])) {
 
-
-                $file=$data['logo'];
-                $type = explode('/', $file->getClientMimeType());
-                $ext = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
+                $file     = $data['logo'];
+                $type     = explode('/', $file->getClientMimeType());
+                $ext      = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
                 $baseName = basename($file->getClientOriginalName(), '.' . $ext);
                 $fileName = $this->media->setUploadPath()->generateFilename($baseName, $ext);
 
-                    try {
-                        $targetFile = $file->move($this->media->getUploadPath(), $fileName);
-                    }
-                    catch (\Exception $e) {
+                try {
+                    $targetFile = $file->move($this->media->getUploadPath(), $fileName);
+                } catch (\Exception $e) {
 
-                        $erroMsg = $this->media->errorMessage($file->getClientOriginalName());
-                        $error = [
-                            'title' => $erroMsg[0],
-                            'body'  => $erroMsg[1]
-                        ];
-                        return response()->json([
-                            'status'=>false,
-                            'code'=>config('responses.bad_request.status_code'),
-                            'data'=>$error,
-                            'message'=> $erroMsg ,
-                            ], config('responses.bad_request.status_code'));
-                    }
+                    $erroMsg = $this->media->errorMessage($file->getClientOriginalName());
+                    $error   = [
+                        'title' => $erroMsg[0],
+                        'body'  => $erroMsg[1],
+                    ];
+                    return response()->json([
+                        'status'  => false,
+                        'code'    => config('responses.bad_request.status_code'),
+                        'data'    => $error,
+                        'message' => $erroMsg,
+                    ], config('responses.bad_request.status_code'));
+                }
 
-                if($type[0]== 'image')
-                {
-                    $media = $this->media->skipPresenter()->uploadImg($targetFile->getPathname(),[[150, 100]], false);
+                if ($type[0] == 'image') {
+                    $media = $this->media->skipPresenter()->uploadImg($targetFile->getPathname(), [[150, 100]], false);
 
-                    $media_id=$media->id;
+                    $media_id = $media->id;
 
                 }
             }
 
-            $update_arr=[];
-            if(isset($data['name'])){
-            $update_arr['name']=$data['name'];
+            $update_arr = [];
+            if (isset($data['name'])) {
+                $update_arr['name'] = $data['name'];
             }
-            if(isset($data['parent_id'])){
-            $update_arr['parent_id']=$data['parent_id'];
+            if (isset($data['parent_id'])) {
+                $update_arr['parent_id'] = $data['parent_id'];
             }
-            if($media_id!=''){
-            $update_arr['media_logo_id']=$media_id;
+            if ($media_id != '') {
+                $update_arr['media_logo_id'] = $media_id;
             }
-            if(isset($data['description'])){
-            $update_arr['description']=$data['description'];
+            if (isset($data['description'])) {
+                $update_arr['description'] = $data['description'];
             }
-            if(isset($data['catalog_url'])){
-            $update_arr['catalog_url']=$data['catalog_url'];
+            if (isset($data['catalog_url'])) {
+                $update_arr['catalog_url'] = $data['catalog_url'];
             }
-            if(isset($data['media_ids'])){
-            $update_arr['media_ids']=$data['media_ids'];
-            }
-
-            if(isset($data['category_id'])){
-                 //Convert wp_category_id to category_id
-            $wp_category_id=$request->get('wp_category_id');
-            $wp=new WpConvetor();
-            $category_id=$wp->getId('category',$wp_category_id);
-            $update_arr['category']=$category_id;
+            if (isset($data['media_ids'])) {
+                $update_arr['media_ids'] = $data['media_ids'];
             }
 
-            $this->brand->updateOne($data,$brand_id);
+            if (isset($data['category_id'])) {
+                //Convert wp_category_id to category_id
+                $wp_category_id         = $request->get('wp_category_id');
+                $wp                     = new WpConvetor();
+                $category_id            = $wp->getId('category', $wp_category_id);
+                $update_arr['category'] = $category_id;
+            }
+
+            $this->brand->updateOne($data, $brand_id);
 
             $brand = $this->brand->find($brand_id);
-            $data=[
-                    'status'=>true,
-                    'code'=>config('responses.success.status_code'),
-                    'message'=>config('responses.success.status_message'),
+            $data  = [
+                'status'  => true,
+                'code'    => config('responses.success.status_code'),
+                'message' => config('responses.success.status_message'),
 
-                    ];
-            $data=array_merge($data,$brand);
+            ];
+            $data = array_merge($data, $brand);
 
             return response()->json($data, config('responses.success.status_code'));
 
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             // dd($e->getMessage());
             return response()->json([
-                'status'=>false,
-                'code'=>config('responses.bad_request.status_code'),
-                'data'=>null,
-                'message'=>$e->getMessage()
+                'status'  => false,
+                'code'    => config('responses.bad_request.status_code'),
+                'data'    => null,
+                'message' => $e->getMessage(),
             ],
                 config('responses.bad_request.status_code')
             );
@@ -332,33 +313,31 @@ class BrandsController extends Controller
      * @return     Response
      */
 
-    public function destroy(BrandDeleteRequest $request){
+    public function destroy(BrandDeleteRequest $request) {
 
+        try {
 
-         try{
-
-            $wp_brand_id=$request->get('wp_brand_id');
-            $wp=new WpConvetor();
-            $brand_id=$wp->getId('brand',$wp_brand_id);
-            $brand = $this->brand->skipPresenter()->delete($brand_id);
-            $data=[
-                    'status'=>true,
-                    'code'=>config('responses.success.status_code'),
-                    'message'=>"Brand has been deleted!",//config('responses.success.status_message'),
-                    'data'=> [],
-                    ];
-                // $data=array_merge($data,$brand);
+            $wp_brand_id = $request->get('wp_brand_id');
+            $wp          = new WpConvetor();
+            $brand_id    = $wp->getId('brand', $wp_brand_id);
+            $brand       = $this->brand->skipPresenter()->delete($brand_id);
+            $data        = [
+                'status'  => true,
+                'code'    => config('responses.success.status_code'),
+                'message' => "Brand has been deleted!", //config('responses.success.status_message'),
+                'data'    => [],
+            ];
+            // $data=array_merge($data,$brand);
 
             return response()->json($data, config('responses.success.status_code'));
 
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             // dd($e->getMessage());
             return response()->json([
-                'status'=>false,
-                'code'=>config('responses.bad_request.status_code'),
-                'data'=>null,
-                'message'=>$e->getMessage()
+                'status'  => false,
+                'code'    => config('responses.bad_request.status_code'),
+                'data'    => null,
+                'message' => $e->getMessage(),
             ],
                 config('responses.bad_request.status_code')
             );

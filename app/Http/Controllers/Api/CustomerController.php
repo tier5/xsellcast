@@ -360,26 +360,26 @@ class CustomerController extends Controller {
             $data['officephone'] = (isset($data['officephone']) ? $data['officephone'] : '');
             $data['avatar_url']  = (isset($data['avatar_url']) ? $data['avatar_url'] : '');
 
-            $zip = new ZipCodeApi();
-            $geo = $zip->getGeoByzip($data['zip']);
+            // $zip = new ZipCodeApi();
+            // $geo = $zip->getGeoByzip($data['zip']);
 
-            if ($geo->getFoundLat() == null || $geo->getFoundLong() == null) {
+            // if ($geo->getFoundLat() == null || $geo->getFoundLong() == null) {
 
-                return response()->json([
-                    'status'  => false,
-                    'code'    => 400,
-                    'data'    => null,
-                    'errors'  => ['zip' => ['The Zip code is invalid']],
-                    'message' => "Bad request",
-                ],
-                    config('responses.bad_request.status_code')
-                );
+            //     return response()->json([
+            //         'status'  => false,
+            //         'code'    => 400,
+            //         'data'    => null,
+            //         'errors'  => ['zip' => ['The Zip code is invalid']],
+            //         'message' => "Bad request",
+            //     ],
+            //         config('responses.bad_request.status_code')
+            //     );
 
-            } else {
+            // } else {
 
-                $data['geo_lat']  = $geo->getFoundLat();
-                $data['geo_long'] = $geo->getFoundLong();
-            }
+            //     $data['geo_lat']  = $geo->getFoundLat();
+            //     $data['geo_long'] = $geo->getFoundLong();
+            // }
 
             $customer = $this->customer->createOne($data, true);
 
@@ -431,26 +431,26 @@ class CustomerController extends Controller {
             $data['officephone'] = (isset($data['officephone']) ? $data['officephone'] : '');
             $data['avatar_url']  = (isset($data['avatar_url']) ? $data['avatar_url'] : '');
 
-            $zip = new ZipCodeApi();
-            $geo = $zip->getGeoByzip($data['zip']);
+            // $zip = new ZipCodeApi();
+            // $geo = $zip->getGeoByzip($data['zip']);
 
-            if ($geo->getFoundLat() == null || $geo->getFoundLong() == null) {
+            // if ($geo->getFoundLat() == null || $geo->getFoundLong() == null) {
 
-                return response()->json([
-                    'status'  => false,
-                    'code'    => 400,
-                    'data'    => null,
-                    'errors'  => ['zip' => ['The Zip code is invalid']],
-                    'message' => "Bad request",
-                ],
-                    config('responses.bad_request.status_code')
-                );
+            //     return response()->json([
+            //         'status'  => false,
+            //         'code'    => 400,
+            //         'data'    => null,
+            //         'errors'  => ['zip' => ['The Zip code is invalid']],
+            //         'message' => "Bad request",
+            //     ],
+            //         config('responses.bad_request.status_code')
+            //     );
 
-            } else {
+            // } else {
 
-                $data['geo_lat']  = $geo->getFoundLat();
-                $data['geo_long'] = $geo->getFoundLong();
-            }
+            //     $data['geo_lat']  = $geo->getFoundLat();
+            //     $data['geo_long'] = $geo->getFoundLong();
+            // }
 
             $customer = $this->customer->createOne($data, true);
 
@@ -493,28 +493,28 @@ class CustomerController extends Controller {
             $wp             = new WpConvetor();
             $customer_id    = $wp->getId('customer', $wp_customer_id);
 
-            if (isset($data['zip'])) {
-                $zip = new ZipCodeApi();
-                $geo = $zip->getGeoByzip($data['zip']);
+            // if (isset($data['zip'])) {
+            //     $zip = new ZipCodeApi();
+            //     $geo = $zip->getGeoByzip($data['zip']);
 
-                if ($geo->getFoundLat() == null || $geo->getFoundLong() == null) {
+            //     if ($geo->getFoundLat() == null || $geo->getFoundLong() == null) {
 
-                    return response()->json([
-                        'status'  => false,
-                        'code'    => 400,
-                        'data'    => null,
-                        'errors'  => ['zip' => ['The Zip code is invalid']],
-                        'message' => "Bad request",
-                    ],
-                        config('responses.bad_request.status_code')
-                    );
+            //         return response()->json([
+            //             'status'  => false,
+            //             'code'    => 400,
+            //             'data'    => null,
+            //             'errors'  => ['zip' => ['The Zip code is invalid']],
+            //             'message' => "Bad request",
+            //         ],
+            //             config('responses.bad_request.status_code')
+            //         );
 
-                } else {
+            //     } else {
 
-                    $data['geo_lat']  = $geo->getFoundLat();
-                    $data['geo_long'] = $geo->getFoundLong();
-                }
-            }
+            //         $data['geo_lat']  = $geo->getFoundLat();
+            //         $data['geo_long'] = $geo->getFoundLong();
+            //     }
+            // }
 
             $customer = $this->customer->skipPresenter()->find($customer_id);
             $this->customer->updateOne($customer, $data);
@@ -1312,7 +1312,11 @@ class CustomerController extends Controller {
 
             $zip      = new ZipCodeApi();
             $zip_code = $request->get('zip');
-            $brand_id = $request->get('brand_id');
+
+            $wp_brand_id = $request->get('wp_brand_id');
+            $wp          = new WpConvetor();
+            $brand_id    = $wp->getId('brand', $wp_brand_id);
+
             $ip       = $request->get('ip');
             $geo_lat  = $request->get('geo_lat');
             $geo_long = $request->get('geo_long');
@@ -1397,8 +1401,11 @@ class CustomerController extends Controller {
      */
     public function baOffers(CustomerBaOfferRequest $request) {
         try {
+            $wp_customer_id = $request->get('wp_customer_id');
+            $wp             = new WpConvetor();
+            $customer_id    = $wp->getId('customer', $wp_customer_id);
 
-            $customer = $this->customer->skipPresenter()->find($request->get('customer_id'));
+            $customer = $this->customer->skipPresenter()->find($customer_id);
             // $user= $customer->user;
             // $offer = $this->offer->skipPresenter()->find($request->offer_id);
             $per_page     = $request->get('per_page') != '' ? $request->get('per_page') : 20;
@@ -1549,11 +1556,17 @@ class CustomerController extends Controller {
      */
     public function assignedBaOffers(CustomerAssignedBaOfferRequest $request) {
         try {
-            $customer_id = $request->get('customer_id');
-            $brand_id    = $request->get('brand_id');
-            $per_page    = $request->get('per_page') != '' ? $request->get('per_page') : 20;
-            $delears     = [];
-            $msg         = '';
+
+            $wp_customer_id = $request->get('wp_customer_id');
+            $wp             = new WpConvetor();
+            $customer_id    = $wp->getId('customer', $wp_customer_id);
+
+            $wp_brand_id = $request->get('wp_brand_id');
+            $brand_id    = $wp->getId('brand', $wp_brand_id);
+
+            $per_page = $request->get('per_page') != '' ? $request->get('per_page') : 20;
+            $delears  = [];
+            $msg      = '';
 
             $salesreps = CustomerSalesRep::where('customer_id', $customer_id)->pluck('salesrep_id');
             $offer     = $this->offer->assignedBaOffers($salesreps);

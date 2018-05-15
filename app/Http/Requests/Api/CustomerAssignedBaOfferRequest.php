@@ -7,8 +7,7 @@ use App\Http\Requests\Request;
 /**
  * Use for simple API request with access token for a post.
  */
-class CustomerAssignedBaOfferRequest extends Request
-{
+class CustomerAssignedBaOfferRequest extends Request {
     protected $redirectRoute = 'api.errors';
 
     /**
@@ -16,8 +15,7 @@ class CustomerAssignedBaOfferRequest extends Request
      *
      * @return bool
      */
-    public function authorize()
-    {
+    public function authorize() {
         return true;
     }
 
@@ -26,32 +24,31 @@ class CustomerAssignedBaOfferRequest extends Request
      *
      * @return array
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-            'access_token' => 'required',
-            'customer_id'  => 'required|integer|exists:user_customer,id',
-            'brand_id'     => 'required|integer|exists:brands,id'
+            'access_token'   => 'required',
+            'wp_customer_id' => 'required|integer|exists:user_customer,wp_userid',
+            'wp_brand_id'    => 'required|integer|exists:brands,wp_brand_id',
         ];
     }
 
-     /**
+    /**
      * Response error message as json
      *
      * @param array $errors
      * @return mixed
      */
-    public function response(array $errors){
+    public function response(array $errors) {
 
         return response()->json([
-                    'status'=>false,
-                    'code'=>config('responses.bad_request.status_code'),
-                    'data'=>null,
-                    'errors'=>$errors,
-                    'message'=>config('responses.bad_request.status_message'),
-                ],
-                config('responses.bad_request.status_code')
-            );
+            'status'  => false,
+            'code'    => config('responses.bad_request.status_code'),
+            'data'    => null,
+            'errors'  => $errors,
+            'message' => config('responses.bad_request.status_message'),
+        ],
+            config('responses.bad_request.status_code')
+        );
         // return Response::json($errors, config('responses.bad_request.status_code'));
     }
 }

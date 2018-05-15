@@ -337,8 +337,12 @@ Prospect registration v2.5 #stable
 	a) Implemented avatar_url in prospect details page
 
 Prospect registration v2.6 #stable
-
 	a) Implemented  wp_customer_id in "Prospect Notification Settings:  add Brand Associate" Api
 	b) Implemented  wp_customer_id in Prospect : Share Offer api
 	c) Implemented  wp_customer_id in Prospect : My Offers
 	d) Implemented  wp_customer_id in Prospect : My Dealers list
+
+CTA Request v5.0 #stable
+	a) Implemented Brand Catalog Request  in CTA request API
+	b) Implemented Map Location Request  in CTA request API
+	c) Removed geo long and lat from prospect create and edit APIs
