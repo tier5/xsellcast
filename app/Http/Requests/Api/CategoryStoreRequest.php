@@ -4,9 +4,9 @@ namespace App\Http\Requests\Api;
 use App\Http\Requests\Request;
 
 /**
- * This request is for App\Http\Controllers\Api\Brand\BrandsController@store
+ * This request is for App\Http\Controllers\Api\CategoriesController@store
  */
-class BrandStoreRequest extends Request {
+class CategoryStoreRequest extends Request {
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -24,23 +24,16 @@ class BrandStoreRequest extends Request {
     public function rules() {
         return [
 
-            'name'           => 'required',
-            // 'logo'        => 'required|image',
-            'wp_category_id' => 'required|integer|exists:categories,wp_category_id',
-            'catalog_url'    => 'url|active_url',
-            // 'opid'        => 'required',
-            'wp_brand_id'    => 'required|unique:brands,wp_brand_id',
-            'slug'           => 'slug|unique:brands,slug',
-            'image_url'      => 'url|active_url',
-            'image_link'     => 'url|active_url',
-            'image_text'     => 'url|active_url',
+            'name'           => 'required|unique:categories,name',
+            'slug'           => 'slug|unique:categories,slug',
+            'wp_category_id' => 'required|integer|unique:categories,wp_category_id',
 
         ];
     }
 
     public function messages() {
         return [
-            'name.required' => 'The brand name field is required.',
+            'name.required' => 'The category name field is required.',
             'opid.required' => 'The Ontraport tag field is required',
             'slug.slug'     => 'The Slug field is invalid',
         ];

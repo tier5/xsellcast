@@ -714,6 +714,25 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Api'), function () {
             'as'   => 'api.v1.brands.delete',
             'uses' => 'BrandsController@destroy'));
 
+        //Categories
+        Route::get('categories', array(
+            'as'   => 'api.v1.categories',
+            'uses' => 'CategoriesController@index'));
+
+        Route::get('category', array(
+            'as'   => 'api.v1.categories.show',
+            'uses' => 'CategoriesController@show'));
+
+        Route::post('categories', array(
+            'as'   => 'api.v1.categories.store',
+            'uses' => 'CategoriesController@store'));
+        Route::post('categories/update', array(
+            'as'   => 'api.v1.categories.edit',
+            'uses' => 'CategoriesController@edit'));
+        Route::delete('categories', array(
+            'as'   => 'api.v1.categories.delete',
+            'uses' => 'CategoriesController@destroy'));
+
         /**
          * Offer routes
          */

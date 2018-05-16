@@ -124,54 +124,60 @@ class BrandsController extends Controller {
 
             $data     = $request->all();
             $media_id = '';
-            if (isset($data['logo'])) {
-                $file     = $data['logo'];
-                $type     = explode('/', $file->getClientMimeType());
-                $ext      = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
-                $baseName = basename($file->getClientOriginalName(), '.' . $ext);
-                $fileName = $this->media->setUploadPath()->generateFilename($baseName, $ext);
+            // if (isset($data['logo'])) {
+            //     $file     = $data['logo'];
+            //     $type     = explode('/', $file->getClientMimeType());
+            //     $ext      = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
+            //     $baseName = basename($file->getClientOriginalName(), '.' . $ext);
+            //     $fileName = $this->media->setUploadPath()->generateFilename($baseName, $ext);
 
-                try {
-                    $targetFile = $file->move($this->media->getUploadPath(), $fileName);
-                } catch (\Exception $e) {
+            //     try {
+            //         $targetFile = $file->move($this->media->getUploadPath(), $fileName);
+            //     } catch (\Exception $e) {
 
-                    $erroMsg = $this->media->errorMessage($file->getClientOriginalName());
-                    $error   = [
-                        'title' => $erroMsg[0],
-                        'body'  => $erroMsg[1],
-                    ];
-                    return response()->json([
-                        'status'  => false,
-                        'code'    => config('responses.bad_request.status_code'),
-                        'data'    => $error,
-                        'message' => $erroMsg,
-                    ], config('responses.bad_request.status_code'));
-                }
+            //         $erroMsg = $this->media->errorMessage($file->getClientOriginalName());
+            //         $error   = [
+            //             'title' => $erroMsg[0],
+            //             'body'  => $erroMsg[1],
+            //         ];
+            //         return response()->json([
+            //             'status'  => false,
+            //             'code'    => config('responses.bad_request.status_code'),
+            //             'data'    => $error,
+            //             'message' => $erroMsg,
+            //         ], config('responses.bad_request.status_code'));
+            //     }
 
-                if ($type[0] == 'image') {
-                    $media = $this->media->skipPresenter()->uploadImg($targetFile->getPathname(), [[150, 100]], false);
+            //     if ($type[0] == 'image') {
+            //         $media = $this->media->skipPresenter()->uploadImg($targetFile->getPathname(), [[150, 100]], false);
 
-                    $media_id = $media->id;
+            //         $media_id = $media->id;
 
-                }
-            }
+            //     }
+            // }
             //Convert wp_category_id to category_id
             $wp_category_id = $request->get('wp_category_id');
             $wp             = new WpConvetor();
             $category_id    = $wp->getId('category', $wp_category_id);
-            $data           = [
-                'name'        => $request->get('name'),
 
-                'description' => $request->get('desc'),
+            $data = [
+                'name'        => $request->get('name'),
+                'slug'        => $request->get('slug'),
+                'description' => $request->get('description'),
                 'catalog_url' => $request->get('catalog_url'),
                 'media_ids'   => $request->get('images'),
                 'category'    => $category_id,
                 'opid'        => $request->get('opid'),
                 'wp_brand_id' => $request->get('wp_brand_id'),
+                'image_url'   => $request->get('image_url'),
+                'image_link'  => $request->get('image_link'),
+                'image_text'  => $request->get('image_text'),
+
             ];
-            if ($media_id != '') {
-                $data['media_logo_id'] = $media_id;
-            }
+            // if ($media_id != '') {
+            //     $data['media_logo_id'] = $media_id;
+            // }
+
             $brand = $this->brand->createOne($data);
 
             $data = [
@@ -214,39 +220,39 @@ class BrandsController extends Controller {
             $wp          = new WpConvetor();
             $brand_id    = $wp->getId('brand', $wp_brand_id);
             // $brand = $this->brand->find($brand_id);
-            $media_id = '';
-            if (isset($data['logo'])) {
+            // $media_id = '';
+            // if (isset($data['logo'])) {
 
-                $file     = $data['logo'];
-                $type     = explode('/', $file->getClientMimeType());
-                $ext      = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
-                $baseName = basename($file->getClientOriginalName(), '.' . $ext);
-                $fileName = $this->media->setUploadPath()->generateFilename($baseName, $ext);
+            //     $file     = $data['logo'];
+            //     $type     = explode('/', $file->getClientMimeType());
+            //     $ext      = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
+            //     $baseName = basename($file->getClientOriginalName(), '.' . $ext);
+            //     $fileName = $this->media->setUploadPath()->generateFilename($baseName, $ext);
 
-                try {
-                    $targetFile = $file->move($this->media->getUploadPath(), $fileName);
-                } catch (\Exception $e) {
+            //     try {
+            //         $targetFile = $file->move($this->media->getUploadPath(), $fileName);
+            //     } catch (\Exception $e) {
 
-                    $erroMsg = $this->media->errorMessage($file->getClientOriginalName());
-                    $error   = [
-                        'title' => $erroMsg[0],
-                        'body'  => $erroMsg[1],
-                    ];
-                    return response()->json([
-                        'status'  => false,
-                        'code'    => config('responses.bad_request.status_code'),
-                        'data'    => $error,
-                        'message' => $erroMsg,
-                    ], config('responses.bad_request.status_code'));
-                }
+            //         $erroMsg = $this->media->errorMessage($file->getClientOriginalName());
+            //         $error   = [
+            //             'title' => $erroMsg[0],
+            //             'body'  => $erroMsg[1],
+            //         ];
+            //         return response()->json([
+            //             'status'  => false,
+            //             'code'    => config('responses.bad_request.status_code'),
+            //             'data'    => $error,
+            //             'message' => $erroMsg,
+            //         ], config('responses.bad_request.status_code'));
+            //     }
 
-                if ($type[0] == 'image') {
-                    $media = $this->media->skipPresenter()->uploadImg($targetFile->getPathname(), [[150, 100]], false);
+            //     if ($type[0] == 'image') {
+            //         $media = $this->media->skipPresenter()->uploadImg($targetFile->getPathname(), [[150, 100]], false);
 
-                    $media_id = $media->id;
+            //         $media_id = $media->id;
 
-                }
-            }
+            //     }
+            // }
 
             $update_arr = [];
             if (isset($data['name'])) {
@@ -255,9 +261,9 @@ class BrandsController extends Controller {
             if (isset($data['parent_id'])) {
                 $update_arr['parent_id'] = $data['parent_id'];
             }
-            if ($media_id != '') {
-                $update_arr['media_logo_id'] = $media_id;
-            }
+            // if ($media_id != '') {
+            //     $update_arr['media_logo_id'] = $media_id;
+            // }
             if (isset($data['description'])) {
                 $update_arr['description'] = $data['description'];
             }
@@ -267,8 +273,20 @@ class BrandsController extends Controller {
             if (isset($data['media_ids'])) {
                 $update_arr['media_ids'] = $data['media_ids'];
             }
+            if (isset($data['slug'])) {
+                $update_arr['slug'] = $data['slug'];
+            }
+            if (isset($data['image_url'])) {
+                $update_arr['image_url'] = $data['image_url'];
+            }
+            if (isset($data['image_link'])) {
+                $update_arr['image_link'] = $data['image_link'];
+            }
+            if (isset($data['image_text'])) {
+                $update_arr['image_text'] = $data['image_text'];
+            }
 
-            if (isset($data['category_id'])) {
+            if (isset($data['wp_category_id'])) {
                 //Convert wp_category_id to category_id
                 $wp_category_id         = $request->get('wp_category_id');
                 $wp                     = new WpConvetor();
@@ -279,7 +297,8 @@ class BrandsController extends Controller {
             $this->brand->updateOne($data, $brand_id);
 
             $brand = $this->brand->find($brand_id);
-            $data  = [
+            // dd($brand);
+            $data = [
                 'status'  => true,
                 'code'    => config('responses.success.status_code'),
                 'message' => config('responses.success.status_message'),

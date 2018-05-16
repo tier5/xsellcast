@@ -346,3 +346,6 @@ CTA Request v5.0 #stable
 	a) Implemented Brand Catalog Request  in CTA request API
 	b) Implemented Map Location Request  in CTA request API
 	c) Removed geo long and lat from prospect create and edit APIs
+
+Category v1.0 #stable
+	a)Created insert and update APIs
