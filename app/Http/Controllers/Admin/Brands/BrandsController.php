@@ -238,28 +238,28 @@ class BrandsController extends Controller {
         try {
             $brand = $this->brand->skipPresenter()->find($brand_id);
 
-            if (!$brand) {
-                abort(402, "Brand don't exist.");
-            }
+            // if (!$brand) {
+            //     abort(402, "Brand don't exist.");
+            // }
 
-            if ($brand->wp_brand_id != '') {
-                $arr = [
-                    'wp_id' => $brand->wp_brand_id,
-                ];
-                $response = $this->lbt_wp->deleteCategory($arr);
-                if ($response['code'] == 200) {
-                    $brand->categories()->detach();
-                    $brand->save();
-                    $brand->delete();
-                    $request->session()->flash('message', 'The brand was successfully deleted!');
+            // if ($brand->wp_brand_id != '') {
+            //     $arr = [
+            //         'wp_id' => $brand->wp_brand_id,
+            //     ];
+            // $response = $this->lbt_wp->deleteCategory($arr);
+            // if ($response['code'] == 200) {
+            $brand->categories()->detach();
+            $brand->save();
+            $brand->delete();
+            $request->session()->flash('message', 'The brand was successfully deleted!');
 
-                } else {
-                    return redirect()->back()->withErrors($response['errors'])->withInput($request->input());
-                }
-            } else {
-                // $request->session()->flash('message', 'The wp brand  id  not found !');
-                return redirect()->back()->withErrors(['wp_brand_id' => 'The wp brand  id  not found !'])->withInput($request->input());
-            }
+            // } else {
+            //     return redirect()->back()->withErrors($response['errors'])->withInput($request->input());
+            // }
+            // } else {
+            //     // $request->session()->flash('message', 'The wp brand  id  not found !');
+            //     return redirect()->back()->withErrors(['wp_brand_id' => 'The wp brand  id  not found !'])->withInput($request->input());
+            // }
             return redirect()->route('admin.brands');
         } catch (\Exception $e) {
             $request->session()->flash('message', $e->getMessage());

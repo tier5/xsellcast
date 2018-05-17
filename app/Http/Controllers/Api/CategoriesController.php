@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Http\Requests\Api\CategoriesRequest;
+use App\Http\Requests\Api\CategoryDeleteRequest;
 use App\Http\Requests\Api\CategoryEditRequest;
-// use App\Http\Requests\Api\categoryDeleteRequest;
 use App\Http\Requests\Api\CategoryStoreRequest;
 
 // use App\Http\Requests\Api\categorysShowRequest;
@@ -49,9 +49,9 @@ class CategoriesController extends Controller {
                 'status'  => true,
                 'code'    => config('responses.success.status_code'),
                 'message' => config('responses.success.status_message'),
-                // 'data'    => $categories,
+                'data'    => $categories,
             ];
-            $data = array_merge($data, (array) $categories);
+            // $data = array_merge($data, (array) $categories);
 
             return response()->json($data, config('responses.success.status_code'));
 
@@ -220,39 +220,39 @@ class CategoriesController extends Controller {
      * Delete a category details
      *
      *
-     * @param      \App\Http\Requests\Api\categoryEditRequest  $request    The request
+     * @param      \App\Http\Requests\Api\CategoryDeleteRequest  $request    The request
      *
      * @return     Response
      */
 
-    // public function destroy(categoryDeleteRequest $request) {
+    public function destroy(CategoryDeleteRequest $request) {
 
-    //     try {
+        try {
 
-    //         $wp_category_id = $request->get('wp_category_id');
-    //         $wp          = new WpConvetor();
-    //         $category_id    = $wp->getId('category', $wp_category_id);
-    //         $category       = $this->category->skipPresenter()->delete($category_id);
-    //         $data        = [
-    //             'status'  => true,
-    //             'code'    => config('responses.success.status_code'),
-    //             'message' => "category has been deleted!", //config('responses.success.status_message'),
-    //             'data'    => [],
-    //         ];
-    //         // $data=array_merge($data,$category);
+            $wp_category_id = $request->get('wp_category_id');
+            $wp             = new WpConvetor();
+            $category_id    = $wp->getId('category', $wp_category_id);
+            $category       = $this->category->skipPresenter()->delete($category_id);
+            $data           = [
+                'status'  => true,
+                'code'    => config('responses.success.status_code'),
+                'message' => "Category has been deleted!", //config('responses.success.status_message'),
+                'data'    => [],
+            ];
+            // $data=array_merge($data,$category);
 
-    //         return response()->json($data, config('responses.success.status_code'));
+            return response()->json($data, config('responses.success.status_code'));
 
-    //     } catch (\Exception $e) {
-    //         // dd($e->getMessage());
-    //         return response()->json([
-    //             'status'  => false,
-    //             'code'    => config('responses.bad_request.status_code'),
-    //             'data'    => null,
-    //             'message' => $e->getMessage(),
-    //         ],
-    //             config('responses.bad_request.status_code')
-    //         );
-    //     }
-    // }
+        } catch (\Exception $e) {
+            // dd($e->getMessage());
+            return response()->json([
+                'status'  => false,
+                'code'    => config('responses.bad_request.status_code'),
+                'data'    => null,
+                'message' => $e->getMessage(),
+            ],
+                config('responses.bad_request.status_code')
+            );
+        }
+    }
 }

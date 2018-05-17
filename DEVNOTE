@@ -351,3 +351,8 @@ Category v1.0 #stable
 	a)Created insert and update APIs
 Category v1.1 #stable
 	a) Fixed validation issue in edit brand API.
+
+Category v1.2 #stable
+	a) Created Api to Delete Category
+	b) Modified Api to Delete brand
+	c) Modified Delete brand and category in CSR login .
