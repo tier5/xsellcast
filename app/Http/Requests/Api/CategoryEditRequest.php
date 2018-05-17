@@ -2,7 +2,6 @@
 namespace App\Http\Requests\Api;
 
 use App\Http\Requests\Request;
-use App\Storage\Category\Category;
 use App\Storage\LbtWp\WpConvetor;
 
 /**
@@ -29,13 +28,15 @@ class CategoryEditRequest extends Request {
         $wp             = new WpConvetor();
 
         $category_id = $wp->getId('category', $wp_category_id);
-
-        $category = Category::find($category_id);
+        // dd($category_id);
         // $name     = 'required|categories,name';
         // $slug     = 'required|slug|unique:categories,slug';
+        $id = '';
 
-        if ($category) {
-            $id = $category->id;
+        if ($category_id) {
+            // $category = Category::find($category_id);
+            // $id       = $category->id;
+            $id = $category_id;
 
         } else {
             return [

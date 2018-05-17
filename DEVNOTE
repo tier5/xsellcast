@@ -349,3 +349,5 @@ CTA Request v5.0 #stable
 
 Category v1.0 #stable
 	a)Created insert and update APIs
+Category v1.1 #stable
+	a) Fixed validation issue in edit brand API.
