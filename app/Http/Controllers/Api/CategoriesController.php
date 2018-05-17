@@ -233,7 +233,8 @@ class CategoriesController extends Controller {
             $wp             = new WpConvetor();
             $category_id    = $wp->getId('category', $wp_category_id);
             $category       = $this->category->skipPresenter()->delete($category_id);
-            $data           = [
+
+            $data = [
                 'status'  => true,
                 'code'    => config('responses.success.status_code'),
                 'message' => "Category has been deleted!", //config('responses.success.status_message'),

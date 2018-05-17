@@ -339,8 +339,12 @@ class BrandsController extends Controller {
             $wp_brand_id = $request->get('wp_brand_id');
             $wp          = new WpConvetor();
             $brand_id    = $wp->getId('brand', $wp_brand_id);
-            $brand       = $this->brand->skipPresenter()->delete($brand_id);
-            $data        = [
+            $brand       = $this->brand->skipPresenter()->find($brand_id);
+
+            // $brand       = $this->brand->skipPresenter()->delete($brand_id);
+            $brand->categories()->detach();
+            $brand->save();
+            $data = [
                 'status'  => true,
                 'code'    => config('responses.success.status_code'),
                 'message' => "Brand has been deleted!", //config('responses.success.status_message'),

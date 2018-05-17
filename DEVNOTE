@@ -356,3 +356,6 @@ Category v1.2 #stable
 	a) Created Api to Delete Category
 	b) Modified Api to Delete brand
 	c) Modified Delete brand and category in CSR login .
+
+Category v1.3 #stable
+	a) Modified Delete brand Api .
