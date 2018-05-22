@@ -343,9 +343,25 @@ class BrandsController extends Controller {
 
             $brand->categories()->detach();
             $brand->save();
-            // detach() and attach
-            // dd($brand->offers()->all());
-            // exit;
+            // detach() and attach offer and dealer
+            $uncategorized = $this->brand->uncategorized();
+            $offers        = $brand->getOffers();
+            $dealers       = $brand->getDealers();
+            foreach ($offers as $offer) {
+
+                $offer->brands()->detach();
+
+                $offer->brands()->save($uncategorized);
+            }
+
+            foreach ($dealers as $dealer) {
+
+                $dealer->brands()->detach();
+
+                $dealer->brands()->save($uncategorized);
+            }
+
+            // // exit;
             $brand->delete();
             // $brand = $this->brand->skipPresenter()->delete($brand_id);
             $data = [
