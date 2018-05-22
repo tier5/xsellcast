@@ -232,7 +232,20 @@ class CategoriesController extends Controller {
             $wp_category_id = $request->get('wp_category_id');
             $wp             = new WpConvetor();
             $category_id    = $wp->getId('category', $wp_category_id);
-            $category       = $this->category->skipPresenter()->delete($category_id);
+            $category       = $this->category->skipPresenter()->find($category_id);
+            //Move all attached brand to uncategorized brand
+            $brands = $category->getBrands();
+            // dd(count($brands));
+            $uncategorized = $this->category->uncategorized();
+
+            foreach ($brands as $brand) {
+                // dd($brand);
+                $brand->categories()->detach();
+                // exit;
+                $brand->categories()->save($uncategorized);
+            }
+
+            $category->delete($category_id);
 
             $data = [
                 'status'  => true,

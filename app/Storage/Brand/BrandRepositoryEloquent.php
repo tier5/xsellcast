@@ -2,43 +2,39 @@
 
 namespace App\Storage\Brand;
 
-use Prettus\Repository\Eloquent\BaseRepository;
-use Prettus\Repository\Criteria\RequestCriteria;
-use App\Storage\Brand\BrandRepository;
 use App\Storage\Brand\Brand;
-use App\Storage\Brand\BrandValidator;
 use App\Storage\Brand\BrandPresenter;
+use App\Storage\Brand\BrandRepository;
+use App\Storage\Brand\BrandValidator;
 use App\Storage\Category\Category;
+use Prettus\Repository\Criteria\RequestCriteria;
+use Prettus\Repository\Eloquent\BaseRepository;
 
 /**
  * Class BrandRepositoryEloquent
  * @package namespace App\Storage\Brand;
  */
-class BrandRepositoryEloquent extends BaseRepository implements BrandRepository
-{
+class BrandRepositoryEloquent extends BaseRepository implements BrandRepository {
     /**
      * Specify Model class name
      *
      * @return string
      */
-    public function model()
-    {
+    public function model() {
         return Brand::class;
     }
 
     /**
-    * Specify Validator class name
-    *
-    * @return mixed
-    */
-    public function validator()
-    {
+     * Specify Validator class name
+     *
+     * @return mixed
+     */
+    public function validator() {
 
         return BrandValidator::class;
     }
 
-    public function presenter()
-    {
+    public function presenter() {
 
         return BrandPresenter::class;
     }
@@ -46,8 +42,7 @@ class BrandRepositoryEloquent extends BaseRepository implements BrandRepository
     /**
      * Boot up the repository, pushing criteria
      */
-    public function boot()
-    {
+    public function boot() {
         $this->pushCriteria(app(RequestCriteria::class));
     }
 
@@ -58,11 +53,10 @@ class BrandRepositoryEloquent extends BaseRepository implements BrandRepository
      *
      * @return     $this  The by dealer.
      */
-    public function getByDealer($dealer_id)
-    {
+    public function getByDealer($dealer_id) {
 
         $model = $this->model
-            ->whereHas('dealers', function($query) use($dealer_id){
+            ->whereHas('dealers', function ($query) use ($dealer_id) {
                 $query->where('dealer_id', $dealer_id);
             });
 
@@ -71,50 +65,44 @@ class BrandRepositoryEloquent extends BaseRepository implements BrandRepository
         return $this;
     }
 
-    public function createOne($data)
-    {
-        $name       = (isset($data['name']) ? $data['name'] : '' );
-        $parentId   = (isset($data['parent_id']) ? $data['parent_id'] : 0);
-        $logoId     = (isset($data['media_logo_id']) ? $data['media_logo_id'] : null);
-        $desc       = (isset($data['description']) ? $data['description'] : '');
-        $catalogUrl = (isset($data['catalog_url']) ? $data['catalog_url'] : '');
-        $mediaIds   = (isset($data['media_ids']) ? $data['media_ids'] : '');
-        $categoryId   = (isset($data['category']) ? $data['category'] : null);
-        $opId = (isset($data['opid']) ? $data['opid'] : null);
+    public function createOne($data) {
+        $name        = (isset($data['name']) ? $data['name'] : '');
+        $parentId    = (isset($data['parent_id']) ? $data['parent_id'] : 0);
+        $logoId      = (isset($data['media_logo_id']) ? $data['media_logo_id'] : null);
+        $desc        = (isset($data['description']) ? $data['description'] : '');
+        $catalogUrl  = (isset($data['catalog_url']) ? $data['catalog_url'] : '');
+        $mediaIds    = (isset($data['media_ids']) ? $data['media_ids'] : '');
+        $categoryId  = (isset($data['category']) ? $data['category'] : null);
+        $opId        = (isset($data['opid']) ? $data['opid'] : null);
         $wp_brand_id = (isset($data['wp_brand_id']) ? $data['wp_brand_id'] : null);
-        $slug = (isset($data['slug']) ? $data['slug'] : null);
-        $image_url = (isset($data['image_url']) ? $data['image_url'] : null);
-        $image_link = (isset($data['image_link']) ? $data['image_link'] : null);
-        $image_text = (isset($data['image_text']) ? $data['image_text'] : null);
+        $slug        = (isset($data['slug']) ? $data['slug'] : null);
+        $image_url   = (isset($data['image_url']) ? $data['image_url'] : null);
+        $image_link  = (isset($data['image_link']) ? $data['image_link'] : null);
+        $image_text  = (isset($data['image_text']) ? $data['image_text'] : null);
 
-
-
-
-        if(is_array($mediaIds))
-        {
+        if (is_array($mediaIds)) {
             $mediaIds = implode(',', $mediaIds);
-        }elseif(!$mediaIds)
-        {
+        } elseif (!$mediaIds) {
             $mediaIds = '';
         }
 
         $insert = [
-                    'name' => $name,
-                    'parent_id' => $parentId,
-                    'media_logo_id' => $logoId,
-                    'description' => $desc,
-                    'catalog_url' => $catalogUrl,
-                    'media_ids' => $mediaIds,
-                    'opid' => $opId,
-                    'wp_brand_id' => $wp_brand_id,
-                    'slug'          => $slug,
-                    'image_url'     => $image_url,
-                    'image_link'    => $image_link,
-                    'image_text'    => $image_text,
+            'name'          => $name,
+            'parent_id'     => $parentId,
+            'media_logo_id' => $logoId,
+            'description'   => $desc,
+            'catalog_url'   => $catalogUrl,
+            'media_ids'     => $mediaIds,
+            'opid'          => $opId,
+            'wp_brand_id'   => $wp_brand_id,
+            'slug'          => $slug,
+            'image_url'     => $image_url,
+            'image_link'    => $image_link,
+            'image_text'    => $image_text,
 
-                ];
+        ];
 
-        $brand = $this->skipPresenter()->create($insert);
+        $brand    = $this->skipPresenter()->create($insert);
         $category = Category::find($categoryId);
 
         $brand->categories()->save($category);
@@ -122,11 +110,10 @@ class BrandRepositoryEloquent extends BaseRepository implements BrandRepository
         return $brand;
     }
 
-    public function customerBrands($customer_id)
-    {
-        $this->model = $this->model->whereHas('dealers', function($query) use($customer_id){
-            $query->whereHas('salesReps', function($query) use($customer_id){
-                $query->whereHas('customersPivot', function($query) use($customer_id){
+    public function customerBrands($customer_id) {
+        $this->model = $this->model->whereHas('dealers', function ($query) use ($customer_id) {
+            $query->whereHas('salesReps', function ($query) use ($customer_id) {
+                $query->whereHas('customersPivot', function ($query) use ($customer_id) {
                     $query->where('customer_id', $customer_id);
                 });
             });
@@ -135,8 +122,7 @@ class BrandRepositoryEloquent extends BaseRepository implements BrandRepository
         return $this;
     }
 
-    public function orderByCategoryName($order = 'desc')
-    {
+    public function orderByCategoryName($order = 'desc') {
 
         $this->model = $this->model
             ->join('brand_categories', 'brand_categories.brand_id', '=', 'brands.id')
@@ -146,26 +132,23 @@ class BrandRepositoryEloquent extends BaseRepository implements BrandRepository
         return $this;
     }
 
-    public function getId($wp_brand_id){
+    public function getId($wp_brand_id) {
         return $wp_brand_id;
         // return $this->model->where('wp_brand_id',$wp_brand_id)->first()->id;
 
     }
 
-    public function updateOne($data,$brand_id){
+    public function updateOne($data, $brand_id) {
 
-        $brand=$this->model->find($brand_id);
-        $brandFields   = \Schema::getColumnListing($brand->getTable());
+        $brand       = $this->model->find($brand_id);
+        $brandFields = \Schema::getColumnListing($brand->getTable());
 
-        foreach($brandFields as $field)
-        {
-            if($field == 'id' || $field == 'wp_brand_id')
-            {
+        foreach ($brandFields as $field) {
+            if ($field == 'id' || $field == 'wp_brand_id') {
                 continue;
             }
 
-            if(isset($data[$field]))
-            {
+            if (isset($data[$field])) {
                 $brand->{$field} = $data[$field];
             }
         }
@@ -174,13 +157,26 @@ class BrandRepositoryEloquent extends BaseRepository implements BrandRepository
 
         return $brand;
     }
-    public function updateWpid($wp_brand_id,$brand_id){
+    public function updateWpid($wp_brand_id, $brand_id) {
 
-        $brand=$this->model->find($brand_id);
-        $brand->wp_brand_id=$wp_brand_id;
+        $brand              = $this->model->find($brand_id);
+        $brand->wp_brand_id = $wp_brand_id;
         $brand->save();
 
         return $brand;
+    }
+
+    public function uncategorized() {
+        $uncategorized = $this->model->where('slug', '=', 'uncategorized')->first();
+
+        if (empty($uncategorized)) {
+            $uncategorized = $this->model->create([
+                'slug' => 'uncategorized',
+                'name' => 'Uncategorized',
+            ]);
+        }
+        return $uncategorized;
+
     }
 
 }

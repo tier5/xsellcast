@@ -359,3 +359,7 @@ Category v1.2 #stable
 
 Category v1.3 #stable
 	a) Modified Delete brand Api .
+
+Category v1.4 #stable
+	a) Fixed delete issue
+	b) Implemented Uncategorized category in delete Api.

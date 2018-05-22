@@ -341,9 +341,13 @@ class BrandsController extends Controller {
             $brand_id    = $wp->getId('brand', $wp_brand_id);
             $brand       = $this->brand->skipPresenter()->find($brand_id);
 
-            // $brand       = $this->brand->skipPresenter()->delete($brand_id);
             $brand->categories()->detach();
             $brand->save();
+            // detach() and attach
+            // dd($brand->offers()->all());
+            // exit;
+            $brand->delete();
+            // $brand = $this->brand->skipPresenter()->delete($brand_id);
             $data = [
                 'status'  => true,
                 'code'    => config('responses.success.status_code'),
