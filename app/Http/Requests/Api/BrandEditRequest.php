@@ -42,6 +42,7 @@ class BrandEditRequest extends Request {
         return [
             'name.required' => 'The brand name field is required.',
             'opid.required' => 'The Ontraport tag field is required',
+            'slug.slug'     => 'The Slug field is invalid',
         ];
     }
 

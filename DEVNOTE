@@ -373,3 +373,7 @@ Category v1.5 #stable
 	a) Created category status update API
 	b) Created migration to add status column in  category, brand, offer and dealer tables
 	c) Created brand status update API
+
+
+Prospect lookbook v0.3 #stable
+	a) Implemented Remove offer from lookbook in CSR Dashboard

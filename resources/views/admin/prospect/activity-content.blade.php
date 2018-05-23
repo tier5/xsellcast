@@ -13,9 +13,14 @@
 @elseif($type == 'offer_request_contact_me')
     @if($request_activity->get('offer'))
         Sent contact request for {!! Html::link(config('lbt.wp_site') . '?p=' . $request_activity->get('offer')->wpid, $request_activity->get('offer')->title, ['target' => "_blank"]) !!}.
-    @endif    
+    @endif
 @elseif($type == 'added_offer')
     Added offer to lookbook {!! Html::link(config('lbt.wp_site') . '?p=' . $request_activity->get('offer')->wpid, $request_activity->get('offer')->title, ['target' => "_blank"]) !!}
+@elseif($type == 'removed_offer')
+    Remove offer from lookbook
+
+     {!! Html::link(config('lbt.wp_site') . '?p=' . $request_activity->get('offer')->wpid, $request_activity->get('offer')->title, ['target' => "_blank"]) !!}
+
 @elseif($type == 'direct_message')
     Sent a direct message.
 @else

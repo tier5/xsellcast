@@ -59,12 +59,13 @@ class CategoryEditRequest extends Request {
         ];
     }
 
-    // public function messages() {
-    //     return [
-    //         // 'name.required' => 'The brand name field is required.',
-    //         // 'opid.required' => 'The Ontraport tag field is required',
-    //     ];
-    // }
+    public function messages() {
+        return [
+            // 'name.required' => 'The brand name field is required.',
+            // 'opid.required' => 'The Ontraport tag field is required',
+            'slug.slug' => 'The Slug field is invalid',
+        ];
+    }
 
     /**
      * Response error message as json

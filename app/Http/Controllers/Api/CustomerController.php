@@ -307,12 +307,16 @@ class CustomerController extends Controller {
             $wp             = new WpConvetor();
             $customer_id    = $wp->getId('customer', $wp_customer_id);
             $offer_id       = $wp->getId('offer', $wp_offer_id);
-
-            $offer = $this->customer->skipPresenter()
+            $customer       = $this->customer->skipPresenter()->find($customer_id);
+            $offer          = $this->customer->skipPresenter()
                 ->find($customer_id)
-                ->pivotOffers()->where('offer_id', $offer_id)->first(); //->delete();
-            $offer->added = false;
-            $offer->save();
+                ->pivotOffers()->where('offer_id', $offer_id)->delete(); //->first(); //
+            // $offer->added = false;
+            // $offer->save();
+
+            $action = new \App\Storage\UserAction\UserAction();
+
+            $action->removeCustomerOffer($customer->user->id, $offer_id);
 
             return response()->json([
                 'status'  => true,
