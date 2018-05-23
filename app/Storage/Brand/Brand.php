@@ -79,4 +79,9 @@ class Brand extends Model implements Transformable {
 
         return $this->dealers->all();
     }
+    // public function getChangeDealersStatus($status) {
+
+    //     return $this->dealers->update(['status' => $status]);
+    // }
+
 }

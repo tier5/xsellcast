@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Http\Requests\Api\BrandDeleteRequest;
 use App\Http\Requests\Api\BrandEditRequest;
+use App\Http\Requests\Api\BrandEditStatusRequest;
 use App\Http\Requests\Api\BrandsRequest;
 use App\Http\Requests\Api\BrandsShowRequest;
 use App\Http\Requests\Api\BrandStoreRequest;
@@ -327,7 +328,7 @@ class BrandsController extends Controller {
      * Delete a brand details
      *
      *
-     * @param      \App\Http\Requests\Api\BrandEditRequest  $request    The request
+     * @param      \App\Http\Requests\Api\BrandDeleteRequest  $request    The request
      *
      * @return     Response
      */
@@ -386,4 +387,74 @@ class BrandsController extends Controller {
             );
         }
     }
+
+    /**
+     * Edit
+     *
+     * Edit a brand status
+     *
+     *
+     * @param      \App\Http\Requests\Api\BrandEditStatusRequest  $request    The request
+     *
+     * @return     Response
+     */
+    public function editStatus(BrandEditStatusRequest $request) {
+
+        try {
+
+            $data        = $request->all();
+            $wp_brand_id = $request->get('wp_brand_id');
+            $wp          = new WpConvetor();
+            $brand_id    = $wp->getId('brand', $wp_brand_id);
+
+            $update_arr = [];
+            if (isset($data['status'])) {
+                $update_arr['status'] = $data['status'];
+            }
+
+            $this->brand->updateOne($data, $brand_id);
+
+            $brand = $this->brand->skipPresenter()->find($brand_id);
+
+            if (isset($data['status'])) {
+                $details = $brand->getDealers();
+                //Dealer
+                foreach ($details as $dealer) {
+                    $dealer->status = $brand->status;
+                    $dealer->save();
+                }
+                $offers = $brand->getOffers();
+                //Offers
+                foreach ($offers as $offer) {
+                    // $status = $category->status ? 'publish' : 'draft';
+
+                    $offer->is_active = $brand->status;
+                    $offer->save();
+                }
+            }
+            // dd($brand);
+            $brand = $this->brand->find($brand_id);
+            $data  = [
+                'status'  => true,
+                'code'    => config('responses.success.status_code'),
+                'message' => config('responses.success.status_message'),
+                'data'    => $brand,
+            ];
+            // $data = array_merge($data, $brand);
+
+            return response()->json($data, config('responses.success.status_code'));
+
+        } catch (\Exception $e) {
+            // dd($e->getMessage());
+            return response()->json([
+                'status'  => false,
+                'code'    => config('responses.bad_request.status_code'),
+                'data'    => null,
+                'message' => $e->getMessage(),
+            ],
+                config('responses.bad_request.status_code')
+            );
+        }
+    }
+
 }

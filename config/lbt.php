@@ -118,6 +118,9 @@ return [
         'added_offer'              => [
             'key'  => 'added_offer',
             'icon' => 'fa-circle'],
+        'removed_offer'            => [
+            'key'  => 'removed_offer',
+            'icon' => 'fa-trash'],
     ],
 
     'message_stat'             => [

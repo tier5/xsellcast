@@ -367,3 +367,9 @@ Category v1.4 #stable
 Brand v1.2 #stable
 	a) Fixed delete issue
 	b) Implemented Uncategorized brand in delete Api.
+
+Category v1.5 #stable
+
+	a) Created category status update API
+	b) Created migration to add status column in  category, brand, offer and dealer tables
+	c) Created brand status update API

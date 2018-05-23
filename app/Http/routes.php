@@ -710,10 +710,14 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Api'), function () {
         Route::post('brand/update', array(
             'as'   => 'api.v1.brands.edit',
             'uses' => 'BrandsController@edit'));
+
         Route::delete('brand', array(
             'as'   => 'api.v1.brands.delete',
             'uses' => 'BrandsController@destroy'));
 
+        Route::post('brand/update/status', array(
+            'as'   => 'api.v1.brands.edit.status',
+            'uses' => 'BrandsController@editStatus'));
         //Categories
         Route::get('categories', array(
             'as'   => 'api.v1.categories',
@@ -729,6 +733,9 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Api'), function () {
         Route::post('categories/update', array(
             'as'   => 'api.v1.categories.edit',
             'uses' => 'CategoriesController@edit'));
+        Route::post('categories/update/status', array(
+            'as'   => 'api.v1.categories.edit.status',
+            'uses' => 'CategoriesController@editStatus'));
         Route::delete('categories', array(
             'as'   => 'api.v1.categories.delete',
             'uses' => 'CategoriesController@destroy'));
