@@ -55,6 +55,7 @@ class CategoryEditRequest extends Request {
             'name'           => 'required|unique:categories,name,' . $id,
             'slug'           => 'slug|unique:categories,slug,' . $id,
             'wp_category_id' => 'required|integer|unique:categories,wp_category_id,' . $id,
+            'status'         => 'in:0,1|integer',
 
         ];
     }

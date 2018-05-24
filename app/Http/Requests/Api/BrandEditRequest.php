@@ -33,6 +33,7 @@ class BrandEditRequest extends Request {
             'image_url'      => 'url|active_url',
             'image_link'     => 'url|active_url',
             'image_text'     => 'url|active_url',
+            'status'         => 'in:0,1|integer',
             // 'opid'        => isset($this->opid)?'required':'',
 
         ];

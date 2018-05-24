@@ -25,7 +25,7 @@ class BrandEditStatusRequest extends Request {
 
         return [
             'wp_brand_id' => 'required|exists:brands,wp_brand_id',
-            'status'      => 'required|in:1,0',
+            'status'      => 'required|in:1,0|integer',
 
         ];
     }

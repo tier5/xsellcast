@@ -377,3 +377,8 @@ Category v1.5 #stable
 
 Prospect lookbook v0.3 #stable
 	a) Implemented Remove offer from lookbook in CSR Dashboard
+
+Category v1.6 #stable
+
+	a) Fixed edit category Api validation
+	b) Fixed edit brand Api validation

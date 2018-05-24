@@ -47,7 +47,7 @@ class CategoryEditStatusRequest extends Request {
 
         return [
 
-            'status'         => 'required|in:0,1',
+            'status'         => 'required|in:0,1|integer',
             'wp_category_id' => 'required|integer|unique:categories,wp_category_id,' . $id,
 
         ];
