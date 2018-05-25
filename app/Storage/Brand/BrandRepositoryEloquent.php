@@ -79,6 +79,7 @@ class BrandRepositoryEloquent extends BaseRepository implements BrandRepository 
         $image_url   = (isset($data['image_url']) ? $data['image_url'] : null);
         $image_link  = (isset($data['image_link']) ? $data['image_link'] : null);
         $image_text  = (isset($data['image_text']) ? $data['image_text'] : null);
+        $status      = (isset($data['status']) ? $data['status'] : 0);
 
         if (is_array($mediaIds)) {
             $mediaIds = implode(',', $mediaIds);
@@ -99,6 +100,7 @@ class BrandRepositoryEloquent extends BaseRepository implements BrandRepository 
             'image_url'     => $image_url,
             'image_link'    => $image_link,
             'image_text'    => $image_text,
+            'status'        => $status,
 
         ];
 

@@ -67,6 +67,8 @@ class BrandsController extends Controller {
     public function store(BrandStoreRequest $request) {
         try {
 
+            // dd($request->all());
+
             $brand = $this->brand->createOne([
                 'name'        => $request->get('name'),
                 // 'media_logo_id' => $request->get('logo'),
@@ -79,6 +81,7 @@ class BrandsController extends Controller {
                 'image_url'   => $request->get('image_url'),
                 'image_link'  => $request->get('image_link'),
                 'image_text'  => $request->get('image_text'),
+                'status'      => $request->get('status'),
 
             ]);
             $wp_category_id = '';
@@ -113,6 +116,7 @@ class BrandsController extends Controller {
 
             //insert wp site database
             $response = $this->lbt_wp->storeCategory($arr); //client()->categories()->save($arr);
+
             if ($response['code'] == 200) {
 
                 $this->brand->updateWpid($response['data']['wp_brand_id'], $brand->id);
@@ -177,6 +181,7 @@ class BrandsController extends Controller {
             $brand->image_url     = $request->get('image_url');
             $brand->image_link    = $request->get('image_link');
             $brand->image_text    = $request->get('image_text');
+            $brand->status        = $request->get('status');
 
             $brand->categories()->detach();
             // $brand->save();
@@ -209,23 +214,30 @@ class BrandsController extends Controller {
                 'meta'            => json_encode($meta),
             ];
 
-            if ($brand->wp_brand_id != '') {
-                //update wp site database
-                $response = $this->lbt_wp->updateCategory($arr, $brand->wp_brand_id);
-                if ($response['code'] == 200) {
-                    $brand->categories()->detach();
-                    $brand->save();
-                    if ($category) {
-                        $brand->categories()->save($category);
-                    }
-                    $request->session()->flash('message', 'The brand was successfully updated!');
-                } else {
-                    return redirect()->back()->withErrors($response['errors'])->withInput($request->input());
-                }
-            } else {
-                // $request->session()->flash('message', 'The wp brand  id  not found !');
-                return redirect()->back()->withErrors(['wp_brand_id' => 'The wp brand  id  not found !'])->withInput($request->input());
+            $brand->categories()->detach();
+            $brand->save();
+            if ($category) {
+                $brand->categories()->save($category);
             }
+
+            $request->session()->flash('message', 'The brand was successfully updated!');
+            // if ($brand->wp_brand_id != '') {
+            //     //update wp site database
+            //     // $response = $this->lbt_wp->updateCategory($arr, $brand->wp_brand_id);
+            //     if ($response['code'] == 200) {
+            //         $brand->categories()->detach();
+            //         $brand->save();
+            //         if ($category) {
+            //             $brand->categories()->save($category);
+            //         }
+            //         $request->session()->flash('message', 'The brand was successfully updated!');
+            //     } else {
+            //         return redirect()->back()->withErrors($response['errors'])->withInput($request->input());
+            //     }
+            // } else {
+            //     // $request->session()->flash('message', 'The wp brand  id  not found !');
+            //     return redirect()->back()->withErrors(['wp_brand_id' => 'The wp brand  id  not found !'])->withInput($request->input());
+            // }
             return redirect()->route('admin.brands');
 
         } catch (\Exception $e) {

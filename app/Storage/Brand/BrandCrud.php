@@ -1,33 +1,29 @@
 <?php namespace App\Storage\Brand;
 
 use App\Storage\Crud\Box;
-use HTML;
 use App\Storage\Crud\CrudForm;
 use App\Storage\Crud\TableCollection;
 
-class BrandCrud
-{
+class BrandCrud {
 
-    public static function table($model, $opt)
-    {
-        $table  = new TableCollection();
-        $all    = ($model ? $model->all() : [] );
-        $info   = array(
-          'box_title'     => 'Brands',
-          'box_body_class' => 'no-padding',
-          'column_size'   => 12);
+    public static function table($model, $opt) {
+        $table = new TableCollection();
+        $all   = ($model ? $model->all() : []);
+        $info  = array(
+            'box_title'      => 'Brands',
+            'box_body_class' => 'no-padding',
+            'column_size'    => 12);
 
         $table = $table->make($all)
             ->columns(array(
-                'name'      => 'Name',
-                'category'  => 'Category'
+                'name'     => 'Name',
+                'category' => 'Category',
             ))
-            ->modify('category', function($row){
+            ->modify('category', function ($row) {
 
-                if($row->category)
-                {
+                if ($row->category) {
                     return $row->category->name;
-                }else{
+                } else {
 
                     return '';
                 }
@@ -44,28 +40,27 @@ class BrandCrud
 
     }
 
-    public static function editForm($opts)
-    {
+    public static function editForm($opts) {
         $brand = $opts['brand'];
 
-        $fields       = new CrudForm('put');
+        $fields = new CrudForm('put');
         $fields->setRoute('admin.brands.update');
         $fields->setModel($brand);
         $fields->setModelId($brand->id);
 
         $fields->addField(array(
-            'name'          => 'name',
-            'label'         => 'Brand Name',
-            'type'          => 'text',
-            'col-class'     => 'col-lg-6 col-md-12 col-sm-12 col-xs-12',
-            'clear_all'     => true));
+            'name'      => 'name',
+            'label'     => 'Brand Name',
+            'type'      => 'text',
+            'col-class' => 'col-lg-6 col-md-12 col-sm-12 col-xs-12',
+            'clear_all' => true));
 
         $fields->addField(array(
-            'name'          => 'slug',
-            'label'         => 'Brand Slug',
-            'type'          => 'text',
-            'col-class'     => 'col-lg-6 col-md-12 col-sm-12 col-xs-12',
-            'clear_all'     => true));
+            'name'      => 'slug',
+            'label'     => 'Brand Slug',
+            'type'      => 'text',
+            'col-class' => 'col-lg-6 col-md-12 col-sm-12 col-xs-12',
+            'clear_all' => true));
 
         // $fields->addField(array(
         //     'name'          => 'logo',
@@ -79,19 +74,19 @@ class BrandCrud
         //     'clear_all'     => true));
 
         $fields->addField(array(
-            'name'          => 'desc',
-            'label'         => 'Brand Description',
-            'type'          => 'textarea',
-            'col-class'     => 'col-lg-8 col-md-12 col-sm-12 col-xs-12',
-            'value'         => $brand->description,
-            'clear_all'     => true));
+            'name'      => 'desc',
+            'label'     => 'Brand Description',
+            'type'      => 'textarea',
+            'col-class' => 'col-lg-8 col-md-12 col-sm-12 col-xs-12',
+            'value'     => $brand->description,
+            'clear_all' => true));
 
         $fields->addField(array(
-            'name'          => 'catalog_url',
-            'label'         => 'Brand Catalog URL',
-            'type'          => 'text',
-            'col-class'     => 'col-lg-8 col-md-12 col-sm-12 col-xs-12',
-            'clear_all'     => true));
+            'name'      => 'catalog_url',
+            'label'     => 'Brand Catalog URL',
+            'type'      => 'text',
+            'col-class' => 'col-lg-8 col-md-12 col-sm-12 col-xs-12',
+            'clear_all' => true));
 
         // $fields->addField(array(
         //     'name'          => 'images',
@@ -109,7 +104,7 @@ class BrandCrud
             'label'     => 'Category',
             'type'      => 'App\Storage\Crud\CustomFields@brandCategoryList',
             'col-class' => 'col-lg-4 col-md-12 col-sm-12 col-xs-12',
-            'selected'  => ($brand->category ? $brand->category->id : null ),
+            'selected'  => ($brand->category ? $brand->category->id : null),
             'clear_all' => true));
 
         $fields->addField(array(
@@ -120,30 +115,38 @@ class BrandCrud
             'clear_all' => true,
             'value'     => $brand->opid));
         $fields->addField(array(
-            'name'          => 'image_url',
-            'label'         => 'Brand Image URL',
-            'type'          => 'text',
-            'col-class'     => 'col-lg-6 col-md-12 col-sm-12 col-xs-12',
-            'clear_all'     => true));
+            'name'      => 'image_url',
+            'label'     => 'Brand Image URL',
+            'type'      => 'text',
+            'col-class' => 'col-lg-6 col-md-12 col-sm-12 col-xs-12',
+            'clear_all' => true));
 
         $fields->addField(array(
-            'name'          => 'image_link',
-            'label'         => 'Brand Image Link',
-            'type'          => 'text',
-            'col-class'     => 'col-lg-6 col-md-12 col-sm-12 col-xs-12',
-            'clear_all'     => true));
+            'name'      => 'image_link',
+            'label'     => 'Brand Image Link',
+            'type'      => 'text',
+            'col-class' => 'col-lg-6 col-md-12 col-sm-12 col-xs-12',
+            'clear_all' => true));
 
         $fields->addField(array(
-            'name'          => 'image_text',
-            'label'         => 'Brand Image Text',
-            'type'          => 'text',
-            'col-class'     => 'col-lg-6 col-md-12 col-sm-12 col-xs-12',
-            'clear_all'     => true));
+            'name'      => 'image_text',
+            'label'     => 'Brand Image Text',
+            'type'      => 'text',
+            'col-class' => 'col-lg-6 col-md-12 col-sm-12 col-xs-12',
+            'clear_all' => true));
+        $fields->addField(array(
+            'name'      => 'status',
+            'label'     => 'Status',
+            'value'     => $brand->status,
+            'type'      => 'App\Storage\Brand\BrandFieldCustomFields@editSelect',
+            'list'      => ['0' => 'Active', '1' => 'Inactive'],
+            'col-class' => 'col-lg-6 col-md-12 col-sm-12 col-xs-12',
+        ));
 
         $info = array(
-            'box_title'     => 'Brands - Create',
-            'column_size'   => 12,
-            'column_class'  => 'col-sm-12 col-xs-12');
+            'box_title'    => 'Brands - Create',
+            'column_size'  => 12,
+            'column_class' => 'col-sm-12 col-xs-12');
 
         $box = new Box($info);
         $box->setForm($fields);
@@ -151,23 +154,22 @@ class BrandCrud
         return $box;
     }
 
-    public static function createForm()
-    {
-        $fields       = new CrudForm('post');
+    public static function createForm() {
+        $fields = new CrudForm('post');
         $fields->setRoute('admin.brands.store');
 
         $fields->addField(array(
-            'name'          => 'name',
-            'label'         => 'Brand Name',
-            'type'          => 'text',
-            'col-class'     => 'col-lg-6 col-md-12 col-sm-12 col-xs-12',
-            'clear_all'     => true));
+            'name'      => 'name',
+            'label'     => 'Brand Name',
+            'type'      => 'text',
+            'col-class' => 'col-lg-6 col-md-12 col-sm-12 col-xs-12',
+            'clear_all' => true));
         $fields->addField(array(
-            'name'          => 'slug',
-            'label'         => 'Brand Slug',
-            'type'          => 'text',
-            'col-class'     => 'col-lg-6 col-md-12 col-sm-12 col-xs-12',
-            'clear_all'     => true));
+            'name'      => 'slug',
+            'label'     => 'Brand Slug',
+            'type'      => 'text',
+            'col-class' => 'col-lg-6 col-md-12 col-sm-12 col-xs-12',
+            'clear_all' => true));
 
         // $fields->addField(array(
         //     'name'          => 'logo',
@@ -180,18 +182,18 @@ class BrandCrud
         //     'clear_all'     => true));
 
         $fields->addField(array(
-            'name'          => 'desc',
-            'label'         => 'Brand Description',
-            'type'          => 'textarea',
-            'col-class'     => 'col-lg-8 col-md-12 col-sm-12 col-xs-12',
-            'clear_all'     => true));
+            'name'      => 'desc',
+            'label'     => 'Brand Description',
+            'type'      => 'textarea',
+            'col-class' => 'col-lg-8 col-md-12 col-sm-12 col-xs-12',
+            'clear_all' => true));
 
         $fields->addField(array(
-            'name'          => 'catalog_url',
-            'label'         => 'Brand Catalog URL',
-            'type'          => 'text',
-            'col-class'     => 'col-lg-8 col-md-12 col-sm-12 col-xs-12',
-            'clear_all'     => true));
+            'name'      => 'catalog_url',
+            'label'     => 'Brand Catalog URL',
+            'type'      => 'text',
+            'col-class' => 'col-lg-8 col-md-12 col-sm-12 col-xs-12',
+            'clear_all' => true));
 
         // $fields->addField(array(
         //     'name'          => 'images',
@@ -204,46 +206,51 @@ class BrandCrud
         //     'clear_all'     => true));
 
         $fields->addField(array(
-            'name'          => 'category',
-            'label'         => 'Category',
-            'type'          => 'App\Storage\Crud\CustomFields@brandCategoryList',
-            'col-class'     => 'col-lg-4 col-md-12 col-sm-12 col-xs-12',
-            'clear_all'     => true));
+            'name'      => 'category',
+            'label'     => 'Category',
+            'type'      => 'App\Storage\Crud\CustomFields@brandCategoryList',
+            'col-class' => 'col-lg-4 col-md-12 col-sm-12 col-xs-12',
+            'clear_all' => true));
 
         $fields->addField(array(
-            'name'          => 'opid',
-            'label'         => 'Ontraport Tag',
-            'type'          => 'App\Storage\Crud\CustomFields@opTagSelect',
-            'col-class'     => 'col-lg-4 col-md-4 col-sm-12 col-xs-12',
-            'clear_all'     => true));
+            'name'      => 'opid',
+            'label'     => 'Ontraport Tag',
+            'type'      => 'App\Storage\Crud\CustomFields@opTagSelect',
+            'col-class' => 'col-lg-4 col-md-4 col-sm-12 col-xs-12',
+            'clear_all' => true));
 
         $fields->addField(array(
-            'name'          => 'image_url',
-            'label'         => 'Brand Image URL',
-            'type'          => 'text',
-            'col-class'     => 'col-lg-6 col-md-12 col-sm-12 col-xs-12',
-            'clear_all'     => true));
+            'name'      => 'image_url',
+            'label'     => 'Brand Image URL',
+            'type'      => 'text',
+            'col-class' => 'col-lg-6 col-md-12 col-sm-12 col-xs-12',
+            'clear_all' => true));
 
         $fields->addField(array(
-            'name'          => 'image_link',
-            'label'         => 'Brand Image Link',
-            'type'          => 'text',
-            'col-class'     => 'col-lg-6 col-md-12 col-sm-12 col-xs-12',
-            'clear_all'     => true));
+            'name'      => 'image_link',
+            'label'     => 'Brand Image Link',
+            'type'      => 'text',
+            'col-class' => 'col-lg-6 col-md-12 col-sm-12 col-xs-12',
+            'clear_all' => true));
 
         $fields->addField(array(
-            'name'          => 'image_text',
-            'label'         => 'Brand Image Text',
-            'type'          => 'text',
-            'col-class'     => 'col-lg-6 col-md-12 col-sm-12 col-xs-12',
-            'clear_all'     => true));
-
-
+            'name'      => 'image_text',
+            'label'     => 'Brand Image Text',
+            'type'      => 'text',
+            'col-class' => 'col-lg-6 col-md-12 col-sm-12 col-xs-12',
+            'clear_all' => true));
+        $fields->addField(array(
+            'name'      => 'status',
+            'label'     => 'Status',
+            'value'     => '0',
+            'type'      => 'select',
+            'list'      => ['0' => 'Active', '1' => 'Inactive'],
+            'col-class' => 'col-lg-6 col-md-12 col-sm-12 col-xs-12'));
 
         $info = array(
-            'box_title'     => 'Brands - Create',
-            'column_size'   => 12,
-            'column_class'  => 'col-sm-12 col-xs-12');
+            'box_title'    => 'Brands - Create',
+            'column_size'  => 12,
+            'column_class' => 'col-sm-12 col-xs-12');
 
         $box = new Box($info);
         $box->setForm($fields);
