@@ -173,6 +173,7 @@ class BrandsController extends Controller {
                 'image_url'   => $request->get('image_url'),
                 'image_link'  => $request->get('image_link'),
                 'image_text'  => $request->get('image_text'),
+                'status'      => $request->get('status'),
 
             ];
             // if ($media_id != '') {
@@ -286,6 +287,9 @@ class BrandsController extends Controller {
             if (isset($data['image_text'])) {
                 $update_arr['image_text'] = $data['image_text'];
             }
+            if (isset($data['status'])) {
+                $update_arr['status'] = $data['status'];
+            }
 
             if (isset($data['wp_category_id'])) {
                 //Convert wp_category_id to category_id
@@ -296,9 +300,26 @@ class BrandsController extends Controller {
             }
 
             $this->brand->updateOne($data, $brand_id);
+            $brand = $this->brand->skipPresenter()->find($brand_id);
+            if (isset($data['status'])) {
+                $details = $brand->getDealers();
+                //Dealer
+                foreach ($details as $dealer) {
+                    $dealer->status = $brand->status;
+                    $dealer->save();
+                }
+                $offers = $brand->getOffers();
+                //Offers
+                foreach ($offers as $offer) {
+                    // $status = $category->status ? 'publish' : 'draft';
 
-            $brand = $this->brand->find($brand_id);
+                    $offer->is_active = $brand->status;
+                    $offer->save();
+                }
+            }
             // dd($brand);
+            $brand = $this->brand->find($brand_id);
+
             $data = [
                 'status'  => true,
                 'code'    => config('responses.success.status_code'),

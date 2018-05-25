@@ -89,14 +89,14 @@ class CustomerRepositoryEloquent extends BaseRepository implements CustomerRepos
          */
         $offer = $customer->offers()->find($offer_id);
 
-        if ($offer) {
-            $customerOffer = $customer->pivotOffers()->where('offer_id', $offer_id)->first();
+        // if ($offer) {
+        //     $customerOffer = $customer->pivotOffers()->where('offer_id', $offer_id)->first();
 
-        } else {
+        // } else {
 
-            $customerOffer = $customer->setOffer($offer_id);
-        }
-
+        $customerOffer = $customer->setOffer($offer_id);
+        // }
+        // dd($customerOffer);
         //  $co                       = $customerOffer->first();
         $customerOffer->added = $is_added;
 // dd($customerOffer);

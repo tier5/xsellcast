@@ -260,7 +260,7 @@ class CustomerController extends Controller {
 
             $this->customer->setOfferToCustomer($offerId, $customer);
 
-            $offer = $this->offer->skipPresenter()->find($offerId);
+            // $offer = $this->offer->skipPresenter()->find($offerId);
             // $ba    = $this->customer->findNereastBAOfOffer($offer, $customer);
 
             // $user = $ba->user;

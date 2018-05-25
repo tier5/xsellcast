@@ -6,7 +6,7 @@
             </div>
             <div class="stream-panel">
                 <div class="stream-info">
-                    <a href="{!! route('admin.prospects.show', ['customer_id' => $activity['user']->customer->id]) !!}">
+                    <a href="{!! route('admin.prospects.show', ['customer_id' => isset($activity['user']->customer->id)?$activity['user']->customer->id:'']) !!}">
                         @if($activity['user_avatar'])
                             <img src="{!! $activity['user_avatar'] !!}">
                         @else
@@ -17,7 +17,7 @@
                     </a>
                 </div>
                 @include('admin.prospect.activity-content', [
-                    'type'             => $activity['type'], 
+                    'type'             => $activity['type'],
                     'request_activity' => $activity['request_activity']])
             </div>
         </div>

@@ -17,7 +17,7 @@
 @elseif($type == 'added_offer')
     Added offer to lookbook {!! Html::link(config('lbt.wp_site') . '?p=' . $request_activity->get('offer')->wpid, $request_activity->get('offer')->title, ['target' => "_blank"]) !!}
 @elseif($type == 'removed_offer')
-    Remove offer from lookbook
+    Removed offer from lookbook
 
      {!! Html::link(config('lbt.wp_site') . '?p=' . $request_activity->get('offer')->wpid, $request_activity->get('offer')->title, ['target' => "_blank"]) !!}
 
