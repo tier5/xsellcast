@@ -2,47 +2,43 @@
 
 namespace App\Storage\SalesRep;
 
-use Prettus\Repository\Eloquent\BaseRepository;
-use Prettus\Repository\Criteria\RequestCriteria;
-use App\Storage\SalesRep\SalesRepRepository;
-use App\Storage\SalesRep\SalesRep;
-use App\Storage\SalesRep\SalesRepValidator;
-use App\Storage\SalesRep\SalesRepPresenter;
-use Auth;
-use App\Storage\User\User;
-use App\Storage\Role\Role;
 use App\Storage\Dealer\Dealer;
 use App\Storage\Ontraport\SalesRepObj;
+use App\Storage\Role\Role;
+use App\Storage\SalesRep\SalesRep;
+use App\Storage\SalesRep\SalesRepPresenter;
+use App\Storage\SalesRep\SalesRepRepository;
+use App\Storage\SalesRep\SalesRepValidator;
+use App\Storage\User\User;
+use Auth;
+use Prettus\Repository\Criteria\RequestCriteria;
+use Prettus\Repository\Eloquent\BaseRepository;
 
 /**
  * Class SalesRepRepositoryEloquent
  * @package namespace App\Storage\SalesRep;
  */
-class SalesRepRepositoryEloquent extends BaseRepository implements SalesRepRepository
-{
+class SalesRepRepositoryEloquent extends BaseRepository implements SalesRepRepository {
     /**
      * Specify Model class name
      *
      * @return string
      */
-    public function model()
-    {
+    public function model() {
         return SalesRep::class;
     }
 
     /**
-    * Specify Validator class name
-    *
-    * @return mixed
-    */
-    public function validator()
-    {
+     * Specify Validator class name
+     *
+     * @return mixed
+     */
+    public function validator() {
 
         return SalesRepValidator::class;
     }
 
-    public function presenter()
-    {
+    public function presenter() {
 
         return SalesRepPresenter::class;
     }
@@ -50,8 +46,7 @@ class SalesRepRepositoryEloquent extends BaseRepository implements SalesRepRepos
     /**
      * Boot up the repository, pushing criteria
      */
-    public function boot()
-    {
+    public function boot() {
         $this->pushCriteria(app(RequestCriteria::class));
     }
 
@@ -62,11 +57,10 @@ class SalesRepRepositoryEloquent extends BaseRepository implements SalesRepRepos
      *
      * @return     $this  The by dealer.
      */
-    public function getByDealer($dealer_id)
-    {
+    public function getByDealer($dealer_id) {
 
         $model = $this->model
-            ->whereHas('dealers', function($query) use($dealer_id){
+            ->whereHas('dealers', function ($query) use ($dealer_id) {
                 $query->where('dealer_id', $dealer_id);
             });
 
@@ -82,16 +76,14 @@ class SalesRepRepositoryEloquent extends BaseRepository implements SalesRepRepos
      *
      * @return     $this  The by dealer.
      */
-    public function getByCustomer($customer_id, $show_approved = true, $show_rejected = true)
-    {
+    public function getByCustomer($customer_id, $show_approved = true, $show_rejected = true) {
 
         $model = $this->model
-            ->whereHas('customersPivot', function($query) use($customer_id, $show_approved, $show_rejected){
+            ->whereHas('customersPivot', function ($query) use ($customer_id, $show_approved, $show_rejected) {
                 $query->where('customer_id', $customer_id);
 
-                if(!$show_approved || !$show_rejected)
-                {
-                    $query->where(function($q) use($show_approved, $show_rejected){
+                if (!$show_approved || !$show_rejected) {
+                    $query->where(function ($q) use ($show_approved, $show_rejected) {
                         $q->where('approved', $show_approved);
                         $q->where('rejected', $show_rejected);
                     });
@@ -103,8 +95,7 @@ class SalesRepRepositoryEloquent extends BaseRepository implements SalesRepRepos
         return $this;
     }
 
-    public function filter($where)
-    {
+    public function filter($where) {
 
         $this->model = $this->model->where($where);
 
@@ -117,31 +108,28 @@ class SalesRepRepositoryEloquent extends BaseRepository implements SalesRepRepos
      *
      * @return     SalesRep|null
      */
-    public function currentUser($salesrep_id = null)
-    {
-        if(!Auth::check()){
+    public function currentUser($salesrep_id = null) {
+        if (!Auth::check()) {
 
             return null;
         }
 
         $user = Auth::user();
 
-        if($salesrep_id){
+        if ($salesrep_id) {
 
             $salesRep = $this->skipPresenter()->find($salesrep_id);
 
-            if($user->id != $salesRep->user_id)
-            {
+            if ($user->id != $salesRep->user_id) {
                 return null;
             }
 
-        }else{
+        } else {
 
             $salesRep = $this->skipPresenter()
                 ->filter(['user_id' => $user->id])
                 ->first();
         }
-
 
         return $salesRep;
     }
@@ -157,29 +145,26 @@ class SalesRepRepositoryEloquent extends BaseRepository implements SalesRepRepos
      *
      * @return     Array
      */
-    public function registrationLevel($sales_rep)
-    {
-        if(!$sales_rep){
+    public function registrationLevel($sales_rep) {
+        if (!$sales_rep) {
 
             return array();
         }
 
         $user = $sales_rep->user()->first();
 
-        if($user->firstname == '')
-        {
+        if ($user->firstname == '') {
             return array(0);
         }
 
         $dealers = $sales_rep->dealers()->get();
 
-        if($dealers->count() == 0)
-        {
+        if ($dealers->count() == 0) {
 
             return array(0, 1);
         }
 
-        if(empty($sales_rep->facebook) && empty($sales_rep->twitter) && empty($sales_rep->linkedin)){
+        if (empty($sales_rep->facebook) && empty($sales_rep->twitter) && empty($sales_rep->linkedin)) {
 
             return array(0, 1, 2);
         }
@@ -187,28 +172,25 @@ class SalesRepRepositoryEloquent extends BaseRepository implements SalesRepRepos
         return array(-1, 0, 1, 2);
     }
 
-    public function maxLevelRegistration($sales_rep)
-    {
+    public function maxLevelRegistration($sales_rep) {
         $levels = $this->registrationLevel($sales_rep);
 
         return end($levels);
     }
 
-    public function createOne($data, $dealer = null, $ontraport = true)
-    {
-        $role = Role::where('name', 'sales-rep')->first();
-        $dealerModel       = ($dealer ? Dealer::find($dealer) : null);
-        $user         = User::create([
+    public function createOne($data, $dealer = null, $ontraport = true) {
+        $role        = Role::where('name', 'sales-rep')->first();
+        $dealerModel = ($dealer ? Dealer::find($dealer) : null);
+        $user        = User::create([
             'firstname' => $data['firstname'],
             'lastname'  => $data['lastname'],
             'password'  => bcrypt($data['password']),
-            'email'     => $data['email'] ]);
+            'email'     => $data['email']]);
 
         $salesrep = $this->model->create([
             'user_id' => $user->id]);
 
-        if($dealerModel)
-        {
+        if ($dealerModel) {
             $salesrep->dealers()->save($dealerModel);
         }
 
@@ -223,41 +205,34 @@ class SalesRepRepositoryEloquent extends BaseRepository implements SalesRepRepos
         return $salesrep;
     }
 
-    public function updateOne(SalesRep $sr, $data)
-    {
+    public function updateOne(SalesRep $sr, $data) {
         $user       = $sr->user;
         $userFields = \Schema::getColumnListing($sr->user->getTable());
         $srFields   = \Schema::getColumnListing($sr->getTable());
 
-        foreach($userFields as $field)
-        {
-            if($field == 'id' || $field == 'password')
-            {
+        foreach ($userFields as $field) {
+            if ($field == 'id' || $field == 'password') {
                 continue;
             }
 
-            if(isset($data[$field]) && $field == 'email' && trim($data[$field]) == ''){
+            if (isset($data[$field]) && $field == 'email' && trim($data[$field]) == '') {
 
                 continue;
             }
 
-            if(isset($data[$field]))
-            {
+            if (isset($data[$field])) {
                 $user->{$field} = $data[$field];
             }
         }
 
         $user->save();
 
-        foreach($srFields as $field)
-        {
-            if($field == 'id' || $field == 'password')
-            {
+        foreach ($srFields as $field) {
+            if ($field == 'id' || $field == 'password') {
                 continue;
             }
 
-            if(isset($data[$field]))
-            {
+            if (isset($data[$field])) {
                 $sr->{$field} = $data[$field];
             }
         }
@@ -270,32 +245,28 @@ class SalesRepRepositoryEloquent extends BaseRepository implements SalesRepRepos
         return $sr;
     }
 
-    public function orderByName($order = 'desc')
-    {
+    public function orderByName($order = 'desc') {
         $this->joinToUsers();
         $this->model = $this->model->orderBy('users.lastname', $order);
 
         return $this;
     }
 
-    public function orderByEmail($order = 'desc')
-    {
+    public function orderByEmail($order = 'desc') {
         $this->joinToUsers();
         $this->model = $this->model->orderBy('users.email', $order);
 
         return $this;
     }
 
-    public function joinToUsers()
-    {
+    public function joinToUsers() {
         $this->model = $this->model->join('users', 'user_salesreps.user_id', '=', 'users.id')
-        ->select('user_salesreps.*');
+            ->select('user_salesreps.*');
 
         return $this;
     }
 
-    public function orderByAgreement($order = 'desc')
-    {
+    public function orderByAgreement($order = 'desc') {
         $this->joinToUsers();
         $this->joinToUserMetaAgreement();
         $this->model = $this->model->orderBy('users_meta.updated_at', $order);
@@ -303,10 +274,42 @@ class SalesRepRepositoryEloquent extends BaseRepository implements SalesRepRepos
         return $this;
     }
 
-    public function joinToUserMetaAgreement()
-    {
+    public function joinToUserMetaAgreement() {
         $this->model = $this->model->leftJoin('users_meta', 'users_meta.user_id', '=', 'users.id')->where('key', 'salesrep_agreement');
 
         return $this;
     }
+    /**
+     * [getAssignedABC description]
+     * @param  [type] $customer_id [description]
+     * @param  [type] $brand_id    [description]
+     * @return [type]              [description]
+     */
+    public function getAssignedABC($customer_id, $brand_id) {
+        $show_approved = true;
+        $show_rejected = false;
+        $model         = $this->model
+            ->whereHas('customersPivot', function ($query) use ($customer_id, $show_approved, $show_rejected) {
+                $query->where('customer_id', $customer_id);
+
+                if (!$show_approved || !$show_rejected) {
+                    $query->where(function ($q) use ($show_approved, $show_rejected) {
+                        $q->where('approved', $show_approved);
+                        $q->where('rejected', $show_rejected);
+                    });
+                }
+            })
+            ->whereHas('dealers', function ($query) use ($brand_id) {
+                $query->whereHas('brands', function ($query) use ($brand_id) {
+                    $query->where('brand_id', $brand_id);
+                });
+
+            });
+        // ->leftJoin('users_meta', 'users_meta.user_id', '=', 'users.id')->where('key', 'salesrep_agreement');
+
+        $this->model = $model;
+
+        return $this;
+    }
+
 }

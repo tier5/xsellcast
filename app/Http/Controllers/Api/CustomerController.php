@@ -164,19 +164,26 @@ class CustomerController extends Controller {
             $wp             = new WpConvetor();
             $customer_id    = $wp->getId('customer', $wp_customer_id);
 
+            $wp_brand_id = $request->get('wp_brand_id');
+            $brand_id    = $wp->getId('brand', $wp_brand_id);
+
             // $customer_id = $request->get('customer_id');
             // $salesreps = $this->customer->getByCustomer($customer_id)->paginate();
             $per_page = $request->get('per_page') != '' ? $request->get('per_page') : 20;
 
-            $customer = Customer::find($customer_id)->salesReps()->paginate($per_page)->toArray();
-
+            // $customer = Customer::find($customer_id)
+            //     ->salesReps()
+            //     ->paginate($per_page)->toArray();
+            // $sales_reps =
+            $salesreps = $this->salesrep->getAssignedABC($customer_id, $brand_id)->paginate($per_page); //->toArray();
+            // dd($salesreps);
             //
             $data = [
                 'status'  => true,
                 'code'    => config('responses.success.status_code'),
                 'message' => config('responses.success.status_message'),
             ];
-            $data = array_merge($data, $customer);
+            $data = array_merge($data, $salesreps);
 
             return response()->json($data, config('responses.success.status_code'));
 

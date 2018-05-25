@@ -382,3 +382,6 @@ Category v1.6 #stable
 
 	a) Fixed edit category Api validation
 	b) Fixed edit brand Api validation
+
+Assigned ABC v1.6 #stable
+	a) Created api to display assigned ABC

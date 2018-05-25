@@ -25,6 +25,7 @@ class CustomerViewSalesRepRequest extends Request {
 
             'access_token'   => 'required',
             'wp_customer_id' => 'required|integer|exists:user_customer,wp_userid',
+            'wp_brand_id'    => 'required|integer|exists:brands,wp_brand_id',
             'page'           => 'integer',
             'limit'          => 'integer',
             'filter_by'      => 'in:approved,rejected',
