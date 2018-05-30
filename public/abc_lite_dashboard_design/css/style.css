@@ -1147,9 +1147,9 @@ button.dim:active:before {
 .media-body {
   overflow: hidden;
 }
-.media-body {
+/*.media-body {
   display: block;
-}
+}*/
 .chat-element > .pull-left {
   margin-right: 10px;
 }
@@ -3615,6 +3615,9 @@ dd.project-people {
   padding: 15px 10px;
   vertical-align: middle;
 }
+.project-title {
+    width: 40%;
+}
 .project-manager .tag-list li a {
   font-size: 10px;
   background-color: white;
@@ -3631,6 +3634,9 @@ dd.project-people {
   color: #676a6c;
   margin-left: 10px;
   line-height: 22px;
+}
+.project-list .label-primary {
+    background-color: #337ab7;
 }
 /* FAQ */
 .faq-item {
