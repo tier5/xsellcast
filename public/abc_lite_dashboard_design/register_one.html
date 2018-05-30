@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title> LBT XSellCast - Register
+ </title>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <meta name="csrf-token" content="WizWF0NBcSdVeBWTDmJPgGBEGSWw0OpYasqn7ZpK">
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="http://xsellcast.tier5-development.us/css/animate.css" rel="stylesheet">
+    <link href="http://xsellcast.tier5-development.us/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="http://xsellcast.tier5-development.us/js/gritter/jquery.gritter.css" rel="stylesheet" />
+    <link href="http://xsellcast.tier5-development.us/css/plugins/dropzone/basic.css" rel="stylesheet" />
+    <link href="http://xsellcast.tier5-development.us/css/plugins/dropzone/dropzone.css" rel="stylesheet" />
+    <link href="http://xsellcast.tier5-development.us/js/tinymce/skin.min.css" rel="stylesheet" />
+    <link href="http://xsellcast.tier5-development.us/css/video-js.css" rel="stylesheet" />
+    <!-- Theme style -->
+    <link href="http://xsellcast.tier5-development.us/css/fullcalendar.css" rel="stylesheet" type="text/css" />
+    <link href="http://xsellcast.tier5-development.us/css/admin-style.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+.stepwizard {
+  display: block;
+  width: 100%;
+  position: relative; }
+  .stepwizard .stepwizard-row {
+    display: block;
+    text-align: center; }
+    .stepwizard .stepwizard-row:before {
+      top: 14px;
+      left: 0;
+      bottom: 0;
+      position: absolute;
+      content: " ";
+      width: 100%;
+      height: 1px;
+      background-color: #ccc;
+      z-index: 0; }
+  .stepwizard .stepwizard-step {
+    display: inline-block;
+    text-align: center;
+    position: relative;
+    padding-right: 20px;
+    padding-left: 20px; }
+    .stepwizard .stepwizard-step p {
+      margin-top: 10px; }
+    .stepwizard .stepwizard-step button[disabled] {
+      opacity: 1 !important;
+      filter: alpha(opacity=100) !important; }
+    @media (max-width: 599px) {
+      .stepwizard .stepwizard-step {
+        display: none; }
+        .stepwizard .stepwizard-step.active {
+          display: block; } }
+  .stepwizard .btn-circle {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 12px;
+    line-height: 1.428571429;
+    border-radius: 15px;
+    background-color: #f7a54a;
+    cursor: default; }
+    .stepwizard .btn-circle[disabled] {
+      background-color: #c2c2c2;
+      -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+      filter: alpha(opacity=100);
+      -moz-opacity: 1.0;
+      -khtml-opacity: 1.0;
+      opacity: 1.0; }
+  .stepwizard .register-social.setup-content .icon-box {
+    text-align: right; }
+    .stepwizard .register-social.setup-content .icon-box span {
+      text-align: center;
+      width: 35px;
+      height: 35px;
+      display: inline-block;
+      background-color: #f7a54a;
+      color: #fff;
+      border-radius: 35px;
+      background-clip: padding-box;
+      /* stops bg color from leaking outside the border: */ }
+      .stepwizard .register-social.setup-content .icon-box span .fa {
+        font-size: 20px;
+        line-height: 37px; }
+  .stepwizard #register-dealer-list {
+    text-align: left; }
+    .stepwizard #register-dealer-list ul {
+      list-style: none;
+      display: inline-block;
+      padding: 0;
+      margin: 0; }
+      .stepwizard #register-dealer-list ul li {
+        list-style: none;
+        padding: 0;
+        position: relative;
+        overflow: hidden; }
+        .stepwizard #register-dealer-list ul li input {
+          position: absolute;
+          left: -9999px; }
+  .stepwizard .register-icon {
+    font-size: 122px;
+    color: #d1d1d2; }
+  .stepwizard .checkbox-inline {
+    display: block;
+    width: 100%;
+    margin: 0 0 20px 0;
+    padding: 0;
+    text-align: left; }
+    .stepwizard .checkbox-inline:last-child {
+      margin-bottom: 0; }
+</style>
+    </head>
+
+<body class="gray-bg">
+
+    <div class="middle-box auth-box text-center registerscreen
+ animated fadeInDown">
+        <div>
+            <div>
+
+                
+            </div>
+
+            
+            
+            
+    <div class="stepwizard">
+
+        <div class="stepwizard-row setup-panel m-b">
+            <div class="stepwizard-step">
+                <a href="#step-1" type="button" class="btn btn-warning btn-circle open-done">1</a>
+                <p>Create Account</p>
+            </div>
+            
+            <div class="stepwizard-step">
+                <a href="#step-3" type="button" class="btn btn-default btn-circle "   >2</a>
+                <p>Social Profiles</p>
+            </div>
+        </div>
+
+        <div class="register-page setup-content" id="step-1">
+            <form action="http://xsellcast.tier5-development.us/auth/register" method="post">
+                <input type="hidden" name="_token" value="WizWF0NBcSdVeBWTDmJPgGBEGSWw0OpYasqn7ZpK">
+
+                <i class="fa fa-user register-icon"></i>
+
+                <h2 class="m-b">Create Account</h2>
+
+                <div class="form-group text-center">
+                    <a href="http://xsellcast.tier5-development.us/auth/fb" class="btn btn-success btn-facebook btn-outline btn-block">
+                        <i class="fa fa-facebook"> </i> Continue with Facebook
+                    </a>
+                </div>
+                <div class="form-group text-center">
+                    <a href="http://xsellcast.tier5-development.us/auth/social/linkedin" class="btn btn-success btn-linkedin btn-outline btn-block">
+                        <i class="fa fa-linkedin"> </i> Sign in with linkedin
+                    </a>
+                </div>
+                <div class="form-group">
+                     <p class="text-muted text-center breakline-through"><small>Or</small></p>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group has-feedback">
+                            <input type="text" class="form-control" placeholder="First Name" name="firstname" value=""/>
+                            <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group has-feedback">
+                            <input type="text" class="form-control" placeholder="Last Name" name="lastname" value=""/>
+                            <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group has-feedback">
+                    <input type="email" class="form-control" placeholder="Email" name="email" value=""/>
+                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group has-feedback">
+                            <input type="text" class="form-control" placeholder="Cell Phone" name="cellphone" value=""/>
+                            <span class="fa fa-mobile-phone form-control-feedback"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group has-feedback">
+                            <input type="text" class="form-control" placeholder="Office Phone" name="officephone" value=""/>
+                            <span class="fa fa-phone form-control-feedback"></span>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-muted text-center"><small>Prospect should be shown my:</small></p>
+                <div class="form-group">
+                    <div class="ibox-content ibox-field">
+                        <label class="checkbox-inline"> <input type="checkbox" name="show_cellphone" value="1" class="i-checks" > Cell Phone </label>
+                        <label class="checkbox-inline"> <input type="checkbox" name="show_officephone" value="1" class="i-checks" > Office Phone </label>
+                        <label class="checkbox-inline"> <input type="checkbox" name="show_email" value="1" class="i-checks" > Email </label>
+                    </div>
+                </div>
+
+                <div class="form-group has-feedback">
+                    <input type="password" class="form-control" placeholder="Password" name="password"/>
+                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                </div>
+                <div class="form-group has-feedback">
+                    <input type="password" class="form-control" placeholder="Confirm password" name="password_confirmation"/>
+                    <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-offset-3 col-sm-offset-3 col-xs-offset-3 m-b-sm">
+                        <button type="button" class="register-next next-submit btn btn-warning nextBtn btn-block btn-flat">Next</button>
+                    </div><!-- /.col -->
+
+                    <div class="col-xs-6 col-sm-6 col-md-offset-3 col-sm-offset-3 col-xs-offset-3">
+                        <a href="http://xsellcast.tier5-development.us/auth/register/cancel" class="btn btn-white btn-block btn-flat">Cancel</a>
+                    </div><!-- /.col -->
+                </div>
+            </form>
+        </div>
+
+        <div class="register-page setup-content" id="step-2">
+            <form action="http://xsellcast.tier5-development.us/api/v1/dealers" method="get" class="search-dealer">
+                <input type="hidden" name="_token" value="WizWF0NBcSdVeBWTDmJPgGBEGSWw0OpYasqn7ZpK">
+                <input type="hidden" name="access_token" value="tYj2Lwe58qmCxjM7qXZnv3nda4p1WuB22PKmPgZs" />
+
+                <i class="fa fa-user-circle register-icon"></i>
+
+                <h2 class="m-b">Company Info</h2>
+
+                <p class="text-muted text-center"><small>Find my company: </small></p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Company Zipcode" name="zip" id="company_zip" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="select-box">
+                               <select class="form-control" name="category">
+                                    <option value="">Select category...</option>
+                                                                            <option value="1">Automotive</option>
+                                                                            <option value="2">Fashion</option>
+                                                                            <option value="3">Home Decor</option>
+                                                                            <option value="4">Properties</option>
+                                                                            <option value="7">Test Category</option>
+                                                                            <option value="8">Test Category LBT X</option>
+                                                                    </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3">
+                            <button type="submit" class="register-next btn btn-white btn-block btn-flat"><i class="fa fa-search"></i> Search</button>
+                        </div>
+                    </div>
+                </div>
+
+
+            </form>
+
+            <form method="post" class="form-horizontal" action="http://xsellcast.tier5-development.us/auth/register/brands-associates/store-dealer">
+                <input type="hidden" name="_token" value="WizWF0NBcSdVeBWTDmJPgGBEGSWw0OpYasqn7ZpK">
+                <div class="ibox-content m-b hidden" id="dealers-container">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Dealers</label>
+                        <div class="col-sm-10">
+                            <div id="register-dealer-list"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-offset-3 col-sm-offset-3 col-xs-offset-3 m-b-md">
+                        <button type="button" class="register-next btn btn-warning next-submit nextBtn btn-block btn-flat">Next</button>
+                    </div><!-- /.col -->
+
+                    <div class="col-xs-6 col-sm-6 col-md-offset-3 col-sm-offset-3 col-xs-offset-3">
+                        <a href="http://xsellcast.tier5-development.us/auth/register/cancel" class="btn btn-white btn-block btn-flat">Cancel</a>
+                    </div><!-- /.col -->
+                </div>
+            </form>
+
+        </div>
+
+        <div class="register-page register-social setup-content" id="step-3">
+
+            <h2 class="m-b">Link Social Profiles</h2>
+
+            <form action="http://xsellcast.tier5-development.us/auth/register/brands-associates/store-social-profile" method="post">
+                <input type="hidden" name="_token" value="WizWF0NBcSdVeBWTDmJPgGBEGSWw0OpYasqn7ZpK" />
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-2 icon-box">
+                            <span><i class="fa fa-facebook"></i></span>
+                        </div>
+                        <div class="col-xs-10">
+                            <input type="text" class="form-control" placeholder="@username" name="facebook" id="facebook" value="" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-2 icon-box">
+                            <span><i class="fa fa-twitter"></i></span>
+                        </div>
+                        <div class="col-xs-10">
+                            <input type="text" class="form-control" placeholder="@username" name="twitter" id="twitter" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-2 icon-box">
+                            <span><i class="fa fa-linkedin"></i></span>
+                        </div>
+                        <div class="col-xs-10">
+                            <input type="text" class="form-control" placeholder="URL" name="linkedin" id="linkedin" value=""/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3 m-b-md">
+                        <button type="button" class="register-next btn btn-warning next-submit doneBtn nextBtn btn-block btn-flat">Done</button>
+                    </div><!-- /.col -->
+
+                    <div class="col-xs-6 col-sm-6 col-md-offset-3 col-sm-offset-3 col-xs-offset-3">
+                        <a href="http://xsellcast.tier5-development.us/auth/register/cancel" class="btn btn-white btn-block btn-flat">Cancel</a>
+                    </div><!-- /.col -->
+                </div>
+            </form>
+        </div>
+
+        <div class="register-page setup-content" id="step-success">
+            <h2>Registration Complete!</h2>
+            <div class="m-b-md"></div>
+            <h3>Welcome to Xsellcast! Log in now to begin exploring.</h3>
+            <div class="m-b-lg"></div>
+            <a class="btn btn-white" href="http://xsellcast.tier5-development.us/auth/login">Log In</a>
+        </div>
+
+    </div>
+
+
+        </div>
+    </div>
+
+    <!-- Mainly scripts -->
+<script src="http://xsellcast.tier5-development.us/js/tinymce/tinymce.min.js"></script>
+<script src="http://xsellcast.tier5-development.us/js/app.js"></script>
+
+
+<script id="offer-select-field-item" type="x-tmpl-mustache">
+    <tr data-name="{{row.title}}" data-id="{{row.id}}" onclick="{{selectEvent}}(this)">
+        <td><img src="{{row.thumbnail}}" width="75" /></td>
+        <td>
+            <label class="label label-{{row.badge}}">{{row.author_type_human}}</label> {{row.status_human}}<br/>
+            <strong class="text-navy">{{row.title }}</strong>
+        </td>
+        <td>{{row.updated_at_human}}</td>
+    </tr>
+</script><script id="modal-okay" type="x-tmpl-mustache">
+    <div class="modal" id="category_delete_modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content animated bounceInRight">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">XsellCast</h4>
+                </div>
+                <div class="modal-body">
+                    {{messages}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</script><script id="category-delete-modal" type="x-tmpl-mustache">
+    <div class="modal" id="category_delete_modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content animated bounceInRight">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">XsellCast</h4>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to permanently delete this category?
+                </div>
+                <div class="modal-footer">
+                    <a href="{{url}}" class="btn btn-primary">Yes</a>
+                    <button type="button" class="btn btn-white" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</script><script id="category_edit_form_mustache" type="x-tmpl-mustache">
+    <div class="modal" id="category_edit_form_modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content animated bounceInRight">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">XsellCast - Edit</h4>
+                </div>
+                <div class="modal-body">
+                
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/javascript">
+
+</script>
+<link rel='stylesheet' type='text/css' property='stylesheet' href='//xsellcast.tier5-development.us/_debugbar/assets/stylesheets?v=1520436526'><script type='text/javascript' src='//xsellcast.tier5-development.us/_debugbar/assets/javascript?v=1520436526'></script><script type="text/javascript">
+jQuery.noConflict(true);
+var phpdebugbar = new PhpDebugBar.DebugBar();
+phpdebugbar.addIndicator("php_version", new PhpDebugBar.DebugBar.Indicator({"icon":"code","tooltip":"Version"}), "right");
+phpdebugbar.addTab("messages", new PhpDebugBar.DebugBar.Tab({"icon":"list-alt","title":"Messages", "widget": new PhpDebugBar.Widgets.MessagesWidget()}));
+phpdebugbar.addIndicator("time", new PhpDebugBar.DebugBar.Indicator({"icon":"clock-o","tooltip":"Request Duration"}), "right");
+phpdebugbar.addTab("timeline", new PhpDebugBar.DebugBar.Tab({"icon":"tasks","title":"Timeline", "widget": new PhpDebugBar.Widgets.TimelineWidget()}));
+phpdebugbar.addIndicator("memory", new PhpDebugBar.DebugBar.Indicator({"icon":"cogs","tooltip":"Memory Usage"}), "right");
+phpdebugbar.addTab("exceptions", new PhpDebugBar.DebugBar.Tab({"icon":"bug","title":"Exceptions", "widget": new PhpDebugBar.Widgets.ExceptionsWidget()}));
+phpdebugbar.addTab("views", new PhpDebugBar.DebugBar.Tab({"icon":"leaf","title":"Views", "widget": new PhpDebugBar.Widgets.TemplatesWidget()}));
+phpdebugbar.addTab("route", new PhpDebugBar.DebugBar.Tab({"icon":"share","title":"Route", "widget": new PhpDebugBar.Widgets.VariableListWidget()}));
+phpdebugbar.addIndicator("currentroute", new PhpDebugBar.DebugBar.Indicator({"icon":"share","tooltip":"Route"}), "right");
+phpdebugbar.addTab("queries", new PhpDebugBar.DebugBar.Tab({"icon":"database","title":"Queries", "widget": new PhpDebugBar.Widgets.LaravelSQLQueriesWidget()}));
+phpdebugbar.addTab("emails", new PhpDebugBar.DebugBar.Tab({"icon":"inbox","title":"Mails", "widget": new PhpDebugBar.Widgets.MailsWidget()}));
+phpdebugbar.addTab("session", new PhpDebugBar.DebugBar.Tab({"icon":"archive","title":"Session", "widget": new PhpDebugBar.Widgets.VariableListWidget()}));
+phpdebugbar.addTab("request", new PhpDebugBar.DebugBar.Tab({"icon":"tags","title":"Request", "widget": new PhpDebugBar.Widgets.VariableListWidget()}));
+phpdebugbar.setDataMap({
+"php_version": ["php.version", ],
+"messages": ["messages.messages", []],
+"messages:badge": ["messages.count", null],
+"time": ["time.duration_str", '0ms'],
+"timeline": ["time", {}],
+"memory": ["memory.peak_usage_str", '0B'],
+"exceptions": ["exceptions.exceptions", []],
+"exceptions:badge": ["exceptions.count", null],
+"views": ["views", []],
+"views:badge": ["views.nb_templates", 0],
+"route": ["route", {}],
+"currentroute": ["route.uri", ],
+"queries": ["queries", []],
+"queries:badge": ["queries.nb_statements", 0],
+"emails": ["swiftmailer_mails.mails", []],
+"emails:badge": ["swiftmailer_mails.count", null],
+"session": ["session", {}],
+"request": ["request", {}]
+});
+phpdebugbar.restoreState();
+phpdebugbar.ajaxHandler = new PhpDebugBar.AjaxHandler(phpdebugbar, undefined, true);
+phpdebugbar.ajaxHandler.bindToXHR();
+phpdebugbar.setOpenHandler(new PhpDebugBar.OpenHandler({"url":"http:\/\/xsellcast.tier5-development.us\/_debugbar\/open"}));
+phpdebugbar.addDataSet({"__meta":{"id":"Xba34bc156bf2b73a6e884e815c5d8723","datetime":"2018-05-21 20:59:09","utime":1526916549.0112,"method":"GET","uri":"\/auth\/register","ip":"223.31.41.147"},"php":{"version":"7.0.30-0ubuntu0.16.04.1","interface":"apache2handler"},"messages":{"count":0,"messages":[]},"time":{"start":1526916548.942,"end":1526916549.0113,"duration":0.06926417350769,"duration_str":"69.26ms","measures":[{"label":"Booting","start":1526916548.942,"relative_start":0,"end":1526916548.9512,"relative_end":1526916548.9512,"duration":0.0091722011566162,"duration_str":"9.17ms","params":[],"collector":null},{"label":"Application","start":1526916548.9505,"relative_start":0.0085201263427734,"end":1526916549.0113,"relative_end":2.8610229492188e-6,"duration":0.060746908187866,"duration_str":"60.75ms","params":[],"collector":null}]},"memory":{"peak_usage":4149808,"peak_usage_str":"3.96MB"},"exceptions":{"count":0,"exceptions":[]},"views":{"nb_templates":8,"templates":[{"name":"auth.register_salesrep (resources\/views\/auth\/register_salesrep.blade.php)","param_count":5,"params":["access_token","sales_rep","user","reglvl","categories"],"type":"blade"},{"name":"admin.layout.plane (resources\/views\/admin\/layout\/plane.blade.php)","param_count":10,"params":["obLevel","__env","app","errors","access_token","sales_rep","user","reglvl","categories","category"],"type":"blade"},{"name":"admin.partials.header (resources\/views\/admin\/partials\/header.blade.php)","param_count":10,"params":["obLevel","__env","app","errors","access_token","sales_rep","user","reglvl","categories","category"],"type":"blade"},{"name":"admin.partials.scripts (resources\/views\/admin\/partials\/scripts.blade.php)","param_count":10,"params":["obLevel","__env","app","errors","access_token","sales_rep","user","reglvl","categories","category"],"type":"blade"},{"name":"admin.partials.mustache.offer-select-field-item (resources\/views\/admin\/partials\/mustache\/offer-select-field-item.php)","param_count":10,"params":["obLevel","__env","app","errors","access_token","sales_rep","user","reglvl","categories","category"],"type":"php"},{"name":"admin.partials.mustache.modal-okay (resources\/views\/admin\/partials\/mustache\/modal-okay.php)","param_count":10,"params":["obLevel","__env","app","errors","access_token","sales_rep","user","reglvl","categories","category"],"type":"php"},{"name":"admin.partials.mustache.category-delete-modal (resources\/views\/admin\/partials\/mustache\/category-delete-modal.php)","param_count":10,"params":["obLevel","__env","app","errors","access_token","sales_rep","user","reglvl","categories","category"],"type":"php"},{"name":"admin.partials.mustache.category_edit_form_modal (resources\/views\/admin\/partials\/mustache\/category_edit_form_modal.php)","param_count":10,"params":["obLevel","__env","app","errors","access_token","sales_rep","user","reglvl","categories","category"],"type":"php"}]},"route":{"uri":"GET auth\/register","middleware":"web","as":"register","controller":"App\\Http\\Controllers\\Auth\\RegisterSalesRepController@showRegistrationForm","namespace":"App\\Http\\Controllers","prefix":"\/auth","where":[],"file":"app\/Http\/Controllers\/Auth\/RegisterSalesRepController.php:48-69"},"queries":{"nb_statements":1,"nb_failed_statements":0,"accumulated_duration":0.00098,"accumulated_duration_str":"980\u03bcs","statements":[{"sql":"select * from `categories`","type":"query","params":[],"bindings":[],"hints":["Use <code>SELECT *<\/code> only if you need all columns from table","The <code>SELECT<\/code> statement has no <code>WHERE<\/code> clause and could examine many more rows than intended"],"backtrace":[],"duration":0.00098,"duration_str":"980\u03bcs","stmt_id":"","connection":"xsellcast_one"}]},"swiftmailer_mails":{"count":0,"mails":[]},"session":{"_token":"WizWF0NBcSdVeBWTDmJPgGBEGSWw0OpYasqn7ZpK","_previous":"array:1 [\n  \"url\" => \"http:\/\/xsellcast.tier5-development.us\/auth\/password\/reset\"\n]","flash":"array:2 [\n  \"old\" => []\n  \"new\" => []\n]","url":"array:1 [\n  \"intended\" => \"http:\/\/xsellcast.tier5-development.us\/admin\"\n]","PHPDEBUGBAR_STACK_DATA":"[]"},"request":{"format":"html","content_type":"text\/html; charset=UTF-8","status_text":"OK","status_code":"200","request_query":"[]","request_request":"[]","request_headers":"array:9 [\n  \"host\" => array:1 [\n    0 => \"xsellcast.tier5-development.us\"\n  ]\n  \"user-agent\" => array:1 [\n    0 => \"Mozilla\/5.0 (X11; Ubuntu; Linux x86_64; rv:60.0) Gecko\/20100101 Firefox\/60.0\"\n  ]\n  \"accept\" => array:1 [\n    0 => \"text\/html,application\/xhtml+xml,application\/xml;q=0.9,*\/*;q=0.8\"\n  ]\n  \"accept-language\" => array:1 [\n    0 => \"en-GB,en;q=0.5\"\n  ]\n  \"accept-encoding\" => array:1 [\n    0 => \"gzip, deflate\"\n  ]\n  \"referer\" => array:1 [\n    0 => \"http:\/\/xsellcast.tier5-development.us\/auth\/password\/reset\"\n  ]\n  \"cookie\" => array:1 [\n    0 => \"tz=eyJpdiI6IjVwUkJ3U3orRTg0NXBuRytXTkQ3RFE9PSIsInZhbHVlIjoiQWZ4WGZzVVBDMUk5TDBBYXVZWEx6ODQ4bzhGb3RcL1RXdjRYZWdVcnhcL3ZzPSIsIm1hYyI6IjJiZWU2M2RjOGMwZGVjNTFlN2I0MTI1ZmM3ZTg0NGRkYTgyY2MwZTc0MTE5N2EwZTBhMmYxNjJiZmE4ZTUzMDUifQ%3D%3D; laravel_session=665bdbd06ef76b00c1871c2debf0847f4457cd8e\"\n  ]\n  \"connection\" => array:1 [\n    0 => \"keep-alive\"\n  ]\n  \"upgrade-insecure-requests\" => array:1 [\n    0 => \"1\"\n  ]\n]","request_server":"array:34 [\n  \"REDIRECT_STATUS\" => \"200\"\n  \"HTTP_HOST\" => \"xsellcast.tier5-development.us\"\n  \"HTTP_USER_AGENT\" => \"Mozilla\/5.0 (X11; Ubuntu; Linux x86_64; rv:60.0) Gecko\/20100101 Firefox\/60.0\"\n  \"HTTP_ACCEPT\" => \"text\/html,application\/xhtml+xml,application\/xml;q=0.9,*\/*;q=0.8\"\n  \"HTTP_ACCEPT_LANGUAGE\" => \"en-GB,en;q=0.5\"\n  \"HTTP_ACCEPT_ENCODING\" => \"gzip, deflate\"\n  \"HTTP_REFERER\" => \"http:\/\/xsellcast.tier5-development.us\/auth\/password\/reset\"\n  \"HTTP_COOKIE\" => \"tz=eyJpdiI6IjVwUkJ3U3orRTg0NXBuRytXTkQ3RFE9PSIsInZhbHVlIjoiQWZ4WGZzVVBDMUk5TDBBYXVZWEx6ODQ4bzhGb3RcL1RXdjRYZWdVcnhcL3ZzPSIsIm1hYyI6IjJiZWU2M2RjOGMwZGVjNTFlN2I0MTI1ZmM3ZTg0NGRkYTgyY2MwZTc0MTE5N2EwZTBhMmYxNjJiZmE4ZTUzMDUifQ%3D%3D; laravel_session=665bdbd06ef76b00c1871c2debf0847f4457cd8e\"\n  \"HTTP_CONNECTION\" => \"keep-alive\"\n  \"HTTP_UPGRADE_INSECURE_REQUESTS\" => \"1\"\n  \"PATH\" => \"\/usr\/local\/sbin:\/usr\/local\/bin:\/usr\/sbin:\/usr\/bin:\/sbin:\/bin\"\n  \"SERVER_SIGNATURE\" => \"<address>Apache\/2.4.18 (Ubuntu) Server at xsellcast.tier5-development.us Port 80<\/address>\\n\"\n  \"SERVER_SOFTWARE\" => \"Apache\/2.4.18 (Ubuntu)\"\n  \"SERVER_NAME\" => \"xsellcast.tier5-development.us\"\n  \"SERVER_ADDR\" => \"172.31.76.205\"\n  \"SERVER_PORT\" => \"80\"\n  \"REMOTE_ADDR\" => \"223.31.41.147\"\n  \"DOCUMENT_ROOT\" => \"\/var\/www\/html\/public\"\n  \"REQUEST_SCHEME\" => \"http\"\n  \"CONTEXT_PREFIX\" => \"\"\n  \"CONTEXT_DOCUMENT_ROOT\" => \"\/var\/www\/html\/public\"\n  \"SERVER_ADMIN\" => \"work@xsellcast.tier5.us\"\n  \"SCRIPT_FILENAME\" => \"\/var\/www\/html\/public\/index.php\"\n  \"REMOTE_PORT\" => \"34512\"\n  \"REDIRECT_URL\" => \"\/auth\/register\"\n  \"GATEWAY_INTERFACE\" => \"CGI\/1.1\"\n  \"SERVER_PROTOCOL\" => \"HTTP\/1.1\"\n  \"REQUEST_METHOD\" => \"GET\"\n  \"QUERY_STRING\" => \"\"\n  \"REQUEST_URI\" => \"\/auth\/register\"\n  \"SCRIPT_NAME\" => \"\/index.php\"\n  \"PHP_SELF\" => \"\/index.php\"\n  \"REQUEST_TIME_FLOAT\" => 1526916548.942\n  \"REQUEST_TIME\" => 1526916548\n]","request_cookies":"array:2 [\n  \"tz\" => \"Asia\/Kolkata\"\n  \"laravel_session\" => null\n]","response_headers":"array:2 [\n  \"cache-control\" => array:1 [\n    0 => \"no-cache\"\n  ]\n  \"content-type\" => array:1 [\n    0 => \"text\/html; charset=UTF-8\"\n  ]\n]","path_info":"\/auth\/register","session_attributes":"array:5 [\n  \"_token\" => \"WizWF0NBcSdVeBWTDmJPgGBEGSWw0OpYasqn7ZpK\"\n  \"_previous\" => array:1 [\n    \"url\" => \"http:\/\/xsellcast.tier5-development.us\/auth\/password\/reset\"\n  ]\n  \"flash\" => array:2 [\n    \"old\" => []\n    \"new\" => []\n  ]\n  \"url\" => array:1 [\n    \"intended\" => \"http:\/\/xsellcast.tier5-development.us\/admin\"\n  ]\n  \"PHPDEBUGBAR_STACK_DATA\" => []\n]"}}, "Xba34bc156bf2b73a6e884e815c5d8723");
+
+</script>
+</body>
+
+</html>

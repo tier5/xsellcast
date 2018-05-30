@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>INSPINIA | Profile</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <div id="wrapper">
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="side-menu">
+                    <li class="nav-header">
+                        <div class="dropdown profile-element"> <span>
+                            <img alt="image" class="img-circle" src="img/profile_small.jpg" />
+                             </span>
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">David Williams</strong>
+                             </span> <span class="text-muted text-xs block">Art Director <b class="caret"></b></span> </span> </a>
+                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                <li><a href="profile.html">Profile</a></li>
+                                <li><a href="contacts.html">Contacts</a></li>
+                                <li><a href="mailbox.html">Mailbox</a></li>
+                                <li class="divider"></li>
+                                <li><a href="login.html">Logout</a></li>
+                            </ul>
+                        </div>
+                        <div class="logo-element">
+                            IN+
+                        </div>
+                    </li>
+                    <li >
+                        <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboards</span></a>
+                    </li>
+                    <li>
+                        <a href="widgets.html"><i class="fa fa-flask"></i> <span class="nav-label">Offers</span> </a>
+                    </li>
+                    <li class="active">
+                        <a href="grid_options.html"><i class="fa fa-laptop"></i> <span class="nav-label">Contacts</span></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-picture-o"></i> <span class="nav-label">Settings</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a href="basic_gallery.html">Basic Gallery</a></li>
+                            <li><a href="carousel.html">Bootstrap Carusela</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div id="page-wrapper" class="gray-bg">
+            <div class="row border-bottom">
+                <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                    <div class="navbar-header">
+                        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+                        <form role="search" class="navbar-form-custom" method="post" action="search_results.html">
+                            <div class="form-group">
+                                <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
+                            </div>
+                        </form>
+                    </div>
+                    <ul class="nav navbar-top-links navbar-right">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                                <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-messages">
+                                <li>
+                                    <div class="dropdown-messages-box">
+                                        <a href="profile.html" class="pull-left">
+                                            <img alt="image" class="img-circle" src="img/a7.jpg">
+                                        </a>
+                                        <div class="media-body">
+                                            <small class="pull-right">46h ago</small>
+                                            <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>
+                                            <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <div class="dropdown-messages-box">
+                                        <a href="profile.html" class="pull-left">
+                                            <img alt="image" class="img-circle" src="img/a4.jpg">
+                                        </a>
+                                        <div class="media-body ">
+                                            <small class="pull-right text-navy">5h ago</small>
+                                            <strong>Chris Johnatan Overtunk</strong> started following <strong>Monica Smith</strong>. <br>
+                                            <small class="text-muted">Yesterday 1:21 pm - 11.06.2014</small>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <div class="dropdown-messages-box">
+                                        <a href="profile.html" class="pull-left">
+                                            <img alt="image" class="img-circle" src="img/profile.jpg">
+                                        </a>
+                                        <div class="media-body ">
+                                            <small class="pull-right">23h ago</small>
+                                            <strong>Monica Smith</strong> love <strong>Kim Smith</strong>. <br>
+                                            <small class="text-muted">2 days ago at 2:30 am - 11.06.2014</small>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <div class="text-center link-block">
+                                        <a href="mailbox.html">
+                                            <i class="fa fa-envelope"></i> <strong>Read All Messages</strong>
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                                <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-alerts">
+                                <li>
+                                    <a href="mailbox.html">
+                                        <div>
+                                            <i class="fa fa-envelope fa-fw"></i> You have 16 messages
+                                            <span class="pull-right text-muted small">4 minutes ago</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="profile.html">
+                                        <div>
+                                            <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                                            <span class="pull-right text-muted small">12 minutes ago</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="grid_options.html">
+                                        <div>
+                                            <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                                            <span class="pull-right text-muted small">4 minutes ago</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <div class="text-center link-block">
+                                        <a href="notifications.html">
+                                            <strong>See All Alerts</strong>
+                                            <i class="fa fa-angle-right"></i>
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="login.html">
+                                <i class="fa fa-sign-out"></i> Log out
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-10">
+                    <h2>Profile</h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li>
+                            <a>Prospects</a>
+                        </li>
+                        <li class="active">
+                            <strong>Prospects Details</strong>
+                        </li>
+                    </ol>
+                </div>
+                <div class="col-lg-2"></div>
+            </div>
+            <div class="wrapper wrapper-content">
+                <div class="row animated fadeInRight">
+                    <div class="col-md-4">
+                        <div class="widget style1 navy-bg clearfix">
+                            <div class="pull-left text-left">
+                                <i class="fa fa-trophy fa-5x"></i>
+                            </div>
+                            <div class="pull-right text-right">
+                                <span> Leadscore </span>
+                                <h2 class="font-bold">217</h2>
+                            </div>
+                        </div>
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Prospect Details</h5>
+                                <div class="ibox-tools">
+                                    <span class="label label-warning pull-right">
+                                        Open
+                                    </span>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="ibox-content">
+                                    <h3>
+                                        Hal Fahey
+                                        <small>
+                                            East Maximilliaville, 
+                                            PA 84930-3387
+                                        </small>
+                                    </h3>
+                                    <div class="media m-b">
+                                      <div class="media-left">
+                                        <a href="#">
+                                          <img alt="image" class="media-object" src="img/a3.jpg">
+                                        </a>
+                                      </div>
+                                      <div class="media-body">
+                                        
+                                      </div>
+                                    </div>
+                        
+                                    <div class="clearfix">
+                                        <div class="btn-group pull-left">
+                                            <a class="btn btn-md btn-white" href="#"><i class="fa fa-phone"></i> Call</a>
+                                            <a class="btn btn-md btn-white" href="#"><i class="fa fa-comment"></i> Send SMS</a>
+                                            <a class="btn btn-md btn-white" href="mailbox-compose.html"><i class="fa fa-envelope"></i> Email</a>
+                                        </div>
+                                        <div class="btn-group pull-right">
+                                            <a class="btn btn-md btn-white" href="profile.html?id="><i class="fa fa-eye"></i> Details</a>
+                                            <a class="btn btn-md btn-white" href="#"><i class="fa fa-mail-forward"></i> Lookbook</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Key Statistics</h5>
+                            </div>
+                            <div>
+                                <div class="ibox-content no-padding">
+                                    <table class="table m-b-none">
+                                        <tbody>
+                                            <tr>
+                                                <th>Household Income</th>
+                                                <td>125-150k;</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Age</th>
+                                                <td>30-55</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Net Worth</th>
+                                                <td>$550,000</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Occupation</th>
+                                                <td>Operations Director</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="ibox-content">
+                                    <div class="user-button">
+                                        <button type="button" data-toggle="modal" data-target="#statisticsModal" class="btn btn-primary btn-sm btn-block">View full breakdown</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Prospects Details</h5>
+                            </div>
+                            <div>
+                                <div class="ibox-content no-padding border-left-right">
+                                    <img alt="image" class="img-responsive" src="img/p_big2.jpg">
+                                </div>
+                                <div class="ibox-content profile-content">
+                                    <h4><strong>Alex Johnatan</strong></h4>
+                                    <p><i class="fa fa-map-marker"></i> San Francisco, CA 94107</p>
+                                    <div class="row m-t-lg">
+                                        <div class="col-md-12">
+                                        <a class="btn btn-xs btn-white" data-toggle="modal" data-target="#myModal41" ><i class="fa fa-phone"></i> Call </a> 
+                                        <a class="btn btn-xs btn-white" data-toggle="modal" data-target="#myModal42" ><i class="fa fa-envelope"></i> Email</a> 
+                                        <a class="btn btn-xs btn-white" data-toggle="modal" data-target="#myModal43" ><i class="fa fa-comment"></i> Text</a>
+                                        </div>
+                                    </div>
+                                    <div class="user-button">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <button type="button" class="btn btn-warning btn-sm btn-block" data-toggle="modal" data-target="#myModax">
+                                                    <i class="fa fa-info-circle"></i> View full breakdown
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                    <div class="modal inmodal" id="myModalx" tabindex="-1" role="dialog"  aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content animated fadeIn">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><i class="fa fa-unlock-alt modal-icon"></i><h4 class="modal-title">Unlock Post Activity</h4><small>Unlock to view activity of Posts</small>
+                                </div>
+                                <div class="modal-body">
+                                    <p><strong>To Unlock Post Activity Talk to Your CSR</strong> </p>
+                                    <p><a class="btn btn-white btn-rounded" href="#"> <i class="fa fa-phone-square"></i> Call CSR</a></p>
+                                    <p><a class="btn btn-warning btn-rounded" href="#"><i class="fa fa-mobile"></i> Text CSR</a></p>
+                                    <p><a class="btn btn-white btn-rounded" href="#"><i class="fa fa-ticket"></i> Open a Ticket to CSR</a></p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal inmodal" id="myModal41" tabindex="-1" role="dialog"  aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content animated fadeIn">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                    <i class="fa fa-tasks modal-icon"></i>
+                                    <h4 class="modal-title">Unlock Prospect full breakdown</h4>
+                                    <small>Unlock to view Prospect full breakdown</small>
+                                </div>
+                                <div class="modal-body">
+                                    <p><strong>To Unlock Prospect full breakdown Talk to Your CSR</strong> </p>
+                                    <p><a class="btn btn-white btn-rounded" href="#"> <i class="fa fa-phone-square"></i> Call CSR</a></p>
+                                    <p><a class="btn btn-warning btn-rounded" href="#"><i class="fa fa-mobile"></i> Text CSR</a></p>
+                                    <p><a class="btn btn-white btn-rounded" href="#"><i class="fa fa-ticket"></i> Open a Ticket to CSR</a></p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="statisticsModal" class="modal inmodal fade in" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content animated fadeIn">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                    <h2>Prospect Statistics</h2>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <dl class="col-sm-3">
+                                            <dt>Joined</dt>
+                                            <dd>2017-04-20</dd>
+                                        </dl>
+                                        <dl class="col-sm-3">
+                                            <dt>Purchases</dt>
+                                            <dd>10</dd>
+                                        </dl>
+                                        <dl class="col-sm-3">
+                                            <dt>Last Active</dt>
+                                            <dd>2018-04-20</dd>
+                                        </dl>
+                                        <dl class="col-sm-3">
+                                            <dt>Leadscore</dt>
+                                            <dd>217</dd>
+                                        </dl>
+                                    </div>
+                                    <hr>
+                                        <div class="row">
+                                            <dl class="col-sm-3">
+                                                <dt class="m-b">Big Spender</dt>
+                                                <dd><label class="label label-success">True</label></dd>
+                                            </dl>
+                                            <dl class="col-sm-3">
+                                                <dt class="m-b">High End Brand Buyer</dt>
+                                                <dd><label class="label label-success">True</label></dd>
+                                            </dl>
+                                            <dl class="col-sm-3">
+                                                <dt class="m-b">Has Premium Credit Card</dt>
+                                                <dd><label class="label label-warning">False</label></dd>
+                                            </dl>
+                                            <dl class="col-sm-3">
+                                                <dt class="m-b">Luxury Shopper</dt>
+                                                <dd><label class="label label-success">True</label></dd>
+                                            </dl>
+                                        </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h3>Demographics</h3>
+                                            <table class="table table-bordered m-b-none">
+                                                <tbody>
+                                                    <tr>
+                                                        <th>Household Income</th>
+                                                        <td>125-150k;</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Age</th>
+                                                        <td>30-55</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Marital Status</th>
+                                                        <td>Single</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Net Worth</th>
+                                                        <td>$550,000</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Occupation</th>
+                                                        <td>Operations Director</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Education</th>
+                                                        <td>MBA</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h3>Market Intent</h3>
+                                            <table class="table table-bordered m-b-none">
+                                                <tbody>
+                                                    <tr>
+                                                        <th>Home and Garden</th>
+                                                        <td>I</td>
+                                                        <th>Furniture</th>
+                                                        <td>B</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Womens Clothing</th>
+                                                        <td>N</td>
+                                                        <th>Jewelry</th>
+                                                        <td>A</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Home Buyer</th>
+                                                        <td>A</td>
+                                                        <th>Beauty</th>
+                                                        <td>N</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Design</th>
+                                                        <td>N</td>
+                                                        <th>Fashonista</th>
+                                                        <td>N</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Automotive</th>
+                                                        <td>A</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Todo List</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                        <i class="fa fa-wrench"></i>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-user">
+                                        <li><a href="#">Config option 1</a>
+                                        </li>
+                                        <li><a href="#">Config option 2</a>
+                                        </li>
+                                    </ul>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+                                <ul class="sortable-list connectList agile-list ui-sortable" id="inprogress">
+                                    <li class="danger-element ui-sortable-handle" id="task-10699">
+                                        Voluptatum quis nihil.
+                                        <div class="agile-detail">
+                                            <a href="#" class="pull-right btn btn-xs btn-white"><i class="fa fa-check"></i></a>
+                                            <i class="fa fa-clock-o"></i> 12.10.2015
+                                        </div>
+                                    </li>
+                                    <li class="info-element ui-sortable-handle" id="task-84436">
+                                        Quos nulla mollitia id quidem dolorem cumque.
+                                        <div class="agile-detail">
+                                            <a href="#" class="pull-right btn btn-xs btn-white"><i class="fa fa-check"></i></a>
+                                            <i class="fa fa-clock-o"></i> 12.10.2015
+                                        </div>
+                                    </li>
+                                    <li class="danger-element ui-sortable-handle" id="task-60916">
+                                        Enim ullam id facere aut ut.
+                                        <div class="agile-detail">
+                                            <a href="#" class="pull-right btn btn-xs btn-white"><i class="fa fa-check"></i></a>
+                                            <i class="fa fa-clock-o"></i> 12.10.2015
+                                        </div>
+                                    </li>
+                                    <li class="danger-element ui-sortable-handle" id="task-31208">
+                                        Voluptatem sed sit voluptas.
+                                        <div class="agile-detail">
+                                            <a href="#" class="pull-right btn btn-xs btn-white"><i class="fa fa-check"></i></a>
+                                            <i class="fa fa-clock-o"></i> 12.10.2015
+                                        </div>
+                                    </li>
+                                    <li class="info-element ui-sortable-handle" id="task-61592">
+                                        Non est doloribus est quaerat.
+                                        <div class="agile-detail">
+                                            <a href="#" class="pull-right btn btn-xs btn-white"><i class="fa fa-check"></i></a>
+                                            <i class="fa fa-clock-o"></i> 12.10.2015
+                                        </div>
+                                    </li>
+                                    <li class="danger-element ui-sortable-handle" id="task-19817">
+                                        Consequatur numquam ex qui quas autem harum eum optio a.
+                                        <div class="agile-detail">
+                                            <a href="#" class="pull-right btn btn-xs btn-white"><i class="fa fa-check"></i></a>
+                                            <i class="fa fa-clock-o"></i> 12.10.2015
+                                        </div>
+                                    </li>
+                                    <li class="info-element ui-sortable-handle" id="task-44929">
+                                        Id molestiae quae commodi suscipit reiciendis voluptas libero minus ratione.
+                                        <div class="agile-detail">
+                                            <a href="#" class="pull-right btn btn-xs btn-white"><i class="fa fa-check"></i></a>
+                                            <i class="fa fa-clock-o"></i> 12.10.2015
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Activity Stream</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                        <i class="fa fa-wrench"></i>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-user">
+                                        <li><a href="#">Config option 1</a>
+                                        </li>
+                                        <li><a href="#">Config option 2</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+                                <div class="activity-stream">
+                                    <div class="stream">
+                                        <div class="stream-badge">
+                                            <i class="fa fa-mobile-phone"></i>
+                                        </div>
+                                        <div class="stream-panel">
+                                            <div class="stream-info">
+                                                <a href="#">
+                                                    <span> You </span>
+                                                    <span class="date">Today at 11:00:00 am</span>
+                                                </a>
+                                            </div>
+                                            Call <a href="#">Alex Johnatan</a>
+                                            <div class="file">
+                                                <a href="#">
+                                                    <span class="corner"></span>
+                                                    <div class="icon">
+                                                        <i class="fa fa-music"></i>
+                                                    </div>
+                                                    <div class="file-name">
+                                                        Callrecording.mp3
+                                                        <br>
+                                                        <small>Added: May 22, 2018</small>
+                                                    </div>
+                                                </a>
+                                            </div> 
+                                        </div>
+                                    </div>
+                                    <div class="stream">
+                                        <div class="stream-badge">
+                                            <i class="fa fa-comment"></i>
+                                        </div>
+                                        <div class="stream-panel">
+                                            <div class="stream-info">
+                                                <a href="#">
+                                                    <span>Alex Johnatan </span>
+                                                    <span class="date">Today at 10:30:00 am</span>
+                                                </a>
+                                            </div>
+                                            Send You a <a href="#">Text</a>
+                                            <div class="well">
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum mattis nisi non consequat. In malesuada elit a mollis posuere. Nunc euismod ante quis dui consequat, ac imperdiet mauris pellentesque. Nulla consectetur suscipit diam. Phasellus feugiat mi in mauris ullamcorper vehicula. Sed eros quam, ultrices eu sagittis vitae, mollis vitae sem.
+                                            </div>  
+                                        </div>
+                                    </div>
+                                    <div class="stream">
+                                        <div class="stream-badge">
+                                            <i class="fa fa-comment"></i>
+                                        </div>
+                                        <div class="stream-panel">
+                                            <div class="stream-info">
+                                                <a href="#">
+                                                    <span>You </span>
+                                                    <span class="date">Today at 10:30:00 am</span>
+                                                </a>
+                                            </div>
+                                            Send Text To  <a href="#">Alex Johnatan</a>
+                                            <div class="well">
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum mattis nisi non consequat. In malesuada elit a mollis posuere. Nunc euismod ante quis dui consequat, ac imperdiet mauris pellentesque. Nulla consectetur suscipit diam. Phasellus feugiat mi in mauris ullamcorper vehicula. Sed eros quam, ultrices eu sagittis vitae, mollis vitae sem.
+                                            </div>  
+                                        </div>
+                                    </div>
+                                    <div class="stream">
+                                        <div class="stream-badge">
+                                            <i class="fa fa-envelope"></i>
+                                        </div>
+                                        <div class="stream-panel">
+                                            <div class="stream-info">
+                                                <a href="#">
+                                                    <span>You </span>
+                                                    <span class="date">Today at 02:40:10 am</span>
+                                                </a>
+                                            </div>
+                                            Send Mail To  <a href="#">Alex Johnatan</a>  
+                                        </div>
+                                    </div>
+                                    <div class="stream">
+                                        <div class="stream-badge">
+                                            <i class="fa fa-flash"></i>
+                                        </div>
+                                        <div class="stream-panel">
+                                            <div class="stream-info">
+                                                <a href="#">
+                                                    <span>Alex Johnatan</span>
+                                                    <span class="date">Today at 01:32:40 am</span>
+                                                </a>
+                                            </div>
+                                            Clicked CTA Button for <a href="#">Price Request</a>  
+                                        </div>
+                                    </div>                  
+                                </div>
+                                <button class="btn btn-warning btn-block m"><i class="fa fa-arrow-down"></i> Show More</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <div class="pull-right">
+                    10GB of <strong>250GB</strong> Free.
+                </div>
+                <div>
+                    <strong>Copyright</strong> Example Company &copy; 2014-2015
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- Mainly scripts -->
+<script src="js/jquery-2.1.1.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="js/inspinia.js"></script>
+<script src="js/plugins/pace/pace.min.js"></script>
+
+<!-- Peity -->
+<script src="js/plugins/peity/jquery.peity.min.js"></script>
+
+<!-- Peity -->
+<script src="js/demo/peity-demo.js"></script>
+
+</body>
+
+</html>
