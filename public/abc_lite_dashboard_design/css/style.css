@@ -3635,8 +3635,12 @@ dd.project-people {
   margin-left: 10px;
   line-height: 22px;
 }
-.project-list .label-primary {
+.project-list .label-primary, .offer-activity .label-primary{
     background-color: #337ab7;
+}
+
+.tag-list li {
+    float: left;
 }
 /* FAQ */
 .faq-item {
