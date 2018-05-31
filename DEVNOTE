@@ -383,7 +383,7 @@ Category v1.6 #stable
 	a) Fixed edit category Api validation
 	b) Fixed edit brand Api validation
 
-Assigned ABC v1.6 #stable
+Assigned ABC v1.0 #stable
 	a) Created api to display assigned ABC
 
 Prospect lookbook v0.4 #stable
@@ -393,3 +393,7 @@ Brand v1.3 #stable
 	a)Implement status in CSR Dashboard
 
 ABC Dashboard v1.0 #stable
+
+Assigned ABC v1.1 #stable
+	a) Implemented avatar image
+	b) Implemented dealer detail in API response

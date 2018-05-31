@@ -2,15 +2,15 @@
 
 namespace App\Storage\SalesRep;
 
-use League\Fractal\TransformerAbstract;
+use App\Storage\Media\Media;
 use App\Storage\SalesRep\SalesRep;
+use League\Fractal\TransformerAbstract;
 
 /**
  * Class SalesRepTransformer
  * @package namespace App\Storage\SalesRep;
  */
-class SalesRepTransformer extends TransformerAbstract
-{
+class SalesRepTransformer extends TransformerAbstract {
 
     /**
      * Transform the \SalesRep entity
@@ -18,15 +18,22 @@ class SalesRepTransformer extends TransformerAbstract
      *
      * @return array
      */
-    public function transform(SalesRep $model)
-    {
-        $user = $model->user;
+    public function transform(SalesRep $model) {
+        $user   = $model->user;
+        $brand  = $model->dealers->first()->brands;
+        $media  = $user->avatarId();
+        $avatar = '';
+        if ($media != '') {
+            $avatar = Media::where('id', '=', $media)->first()->getOrigUrl();
+        }
 
         return [
             'id'                 => (int) $model->id,
             'firstname'          => $user->firstname,
             'lastname'           => $user->lastname,
+            'avatar'             => $avatar,
             'email'              => $user->email,
+            'position'           => $model->job_title,
             'user_id'            => $user->id,
             'show_cellphone'     => $model->show_cellphone,
             'show_officephone'   => $model->show_officephone,
@@ -39,7 +46,9 @@ class SalesRepTransformer extends TransformerAbstract
             'created_at'         => $model->created_at,
             'updated_at'         => $model->updated_at,
             'agreement_accepted' => $model->is_agreement,
-            'agreed_at'          => $model->local_agreed_at
+            'agreed_at'          => $model->local_agreed_at,
+            'dealer'             => $model->dealers,
+            // 'brand'              => $brand,
         ];
     }
 }
