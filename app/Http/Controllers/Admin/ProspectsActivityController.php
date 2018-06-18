@@ -18,6 +18,7 @@ class ProspectsActivityController extends Controller {
     }
 
     public function index(Request $request, $filter = false) {
+
         $user          = Auth::user();
         $salesRep      = $user->salesRep;
         $layoutColumns = $this->crud->layoutColumn();
@@ -51,7 +52,6 @@ class ProspectsActivityController extends Controller {
         }
 
         $activities = $activities->orderBy('user_actions.created_at', 'desc')->all();
-        // dd($activities);
 
         if ($customer) {
             $layoutColumns->addItem('admin.customer.lookbook_bottom', ['show_box' => false, 'view_args' => ['customer' => $customer]]);

@@ -10,7 +10,7 @@ class CustomerBrands extends Migration {
      * @return void
      */
     public function up() {
-        Schema::create('customer_offers', function (Blueprint $table) {
+        Schema::create('customer_brands', function (Blueprint $table) {
             $table->increments('id');
 
             $table->integer('customer_id')->length(11)->unsigned()->nullable();

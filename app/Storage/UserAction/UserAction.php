@@ -61,7 +61,14 @@ class UserAction extends Model implements Transformable {
         ];
 
         if (!is_integer($thread)) {
-            $meta[] = ['key' => 'offer_id', 'val' => $thread->getMeta('offer_id')];
+            $offer_id = $thread->getMeta('offer_id');
+            $brand_id = $thread->getMeta('brand_id');
+            if ($offer_id != '') {
+                $meta[] = ['key' => 'offer_id', 'val' => $thread->getMeta('offer_id')];
+            } elseif ($brand_id != '') {
+                $meta[] = ['key' => 'brand_id', 'val' => $thread->getMeta('brand_id')];
+            }
+
         }
 
         return $this->createAction($cust_user_id, $type, $meta);
@@ -100,6 +107,21 @@ class UserAction extends Model implements Transformable {
             ['key' => 'offer_id', 'val' => $offer_id],
         ];
         return $this->createAction($cust_user_id, 'removed_offer', $meta);
+    }
+
+    public function addCustomerBrand($cust_user_id, $brand_id) {
+
+        $meta = [
+            ['key' => 'brand_id', 'val' => $brand_id],
+        ];
+        return $this->createAction($cust_user_id, 'added_brand', $meta);
+    }
+    public function removeCustomerBrand($cust_user_id, $brand_id) {
+
+        $meta = [
+            ['key' => 'brand_id', 'val' => $brand_id],
+        ];
+        return $this->createAction($cust_user_id, 'removed_brand', $meta);
     }
 
     public function user() {
@@ -153,14 +175,19 @@ class UserAction extends Model implements Transformable {
      * Set info if a action is request by customer to BA.
      */
     public function customerOfferRequest() {
+
         $requestKeys = $this->request_keys; //['offer_request_appt',     'offer_request_price', 'offer_request_info'];
 
         if (in_array($this->type, $requestKeys)) {
-            $threadId = $this->getMeta('thread_id');
-            $thread   = \App\Storage\Messenger\Thread::forMetaOfferId()->selectThreadFields()->find($threadId);
+            $threadId     = $this->getMeta('thread_id');
+            $thread_offer = \App\Storage\Messenger\Thread::forMetaOfferId()->selectThreadFields()->find($threadId);
+            $thread_brand = \App\Storage\Messenger\Thread::forMetaBrandId()->selectThreadFields()->find($threadId);
 
-            if ($thread) {
-                $collect = collect(['offer' => $thread->offer(), 'thread' => $thread]);
+            if ($thread_offer) {
+                $collect = collect(['offer' => $thread_offer->offer(), 'thread' => $thread_offer]);
+
+            } elseif ($thread_brand) {
+                $collect = collect(['brand' => $thread_brand->brand(), 'thread' => $thread_brand]);
             } else {
                 $collect = collect([]);
             }

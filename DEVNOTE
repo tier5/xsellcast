@@ -400,3 +400,6 @@ Assigned ABC v1.1 #stable
 
 CTA Request v5.1 #stable
 	a)created migration for customer brand
+
+CTA Request v5.2 #stable
+	a) Implemented brand CTA request in CTA request API

@@ -121,6 +121,12 @@ return [
         'removed_offer'            => [
             'key'  => 'removed_offer',
             'icon' => 'fa-trash'],
+        'added_brand'              => [
+            'key'  => 'added_brand',
+            'icon' => 'fa-circle'],
+        'removed_brand'            => [
+            'key'  => 'removed_brand',
+            'icon' => 'fa-trash'],
     ],
 
     'message_stat'             => [

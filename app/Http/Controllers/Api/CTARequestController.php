@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Http\Requests\Api\CTARequestPostRequest;
 use App\Http\Requests\Api\RequestAptShowRequest;
 use App\Http\Requests\Api\RequestTypeAllIndexRequest;
+use App\Storage\Brand\BrandRepository;
 use App\Storage\CustomerRequest\CustomerRequest;
 use App\Storage\Customer\CustomerRepository;
 use App\Storage\LbtWp\WpConvetor;
@@ -34,13 +35,14 @@ class CTARequestController extends Controller {
 
     protected $offer;
 
-    public function __construct(MessageRepository $message, CustomerRepository $customer, SalesRepRepository $salesrep, ThreadRepository $thread, OfferRepository $offer) {
+    public function __construct(MessageRepository $message, CustomerRepository $customer, SalesRepRepository $salesrep, ThreadRepository $thread, OfferRepository $offer, BrandRepository $brand) {
         $this->message          = $message;
         $this->customer         = $customer;
         $this->salesrep         = $salesrep;
         $this->thread           = $thread;
         $this->customer_request = new CustomerRequest();
         $this->offer            = $offer;
+        $this->brand            = $brand;
     }
 
     /**
@@ -135,8 +137,17 @@ class CTARequestController extends Controller {
             $customer       = $this->customer->skipPresenter()->find($customer_id);
 
             $wp_offer_id = $request->get('wp_offer_id');
-            $offer_id    = $wp->getId('offer', $wp_offer_id);
-            $offer       = $this->offer->skipPresenter()->find($offer_id);
+            $offer       = '';
+            if ($wp_offer_id != '') {
+                $offer_id = $wp->getId('offer', $wp_offer_id);
+                $offer    = $this->offer->skipPresenter()->find($offer_id);
+            }
+            $wp_brand_id = $request->get('wp_brand_id');
+            $brand       = '';
+            if ($wp_brand_id != '') {
+                $brand_id = $wp->getId('brand', $wp_brand_id);
+                $brand    = $this->brand->skipPresenter()->find($brand_id);
+            }
 
             $body        = $request->get('body');
             $type_id     = $request->get('type');
@@ -145,6 +156,7 @@ class CTARequestController extends Controller {
             $data = [
                 'customer'    => $customer,
                 'offer'       => $offer,
+                'brand'       => $brand,
                 // 'type'        => $type,
                 'body'        => $body,
                 'phoneNumber' => $phoneNumber,
@@ -238,8 +250,13 @@ class CTARequestController extends Controller {
         $customer = $data['customer'];
         $offer    = $data['offer'];
         $body     = $data['body'];
+        $brand    = $data['brand'];
 
-        $thread = $this->customer_request->sendRequest($customer, $offer, 'appt', $body);
+        $subject  = null;
+        $approved = false;
+        // $brand = false
+
+        $thread = $this->customer_request->sendRequest($customer, $offer, 'appt', $body, $subject, $approved, $brand);
 
         //send mail to BA
         // $ba=$this->customer->findNereastBAOfOffer($offer,$customer);
@@ -276,8 +293,11 @@ class CTARequestController extends Controller {
         $customer = $data['customer'];
         $offer    = $data['offer'];
         $body     = $data['body'];
+        $brand    = $data['brand'];
 
-        $thread = $this->customer_request->sendRequest($customer, $offer, 'info', $body);
+        $subject  = null;
+        $approved = false;
+        $thread   = $this->customer_request->sendRequest($customer, $offer, 'info', $body, $subject, $approved, $brand);
 
         //send mail to BA
         //       $ba=$this->customer->findNereastBAOfOffer($offer,$customer);
@@ -312,7 +332,11 @@ class CTARequestController extends Controller {
         $offer    = $data['offer'];
         $body     = $data['body'];
 
-        $thread = $this->customer_request->sendRequest($customer, $offer, 'price', $body);
+        $brand = $data['brand'];
+
+        $subject  = null;
+        $approved = false;
+        $thread   = $this->customer_request->sendRequest($customer, $offer, 'price', $body, $subject, $approved, $brand);
 
         return $thread;
     }
@@ -323,7 +347,12 @@ class CTARequestController extends Controller {
         $body        = $data['body'];
         $phoneNumber = $data['phoneNumber'];
 
-        $thread = $this->customer_request->sendContactRequest($customer, $offer, $body, $phoneNumber);
+        $brand = $data['brand'];
+
+        $subject  = null;
+        $approved = false;
+
+        $thread = $this->customer_request->sendContactRequest($customer, $offer, $body, $phoneNumber, $brand);
 
         return $thread;
     }
@@ -341,6 +370,7 @@ class CTARequestController extends Controller {
         // $salesrep_id=$data['salesrep_id'];
         // $salesrep = $this->salesrep->skipPresenter()->find($salesrep_id);
         $salesrep = $this->customer->findNereastBAOfOffer($offer, $customer);
+
         // dd($salesrep);
         if ($salesrep) {
             $pivot  = $salesrep->customersPivot()->where('customer_id', $customer->id)->first();
@@ -357,8 +387,11 @@ class CTARequestController extends Controller {
         $customer = $data['customer'];
         $offer    = $data['offer'];
         $body     = $data['body'];
+        $brand    = $data['brand'];
 
-        $thread = $this->customer_request->sendRequest($customer, $offer, 'brand_catalog', $body);
+        $subject  = null;
+        $approved = false;
+        $thread   = $this->customer_request->sendRequest($customer, $offer, 'brand_catalog', $body, $subject, $approved, $brand);
 
         return $thread;
     }
@@ -368,8 +401,11 @@ class CTARequestController extends Controller {
         $customer = $data['customer'];
         $offer    = $data['offer'];
         $body     = $data['body'];
+        $brand    = $data['brand'];
 
-        $thread = $this->customer_request->sendRequest($customer, $offer, 'map_location', $body);
+        $subject  = null;
+        $approved = false;
+        $thread   = $this->customer_request->sendRequest($customer, $offer, 'map_location', $body, $subject, $approved, $brand);
 
         return $thread;
     }

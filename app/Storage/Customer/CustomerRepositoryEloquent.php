@@ -126,6 +126,65 @@ class CustomerRepositoryEloquent extends BaseRepository implements CustomerRepos
         return $customerOffer;
     }
 
+    /**
+     * Sets the brand to customer.
+     *
+     * @param      integer  $brand_id     The offer identifier
+     * @param      App\Storage\Customer\Customer  $customer  The customer identifier
+     * @param      string  $action        The action
+     *
+     * @return     App\Storage\Customer\Customer
+     */
+    public function setBrandToCustomer($brand_id, $customer, $is_added = true, $request_type = null) {
+        if (is_integer($customer)) {
+            $customerId = $customer;
+            $customer   = $this->model->find($customerId);
+        }
+
+        /**
+         * Return null if offer already exists.
+         */
+        $offer = $customer->brands()->find($brand_id);
+
+        // if ($offer) {
+        //     $customerOffer = $customer->pivotOffers()->where('offer_id', $offer_id)->first();
+
+        // } else {
+
+        $customerBrand = $customer->setBrand($brand_id);
+        // }
+        // dd($customerOffer);
+        //  $co                       = $customerOffer->first();
+        $customerBrand->added = $is_added;
+// dd($customerOffer);
+        if ($request_type && $request_type == 'appt') {
+            $customerBrand->is_appt = true;
+        } elseif ($request_type && $request_type == 'price') {
+            $customerBrand->is_price = true;
+        } elseif ($request_type && $request_type == 'info') {
+            $customerBrand->is_info = true;
+        }
+        //$customerOffer->requested = $is_requested;
+
+        $customerBrand->setUpdatedAt($this->model->freshTimestamp());
+        $customerBrand->save();
+
+        /**
+         * Set action
+         */
+        $action = new \App\Storage\UserAction\UserAction();
+
+        if ($is_added) {
+
+            $action->addCustomerBrand($customer->user->id, $brand_id);
+        }
+
+        //End set action
+
+        return $customerBrand;
+
+    }
+
     public function completePresenter() {
         $this->setPresenter('App\Storage\Customer\CustomerCompletePresenter');
 
@@ -207,7 +266,45 @@ class CustomerRepositoryEloquent extends BaseRepository implements CustomerRepos
         }
 
     }
+    /**
+     *
+     * @param      Offer  $offer     The offer
+     * @param      Customer  $customer  The customer
+     *
+     * @return     SalesRep
+     */
+    public function findNereastBAOfBrand($brand, $customer) {
+        // $brands = $offer->brands;
+        // $brand  = ($brands ? $brands->first() : null);
 
+        if (!$brand) {
+            return null;
+        }
+
+        $dealers       = $brand->dealers;
+        $nearestDis    = 99999999999;
+        $nearestDealer = $dealers->first();
+
+        foreach ($dealers as $dealer) {
+            $distance = $this->distance($customer->geo_lat, $customer->geo_long, $dealer->geo_lat, $dealer->geo_long);
+
+            if ($nearestDis > $distance) {
+                $nearestDis    = $distance;
+                $nearestDealer = $dealer;
+            }
+        }
+        if ($nearestDealer) {
+
+            $salesrep = $nearestDealer->salesReps->shuffle()->first();
+            return $salesrep;
+
+        } else {
+
+            return false;
+
+        }
+
+    }
     public function distance($lat1, $lon1, $lat2, $lon2, $unit = 'K') {
         $lat1 = (float) $lat1;
         $lon1 = (float) $lon1;

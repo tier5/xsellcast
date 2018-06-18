@@ -22,11 +22,23 @@ class CTARequestPostRequest extends Request {
      * @return array
      */
     public function rules() {
+        $type       = $this->type;
+        $brand_rule = '';
+        $offer_rule = '';
+        if (in_array($type, [1, 2, 3, 4])) {
+            $offer_rule = 'required_without:wp_brand_id|integer|exists:offers,wpid';
+            $brand_rule = 'required_without:wp_offer_id|integer|exists:brands,wp_brand_id';
+        }
+        if (in_array($type, [5, 6, 7])) {
+            $offer_rule = 'required|integer|exists:offers,wpid';
+        }
+
         return [
             'access_token'   => 'required',
             'type'           => 'required|integer|in:1,2,3,4,5,6,7',
             'wp_customer_id' => 'required|integer|exists:user_customer,wp_userid',
-            'wp_offer_id'    => 'required|integer|exists:offers,wpid',
+            'wp_offer_id'    => $offer_rule,
+            'wp_brand_id'    => $brand_rule,
             'body'           => 'required_if:type,==,5',
             'phone_number'   => 'required_if:type,==,4|numeric',
         ];
