@@ -403,3 +403,7 @@ CTA Request v5.1 #stable
 
 CTA Request v5.2 #stable
 	a) Implemented brand CTA request in CTA request API
+
+CTA Request v5.3 #stable
+	a) Implemented brand CTA request in CSR dashboard
+	b) Added Brand CTA request in prospect activities list;
