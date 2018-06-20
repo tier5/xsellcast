@@ -409,3 +409,6 @@ CTA Request v5.3 #stable
 	b) Added Brand CTA request in prospect activities list
 CTA Request v5.4 #stable
 	a) Modified brand CTA request in CSR dashboard
+
+CTA Request v5.5 #stable
+	a) Fixed issue in brand information CTA
