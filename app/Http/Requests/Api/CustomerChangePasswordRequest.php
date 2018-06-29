@@ -4,8 +4,8 @@ namespace App\Http\Requests\Api;
 
 use App\Http\Requests\Request;
 use Response;
-class CustomerChangePasswordRequest extends Request
-{
+
+class CustomerChangePasswordRequest extends Request {
     protected $redirectRoute = 'api.errors';
 
     /**
@@ -13,8 +13,7 @@ class CustomerChangePasswordRequest extends Request
      *
      * @return bool
      */
-    public function authorize()
-    {
+    public function authorize() {
         return true;
     }
 
@@ -23,12 +22,11 @@ class CustomerChangePasswordRequest extends Request
      *
      * @return array
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-            'access_token'  => 'required',
-            'email'         => 'required|email',
-            'password'      => 'required|min:6',
+            'access_token' => 'required',
+            'email'        => 'required|email',
+            'password'     => 'required|min:6',
         ];
     }
 
@@ -38,17 +36,17 @@ class CustomerChangePasswordRequest extends Request
      * @param array $errors
      * @return mixed
      */
-    public function response(array $errors){
+    public function response(array $errors) {
 
         return response()->json([
-                    'status'=>false,
-                    'code'=>config('responses.bad_request.status_code'),
-                    'data'=>null,
-                    'errors'=>$errors,
-                    'message'=>config('responses.bad_request.status_message'),
-                ],
-                config('responses.bad_request.status_code')
-            );
+            'status'  => false,
+            'code'    => config('responses.bad_request.status_code'),
+            'data'    => null,
+            'errors'  => $errors,
+            'message' => config('responses.bad_request.status_message'),
+        ],
+            config('responses.bad_request.status_code')
+        );
         // return Response::json($errors, config('responses.bad_request.status_code'));
     }
 }

@@ -7,8 +7,7 @@ use App\Http\Requests\Request;
 /**
  * Use for simple API request with access token for a post.
  */
-class CustomerDeleteRequest extends Request
-{
+class CustomerDeleteRequest extends Request {
     protected $redirectRoute = 'api.errors';
 
     /**
@@ -16,8 +15,7 @@ class CustomerDeleteRequest extends Request
      *
      * @return bool
      */
-    public function authorize()
-    {
+    public function authorize() {
         return true;
     }
 
@@ -26,8 +24,7 @@ class CustomerDeleteRequest extends Request
      *
      * @return     array
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             'access_token' => 'required',
             'customer_id'  => 'required|integer|exists:user_customer,id',

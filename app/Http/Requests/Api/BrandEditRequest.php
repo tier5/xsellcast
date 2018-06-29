@@ -2,6 +2,7 @@
 namespace App\Http\Requests\Api;
 
 use App\Http\Requests\Request;
+use App\Storage\LbtWp\WpConvetor;
 
 /**
  * This request is for App\Http\Controllers\Api\Brand\BrandsController@edit
@@ -23,13 +24,18 @@ class BrandEditRequest extends Request {
      */
     public function rules() {
 
+        $wp_brand_id = $this->wp_brand_id;
+        $wp          = new WpConvetor();
+
+        $brand_id = $wp->getId('brand', $wp_brand_id);
+
         return [
             'wp_brand_id'    => 'required|exists:brands,wp_brand_id',
             'name'           => isset($this->name) ? 'required' : '',
             'logo'           => isset($this->logo) ? 'required|image' : '',
             'wp_category_id' => isset($this->category_id) ? 'required|integer|exists:categories,wp_category_id' : '',
             'catalog_url'    => isset($this->catalog_url) ? 'url|active_url' : '',
-            'slug'           => 'slug|unique:brands,slug',
+            'slug'           => 'slug|unique:brands,slug,' . $brand_id,
             'image_url'      => 'url|active_url',
             'image_link'     => 'url|active_url',
             'image_text'     => 'url|active_url',

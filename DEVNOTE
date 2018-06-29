@@ -416,3 +416,6 @@ CTA Request v5.5.1 #stable
 	a) Fixed issue in brand information CTA
 
 Test commit 1
+
+Brand v1.4 #stable
+	a) Fixed brand edit slug issue.

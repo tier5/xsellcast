@@ -317,16 +317,15 @@ class BrandsController extends Controller {
                     $offer->save();
                 }
             }
-            // dd($brand);
             $brand = $this->brand->find($brand_id);
-
-            $data = [
+            $data  = [
                 'status'  => true,
+                'data'    => $brand,
                 'code'    => config('responses.success.status_code'),
                 'message' => config('responses.success.status_message'),
 
             ];
-            $data = array_merge($data, $brand);
+            // $data = array_merge($data, $brand);
 
             return response()->json($data, config('responses.success.status_code'));
 

@@ -28,7 +28,7 @@ class CategoryEditStatusRequest extends Request {
         $wp             = new WpConvetor();
 
         $category_id = $wp->getId('category', $wp_category_id);
-        // dd($category_id);
+
         // $name     = 'required|categories,name';
         // $slug     = 'required|slug|unique:categories,slug';
         $id = '';
