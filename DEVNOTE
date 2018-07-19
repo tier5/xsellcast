@@ -423,3 +423,6 @@ Brand v1.4 #stable
 Dealer v1.0 #stable
 	a) Created Dealer CSV upload
 	b) Created migration to update dealer table
+
+Dealer v1.1 #stable
+	a) Modified Dealer CSV upload

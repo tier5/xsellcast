@@ -55,8 +55,9 @@ class DealersCsvController extends Controller {
             $medias = $this->media->skipPresenter()->findWhereIn('id', [$csv]);
 
             foreach ($medias as $media) {
+                // dd($media);
                 // $csv_url = $media->getOrigUrl();
-                $csv_url = 'public/uploads/testing LBT Dealers 5-22-2018 FINAL-38.csv';
+                $csv_url = 'public/uploads/' . $media->slug;
                 Excel::load($csv_url)->each(function (Collection $csvLine) {
 
                     // dd($csvLine);
