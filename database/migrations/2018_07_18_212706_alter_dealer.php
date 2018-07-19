@@ -13,6 +13,7 @@ class AlterDealer extends Migration {
         Schema::table('dealers', function ($t) {
             $t->integer('website')->nullable()->change();
             $t->integer('phone')->nullable()->change();
+            $t->integer('state')->nullable()->change();
         });
 
     }
