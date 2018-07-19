@@ -2,41 +2,45 @@
 
 namespace App\Storage\Dealer;
 
+use Prettus\Repository\Eloquent\BaseRepository;
+use Prettus\Repository\Criteria\RequestCriteria;
+use App\Storage\Dealer\DealerRepository;
+use App\Storage\Dealer\Dealer;
+use App\Storage\Dealer\DealerValidator;
+use App\Storage\Dealer\DealerPresenter;
 use App\Storage\Brand\Brand;
 use App\Storage\CityState\CityState;
 use App\Storage\Customer\CustomerRepositoryEloquent;
-use App\Storage\Dealer\Dealer;
-use App\Storage\Dealer\DealerPresenter;
-use App\Storage\Dealer\DealerRepository;
-use App\Storage\Dealer\DealerValidator;
-use Prettus\Repository\Criteria\RequestCriteria;
-use Prettus\Repository\Eloquent\BaseRepository;
 
 /**
  * Class DealerRepositoryEloquent
  * @package namespace App\Storage\Dealer;
  */
-class DealerRepositoryEloquent extends BaseRepository implements DealerRepository {
+class DealerRepositoryEloquent extends BaseRepository implements DealerRepository
+{
     /**
      * Specify Model class name
      *
      * @return string
      */
-    public function model() {
+    public function model()
+    {
         return Dealer::class;
     }
 
     /**
-     * Specify Validator class name
-     *
-     * @return mixed
-     */
-    public function validator() {
+    * Specify Validator class name
+    *
+    * @return mixed
+    */
+    public function validator()
+    {
 
         return DealerValidator::class;
     }
 
-    public function presenter() {
+    public function presenter()
+    {
 
         return DealerPresenter::class;
     }
@@ -44,24 +48,27 @@ class DealerRepositoryEloquent extends BaseRepository implements DealerRepositor
     /**
      * Boot up the repository, pushing criteria
      */
-    public function boot() {
+    public function boot()
+    {
         $this->pushCriteria(app(RequestCriteria::class));
     }
 
-    public function filter($where) {
+    public function filter($where)
+    {
 
         $this->model = $this->model->where($where);
 
         return $this;
     }
 
-    public function withCategoryId($category_id) {
-        $this->model = $this->model->with(['brands.categories' => function ($q) use ($category_id) {
+    public function withCategoryId($category_id)
+    {
+        $this->model = $this->model->with(['brands.categories' => function($q) use($category_id){
             $q->where('categories.id', $category_id);
         }]);
 
-        $this->model->whereHas('brands', function ($q) use ($category_id) {
-            $q->whereHas('categories', function ($q) use ($category_id) {
+        $this->model->whereHas('brands', function($q) use($category_id){
+            $q->whereHas('categories', function($q) use($category_id){
                 $q->where('categories.id', $category_id);
             });
         });
@@ -69,12 +76,12 @@ class DealerRepositoryEloquent extends BaseRepository implements DealerRepositor
         return $this;
     }
 
-    public function createOne($data) {
+    public function createOne($data)
+    {
 
         $hoursOfOperation = ($data['hours_of_operation'] && is_array($data['hours_of_operation']) ? serialize($data['hours_of_operation']) : '');
         $brand            = ($data['brand'] ? Brand::find($data['brand']) : null);
         $dealerData       = [
-            'wpid'               => $data['wpid'],
             'name'               => $data['name'],
             'address1'           => $data['address1'],
             'address2'           => $data['address2'],
@@ -96,25 +103,26 @@ class DealerRepositoryEloquent extends BaseRepository implements DealerRepositor
         ];
         $cityState = CityState::zipLook($data['zip'])->first();
 
-        if ($cityState) {
+        if($cityState)
+        {
             $dealerData['geo_lat']  = $cityState->geo_lat;
             $dealerData['geo_long'] = $cityState->geo_long;
         }
 
-        $dealer = $this->skipPresenter()->create($dealerData);
+        $dealer           = $this->skipPresenter()->create($dealerData);
 
-        if ($brand) {
+        if($brand){
             $dealer->brands()->save($brand);
         }
 
         return $dealer;
     }
 
-    public function updateOne($dealer, $data) {
+    public function updateOne($dealer, $data)
+    {
         $hoursOfOperation = ($data['hours_of_operation'] && is_array($data['hours_of_operation']) ? serialize($data['hours_of_operation']) : '');
         $brand            = ($data['brand'] ? Brand::find($data['brand']) : null);
         $dealer           = $this->skipPresenter()->update([
-            'wpid'               => $data['wpid'],
             'name'               => $data['name'],
             'address1'           => $data['address1'],
             'address2'           => $data['address2'],
@@ -138,35 +146,39 @@ class DealerRepositoryEloquent extends BaseRepository implements DealerRepositor
         $dealer->brands()->detach();
         $dealer->save();
 
-        if ($brand) {
+        if($brand){
             $dealer->brands()->save($brand);
         }
 
         return $dealer;
     }
 
-    public function whereInZips($zips) {
+    public function whereInZips($zips)
+    {
         $this->model = $this->model->whereIn('zip', $zips);
 
         return $this;
     }
-    public function whereBrandInZips($zips, $brand_id) {
+    public function whereBrandInZips($zips,$brand_id)
+    {
 
-        $this->model = $this->model->leftJoin('dealer_brands', 'dealers.id', '=', 'dealer_brands.dealer_id')
+         $this->model = $this->model->leftJoin('dealer_brands', 'dealers.id', '=', 'dealer_brands.dealer_id')
             ->whereIn('zip', $zips)
             ->where('dealer_brands.brand_id', $brand_id)
-        ;
+            ;
 
         return $this;
     }
 
-    public function orderByName($order = 'desc') {
+    public function orderByName($order = 'desc')
+    {
         $this->model = $this->model->orderBy('name', $order);
 
         return $this;
     }
 
-    public function orderByBrand($order = 'desc') {
+    public function orderByBrand($order = 'desc')
+    {
         $this->model = $this->model->leftJoin('dealer_brands', 'dealers.id', '=', 'dealer_brands.dealer_id')
             ->leftJoin('brands', 'dealer_brands.brand_id', '=', 'brands.id')
             ->orderBy('brands.name', $order)
@@ -175,40 +187,46 @@ class DealerRepositoryEloquent extends BaseRepository implements DealerRepositor
         return $this;
     }
 
-    public function orderByCity($order = 'desc') {
+    public function orderByCity($order = 'desc')
+    {
         $this->model = $this->model->orderBy('city', $order);
 
         return $this;
     }
 
-    public function orderByZip($order = 'desc') {
+    public function orderByZip($order = 'desc')
+    {
         $this->model = $this->model->orderBy('zip', $order);
 
         return $this;
     }
 
-    public function orderByState($order = 'desc') {
+    public function orderByState($order = 'desc')
+    {
         $this->model = $this->model->orderBy('state', $order);
 
         return $this;
     }
 
-    public function scopeInBrand($brand) {
-        return $this->scopeQuery(function ($q) use ($brand) {
+    public function scopeInBrand($brand)
+    {
+        return $this->scopeQuery(function($q) use($brand){
 
-            return $q->whereHas('brands', function ($q) use ($brand) {
+            return $q->whereHas('brands', function($q) use($brand){
 
                 $q->where('brands.id', $brand->id);
             });
         });
     }
 
-    public function nearestInBrandCustomer($brand, $customer) {
-        $customerRepo  = new CustomerRepositoryEloquent(app());
-        $dealers       = $this->skipPresenter()->scopeInBrand($brand)->all();
+    public function nearestInBrandCustomer($brand, $customer)
+    {
+        $customerRepo = new CustomerRepositoryEloquent(app());
+        $dealers      = $this->skipPresenter()->scopeInBrand($brand)->all();
         $nearestDealer = null;
 
-        foreach ($dealers as $dealer) {
+        foreach($dealers as $dealer)
+        {
             /**
              * Calculate distance
              *
@@ -217,14 +235,16 @@ class DealerRepositoryEloquent extends BaseRepository implements DealerRepositor
 
             $distance = $customerRepo->distance($customer->geo_lat, $customer->geo_long, $dealer->geo_lat, $dealer->geo_long);
 
-            if ($nearestDealer) {
+            if($nearestDealer)
+            {
 
                 $nearestSoFar = $customerRepo->distance($customer->geo_lat, $customer->geo_long, $nearestDealer->geo_lat, $nearestDealer->geo_long);
 
-                if ($nearestSoFar >= $distance) {
+                if($nearestSoFar >= $distance)
+                {
                     $nearestDealer = $dealer;
                 }
-            } else {
+            }else{
 
                 $nearestDealer = $dealer;
             }
@@ -232,5 +252,9 @@ class DealerRepositoryEloquent extends BaseRepository implements DealerRepositor
 
         return collect([$nearestDealer]);
     }
+
+
+
+
 
 }

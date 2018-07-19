@@ -419,3 +419,7 @@ Test commit 1
 
 Brand v1.4 #stable
 	a) Fixed brand edit slug issue.
+
+Dealer v1.0 #stable
+	a) Created Dealer CSV upload
+	b) Created migration to update dealer table

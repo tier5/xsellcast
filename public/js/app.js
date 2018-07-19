@@ -31926,6 +31926,7 @@ var mediaModalDelete = function(guid, li_guid){
 };
 
 var mediaAddMediaToList = function($list, data, field_name){
+	
 	if(!field_name){
 		field_name = 'media';
 	}
@@ -31952,11 +31953,13 @@ var mediaAddMediaToList = function($list, data, field_name){
 
 			footerHtml = window[footCallback](row, liGuid);
 		}
-
+ 
 		if(row.type === 'image'){
 			body = mediaImg(row.url);
 		}else if(row.type === 'video'){
 			body = mediaVideoPlayer(row.url, row.extension);
+		}else if(row.type === 'text'){
+			body = mediaImg(row.url);
 		}
 
 		var modal = 
@@ -32049,6 +32052,7 @@ var mediaUpload = function(form_data, $list, field_name){
 	   	success: function(data) {
 
 	   		mediaAddMediaToList($list, data.data, field_name)
+	   		console.log('test');
 			$.gritter.add({
 				text: 'Media uploaded!',
 				time: 3000

@@ -6,8 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
-class Dealer extends Model implements Transformable
-{
+class Dealer extends Model implements Transformable {
     use TransformableTrait;
 
     protected $fillable = [
@@ -30,29 +29,26 @@ class Dealer extends Model implements Transformable
         'outlet',
         'distributor_name',
         'rep_name',
-        'rep_email'
+        'rep_email',
+        'wpid',
 
     ];
 
     protected $table = 'dealers';
 
-    public function brands()
-    {
-    	return $this->belongsToMany('App\Storage\Brand\Brand', 'dealer_brands', 'dealer_id', 'brand_id');
+    public function brands() {
+        return $this->belongsToMany('App\Storage\Brand\Brand', 'dealer_brands', 'dealer_id', 'brand_id');
     }
 
-    public function customers()
-    {
-    	return $this->belongsToMany('App\Storage\Customer\Customer', 'customer_dealers', 'dealer_id', 'customer_id');
+    public function customers() {
+        return $this->belongsToMany('App\Storage\Customer\Customer', 'customer_dealers', 'dealer_id', 'customer_id');
     }
 
-    public function salesReps()
-    {
+    public function salesReps() {
         return $this->belongsToMany('App\Storage\SalesRep\SalesRep', 'dealer_salesrep', 'dealer_id', 'salesrep_id');
     }
 
-    public function categories()
-    {
+    public function categories() {
         return $this->belongsToMany('App\Storage\DealersCategory\DealersCategory', 'dealers_category_relation', 'dealer_id', 'category_id');
     }
 }

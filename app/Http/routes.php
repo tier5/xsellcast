@@ -594,6 +594,18 @@ Route::group(array('prefix' => 'admin', 'middleware' => array('auth', 'admin-pag
         Route::get('{id}/destroy', array(
             'as'   => 'admin.dealers.delete',
             'uses' => 'DealersController@destroy'));
+
+    });
+
+    Route::group(array('prefix' => 'dealers_csv', 'namespace' => 'Dealers', 'middleware' => ['role-only:csr']), function () {
+        Route::get('', array(
+            'as'   => 'admin.dealers_csv.create',
+            'uses' => 'DealersCsvController@create'));
+
+        Route::post('store', array(
+            'as'   => 'admin.dealers.store',
+            'uses' => 'DealersCsvController@store'));
+
     });
 
     Route::group(array('prefix' => 'categories', 'namespace' => 'Categories', 'middleware' => ['role-only:csr']), function () {
