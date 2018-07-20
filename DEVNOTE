@@ -428,3 +428,6 @@ Dealer v1.1 #stable
 	a) Modified Dealer CSV upload
 Dealer v1.2 #stable
 	a) Modified migration to update dealer table
+
+Dealer v1.3 #stable
+	a) Modified migration to alter dealer table
