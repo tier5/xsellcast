@@ -31,6 +31,7 @@ class Dealer extends Model implements Transformable {
         'rep_name',
         'rep_email',
         'wpid',
+        'email',
 
     ];
 

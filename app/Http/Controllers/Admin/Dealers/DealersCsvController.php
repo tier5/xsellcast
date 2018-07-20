@@ -1,4 +1,5 @@
 <?php namespace App\Http\Controllers\Admin\Dealers;
+ini_set('memory_limit', '6400M');
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\DealerStoreCsvRequest;
@@ -66,18 +67,17 @@ class DealersCsvController extends Controller {
                         $logo = null;
                         $wpid = (int) $csvLine->id;
                         // dd($wpid);
-                        $brand    = (int) $csvLine->brandid;
-                        $name     = $csvLine->name;
-                        $address1 = $csvLine->address;
-                        $city     = $csvLine->city;
-                        $state    = $csvLine->state;
-                        $county   = $csvLine->county;
-                        $ziparr   = explode('-', $csvLine->zip_code);
-                        $zip      = (int) $ziparr[0];
-
+                        $brand              = (int) $csvLine->brandid;
+                        $name               = $csvLine->name;
+                        $address1           = $csvLine->address;
+                        $city               = $csvLine->city;
+                        $state              = $csvLine->state;
+                        $county             = $csvLine->county;
+                        $ziparr             = explode('-', $csvLine->zip_code);
+                        $zip                = (int) $ziparr[0];
                         $country            = $csvLine->country;
                         $hours_of_operation = ''; //$csvLine->hours_of_operation;
-                        $rep_email          = $csvLine->email_address;
+                        $email              = $csvLine->email_address;
                         $phone              = $csvLine->phone_number;
                         $website            = $csvLine->website == '' ? null : $csvLine->website;
                         $outlet             = $csvLine->outlet == '' ? null : $csvLine->outlet;
@@ -87,9 +87,10 @@ class DealersCsvController extends Controller {
                         $address2         = '';
                         $distributor_name = '';
                         $rep_name         = '';
+                        $rep_email        = '';
 
                         $dealer = Dealer::where('wpid', '=', $wpid)->first();
-
+                        // dd($dealer);
                         $data = [
                             'wpid'               => $wpid,
                             'name'               => $name,
@@ -101,12 +102,15 @@ class DealersCsvController extends Controller {
                             'website'            => $website,
                             'fax'                => $fax,
                             'phone'              => $phone,
-                            'city'               => $city,
-                            'state'              => $state,
                             'zip'                => $zip,
+                            'city'               => $city,
+                            'county'             => $county,
+                            'state'              => $state,
+                            'country'            => $country,
+                            'email'              => $email,
                             'brand'              => $brand,
                             'outlet'             => $outlet,
-                            'county'             => $county,
+
                             'distributor_name'   => $distributor_name,
                             'rep_name'           => $rep_name,
                             'rep_email'          => $rep_email,
@@ -118,8 +122,7 @@ class DealersCsvController extends Controller {
                             //insert
                             $this->dealer->createOne($data);
                         }
-                        // dd();
-                        //
+
                     }
                 });
             }

@@ -81,10 +81,12 @@ class DealerRepositoryEloquent extends BaseRepository implements DealerRepositor
             'city'               => $data['city'],
             'county'             => $data['county'],
             'state'              => $data['state'],
+            'country'            => $data['country'],
             'phone'              => $data['phone'],
             'fax'                => $data['fax'],
             'website'            => $data['website'],
             'zip'                => $data['zip'],
+            'email'              => $data['email'],
             'description'        => $data['description'],
             'hours_of_operation' => $hoursOfOperation,
             'logo_media_id'      => $data['logo_media_id'],
@@ -95,10 +97,12 @@ class DealerRepositoryEloquent extends BaseRepository implements DealerRepositor
 
         ];
         $cityState = CityState::zipLook($data['zip'])->first();
-
+        // dd($cityState);
         if ($cityState) {
             $dealerData['geo_lat']  = $cityState->geo_lat;
             $dealerData['geo_long'] = $cityState->geo_long;
+            $dealerData['state']    = $cityState->state;
+            $dealerData['city']     = $cityState->city;
         }
 
         $dealer = $this->skipPresenter()->create($dealerData);
@@ -113,7 +117,8 @@ class DealerRepositoryEloquent extends BaseRepository implements DealerRepositor
     public function updateOne($dealer, $data) {
         $hoursOfOperation = ($data['hours_of_operation'] && is_array($data['hours_of_operation']) ? serialize($data['hours_of_operation']) : '');
         $brand            = ($data['brand'] ? Brand::find($data['brand']) : null);
-        $dealer           = $this->skipPresenter()->update([
+
+        $dealerData = [
             'wpid'               => $data['wpid'],
             'name'               => $data['name'],
             'address1'           => $data['address1'],
@@ -121,10 +126,12 @@ class DealerRepositoryEloquent extends BaseRepository implements DealerRepositor
             'city'               => $data['city'],
             'county'             => $data['county'],
             'state'              => $data['state'],
+            'country'            => $data['country'],
             'phone'              => $data['phone'],
             'fax'                => $data['fax'],
             'website'            => $data['website'],
             'zip'                => $data['zip'],
+            'email'              => $data['email'],
             'description'        => $data['description'],
             'hours_of_operation' => $hoursOfOperation,
             'logo_media_id'      => $data['logo_media_id'],
@@ -133,8 +140,18 @@ class DealerRepositoryEloquent extends BaseRepository implements DealerRepositor
             'rep_name'           => $data['rep_name'],
             'rep_email'          => $data['rep_email'],
 
-        ], $dealer->id);
+        ];
 
+        $cityState = CityState::zipLook($data['zip'])->first();
+        // dd($cityState);
+        if ($cityState) {
+            $dealerData['geo_lat']  = $cityState->geo_lat;
+            $dealerData['geo_long'] = $cityState->geo_long;
+            $dealerData['state']    = $cityState->state;
+            $dealerData['city']     = $cityState->city;
+        }
+
+        $dealer = $this->skipPresenter()->update($dealerData, $dealer->id);
         $dealer->brands()->detach();
         $dealer->save();
 
